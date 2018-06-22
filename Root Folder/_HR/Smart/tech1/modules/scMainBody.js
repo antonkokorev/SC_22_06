@@ -43,7 +43,9 @@ function classMainBody() {
                 },
                 success: function (json) {
                     param.status = true;
-                    param.result = json;
+
+                    (param.return)?param[param.return]=json: param.result = json;
+
                     if (param.activeController) {
                         try {
                             console.warn("Контроллер " + param.callback + " пошел работать");
@@ -58,7 +60,7 @@ function classMainBody() {
                             console.error("Ошибка выполнения AJAX "+ param.callback);
                 },
             });
-        }
+        },
 
 
     this.services = {
@@ -109,7 +111,7 @@ function classMainBody() {
             "callback": "getCompetetionInstrument",
         }
 
-    }
+    };
 
 
     this.globalJSON = {
@@ -199,7 +201,7 @@ function classMainBody() {
 
 
         var that = this;
-        console.warn("initMainBody")
+        console.warn("initMainBody");
         //this.currentUser=this.globalSettings.Settings.user;
 
         for (var key in this.services) {

@@ -205,9 +205,20 @@ function classMainMenu() {
 				}
 				if(poz_arr.length>0||neg_arr.length>0)
 				{
-                    console.log(poz_arr.concat(neg_arr).join(";"));
+                    console.log(poz_arr.concat(neg_arr).join(","));
                    // console.log(neg_arr.join(";"));
-					that_.s
+                    that_.services.position.return="user_result";
+                    var fam="["+poz_arr.concat(neg_arr).join(",")+"]";
+                    if(that_.services.position.params_.family!=fam)
+					{
+                        that_.services.position.params_.family=fam;
+                        that_.ajax(that_.services.position);
+
+                    }
+
+
+
+
 
                 }
 
