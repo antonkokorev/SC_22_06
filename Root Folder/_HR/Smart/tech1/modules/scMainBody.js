@@ -248,6 +248,7 @@ function classMainBody() {
         //   this.animateChoice();
         //this.positionController();
         //this.competencesController();
+        this.instrumentsController();
     }
 
 }

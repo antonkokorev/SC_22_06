@@ -156,7 +156,7 @@ function classInstruments() {
 
     this.instrumentsController = function () {
 // Свайпер
-        var tools_swiper = new Swiper('.swiper-tools-container', {
+        window.tools_swiper = new Swiper('.swiper-tools-container', {
             direction: 'vertical',
             slidesPerView: 'auto',
             mousewheel: true,
@@ -164,7 +164,7 @@ function classInstruments() {
         });
 
         $(window).resize(function () {
-            tools_swiper.update();
+            window.tools_swiper.update();
         })
     }
 }
