@@ -933,9 +933,16 @@
 
 .position-slide,
 .position-slide .slide-row,
-.position-slide .slide-position-col,
-.position-slide .position-all {
+.position-slide .slide-position-col{
     height: 100%;
+}
+
+.position-slide .position-all {
+    height: calc(100% - 70px);
+}
+
+.position-slide .sc-slide-heading {
+    height: 70px;
 }
 
 .position-heading {

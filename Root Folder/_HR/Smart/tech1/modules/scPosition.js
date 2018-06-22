@@ -1,6 +1,6 @@
 function classPosition() {
     var eventBr = ($.browser.mobile) ? 'touchstart' : 'click';
-/*   '    <div id="sc-profile" ng-controller="profileController" class="profile-slide sc-v-slide">' +*/
+    /*   '    <div id="sc-profile" ng-controller="profileController" class="profile-slide sc-v-slide">' +*/
     this.positionView = function () {
         var html =
             '        <div id="sc-position" ng-controller="positionController"  class="sc-main-slide">' +
@@ -15,9 +15,13 @@ function classPosition() {
             '                      <div class="swiper-slide">' +
 
 
-            '                           <div class="position choose-position" ng-repeat="position in model">' +// data-grade="grade" data-turnover="turnover"
+            '                           <div class="position choose-position" ng-repeat="position in model">' +
             '                               <h3 class="position-heading"> {{position.sJobProfileId}}</h3>' +
             '                               <p class="position-learn-more">{{position.sJobProfileName}} </p>' +
+            '                               <p class="position-learn-more">' +
+            '                                   <span class="position-more">Грейд {{position.iGrade}}</span>' +
+            '                                   <span class="position-more">Оборачиваемость {{position.iTurnover}}</span>' +
+            '                               </p>' +
             '                           </div>' +
 
             '                         </div>' +
@@ -35,25 +39,25 @@ function classPosition() {
 
         return html;
     }
-/**
- *             '                               <div class="profile-competence" ng-repeat="competence in competences" ng-if="competence.sType === competencesTypes[0]">' +
- '                                <p class="profile-competence-label"> {{competence.sFullName}} </p>' +
- '                                <p class="profile-competence-ratings"><span class="profile-competence-rating"> {{competence.iRate360}} </span></p>' +
- '                               </div>'+
- *
- *
- * */
+    /**
+     *             '                               <div class="profile-competence" ng-repeat="competence in competences" ng-if="competence.sType === competencesTypes[0]">' +
+     '                                <p class="profile-competence-label"> {{competence.sFullName}} </p>' +
+     '                                <p class="profile-competence-ratings"><span class="profile-competence-rating"> {{competence.iRate360}} </span></p>' +
+     '                               </div>'+
+     *
+     *
+     * */
     this.positionController = function () {
 
-        var that=this;
+        var that = this;
         positionApp = angular.module('positionModule', []);
 
         positionApp.controller('positionController', ['$scope', function ($scope) {
-            $scope.all="Все"
-           $scope.model=that_.services.position.result;
+            $scope.all = "Все";
+            $scope.model = that_.services.position.result;
         }]);
 
-        angular.element(function() {
+        angular.element(function () {
             angular.bootstrap(document.getElementById("sc-position"), ['positionModule']);
         });
 
