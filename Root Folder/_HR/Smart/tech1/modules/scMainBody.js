@@ -46,8 +46,8 @@ function classMainBody() {
                     if (param.activeController) {
                         try {
                             param.activeController();
-                        } catch(err) {
-                            console.log("Контроллер "+ param.callback +" не существует");
+                        } catch (err) {
+                            console.log("Контроллер " + param.callback + " не существует");
                         }
 
                     }
@@ -76,7 +76,7 @@ function classMainBody() {
                 "loadInStart": true,
                 "activeController": that_.choiceController
             },
-        /*
+
         "instrument": {
             "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument",
             "status": false,
@@ -96,12 +96,11 @@ function classMainBody() {
         "competention": {
             "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=positionCompetention",
             "status": false,
-            "params": "&user=102838&position=[]",
+            "params": "&user=102838&position=[30007047,30006541]",
             "loadInStart": false,
             "callback": "getCompetetionInstrument",
         }
 
-*/
     }
 
 
@@ -235,7 +234,7 @@ function classMainBody() {
 
         this.menuController();
         //this.choiceController();
-     //   this.animateChoice();
+        //   this.animateChoice();
         //this.positionController();
         //this.competencesController();
     }

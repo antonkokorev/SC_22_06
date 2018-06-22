@@ -51,6 +51,9 @@
 				<bi:value><![CDATA[Z_CONTROLLER._Action("openPage");]]></bi:value>
 			</bi:property>
 		</bi:component>
+		<bi:component name="IMAGE_1" type="IMAGE_COMPONENT">
+			<bi:property name="VISIBLE" value=""/>
+		</bi:component>
 		<bi:component name="DATAPOWER_1" type="com_sap_sbt_datapower_v3_DataPower">
 			<bi:property name="exlibs" type="ORDEREDLIST">
 				<bi:property name="lib" index="0" value="lib\loading_lib.json"/>
@@ -60,7 +63,7 @@
 				<bi:property name="inc" index="1" value="modules\scMainMenu.js"/>
 				<bi:property name="inc" index="2" value="modules\scProfile.js"/>
 				<bi:property name="inc" index="3" value="modules\scChoice.js"/>
-				<bi:property name="inc" index="4" value="modules\scPosition.js"/>
+				<bi:property name="inc" index="4" value="modules\scPosition1.js"/>
 				<bi:property name="inc" index="5" value="modules\scCompetences.js"/>
 				<bi:property name="inc" index="6" value="modules\scGoals.js"/>
 				<bi:property name="inc" index="7" value="modules\scInstruments.js"/>
