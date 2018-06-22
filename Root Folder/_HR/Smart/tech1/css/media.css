@@ -1,0 +1,142 @@
+@media screen and (max-width: 1024px) {
+
+    .sc-menu {
+        padding: 20px;
+    }
+
+    .sc-menu-heading {
+        font-size: 24px;
+    }
+
+    .sc-slide-heading {
+        font-size: 45px;
+    }
+
+    .sc-slide-middle-heading {
+        font-size: 24px;
+    }
+
+    .sc-profile-competences-heading {
+        font-size: 24px;
+    }
+
+    .sc-profile-obligation {
+        font-size: 16px;
+    }
+
+    .sc-profile-obligation-from {
+        font-size: 16px;
+    }
+
+    .slide-profile-obligation-info {
+      margin-top: 10px;
+    }
+
+    .slide-profile-row {
+        flex-direction: column;
+    }
+
+    .slide-profile-col {
+        width: 100%;
+    }
+
+    .profile-competence {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .profile-competence-label {
+        font-size: 16px;
+    }
+
+    .profile-skill-label {
+        font-size: 16px;
+    }
+
+    .add-buttons {
+        font-size: 16px;
+    }
+
+    .competence-position-conformity, .competence-position-intersection {
+        margin-top: 15px;
+    }
+
+    .position-heading {
+        /*font-size: 24px;*/
+    }
+
+    .competence-position-heading {
+        font-size: 24px;
+    }
+
+    .competence-about {
+        margin-top: 15px;
+    }
+
+    .goal-heading {
+        font-size: 24px;
+    }
+
+    .goal-desc {
+        margin-top: 15px;
+    }
+
+    .tools-heading {
+        font-size: 24px;
+    }
+
+    .ipr-heading {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    .sc-menu {
+        padding: 20px 15px 20px 10px;
+    }
+
+    .slide-profile-col {
+        margin-top: 20px;
+    }
+
+    .sc-menu-heading {
+        font-size: 22px;
+    }
+
+    .sc-slide-heading {
+        font-size: 35px;
+    }
+
+    .sc-slide-middle-heading {
+        font-size: 22px;
+    }
+
+    .position-heading {
+        font-size: 22px;
+    }
+
+    .competence-position-heading {
+        font-size: 22px;
+    }
+
+    .goal-heading {
+        font-size: 22px;
+    }
+
+    .tools-heading {
+        font-size: 22px;
+    }
+
+    .ipr-heading {
+        font-size: 22px;
+    }
+
+    .position {
+        margin-top: 18px;
+    }
+
+    .tools-text {
+        line-height: 1.35;
+    }
+}

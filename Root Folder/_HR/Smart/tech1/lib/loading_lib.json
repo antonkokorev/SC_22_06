@@ -1,0 +1,17 @@
+{
+   "context": "sdk",
+   "bo": true,
+   "paths": {
+   "swiper": "$$path$$lib/swiper",
+   "SplitText": "$$path$$lib/SplitText",
+	"TweenMax": "$$path$$lib/TweenMax",
+	"Draggable":"$$path$$lib/Draggable",
+	"CSSPlugin":"$$path$$lib/CSSPlugin",
+	"TweenLite":"$$path$$lib/TweenLite"
+   },
+   "shim": {
+	"SplitText":{
+		"deps":["TweenMax"]
+	}
+   }
+}

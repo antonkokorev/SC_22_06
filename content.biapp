@@ -1,0 +1,172 @@
+<bi:biapp bi:version="2003" xmlns:bi="http://xml.sap.com/2011/biml/biapp" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/TR/REC-html40" xmlns:h="http://www.w3.org/TR/REC-html40" xmlns:sdk1="com.sap.sbt.component.v4" sdk1:version="1.2" xmlns:sdk2="com.sap.sbt.datapower.v3" sdk2:version="3.0" xmlns:sdk3="com.sap.sbt.ztlpower.v4" sdk3:version="1.4">
+	<bi:component name="APPLICATION_PROPERTIES" type="APPLICATION_PROPERTIES">
+		<bi:property name="THEME" value="sap_belize"/>
+		<bi:property name="MERGE_PROMPTS" value=" "/>
+		<bi:property name="UI5_MAIN" value="X"/>
+		<bi:property name="COMPACT_MODE" value="X"/>
+		<bi:property name="CUSTOM_CSS" value="Root Folder/_HR/Smart/tech1/smart.css"/>
+		<bi:property name="GLOBALVARIABLES" type="UNORDEREDLIST">
+			<bi:property name="GLOBALVARIABLE" index="0">
+				<bi:property name="NAME" value="gv_currentPage"/>
+				<bi:property name="GLOBAL_VAR_TYPE" value="String"/>
+				<bi:property name="VALUE" value="&apos;pageStart&apos;"/>
+			</bi:property>
+			<bi:property name="GLOBALVARIABLE" index="1">
+				<bi:property name="NAME" value="gv_user"/>
+				<bi:property name="GLOBAL_VAR_TYPE" value="String"/>
+				<bi:property name="VALUE" value="&apos;&apos;"/>
+			</bi:property>
+		</bi:property>
+		<bi:property name="ON_STARTUP">
+			<bi:value><![CDATA[gv_user=APPLICATION.getInfo().user;]]></bi:value>
+		</bi:property>
+	</bi:component>
+	<bi:component name="ROOT" type="ABSOLUTE_LAYOUT_COMPONENT">
+		<bi:component name="CC_MENU" type="com_sap_sbt_component_v4_Component">
+			<bi:property name="TOP_MARGIN" value="100"/>
+			<bi:property name="HEIGHT" value="auto"/>
+			<bi:property name="BOTTOM_MARGIN" value="0"/>
+			<bi:property name="LEFT_MARGIN" value="0"/>
+			<bi:property name="WIDTH" value="500"/>
+			<bi:property name="VISIBLE" value=""/>
+			<bi:property name="DESIGNER_VISIBLE" value=""/>
+		</bi:component>
+		<bi:component name="CC_BODY" type="com_sap_sbt_component_v4_Component">
+			<bi:property name="LEFT_MARGIN" value="0"/>
+			<bi:property name="TOP_MARGIN" value="0"/>
+			<bi:property name="RIGHT_MARGIN" value="0"/>
+			<bi:property name="BOTTOM_MARGIN" value="0"/>
+			<bi:property name="WIDTH" value="auto"/>
+			<bi:property name="HEIGHT" value="auto"/>
+		</bi:component>
+		<bi:component name="CC_START" type="com_sap_sbt_component_v4_Component">
+			<bi:property name="LEFT_MARGIN" value="0"/>
+			<bi:property name="TOP_MARGIN" value="0"/>
+			<bi:property name="RIGHT_MARGIN" value="0"/>
+			<bi:property name="BOTTOM_MARGIN" value="0"/>
+			<bi:property name="WIDTH" value="auto"/>
+			<bi:property name="HEIGHT" value="auto"/>
+			<bi:property name="CSS_CLASS" value="black"/>
+			<bi:property name="tech1">
+				<bi:value><![CDATA[Z_CONTROLLER._Action("openPage");]]></bi:value>
+			</bi:property>
+		</bi:component>
+		<bi:component name="IMAGE_1" type="IMAGE_COMPONENT">
+			<bi:property name="VISIBLE" value=""/>
+		</bi:component>
+		<bi:component name="DATAPOWER_1" type="com_sap_sbt_datapower_v3_DataPower">
+			<bi:property name="exlibs" type="ORDEREDLIST">
+				<bi:property name="lib" index="0" value="lib\loading_lib.json"/>
+			</bi:property>
+			<bi:property name="includes" type="ORDEREDLIST">
+				<bi:property name="inc" index="0" value="modules\scHeader.js"/>
+				<bi:property name="inc" index="1" value="modules\scMainMenu.js"/>
+				<bi:property name="inc" index="2" value="modules\scProfile.js"/>
+				<bi:property name="inc" index="3" value="modules\scChoice.js"/>
+				<bi:property name="inc" index="4" value="modules\scPosition.js"/>
+				<bi:property name="inc" index="5" value="modules\scCompetences.js"/>
+				<bi:property name="inc" index="6" value="modules\scGoals.js"/>
+				<bi:property name="inc" index="7" value="modules\scInstruments.js"/>
+				<bi:property name="inc" index="8" value="modules\scIpr.js"/>
+				<bi:property name="inc" index="9" value="modules\scMainBody.js"/>
+				<bi:property name="inc" index="10" value="modules\scStart.js"/>
+				<bi:property name="inc" index="11" value="css\scHeader.css"/>
+				<bi:property name="inc" index="12" value="css\scMainMenu.css"/>
+				<bi:property name="inc" index="13" value="css\scMainBody.css"/>
+				<bi:property name="inc" index="14" value="css\scStart.css"/>
+				<bi:property name="inc" index="15" value="css\media.css"/>
+			</bi:property>
+			<bi:property name="start">
+				<bi:value><![CDATA[Z_CONTROLLER._Action("init");]]></bi:value>
+			</bi:property>
+			<bi:property name="libs" type="ORDEREDLIST">
+				<bi:property name="lib" index="0" value="angular"/>
+			</bi:property>
+		</bi:component>
+		<bi:component name="ZTLPOWER_1" type="com_sap_sbt_ztlpower_v4_ZtlPower"/>
+		<bi:component name="Z_CONTROLLER" type="GLOBAL_SCRIPTS_COMPONENT">
+			<bi:property name="FUNCTIONS" type="ORDEREDLIST">
+				<bi:property name="FUNCTION" index="0">
+					<bi:property name="NAME" value="_Action"/>
+					<bi:property name="FUNCTION_BODY">
+						<bi:value><![CDATA[if(action=='openPage'){
+	var res=CC_START.ioAttr(actionType.GET, "return");
+
+	if(res=='1'){
+		gv_currentPage="pagePath";
+	}
+}
+
+
+Z_MODEL._Action(action);]]></bi:value>
+					</bi:property>
+					<bi:property name="INPUT_PARAMETERS" type="ORDEREDLIST">
+						<bi:property name="INPUT_PARAMETER" index="0">
+							<bi:property name="NAME" value="action"/>
+							<bi:property name="PARAMETER_TYPE" value="String"/>
+						</bi:property>
+					</bi:property>
+				</bi:property>
+			</bi:property>
+		</bi:component>
+		<bi:component name="Z_MODEL" type="GLOBAL_SCRIPTS_COMPONENT">
+			<bi:property name="FUNCTIONS" type="ORDEREDLIST">
+				<bi:property name="FUNCTION" index="0">
+					<bi:property name="NAME" value="_Action"/>
+					<bi:property name="FUNCTION_BODY">
+						<bi:value><![CDATA[Z_VIEW._Action(action);]]></bi:value>
+					</bi:property>
+					<bi:property name="INPUT_PARAMETERS" type="ORDEREDLIST">
+						<bi:property name="INPUT_PARAMETER" index="0">
+							<bi:property name="NAME" value="action"/>
+							<bi:property name="PARAMETER_TYPE" value="String"/>
+						</bi:property>
+					</bi:property>
+				</bi:property>
+			</bi:property>
+		</bi:component>
+		<bi:component name="Z_VIEW" type="GLOBAL_SCRIPTS_COMPONENT">
+			<bi:property name="FUNCTIONS" type="ORDEREDLIST">
+				<bi:property name="FUNCTION" index="0">
+					<bi:property name="NAME" value="_Action"/>
+					<bi:property name="FUNCTION_BODY">
+						<bi:value><![CDATA[if(action=='init'){
+	CC_MENU.ioAttr(actionType.SET, "event$$_$$include","initMainMenu$$_$$classMainMenu");
+	CC_BODY.ioAttr(actionType.SET, "event$$_$$include$$_$$user","initMainBody$$_$$classMainBody$$_$$"+gv_user);
+	CC_START.ioAttr(actionType.SET, "event$$_$$include","initStart$$_$$classStart");
+}
+
+
+/*if(action=='openPage'){
+	
+	
+	if(gv_currentPage=='pagePath')
+	{
+		CC_START.setVisible(false);
+		CC_MENU.setVisible(true);
+		CC_BODY.setVisible(true);
+		CC_MENU.ioAttr(actionType.SET, "event$$_$$include","initMainMenu$$_$$classMainMenu");
+		CC_BODY.ioAttr(actionType.SET, "event$$_$$include","initMainBody$$_$$classMainBody");
+	}
+		if(gv_currentPage=='pageStart')
+	{
+		CC_START.setVisible(true);
+		CC_MENU.setVisible(false);
+		CC_BODY.setVisible(false);
+		CC_START.ioAttr(actionType.SET, "event$$_$$include","initStart$$_$$classStart");
+	}
+	
+	
+}*/]]></bi:value>
+					</bi:property>
+					<bi:property name="INPUT_PARAMETERS" type="ORDEREDLIST">
+						<bi:property name="INPUT_PARAMETER" index="0">
+							<bi:property name="NAME" value="action"/>
+							<bi:property name="PARAMETER_TYPE" value="String"/>
+						</bi:property>
+					</bi:property>
+				</bi:property>
+			</bi:property>
+		</bi:component>
+	</bi:component>
+</bi:biapp>

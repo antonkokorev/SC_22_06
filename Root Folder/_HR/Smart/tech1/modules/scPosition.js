@@ -1,0 +1,108 @@
+function classPosition() {
+    var eventBr = ($.browser.mobile) ? 'touchstart' : 'click';
+/*   '    <div id="sc-profile" ng-controller="profileController" class="profile-slide sc-v-slide">' +*/
+    this.positionView = function () {
+        var html =
+            '        <div id="sc-position" ng-controller="positionController"  class="sc-main-slide">' +
+            '            <div class="position-slide sc-v-slide">' +
+            '                <div class="slide-row">' +
+            '                    <div class="slide-position-col">' +
+            '                        <h2 class="sc-slide-heading"> {{all}} </h2>' +
+            '                        <div class="position-all">';
+
+        /*var positions = this.globalJSON.positions;
+
+        positions.forEach(function (position) {*/
+
+            html +=
+                '<div class="position choose-position" ng-repeat="position in model">' +// data-grade="grade" data-turnover="turnover"
+                '    <h3 class="position-heading"> {{position.sJobProfileId}}</h3>' +
+                '    <p class="position-learn-more">{{position.sJobProfileName}} </p>' +
+                '</div>';
+    //    });
+
+        html +=
+            '                        </div>' +
+            '                    </div>' +
+            '                    <div class="slide-position-col chosen-positions">' +
+            '                        <h2 class="sc-slide-heading"> Избранные </h2>' +
+            '                    </div>' +
+            '                </div>' +
+            '            </div>' +
+            '        </div>';
+
+        return html;
+    }
+/**
+ *             '                               <div class="profile-competence" ng-repeat="competence in competences" ng-if="competence.sType === competencesTypes[0]">' +
+ '                                <p class="profile-competence-label"> {{competence.sFullName}} </p>' +
+ '                                <p class="profile-competence-ratings"><span class="profile-competence-rating"> {{competence.iRate360}} </span></p>' +
+ '                               </div>'+
+ *
+ *
+ * */
+    this.positionController = function () {
+
+        var that=this;
+        positionApp = angular.module('positionModule', []);
+
+        positionApp.controller('positionController', ['$scope', function ($scope) {
+            $scope.all="Все"
+           $scope.model=that_.services.position.result;
+        }]);
+
+        angular.element(function() {
+            angular.bootstrap(document.getElementById("sc-position"), ['positionModule']);
+        });
+
+// Выбор позиций
+        var choose_position = document.querySelectorAll(".choose-position");
+        var chosen_position = document.querySelector(".chosen-positions");
+        choose_position.forEach(function (item) {
+            item.addEventListener(eventBr, function () {
+                if (item.classList.contains("disabled")) {
+                    return;
+                }
+
+                var newItem = item.cloneNode(true);
+
+                // Запрещаем повторный клик
+                item.classList.add("disabled");
+
+                newItem.firstElementChild.classList.add("color-red");
+                newItem.addEventListener(eventBr, function () {
+                    chosen_position.removeChild(newItem);
+                    item.classList.remove("disabled");
+                });
+                chosen_position.appendChild(newItem);
+            });
+        });
+
+        // Фильтры
+        var filterInputs = document.querySelectorAll(".sc-menu-filter-input");
+
+        filterInputs.forEach(function (filter) {
+
+            filter.addEventListener("input", function () {
+                for (var i = 0; i < choose_position.length; i++) {
+                    var turnover = choose_position[i].getAttribute("data-turnover");
+                    var grade = choose_position[i].getAttribute("data-grade");
+
+                    if (filter.classList.contains("turnover-from") && turnover <= filter.value) {
+                        choose_position[i].classList.add("hidden");
+                    } else {
+                        choose_position[i].classList.remove("hidden");
+                    }
+
+                    if (filter.classList.contains("turnover-to") && turnover >= filter.value) {
+                        choose_position[i].classList.add("hidden");
+                    } else {
+                        choose_position[i].classList.remove("hidden");
+                    }
+
+                }
+            });
+
+        });
+    }
+}
