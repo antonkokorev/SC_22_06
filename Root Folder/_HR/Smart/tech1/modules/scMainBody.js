@@ -14,47 +14,44 @@ function classMainBody() {
     //======================================
 
     //this.currentUser="Basic Z2VvcmdpZXYtZWk6cXdlcnR5MTIz",
-    this.currentUser = "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi";
-    var that_ = this;
+
+    this.currentUser = "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
+        that_ = this,
 
 
-    this.ajax = function (param) {
-        /*var that=this;*/
-        $.ajax
-        ({
-            type: "GET",
-            url: param.url + param.params,
-            dataType: 'jsonp',
-            name: key,
-            async: true,
-            jsonpCallback: param.callback,
-            //headers:{"Authorization":"Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi"},
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Form " + btoa("domozhako_mv:12345Tgb")/*"Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi"*/);
-            },
-            success: function (json) {
-                param.status = true;
-                param.result = json;
-                if (param.activeController) {
-                    param.activeController();
-                }
-                //alert(JSON.stringify(that.services[this.name].result));
-            },
-            error: function (json) {
-                param.status = true;
-                param.result = json;
-                if (param.activeController) {
-                    try {
-                        param.activeController();
-                    } catch (err) {
-                        console.log("Контроллер " + param.callback + " не существует");
+        this.ajax = function (param) {
+            /*var that=this;*/
+            $.ajax
+            ({
+                type: "GET",
+                url: param.url + param.params,
+                dataType: 'jsonp',
+                name: key,
+                async: true,
+                jsonpCallback: param.callback,
+                //headers:{"Authorization":"Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi"},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Authorization", "Form " + btoa("domozhako_mv:12345Tgb")/*"Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi"*/);
+                },
+                success: function (json) {
+                    param.status = true;
+                    param.result = json;
+                    if (param.activeController) {
+                        try {
+                            console.warn("Контроллер " + param.callback + " пошел работать");
+                            param.activeController();
+                        } catch (err) {
+                            console.error("Контроллер " + param.callback + " не существует");
+                        }
+
                     }
-
-                }
-                //alert(JSON.stringify(that.services[this.name].result));
-            },
-        });
-    };
+                    //alert(JSON.stringify(that.services[this.name].result));
+                },
+                error: function (json) {
+                    console.error("Ошибка выполнения AJAX " + param.callback);
+                },
+            });
+        }
 
 
     this.services = {
