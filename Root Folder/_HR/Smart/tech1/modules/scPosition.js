@@ -8,20 +8,22 @@ function classPosition() {
             '                <div class="slide-row">' +
             '                    <div class="slide-position-col">' +
             '                        <h2 class="sc-slide-heading"> {{all}} </h2>' +
-            '                        <div class="position-all">';
+            '                        <div class="position-all">' +
 
-        /*var positions = this.globalJSON.positions;
+            '                  <div id="swiper-positions-container" class="swiper-container swiper-auto-container">' +
+            '                    <div class="swiper-wrapper">' +
+            '                      <div class="swiper-slide">' +
 
-        positions.forEach(function (position) {*/
 
-            html +=
-                '<div class="position choose-position" ng-repeat="position in model">' +// data-grade="grade" data-turnover="turnover"
-                '    <h3 class="position-heading"> {{position.sJobProfileId}}</h3>' +
-                '    <p class="position-learn-more">{{position.sJobProfileName}} </p>' +
-                '</div>';
-    //    });
+            '                           <div class="position choose-position" ng-repeat="position in model">' +// data-grade="grade" data-turnover="turnover"
+            '                               <h3 class="position-heading"> {{position.sJobProfileId}}</h3>' +
+            '                               <p class="position-learn-more">{{position.sJobProfileName}} </p>' +
+            '                           </div>' +
 
-        html +=
+            '                         </div>' +
+            '                       </div>' +
+            '                     </div>' +
+
             '                        </div>' +
             '                    </div>' +
             '                    <div class="slide-position-col chosen-positions">' +
@@ -103,6 +105,17 @@ function classPosition() {
                 }
             });
 
+        });
+
+        window.positions_swiper = new Swiper('#swiper-positions-container', {
+            direction: 'vertical',
+            slidesPerView: 'auto',
+            mousewheel: true,
+            freeMode: true
+        });
+
+        $(window).resize(function () {
+            window.positions_swiper.update();
         });
     }
 }

@@ -20,7 +20,7 @@ function classCompetences() {
 
             '                    <div class="competences-h-slide competences-by-position-current">' +
 
-            '                       <h2 class="sc-slide-heading position-name"> {{positionCurrent.sJobProfileName}} </h2>' +
+            '                       <h2 class="sc-slide-heading"> {{positionCurrent.sJobProfileName}} </h2>' +
             '                       <div class="back-button-competence back1" ng-click="getBack(0)"> Назад</div>' +
 
             '                       <div id="swiper-cpos-container" class="swiper-container swiper-auto-container">' +

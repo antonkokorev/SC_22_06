@@ -233,11 +233,6 @@
     margin-top: 10px;
 }
 
-.profile-skill-name {
-    margin-right: 10px;
-    min-width: 120px;
-    color: #8d8d8d;
-}
 
 .profile-skill-stars {
     position: relative;
@@ -902,6 +897,7 @@
 .swiper-structure-container,
 .swiper-auto-container {
     height: 100%;
+    overflow: hidden;
 }
 
 .swiper-auto-container .swiper-slide,
@@ -933,6 +929,13 @@
 
 .position {
     margin-top: 30px;
+}
+
+.position-slide,
+.position-slide .slide-row,
+.position-slide .slide-position-col,
+.position-slide .position-all {
+    height: 100%;
 }
 
 .position-heading {
@@ -1030,7 +1033,7 @@
     cursor: pointer;
 }
 
-.position-name {
+.swiper-header {
     background: #fff;
     position: relative;
     z-index: 10;
