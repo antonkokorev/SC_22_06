@@ -91,11 +91,11 @@ function classMainBody() {
                 },
                 */
         "competention": {
-            "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=positionCompetention",
+            "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=positionCompetentions",
             "status": false,
             "params": "&user=102838&position=[30007047,30006541]",
             "loadInStart": true,
-            "callback": "getCompetetionPosition",
+            "callback": "getPositionCompetetions",
             "activeController": that_.competencesController
         }
 

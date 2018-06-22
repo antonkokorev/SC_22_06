@@ -900,11 +900,11 @@
 }
 
 .swiper-structure-container,
-.swiper-intersections-container {
+.swiper-auto-container {
     height: 100%;
 }
 
-.swiper-intersections-container .swiper-wrapper,
+.swiper-auto-container .swiper-slide,
 .swiper-negative-container .swiper-slide,
 .swiper-structure-container .swiper-slide,
 .swiper-labels-container .swiper-slide,
@@ -1030,6 +1030,12 @@
     cursor: pointer;
 }
 
+.position-name {
+    background: #fff;
+    position: relative;
+    z-index: 10;
+}
+
 .competence-position-conformity,
 .competence-position-intersection {
     margin-top: 25px;
@@ -1105,7 +1111,11 @@
 }
 
 .back-button-competence {
-    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    background: #fff;
+    position: relative;
+    z-index: 10;
     color: #8d8d8d;
     -webkit-transition: color 0.3s;
     -moz-transition: color 0.3s;

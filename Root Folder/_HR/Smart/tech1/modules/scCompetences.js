@@ -9,24 +9,46 @@ function classCompetences() {
             '                <div class="competences-by-position">' +
             '                    <div class="competences-h-slide competences-by-position-list">'+
 
-            '                        <div class="competence-position" >' +
-            '                            <h3 class="competence-position-heading"> Position </h3>' +
+            '                        <div class="competence-position" ng-repeat="position in model.aPositions" ng-click="getPositionCompetences($index, position)">' +
+            '                            <h3 class="competence-position-heading"> {{position.sJobProfileName}} </h3>' +
             '                            <p class="competence-position-conformity"> Соответствие <span' +
             '                                    class="conformity-bold"> 87 </span></p>' +
             '                            <p class="competence-position-competences"> Компетенции </p>' +
             '                        </div>' +
 
             '                    </div>' +
-            '                    <div class="competences-h-slide competences-by-position-current"></div>' +
+
+            '                    <div class="competences-h-slide competences-by-position-current">' +
+
+            '                       <h2 class="sc-slide-heading position-name"> {{positionCurrent.sJobProfileName}} </h2>' +
+            '                       <div class="back-button-competence back1" ng-click="getBack(0)"> Назад</div>' +
+
+            '                       <div id="swiper-cpos-container" class="swiper-container swiper-auto-container">' +
+            '                           <div class="swiper-wrapper">' +
+            '                               <div class="swiper-slide">' +
+
+            '                                   <div class="competence-position-current" ng-repeat="competence in currentPositionCompetences">' +
+            '                                       <h3 class="competence-position-heading"> {{competence.sCompetentionName}}</h3>' +
+            '                                       <p class="competence-position-conformity"> Соответствие <span class="conformity-bold"> {{competence.iUserCompProc}} </span></p>' +
+            '                                       <p class="competence-position-competences"> Индикаторы </p>' +
+            '                                   </div>'+
+
+            '                               </div>' +
+            '                           </div>' +
+            '                       </div>' +
+
+            '                    </div>' +
+
+
             '                    <div class="competences-h-slide competences-by-position-competence"></div>' +
             '                </div>' +
             '                <div class="competence-by-intersections">' +
 
-            '                <div class="swiper-container swiper-intersections-container">' +
+            '                <div id="swiper-intersections-container" class="swiper-container swiper-auto-container">' +
             '                   <div class="swiper-wrapper">' +
             '                       <div class="swiper-slide">' +
 
-            '                           <div class="competence-position-current" ng-repeat="competence in model">' +
+            '                           <div class="competence-position-current" ng-repeat="competence in model.aCompetetionIntersection">' +
             '                               <h3 class="competence-position-heading"> {{competence.sCompetentionName}} </h3>' +
             '                               <p class="competence-position-conformity"> Соответствие <span' +
             '                                       class="conformity-bold"> {{competence.iUserCompProc}}</span></p>' +
@@ -52,8 +74,28 @@ function classCompetences() {
         var app = angular.module('competencesComponent', []);
 
         app.controller('competencesController', ['$scope', function ($scope) {
+            //debugger;
             $scope.model = that.result;
 
+            $scope.positionCurrent = null;
+            $scope.currentPositionCompetences = [];
+
+            var competences_h_slider = document.querySelector(".competences-by-position");
+
+            $scope.getPositionCompetences = function(index, position) {
+                competences_h_slider.style.transform = "translateX(-33%)";
+
+                $scope.positionCurrent = position;
+                $scope.currentPositionCompetences = $scope.model.aPositions[index].aCompetentions;
+
+                setTimeout(function() {
+                    window.cpos_swiper.update();
+                }, 300);
+            };
+
+            $scope.getBack = function(n) {
+                competences_h_slider.style.transform = "translateX(-"+ 33.3333 * n +"%)";
+            }
         }]);
 
         angular.element(function () {
@@ -73,6 +115,7 @@ function classCompetences() {
             // a должно быть равным b
             return 0;
         }
+
 
         // Слайдер компетенций
         var competences_h_slider = document.querySelector(".competences-by-position");
@@ -144,9 +187,16 @@ function classCompetences() {
                 }
             })
         }
-        */
+*/
 
-        window.intersections_swiper = new Swiper('.swiper-intersections-container', {
+        window.intersections_swiper = new Swiper('#swiper-intersections-container', {
+            direction: 'vertical',
+            slidesPerView: 'auto',
+            mousewheel: true,
+            freeMode: true
+        });
+
+        window.cpos_swiper = new Swiper('#swiper-cpos-container', {
             direction: 'vertical',
             slidesPerView: 'auto',
             mousewheel: true,
@@ -155,6 +205,7 @@ function classCompetences() {
 
         $(window).resize(function () {
             window.intersections_swiper.update();
+            window.cpos_swiper.update();
         });
     }
 }
