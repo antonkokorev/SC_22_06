@@ -36,22 +36,18 @@ function classMainBody() {
                     param.status = true;
                     param.result = json;
                     if (param.activeController) {
-                        param.activeController();
+                        try {
+                            console.warn("Контроллер " + param.callback + " пошел работать")
+                            param.activeController();
+                        } catch (err) {
+                            console.error("Контроллер " + param.callback + " не существует");
+                        }
+                        
                     }
                     //alert(JSON.stringify(that.services[this.name].result));
                 },
                 error: function (json) {
-                    param.status = true;
-                    param.result = json;
-                    if (param.activeController) {
-                        try {
-                            param.activeController();
-                        } catch (err) {
-                            console.log("Контроллер " + param.callback + " не существует");
-                        }
-
-                    }
-                    //alert(JSON.stringify(that.services[this.name].result));
+                            console.error("Ошибка выполнения AJAX "+ param.callback);
                 },
             });
         }
