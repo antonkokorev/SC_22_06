@@ -51,9 +51,6 @@
 				<bi:value><![CDATA[Z_CONTROLLER._Action("openPage");]]></bi:value>
 			</bi:property>
 		</bi:component>
-		<bi:component name="IMAGE_1" type="IMAGE_COMPONENT">
-			<bi:property name="VISIBLE" value=""/>
-		</bi:component>
 		<bi:component name="DATAPOWER_1" type="com_sap_sbt_datapower_v3_DataPower">
 			<bi:property name="exlibs" type="ORDEREDLIST">
 				<bi:property name="lib" index="0" value="lib\loading_lib.json"/>
