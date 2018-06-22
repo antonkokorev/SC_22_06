@@ -719,6 +719,7 @@
 
 
 .sc-structure-heading {
+    min-height: 36px;
     font-size: 20px;
     font-weight: normal;
     font-style: normal;
@@ -734,6 +735,7 @@
     line-height: normal;
     letter-spacing: 1px;
     color: #26a69a;
+    font-weight: 600;
 }
 
 .sc-structure-heading.no {
@@ -742,6 +744,7 @@
     line-height: normal;
     letter-spacing: 1px;
     color: #ff3d46;
+    font-weight: 600;
 }
 
 .sc-structure-about {
@@ -897,8 +900,7 @@
     width: 90%;
 }
 
-.swiper-structure-container,
-.swiper-structure-container .swiper-wrapper{
+.swiper-structure-container {
     height: 100%;
 }
 

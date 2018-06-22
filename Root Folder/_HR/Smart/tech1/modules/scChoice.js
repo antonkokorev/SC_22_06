@@ -1,6 +1,6 @@
 function classChoice() {
     var eventBr = ($.browser.mobile) ? 'touchstart' : 'click';
-    /*------------------------------------------------------------------------------------------------- xc xc------------------*/
+    /*-------------------------------------------------------------------------------------------------------------------*/
     /*-------------------------------------------------------------------------------------------------------------------*/
     this.choiceView = function () {
 
@@ -53,10 +53,10 @@ function classChoice() {
             '       <div class="sc-choice-v-slide">' +
 
             '           <div class="sc-choice-structures">' +
-            '             <div class="sc-choice-structure-col clearfix">' +
+            '             <div class="sc-choice-structure-col">' +
             '               <div class="swiper-container swiper-structure-container">' +
             '                   <div class="swiper-wrapper">' +
-            '                       <div class="swiper-slide">' +
+            '                       <div class="swiper-slide clearfix">' +
             '                           <div class="sc-choice-structure" ng-repeat="structure in family">' +
             '                               <h3 class="sc-structure-heading" ng-click="chooseStructure($event)">{{structure.sName}}</h3>' +
             '                           </div>' +
@@ -95,6 +95,8 @@ function classChoice() {
                 } else if (e.target.classList.contains("no")) {
                     e.target.classList.remove("no");
                 }
+
+                window.structure_swiper.update();
             }
         }]);
 
@@ -123,44 +125,11 @@ function classChoice() {
             filter_wrapper.classList.remove("expand");
         });
 
-        window.negative_swiper = new Swiper('.swiper-negative-container', {
-            direction: 'vertical',
-            slidesPerView: 'auto',
-            mousewheel: true,
-            freeMode: true
-        });
 
-        window.labels_swiper = new Swiper('.swiper-labels-container', {
-            direction: 'vertical',
-            slidesPerView: 'auto',
-            mousewheel: true,
-            freeMode: true
-        });
-
-        window.positive_swiper = new Swiper('.swiper-positive-container', {
-            direction: 'vertical',
-            slidesPerView: 'auto',
-            mousewheel: true,
-            freeMode: true
-        });
-
-        window.structure_swiper = new Swiper('.swiper-structure-container', {
-            direction: 'vertical',
-            slidesPerView: 'auto',
-            mousewheel: true,
-            freeMode: true
-        });
-
-        $(window).resize(function () {
-            window.negative_swiper.update();
-            window.labels_swiper.update();
-            window.positive_swiper.update();
-            window.structure_swiper.update();
-        })
 
         var animateChoice = function () {
             console.warn("animateChoice");
-            var that = this;
+            //var that = this;
 
             // случайное целое число
             function randomInteger(min, max) {
@@ -328,7 +297,7 @@ function classChoice() {
                       }*/
                 }
 
-                that.labels_swiper.update()
+                window.labels_swiper.update()
             }
 
 
@@ -414,9 +383,9 @@ function classChoice() {
 
                         if (curentParent != target.slice(1))
                             $(target).prepend(this.target);
-                        that.negative_swiper.update();
-                        that.labels_swiper.update();
-                        that.positive_swiper.update();
+                        window.negative_swiper.update();
+                        window.labels_swiper.update();
+                        window.positive_swiper.update();
                     }
                 })
 
@@ -427,6 +396,41 @@ function classChoice() {
         };
 
         animateChoice();
+
+        window.negative_swiper = new Swiper('.swiper-negative-container', {
+            direction: 'vertical',
+            slidesPerView: 'auto',
+            mousewheel: true,
+            freeMode: true
+        });
+
+        window.labels_swiper = new Swiper('.swiper-labels-container', {
+            direction: 'vertical',
+            slidesPerView: 'auto',
+            mousewheel: true,
+            freeMode: true
+        });
+
+        window.positive_swiper = new Swiper('.swiper-positive-container', {
+            direction: 'vertical',
+            slidesPerView: 'auto',
+            mousewheel: true,
+            freeMode: true
+        });
+
+        window.structure_swiper = new Swiper('.swiper-structure-container', {
+            direction: 'vertical',
+            slidesPerView: 'auto',
+            mousewheel: true,
+            freeMode: true
+        });
+
+        $(window).resize(function () {
+            window.negative_swiper.update();
+            window.labels_swiper.update();
+            window.positive_swiper.update();
+            window.structure_swiper.update();
+        });
     }
 
 }

@@ -36,6 +36,10 @@
         flex-direction: column;
     }
 
+    .sc-structure-heading {
+        font-size: 16px;
+    }
+
     .slide-profile-col {
         width: 100%;
     }
@@ -138,5 +142,19 @@
 
     .tools-text {
         line-height: 1.35;
+    }
+
+    .sc-structure-heading {
+        font-size: 14px;
+    }
+
+    .sort-choice,
+    .get-lucky-choice,
+    .filter-placeholder{
+        font-size: 14px;
+    }
+
+    .filter-choice.expand {
+        width: 140px;
     }
 }
