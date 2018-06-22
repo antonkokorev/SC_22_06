@@ -207,7 +207,6 @@ function classProfile() {
 //============================================================================================================================================================================================
 
     this.profileController = function () {
-        var test;
         var eventBr = ($.browser.mobile) ? 'touchstart' : 'click';
 
         var that = this;
