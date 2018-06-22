@@ -894,16 +894,17 @@
 }
 
 .swiper-negative-container,
-.swiper-positive-container
-{
+.swiper-positive-container {
     height: 100%;
     width: 90%;
 }
 
-.swiper-structure-container {
+.swiper-structure-container,
+.swiper-intersections-container {
     height: 100%;
 }
 
+.swiper-intersections-container .swiper-wrapper,
 .swiper-negative-container .swiper-slide,
 .swiper-structure-container .swiper-slide,
 .swiper-labels-container .swiper-slide,

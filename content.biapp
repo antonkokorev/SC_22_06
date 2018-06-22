@@ -63,7 +63,7 @@
 				<bi:property name="inc" index="1" value="modules\scMainMenu.js"/>
 				<bi:property name="inc" index="2" value="modules\scProfile.js"/>
 				<bi:property name="inc" index="3" value="modules\scChoice.js"/>
-				<bi:property name="inc" index="4" value="modules\scPosition1.js"/>
+				<bi:property name="inc" index="4" value="modules\scPosition.js"/>
 				<bi:property name="inc" index="5" value="modules\scCompetences.js"/>
 				<bi:property name="inc" index="6" value="modules\scGoals.js"/>
 				<bi:property name="inc" index="7" value="modules\scInstruments.js"/>

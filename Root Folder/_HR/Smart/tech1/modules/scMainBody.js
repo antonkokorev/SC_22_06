@@ -14,47 +14,47 @@ function classMainBody() {
     //======================================
 
     //this.currentUser="Basic Z2VvcmdpZXYtZWk6cXdlcnR5MTIz",
-    this.currentUser = "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
-        that_ = this,
+    this.currentUser = "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi";
+    var that_ = this;
 
 
-        this.ajax = function (param) {
-            /*var that=this;*/
-            $.ajax
-            ({
-                type: "GET",
-                url: param.url + param.params,
-                dataType: 'jsonp',
-                name: key,
-                async: true,
-                jsonpCallback: param.callback,
-                //headers:{"Authorization":"Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi"},
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("Authorization", "Form " + btoa("domozhako_mv:12345Tgb")/*"Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi"*/);
-                },
-                success: function (json) {
-                    param.status = true;
-                    param.result = json;
-                    if (param.activeController) {
+    this.ajax = function (param) {
+        /*var that=this;*/
+        $.ajax
+        ({
+            type: "GET",
+            url: param.url + param.params,
+            dataType: 'jsonp',
+            name: key,
+            async: true,
+            jsonpCallback: param.callback,
+            //headers:{"Authorization":"Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi"},
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("Authorization", "Form " + btoa("domozhako_mv:12345Tgb")/*"Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi"*/);
+            },
+            success: function (json) {
+                param.status = true;
+                param.result = json;
+                if (param.activeController) {
+                    param.activeController();
+                }
+                //alert(JSON.stringify(that.services[this.name].result));
+            },
+            error: function (json) {
+                param.status = true;
+                param.result = json;
+                if (param.activeController) {
+                    try {
                         param.activeController();
+                    } catch (err) {
+                        console.log("Контроллер " + param.callback + " не существует");
                     }
-                    //alert(JSON.stringify(that.services[this.name].result));
-                },
-                error: function (json) {
-                    param.status = true;
-                    param.result = json;
-                    if (param.activeController) {
-                        try {
-                            param.activeController();
-                        } catch (err) {
-                            console.log("Контроллер " + param.callback + " не существует");
-                        }
 
-                    }
-                    //alert(JSON.stringify(that.services[this.name].result));
-                },
-            });
-        }
+                }
+                //alert(JSON.stringify(that.services[this.name].result));
+            },
+        });
+    };
 
 
     this.services = {
@@ -76,32 +76,33 @@ function classMainBody() {
                 "loadInStart": true,
                 "activeController": that_.choiceController
             },
+        /*
+                "instrument": {
+                    "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument",
+                    "status": false,
+                    "params": "&compitentId=2000001154&user=102838",
+                    "loadInStart": false,
+                    "callback": "getCompetetionInstrument"
+                },
 
-        "instrument": {
-            "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument",
-            "status": false,
-            "params": "&compitentId=2000001154&user=102838",
-            "loadInStart": false,
-            "callback": "getCompetetionInstrument"
-        },
-
-        "position": {
-            "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=position",
-            "status": false,
-            "params": "&user=102838&requestType=model&family=[30000047]&row=1_2",
-            "loadInStart": true,
-            "callback": "getRecommendatedPosition",
-        }
-        ,
+                "position": {
+                    "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=position",
+                    "status": false,
+                    "params": "&user=102838&requestType=model&family=[30000047]&row=1_2",
+                    "loadInStart": true,
+                    "callback": "getRecommendatedPosition",
+                },
+                */
         "competention": {
             "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=positionCompetention",
             "status": false,
             "params": "&user=102838&position=[30007047,30006541]",
-            "loadInStart": false,
-            "callback": "getCompetetionInstrument",
+            "loadInStart": true,
+            "callback": "getCompetetionPosition",
+            "activeController": that_.competencesController
         }
 
-    }
+    };
 
 
     this.globalJSON = {
@@ -183,7 +184,7 @@ function classMainBody() {
                 ]
             }
         ]
-    }
+    };
 
 
     this.initMainBody = function () {
