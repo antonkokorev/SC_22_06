@@ -38,7 +38,6 @@
 			<bi:property name="BOTTOM_MARGIN" value="0"/>
 			<bi:property name="WIDTH" value="auto"/>
 			<bi:property name="HEIGHT" value="auto"/>
-			<bi:property name="CSS_CLASS" value="sc-app"/>
 		</bi:component>
 		<bi:component name="CC_START" type="com_sap_sbt_component_v4_Component">
 			<bi:property name="LEFT_MARGIN" value="0"/>

@@ -79,9 +79,7 @@ function classChoice() {
         var that = this;
 
 
-        var app = angular.module('choiceComponent', []);
-
-        app.controller('choiceController', ['$scope', function ($scope) {
+        angular.module('scApp').controller('choiceController', ['$scope', function ($scope) {
             $scope.tags = that.result.aTags;
             $scope.family = that.result.aFamily;
 
@@ -99,10 +97,6 @@ function classChoice() {
                 window.structure_swiper.update();
             }
         }]);
-
-        angular.element(function () {
-            angular.bootstrap(document.getElementById("sc-choice"), ['choiceComponent']);
-        });
 
 
         var filter = document.querySelector(".filter-input");

@@ -210,70 +210,67 @@ function classProfile() {
         var eventBr = ($.browser.mobile) ? 'touchstart' : 'click';
 
         var that = this;
-        var app = angular.module('profileComponent', []);
 
-        app.controller('profileController', ['$scope', function ($scope) {
-            var data = that.result;
+        angular.module("scApp")
+            .controller('profileController', ['$scope', function ($scope) {
+                var data = that.result;
 
-            $scope.model = data;
-            $scope.competencesTypes = ["Corp", "Role", "Func"];
-            $scope.jobExperience = "";
+                $scope.model = data;
+                $scope.competencesTypes = ["Corp", "Role", "Func"];
+                $scope.jobExperience = "";
 
-            if (data.iCountExperienceYear === 1) {
-                $scope.jobExperience = data.iCountExperienceYear + "год";
-            }
+                if (data.iCountExperienceYear === 1) {
+                    $scope.jobExperience = data.iCountExperienceYear + "год";
+                }
 
-            if (data.iCountExperienceYear > 1 && data.iCountExperienceYear < 5) {
-                $scope.jobExperience = data.iCountExperienceYear + "года";
-            }
+                if (data.iCountExperienceYear > 1 && data.iCountExperienceYear < 5) {
+                    $scope.jobExperience = data.iCountExperienceYear + "года";
+                }
 
-            if (data.iCountExperienceYear > 5) {
-                $scope.jobExperience = data.iCountExperienceYear + "лет";
-            }
+                if (data.iCountExperienceYear > 5) {
+                    $scope.jobExperience = data.iCountExperienceYear + "лет";
+                }
 
 
-            $scope.addNewSkill = function (e) {
+                $scope.addNewSkill = function (e) {
 
-                var add_skill_line = document.querySelector(".add-skill-hr");
-                var add_skill_form = document.querySelector(".add-skill-form");
-                var checkboxes = document.querySelectorAll(".add-skill-form .add-skill-label");
+                    var add_skill_line = document.querySelector(".add-skill-hr");
+                    var add_skill_form = document.querySelector(".add-skill-form");
+                    var checkboxes = document.querySelectorAll(".add-skill-form .add-skill-label");
 
-                if (e.currentTarget.classList.contains("clicked")) {
-                    alert("Добавляю новый скилл");
-                    var input = add_skill_form.querySelector(".add-new-skill-input");
-                    input.value = "";
-                    for (var i = 0; i < checkboxes.length; i++) {
-                        checkboxes[i].classList.remove("checked");
+                    if (e.currentTarget.classList.contains("clicked")) {
+                        alert("Добавляю новый скилл");
+                        var input = add_skill_form.querySelector(".add-new-skill-input");
+                        input.value = "";
+                        for (var i = 0; i < checkboxes.length; i++) {
+                            checkboxes[i].classList.remove("checked");
+                        }
+                        e.currentTarget.classList.remove("clicked");
+                        add_skill_form.classList.add("hide");
+                        add_skill_line.classList.add("hide");
+                        return;
                     }
-                    e.currentTarget.classList.remove("clicked");
-                    add_skill_form.classList.add("hide");
-                    add_skill_line.classList.add("hide");
-                    return;
+
+                    e.currentTarget.classList.add("clicked");
+                    add_skill_form.classList.remove("hide");
+                    add_skill_line.classList.remove("hide");
+
+                    for (var i = 0; i < checkboxes.length; i++) {
+                        checkboxes[i].addEventListener(eventBr, function () {
+
+                            for (var j = 0; j < checkboxes.length; j++) {
+                                checkboxes[j].classList.remove("checked");
+                            }
+
+                            this.classList.add("checked");
+                            if (e.currentTarget.previousElementSibling) {
+                                $(this).prevAll().addClass("checked");
+                            }
+                        })
+                    }
                 }
+            }]);
 
-                e.currentTarget.classList.add("clicked");
-                add_skill_form.classList.remove("hide");
-                add_skill_line.classList.remove("hide");
-
-                for (var i = 0; i < checkboxes.length; i++) {
-                    checkboxes[i].addEventListener(eventBr, function () {
-
-                        for (var j = 0; j < checkboxes.length; j++) {
-                            checkboxes[j].classList.remove("checked");
-                        }
-
-                        this.classList.add("checked");
-                        if (e.currentTarget.previousElementSibling) {
-                            $(this).prevAll().addClass("checked");
-                        }
-                    })
-                }
-            }
-        }]);
-
-        angular.element(function () {
-            angular.bootstrap(document.getElementById("sc-profile"), ['profileComponent']);
-        });
 
         function renderTimelineLine(parent) {
 

@@ -134,9 +134,8 @@ function classMainMenu() {
 
         this.menuController = function() {
 			var that=this;
-      var app = angular.module('mMenu', []);
 
-			app.controller('menuController', ['$scope', function ($scope) {
+			angular.module("scApp").controller('menuController', ['$scope', function ($scope) {
 
 				$scope.showModelPosition=function(){
 					//alert("showModelPosition")
@@ -184,9 +183,6 @@ function classMainMenu() {
 						}]
 
 				}]);
-			angular.element(function() {
-				angular.bootstrap(document.getElementById("id_menu"), ['mMenu']);
-			});
 
 
 

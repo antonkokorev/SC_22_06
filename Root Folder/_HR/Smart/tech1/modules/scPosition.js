@@ -40,37 +40,14 @@ function classPosition() {
         return html;
     }
 
-/**
- *             '                               <div class="profile-competence" ng-repeat="competence in competences" ng-if="competence.sType === competencesTypes[0]">' +
- '                                <p class="profile-competence-label"> {{competence.sFullName}} </p>' +
- '                                <p class="profile-competence-ratings"><span class="profile-competence-rating"> {{competence.iRate360}} </span></p>' +
- '                               </div>'+
- *
- *
- * */
     this.positionController = function (show) {
-
-    /**
-     *             '                               <div class="profile-competence" ng-repeat="competence in competences" ng-if="competence.sType === competencesTypes[0]">' +
-     '                                <p class="profile-competence-label"> {{competence.sFullName}} </p>' +
-     '                                <p class="profile-competence-ratings"><span class="profile-competence-rating"> {{competence.iRate360}} </span></p>' +
-     '                               </div>'+
-     *
-     *
-     * */
 
 
         var that = this;
-        positionApp = angular.module('positionModule', []);
-
-        positionApp.controller('positionController', ['$scope', function ($scope) {
+        angular.module('scApp').controller('positionController', ['$scope', function ($scope) {
             $scope.all = "Все";
             $scope.model = that_.services.position.result;
         }]);
-
-        angular.element(function () {
-            angular.bootstrap(document.getElementById("sc-position"), ['positionModule']);
-        });
 
 // Выбор позиций
         var choose_position = document.querySelectorAll(".choose-position");

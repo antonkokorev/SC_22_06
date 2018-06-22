@@ -71,9 +71,8 @@ function classCompetences() {
 
     this.competencesController = function() {
         var that = this;
-        var app = angular.module('competencesComponent', []);
 
-        app.controller('competencesController', ['$scope', function ($scope) {
+        angular.module('scApp').controller('competencesController', ['$scope', function ($scope) {
             //debugger;
             $scope.model = that.result;
 
@@ -97,10 +96,6 @@ function classCompetences() {
                 competences_h_slider.style.transform = "translateX(-"+ 33.3333 * n +"%)";
             }
         }]);
-
-        angular.element(function () {
-            angular.bootstrap(document.getElementById("sc-competences"), ['competencesComponent']);
-        });
 
 
         /*
