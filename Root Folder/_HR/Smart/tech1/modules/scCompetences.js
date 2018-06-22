@@ -4,65 +4,42 @@ function classCompetences() {
     this.competencesView = function() {
         var html =
             '        <!--Компетенции-->' +
-            '        <div class="sc-main-slide">' +
+            '        <div id="sc-competences" ng-controller="competencesController" class="sc-main-slide">' +
             '            <div class="competences-slide sc-v-slide">' +
             '                <div class="competences-by-position">' +
-            '                    <div class="competences-h-slide competences-by-position-list">';
+            '                    <div class="competences-h-slide competences-by-position-list">'+
 
-        var competences = this.globalJSON.competence;
+            '                        <div class="competence-position" >' +
+            '                            <h3 class="competence-position-heading"> Position </h3>' +
+            '                            <p class="competence-position-conformity"> Соответствие <span' +
+            '                                    class="conformity-bold"> 87 </span></p>' +
+            '                            <p class="competence-position-competences"> Компетенции </p>' +
+            '                        </div>' +
 
-        competences.forEach(function (competence, index) {
-            html +=
-                '                        <div class="competence-position" data-index="' + index + '">' +
-                '                            <h3 class="competence-position-heading"> ' + competence.position + ' </h3>' +
-                '                            <p class="competence-position-conformity"> Соответствие <span' +
-                '                                    class="conformity-bold"> ' + competence.conformity + ' </span></p>' +
-                '                            <p class="competence-position-competences"> Компетенции </p>' +
-                '                        </div>'
-        });
-
-        html +=
             '                    </div>' +
             '                    <div class="competences-h-slide competences-by-position-current"></div>' +
             '                    <div class="competences-h-slide competences-by-position-competence"></div>' +
             '                </div>' +
             '                <div class="competence-by-intersections">' +
-            '                    <div class="competence-position-current">' +
-            '                        <h3 class="competence-position-heading"> Системное мышление и решение проблем </h3>' +
-            '                        <p class="competence-position-conformity"> Соответствие <span' +
-            '                                class="conformity-bold"> 87% </span></p>' +
-            '                        <p class="competence-position-intersection"> Встречается в <span class="conformity-bold"> 2 позициях </span>' +
-            '                        </p>' +
-            '                        <p class="competence-position-competences"> Индикаторы </p>' +
-            '                    </div>' +
 
-            '                    <div class="competence-position-current">' +
-            '                        <h3 class="competence-position-heading"> Управление результатом и ответственность </h3>' +
-            '                        <p class="competence-position-conformity"> Соответствие <span' +
-            '                                class="conformity-bold"> 87% </span></p>' +
-            '                        <p class="competence-position-intersection"> Встречается в <span class="conformity-bold"> 2 позициях </span>' +
-            '                        </p>' +
-            '                        <p class="competence-position-competences"> Индикаторы </p>' +
-            '                    </div>' +
+            '                <div class="swiper-container swiper-intersections-container">' +
+            '                   <div class="swiper-wrapper">' +
+            '                       <div class="swiper-slide">' +
 
-            '                    <div class="competence-position-current">' +
-            '                        <h3 class="competence-position-heading"> Управление собой </h3>' +
-            '                        <p class="competence-position-conformity"> Соответствие <span' +
-            '                                class="conformity-bold"> 87% </span></p>' +
-            '                        <p class="competence-position-intersection"> Встречается в <span class="conformity-bold"> 2 позициях </span>' +
-            '                        </p>' +
-            '                        <p class="competence-position-competences"> Индикаторы </p>' +
-            '                    </div>' +
+            '                           <div class="competence-position-current" ng-repeat="competence in model">' +
+            '                               <h3 class="competence-position-heading"> {{competence.sCompetentionName}} </h3>' +
+            '                               <p class="competence-position-conformity"> Соответствие <span' +
+            '                                       class="conformity-bold"> {{competence.iUserCompProc}}</span></p>' +
+            '                               <p class="competence-position-intersection"> Встречается в <span class="conformity-bold"> {{competence.iCount}} </span>' +
+            '                               </p>' +
+            '                               <p class="competence-position-competences"> Индикаторы </p>' +
+            '                           </div>' +
 
-            '                    <div class="competence-position-current">' +
-            '                        <h3 class="competence-position-heading"> Инновационность и Digital навыки </h3>' +
-            '                        <p class="competence-position-conformity"> Соответствие <span' +
-            '                                class="conformity-bold"> 87% </span></p>' +
-            '                        <p class="competence-position-intersection"> Встречается в <span class="conformity-bold"> 2 позициях </span>' +
-            '                        </p>' +
-            '                        <p class="competence-position-competences"> Индикаторы </p>' +
-            '                    </div>' +
+            '                       </div>' +
+            '                   </div>' +
             '                </div>' +
+            '                </div>' +
+
             '            </div>' +
             '        </div>';
 
@@ -72,6 +49,19 @@ function classCompetences() {
 
     this.competencesController = function() {
         var that = this;
+        var app = angular.module('competencesComponent', []);
+
+        app.controller('competencesController', ['$scope', function ($scope) {
+            $scope.model = that.result;
+
+        }]);
+
+        angular.element(function () {
+            angular.bootstrap(document.getElementById("sc-competences"), ['competencesComponent']);
+        });
+
+
+        /*
         // Функция сортировки
         function orderByConformity(a, b) {
             if (a.conformity > b.conformity) {
@@ -154,5 +144,17 @@ function classCompetences() {
                 }
             })
         }
+        */
+
+        window.intersections_swiper = new Swiper('.swiper-intersections-container', {
+            direction: 'vertical',
+            slidesPerView: 'auto',
+            mousewheel: true,
+            freeMode: true
+        });
+
+        $(window).resize(function () {
+            window.intersections_swiper.update();
+        });
     }
 }
