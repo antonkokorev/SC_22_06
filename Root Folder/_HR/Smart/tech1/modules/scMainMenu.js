@@ -31,10 +31,10 @@ function classMainMenu() {
             '        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{model[2].num}}</span>{{model[2].item}} </h2>' +
             '        <div class="sc-menu-details">' +
             '            <div class="sc-menu-desc">' +
-            '                <p class="sc-menu-desc-p">{{model[2].child[0].discr}}</p>' +
+            '                <p ng-click="showModelPosition()" class="sc-menu-desc-p">{{model[2].child[0].discr}}</p>' +
             '            </div>' +
             '            <div class="sc-menu-desc">' +
-            '                <p class="sc-menu-desc-p">{{model[2].child[1].discr}}</p>' +
+            '                <p ng-click="showUserPosition()" class="sc-menu-desc-p">{{model[2].child[1].discr}}</p>' +
             '            </div>' +
             '            <div class="sc-menu-desc">' +
             '                <h3 class="sc-menu-desc-heading sc-menu-pop-filter"> Фильтр </h3>' +
@@ -137,7 +137,20 @@ function classMainMenu() {
       var app = angular.module('mMenu', []);
 
 			app.controller('menuController', ['$scope', function ($scope) {
-						$scope.model = [{
+
+				$scope.showModelPosition=function(){
+					//alert("showModelPosition")
+                   //  that_.services.position.result=that_.services.position.model_list;
+				};
+                $scope.showUserPosition=function(){
+                    alert("showUserPosition");
+                    //that_.services.position.result=that_.services.position.user_list;
+                    that_.positionController()
+                };
+
+
+
+				$scope.model = [{
 							num:"01",
 							item:"Профиль",
 							discr:"Расскажите мне о себе то, чего я не знаю"
@@ -192,34 +205,24 @@ function classMainMenu() {
 				var poz_arr=[];
 				var d=that.services.dict.result.aTags;
 				for(var ii=0;ii<negative.length;ii++){
-				/*	var obj={};
-					obj.id=d[negative[ii].number].iId;
-					obj.iFamilyId=d[negative[ii].number].iFamilyId;*/
 					neg_arr.push('-'+d[negative[ii].number].iFamilyId)
 				}
 				for(var ii=0;ii<pozitive.length;ii++){
-					/*var obj={};
-					obj.id=d[pozitive[ii].number].iId;
-					obj.iFamilyId=d[pozitive[ii].number].iFamilyId;*/
-					poz_arr.push('+'+d[pozitive[ii].number].iFamilyId)
+					poz_arr.push(d[pozitive[ii].number].iFamilyId)
 				}
 				if(poz_arr.length>0||neg_arr.length>0)
 				{
                     console.log(poz_arr.concat(neg_arr).join(","));
-                   // console.log(neg_arr.join(";"));
-                    that_.services.position.return="user_result";
                     var fam="["+poz_arr.concat(neg_arr).join(",")+"]";
                     if(that_.services.position.params_.family!=fam)
 					{
+                        that_.services.position.activeController=undefined;
+                        that_.services.position.return="user_list";
+                        that_.services.position.model_list= that_.services.position.result;
                         that_.services.position.params_.family=fam;
+                        that_.services.position.params_.requestType="list";
                         that_.ajax(that_.services.position);
-
                     }
-
-
-
-
-
                 }
 
                 var main_slider = document.querySelector(".sc-main-slider");

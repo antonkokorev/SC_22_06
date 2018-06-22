@@ -41,7 +41,7 @@ function classPosition() {
  *
  *
  * */
-    this.positionController = function () {
+    this.positionController = function (show) {
 
         var that=this;
         positionApp = angular.module('positionModule', []);
