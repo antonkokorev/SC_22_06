@@ -1,6 +1,6 @@
 function classPosition() {
     var eventBr = ($.browser.mobile) ? 'touchstart' : 'click';
-/*   '    <div id="sc-profile" ng-controller="profileController" class="profile-slide sc-v-slide">' +*/
+    /*   '    <div id="sc-profile" ng-controller="profileController" class="profile-slide sc-v-slide">' +*/
     this.positionView = function () {
         var html =
             '        <div id="sc-position" ng-controller="positionController"  class="sc-main-slide">' +
@@ -8,20 +8,26 @@ function classPosition() {
             '                <div class="slide-row">' +
             '                    <div class="slide-position-col">' +
             '                        <h2 class="sc-slide-heading"> {{all}} </h2>' +
-            '                        <div class="position-all">';
+            '                        <div class="position-all">' +
 
-        /*var positions = this.globalJSON.positions;
+            '                  <div id="swiper-positions-container" class="swiper-container swiper-auto-container">' +
+            '                    <div class="swiper-wrapper">' +
+            '                      <div class="swiper-slide">' +
 
-        positions.forEach(function (position) {*/
 
-            html +=
-                '<div class="position choose-position" ng-repeat="position in model">' +// data-grade="grade" data-turnover="turnover"
-                '    <h3 class="position-heading"> {{position.sJobProfileId}}</h3>' +
-                '    <p class="position-learn-more">{{position.sJobProfileName}} </p>' +
-                '</div>';
-    //    });
+            '                           <div class="position choose-position" ng-repeat="position in model">' +
+            '                               <h3 class="position-heading"> {{position.sJobProfileId}}</h3>' +
+            '                               <p class="position-learn-more">{{position.sJobProfileName}} </p>' +
+            '                               <p class="position-learn-more">' +
+            '                                   <span class="position-more">Грейд {{position.iGrade}}</span>' +
+            '                                   <span class="position-more">Оборачиваемость {{position.iTurnover}}</span>' +
+            '                               </p>' +
+            '                           </div>' +
 
-        html +=
+            '                         </div>' +
+            '                       </div>' +
+            '                     </div>' +
+
             '                        </div>' +
             '                    </div>' +
             '                    <div class="slide-position-col chosen-positions">' +
@@ -33,6 +39,7 @@ function classPosition() {
 
         return html;
     }
+
 /**
  *             '                               <div class="profile-competence" ng-repeat="competence in competences" ng-if="competence.sType === competencesTypes[0]">' +
  '                                <p class="profile-competence-label"> {{competence.sFullName}} </p>' +
@@ -43,15 +50,25 @@ function classPosition() {
  * */
     this.positionController = function (show) {
 
-        var that=this;
+    /**
+     *             '                               <div class="profile-competence" ng-repeat="competence in competences" ng-if="competence.sType === competencesTypes[0]">' +
+     '                                <p class="profile-competence-label"> {{competence.sFullName}} </p>' +
+     '                                <p class="profile-competence-ratings"><span class="profile-competence-rating"> {{competence.iRate360}} </span></p>' +
+     '                               </div>'+
+     *
+     *
+     * */
+
+
+        var that = this;
         positionApp = angular.module('positionModule', []);
 
         positionApp.controller('positionController', ['$scope', function ($scope) {
-            $scope.all="Все"
-           $scope.model=that_.services.position.result;
+            $scope.all = "Все";
+            $scope.model = that_.services.position.result;
         }]);
 
-        angular.element(function() {
+        angular.element(function () {
             angular.bootstrap(document.getElementById("sc-position"), ['positionModule']);
         });
 
@@ -103,6 +120,17 @@ function classPosition() {
                 }
             });
 
+        });
+
+        window.positions_swiper = new Swiper('#swiper-positions-container', {
+            direction: 'vertical',
+            slidesPerView: 'auto',
+            mousewheel: true,
+            freeMode: true
+        });
+
+        $(window).resize(function () {
+            window.positions_swiper.update();
         });
     }
 }

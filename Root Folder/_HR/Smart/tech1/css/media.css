@@ -69,6 +69,14 @@
         /*font-size: 24px;*/
     }
 
+    .position-slide .sc-slide-heading {
+        height: 60px;
+    }
+
+    .position-slide .position-all {
+        height: calc(100% - 60px);
+    }
+
     .competence-position-heading {
         font-size: 24px;
     }
