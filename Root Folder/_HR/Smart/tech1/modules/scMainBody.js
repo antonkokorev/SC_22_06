@@ -1,5 +1,5 @@
 function classMainBody() {
-    //======================================
+    //========================================
     //подключение модулей
     //======================================
     classHeader.call(this);
@@ -14,13 +14,21 @@ function classMainBody() {
     //======================================
 
     //this.currentUser="Basic Z2VvcmdpZXYtZWk6cXdlcnR5MTIz",
-
     this.currentUser = "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
         that_ = this,
 
 
         this.ajax = function (param) {
             /*var that=this;*/
+            //чтобы удобнее собирать параметры было
+            if(param.params_){
+                param.params="";
+               for(key in param.params_)
+               {
+                   param.params+="&"+key+"="+param.params_[key]
+               }
+            }
+
             $.ajax
             ({
                 type: "GET",
@@ -35,7 +43,9 @@ function classMainBody() {
                 },
                 success: function (json) {
                     param.status = true;
-                    param.result = json;
+
+                    (param.return)?param[param.return]=json: param.result = json;
+
                     if (param.activeController) {
                         try {
                             console.warn("Контроллер " + param.callback + " пошел работать");
@@ -45,13 +55,12 @@ function classMainBody() {
                         }
 
                     }
-                    //alert(JSON.stringify(that.services[this.name].result));
                 },
                 error: function (json) {
-                    console.error("Ошибка выполнения AJAX " + param.callback);
+                            console.error("Ошибка выполнения AJAX "+ param.callback);
                 },
             });
-        }
+        },
 
 
     this.services = {
@@ -59,6 +68,7 @@ function classMainBody() {
             "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=empProfile",
             "status": false,
             "params": "&user=102838",
+
             "loadInStart": true,
             "callback": "getEmpProfile",
             "activeController": that_.profileController
@@ -73,23 +83,26 @@ function classMainBody() {
                 "loadInStart": true,
                 "activeController": that_.choiceController
             },
-        /*
-                "instrument": {
-                    "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument",
-                    "status": false,
-                    "params": "&compitentId=2000001154&user=102838",
-                    "loadInStart": false,
-                    "callback": "getCompetetionInstrument"
-                },
 
-                "position": {
-                    "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=position",
-                    "status": false,
-                    "params": "&user=102838&requestType=model&family=[30000047]&row=1_2",
-                    "loadInStart": true,
-                    "callback": "getRecommendatedPosition",
-                },
-                */
+        "instrument": {
+            "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument",
+            "status": false,
+            "params": "&compitentId=2000001154&user=102838",
+            "loadInStart": false,
+            "callback": "getCompetetionInstrument"
+        },
+
+        "position": {
+            "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=position",
+            "status": false,
+            "params": "&user=102838&requestType=model&family=[30000047]&row=1_2",
+            "params_":{"user":"102838","requestType":"model","family":"[30000047]","row":"1_40"},
+            "loadInStart": true,
+            "callback": "getRecommendatedPosition",
+            "activeController": that_.positionController
+
+        }
+        ,
         "competention": {
             "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=positionCompetentions",
             "status": false,
@@ -181,7 +194,7 @@ function classMainBody() {
                 ]
             }
         ]
-    };
+    }
 
 
     this.initMainBody = function () {
@@ -189,7 +202,7 @@ function classMainBody() {
 
 
         var that = this;
-        console.warn("initMainBody")
+        console.warn("initMainBody");
         //this.currentUser=this.globalSettings.Settings.user;
 
         for (var key in this.services) {
