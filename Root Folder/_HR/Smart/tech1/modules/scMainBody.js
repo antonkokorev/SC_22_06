@@ -20,6 +20,15 @@ function classMainBody() {
 
         this.ajax = function (param) {
             /*var that=this;*/
+            //чтобы удобнее собирать параметры было
+            if(param.params_){
+                param.params="";
+               for(key in param.params_)
+               {
+                   param.params+="&"+key+"="+param.params_[key]
+               }
+            }
+
             $.ajax
             ({
                 type: "GET",
@@ -37,14 +46,13 @@ function classMainBody() {
                     param.result = json;
                     if (param.activeController) {
                         try {
-                            console.warn("Контроллер " + param.callback + " пошел работать")
+                            console.warn("Контроллер " + param.callback + " пошел работать");
                             param.activeController();
                         } catch (err) {
                             console.error("Контроллер " + param.callback + " не существует");
                         }
-                        
+
                     }
-                    //alert(JSON.stringify(that.services[this.name].result));
                 },
                 error: function (json) {
                             console.error("Ошибка выполнения AJAX "+ param.callback);
@@ -58,6 +66,7 @@ function classMainBody() {
             "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=empProfile",
             "status": false,
             "params": "&user=102838",
+
             "loadInStart": true,
             "callback": "getEmpProfile",
             "activeController": that_.profileController
@@ -85,8 +94,11 @@ function classMainBody() {
             "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=position",
             "status": false,
             "params": "&user=102838&requestType=model&family=[30000047]&row=1_2",
+            "params_":{"user":"102838","requestType":"model","family":"[30000047]","row":"1_40"},
             "loadInStart": true,
             "callback": "getRecommendatedPosition",
+            "activeController": that_.positionController
+
         }
         ,
         "competention": {

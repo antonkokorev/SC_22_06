@@ -192,21 +192,25 @@ function classMainMenu() {
 				var poz_arr=[];
 				var d=that.services.dict.result.aTags;
 				for(var ii=0;ii<negative.length;ii++){
-					var obj={};
+				/*	var obj={};
 					obj.id=d[negative[ii].number].iId;
-					obj.iFamilyId=d[negative[ii].number].iFamilyId;
-					neg_arr.push(obj)
+					obj.iFamilyId=d[negative[ii].number].iFamilyId;*/
+					neg_arr.push('-'+d[negative[ii].number].iFamilyId)
 				}
 				for(var ii=0;ii<pozitive.length;ii++){
-					var obj={};
+					/*var obj={};
 					obj.id=d[pozitive[ii].number].iId;
-					obj.iFamilyId=d[pozitive[ii].number].iFamilyId;
-					poz_arr.push(obj)
+					obj.iFamilyId=d[pozitive[ii].number].iFamilyId;*/
+					poz_arr.push('+'+d[pozitive[ii].number].iFamilyId)
 				}
-				
-				console.log(poz_arr);
-				console.log(neg_arr);
-				
+				if(poz_arr.length>0||neg_arr.length>0)
+				{
+                    console.log(poz_arr.concat(neg_arr).join(";"));
+                   // console.log(neg_arr.join(";"));
+					that_.s
+
+                }
+
                 var main_slider = document.querySelector(".sc-main-slider");
                 if (active_li) {
                     active_li.classList.remove("active");
