@@ -4,7 +4,7 @@ function classProfile() {
 
         var profileHtml =
             '  <div class="sc-main-slide">' +
-            '    <div id="sc-profile" ng-controller="profileController" class="profile-slide sc-v-slide">' +
+            '    <div id="sc-profile" class="profile-slide sc-v-slide">' +
             '      <div class="swiper-container swiper-profile-container">' +
             '        <div class="swiper-wrapper">' +
             '          <div class="swiper-slide">' +
@@ -207,7 +207,7 @@ function classProfile() {
 //============================================================================================================================================================================================
 
     this.profileController = function () {
-        var eventBr = ($.browser.mobile) ? 'touchstart' : 'click';
+       /* var eventBr = ($.browser.mobile) ? 'touchstart' : 'click';
 
         var that = this;
 
@@ -307,7 +307,7 @@ function classProfile() {
             window.profile_swiper.update();
             renderTimelineLine(".profile-education");
             renderTimelineLine(".profile-results");
-        });
+        });*/
 
     }
 

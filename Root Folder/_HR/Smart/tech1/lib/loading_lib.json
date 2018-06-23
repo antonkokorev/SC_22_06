@@ -3,6 +3,8 @@
    "bo": true,
    "paths": {
    "swiper": "$$path$$lib/swiper",
+   "route":"$$path$$lib/angular-route",
+   "angular":"$$path$$lib/angular",
    "SplitText": "$$path$$lib/SplitText",
 	"TweenMax": "$$path$$lib/TweenMax",
 	"Draggable":"$$path$$lib/Draggable",
@@ -12,6 +14,9 @@
    "shim": {
 	"SplitText":{
 		"deps":["TweenMax"]
+	},
+		"route":{
+		"deps":["angular"]
 	}
    }
 }

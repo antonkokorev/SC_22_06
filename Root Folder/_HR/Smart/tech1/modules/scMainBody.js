@@ -118,63 +118,116 @@ function classMainBody() {
     this.initMainBody = function () {
         /*  */
 
+       var path= $("head").find("link").last().attr("href").split("/");
+        path[path.length - 1] = "";
+        this.path=path.join("/");
 
-        var that = this;
+      var that = this;
         console.warn("initMainBody");
         //this.currentUser=this.globalSettings.Settings.user;
 
-        for (var key in this.services) {
-            if (this.services[key].loadInStart) {
-                this.ajax(this.services[key]);
-            }
-        }
-
+        /*    for (var key in this.services) {
+              if (this.services[key].loadInStart) {
+                  this.ajax(this.services[key]);
+              }
+          }
+  */
         that.reDrawMainBody()
     };
 
     /*************************************************************************************************************************/
-
+    /*   var html =
+           '<div id="sc-app" ng-app="scApp">' +
+           this.headerView() +
+           '<main-menu id="id_menu" class="sc-menu"></main-menu>'+
+           '<div ng-view class="sc-main-slide"></div>'+
+              // this.menuView() +
+          '   <main id="id_main" class="sc-main">' +
+           '   <div class="sc-main-slider">' +
+        //     '<p><a href="#/!">Main</a></p>' +
+        //    '<a href="#!banana">Banana</a>' +
+         //   '<a href="#!tomato">Tomato</a>' +
+        //  this.profileView() +
+       //   this.choiceView() +
+       //   this.positionView() +
+        //  this.competencesView() +
+        //  this.goalsView() +
+       //   this.instrumentsView() +
+      //    this.iprView() +
+           '   </div>' +
+           '   </main>' +
+           '</div>';*/
     this.reDrawMainBody = function () {
         this.refresh();
 
         var globalSettings = this.globalSettings;
+        //============================================================
+        //создание html страницы
+        //============================================================
         var component = '#' + globalSettings.teg + '_COMPONENT ';
-
         var html =
             '<div id="sc-app" ng-app="scApp">' +
-                this.headerView() +
-                this.menuView() +
-            '   <main id="id_main" class="sc-main">' +
-            '   <div class="sc-main-slider">' +
-                    this.profileView() +
-                    this.choiceView() +
-                    this.positionView() +
-                    this.competencesView() +
-                    this.goalsView() +
-                    this.instrumentsView() +
-                    this.iprView() +
-            '   </div>' +
-            '   </main>' +
-            '</div>';
-
-
+            '<main-menu id="id_menu" class="sc-menu"></main-menu>'+
+            '<main id="id_main" class="sc-main enter-active">' +
+                '<div ng-view ></div>'+
+            '</main>' +
+          '</div>';
         $(component).append(html);
+        //============================================================
+        //создание основного модуля и роутинга
+        //============================================================
+        this.app = angular.module('scApp', ["ngRoute"]);
+        this.app.config(function($routeProvider) {
+            $routeProvider
+                .when("/", {
+                    template : '<profile id="sc-profile" class="profile-slide sc-v-slide"></profile>'
+                })
+                .when("/banana", {
+                    template : "<h1>Banana</h1><p>Bananas contain around 75% water.</p>"
+                })
+                .when("/tomato", {
+                    template : "<h1>Tomato</h1><p>Tomatoes contain around 95% water.</p>"
+                });
+        });
+        //============================================================
+        //создание директив
+        //============================================================
+        this.app.directive('mainMenu', function() {
+            return {
+                restrict: 'AE',
+                scope:{},
+                templateUrl: that_.path+"modules/menu.html",
+                controller:  that_.menuController,
+                controllerAs: "menu"
+            };
+        });
 
-        var app = angular.module('scApp', []);
+        this.app.directive('profile', function() {
+            return {
+                restrict: 'AE',
+                scope:{},
+                templateUrl: that_.path+"modules/profile.html",//that_.profileView(),
+                controller:  that_.profileController,
+                controllerAs: "profile"
+            };
+        });
 
-        // angular.element(function () {
-        //     angular.bootstrap(document.getElementById("sc-app"), ['scApp']);
-        // });
 
-        $(".sc-menu").addClass("enter-active");
-        $(".sc-main").addClass("enter-active");
+        this.app.factory('bar', function(a) {
+            return a * 2;
+        });
+        //============================================================
+        //регистрация приложения Angular
+        //============================================================
+        angular.element(function () {
+           angular.bootstrap(document.getElementById("sc-app"), ['scApp']);
+         });
 
-        //this.menuController();
-        //this.choiceController();
-        //   this.animateChoice();
-        //this.positionController();
-        //this.competencesController();
-        //this.instrumentsController();
+
+      /*  $(".sc-menu").addClass("enter-active");
+        $(".sc-main").addClass("enter-active");*/
+
+
     }
 
 }

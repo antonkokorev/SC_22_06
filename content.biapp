@@ -50,6 +50,7 @@
 			<bi:property name="tech1">
 				<bi:value><![CDATA[Z_CONTROLLER._Action("openPage");]]></bi:value>
 			</bi:property>
+			<bi:property name="VISIBLE" value=""/>
 		</bi:component>
 		<bi:component name="DATAPOWER_1" type="com_sap_sbt_datapower_v3_DataPower">
 			<bi:property name="exlibs" type="ORDEREDLIST">
@@ -75,9 +76,6 @@
 			</bi:property>
 			<bi:property name="start">
 				<bi:value><![CDATA[Z_CONTROLLER._Action("init");]]></bi:value>
-			</bi:property>
-			<bi:property name="libs" type="ORDEREDLIST">
-				<bi:property name="lib" index="0" value="angular"/>
 			</bi:property>
 		</bi:component>
 		<bi:component name="ZTLPOWER_1" type="com_sap_sbt_ztlpower_v4_ZtlPower"/>
@@ -130,7 +128,7 @@ Z_MODEL._Action(action);]]></bi:value>
 						<bi:value><![CDATA[if(action=='init'){
 	CC_MENU.ioAttr(actionType.SET, "event$$_$$include","initMainMenu$$_$$classMainMenu");
 	CC_BODY.ioAttr(actionType.SET, "event$$_$$include$$_$$user","initMainBody$$_$$classMainBody$$_$$"+gv_user);
-	CC_START.ioAttr(actionType.SET, "event$$_$$include","initStart$$_$$classStart");
+	//CC_START.ioAttr(actionType.SET, "event$$_$$include","initStart$$_$$classStart");
 }
 
 
