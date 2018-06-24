@@ -2,14 +2,14 @@ function scMenuView() {
     this.menuTemplate = {},
 //=====================================================================================================================
         this.menuTemplate.mainMenu =
-            `<div ng-class="menu.activeClass('{{mItem.page}}')" class="sc-menu-li" ng-repeat="mItem in menu.data">
+            `<div ng-class="menu.activeClass('{{mItem.page}}')"  class="sc-menu-li" ng-repeat="mItem in menu.data">
                 <a href="#!{{mItem.page}}">
                     <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{mItem.num}}</span>{{mItem.item}}
                     </h2>
-                    <menu-basic     ng-show="'{{mItem.type}}'=='menuBasic'"></menu-basic>
-                    <menu-choice    ng-show="'{{mItem.type}}'=='menuChoice'"></menu-choice>
-                    <menu-position  ng-show="'{{mItem.type}}'=='menuPosition'"></menu-position>
-                    <menu-list      ng-show="'{{mItem.type}}'=='menuList'"></menu-list>
+                    <menu-basic     ng-show="'{{mItem.type}}'=='menuBasic'">    </menu-basic>
+                    <menu-choice    ng-show="'{{mItem.type}}'=='menuChoice'">   </menu-choice>
+                    <menu-position  ng-show="'{{mItem.type}}'=='menuPosition'"> </menu-position>
+                    <menu-list      ng-show="'{{mItem.type}}'=='menuList'">     </menu-list>
                 </a>
             </div>`,
 //=====================================================================================================================

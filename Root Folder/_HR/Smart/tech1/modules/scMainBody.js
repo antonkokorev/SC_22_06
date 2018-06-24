@@ -133,7 +133,6 @@ function classMainBody() {
             '<main-menu id="id_menu" class="sc-menu"></main-menu>'+
             '<main id="id_main" class="sc-main enter-active">' +
                 '<div ng-view ></div>'+
-           // '<a href="#!profile">Banana</a>' +
             '</main>' +
           '</div>';
         $(component).append(html);

@@ -1,8 +1,13 @@
 function dirMenu() {
+
     (function () {
+        console.warn("dirMenu")
         angular.module('mainMenuModule', ["ngRoute"])
-        //-------------------------------------------------------------
-            .directive('mainMenu', ['$location', function ($location) {
+         /*   .controller('menuController', function (menuDataService) {
+            this.data=menuDataService.data;
+        })*/
+            //-------------------------------------------------------------
+            .directive('mainMenu', ['$location','menuDataService', function ($location,menuDataService) {
                 return {
                     restrict: 'E',
                     scope: true,
@@ -12,15 +17,7 @@ function dirMenu() {
                 };
             }])
             //-------------------------------------------------------------
-            .directive('menuChoice', function ($location) {
-                return {
-                    restrict: 'E',
-                    scope: true,
-                    template: that_.menuTemplate.menuChoice
-                };
-                //-------------------------------------------------------------
-            })
-            .directive('menuBasic', function ($location) {
+            .directive('menuBasic', function () {
                 return {
                     restrict: 'E',
                     scope: true,
@@ -28,7 +25,16 @@ function dirMenu() {
                 };
             })
             //-------------------------------------------------------------
-            .directive('menuPosition', function ($location) {
+            .directive('menuChoice', function () {
+                return {
+                    restrict: 'E',
+                    scope: true,
+                    template: that_.menuTemplate.menuChoice
+                };
+
+            })
+            //-------------------------------------------------------------
+            .directive('menuPosition', function () {
                 return {
                     restrict: 'E',
                     scope: true,
@@ -36,21 +42,21 @@ function dirMenu() {
                 };
             })
             //-------------------------------------------------------------
-            .directive('menuList', function ($location) {
+            .directive('menuList', function () {
                 return {
                     restrict: 'E',
                     scope: true,
                     template: that_.menuTemplate.menuList
                 };
-            });
+            })
 
 
-        function menuController($location) {
+        function menuController($location,menuDataService) {
             console.warn('menuController');
             //============================================
             //атрибуты
             //============================================
-            this.data = data();
+            this.data = menuDataService.data;
             //============================================
             //функции
             //============================================
@@ -69,8 +75,16 @@ function dirMenu() {
                 return page === currentRoute ? 'active' : '';
             };
 
-            function data() {
-                return [{
+            /*function data() {
+                return
+            }*/
+
+        }
+
+
+        angular.module('mainMenuModule')
+            .service('menuDataService', function () {
+                this.data = [{
                     num: "01",
                     item: "Профиль",
                     type: "menuBasic",
@@ -174,12 +188,9 @@ function dirMenu() {
                         }
                     ]
                 }
+                ]})
 
 
-                ]
-            }
-
-        }
     }());
 
 
