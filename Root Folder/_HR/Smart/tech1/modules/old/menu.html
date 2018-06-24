@@ -1,0 +1,116 @@
+<!--Пункт меню 01 Профиль-->
+<div ng-class="menu.activeClass('profile')" class="sc-menu-li">
+    <a href="#!profile">
+        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[0].num}}</span>{{menu.data[0].item}}
+        </h2>
+        <div class="sc-menu-details">
+            <div class="sc-menu-desc">
+                <p class="sc-menu-desc-p">{{menu.data[0].discr}}</p>
+            </div>
+        </div>
+    </a>
+</div>
+
+<!--Пункт меню 02 Выбор-->
+<div ng-class="menu.activeClass('choice')" class="sc-menu-li">
+    <a href="#!choice">
+        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[1].num}}</span>{{menu.data[1].item}}
+        </h2>
+        <div class="sc-menu-details" ng-repeat="item in menu.data[1].child">
+            <div class="sc-menu-desc">
+                <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
+                <p class="sc-menu-desc-p">{{item.discr}}</p>
+            </div>
+        </div>
+    </a>
+</div>
+<!--Пункт меню 03 Позиции-->
+<div ng-class="menu.activeClass('position')" class="sc-menu-li">
+    <a href="#!position">
+        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[2].num}}</span>{{menu.data[2].item}}
+        </h2>
+        <div class="sc-menu-details">
+
+            <div class="sc-menu-desc" ng-repeat=" item in menu.data[2].child">
+                <p class="sc-menu-desc-p">{{item.discr}}</p>
+            </div>
+
+            <div ng-click="menu.acFilter()" class="sc-menu-desc ">
+                <h3 class="sc-menu-desc-heading sc-menu-pop-filter">{{menu.data[2].nameFlt}} </h3>
+            </div>
+
+            <div ng-show="menu.data[2].showFlt">
+                <div class="sc-menu-desc">
+                    <p class="sc-menu-desc-p">{{menu.data[2].discrFlt}}</p>
+                </div>
+                <div class="sc-menu-desc" ng-repeat="item in menu.data[2].childFlt">
+                    <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
+                    <p class="sc-menu-desc-p">от <input class="sc-menu-filter-input color-red"
+                                                        placeholder="1"> до <input
+                            class="sc-menu-filter-input color-red turnover-to" placeholder="{{item.placeholder}}"></p>
+                </div>
+                <div class="sc-menu-desc">
+                    <h3 class="sc-menu-desc-heading color-red"> Отфильтровать </h3>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+
+<!--Пункт меню 04 Компетенции-->
+<div ng-class="menu.activeClass('competences')"  class="sc-menu-li">
+    <a href="#!competences">
+        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[3].num}}</span>{{menu.data[3].item}}
+        </h2>
+        <div class="sc-menu-details">
+            <div class="sc-menu-desc">
+                <p class="sc-menu-desc-p">{{menu.data[3].discr}}</p>
+            </div>
+            <div class="sc-menu-desc " ng-repeat="item  in menu.data[3].child ">
+                <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
+                <p class="sc-menu-desc-p">{{item.discr}}</p>
+            </div>
+
+        </div>
+    </a>
+</div>
+<!--Пункт меню 05 Цели-->
+
+<div ng-class="menu.activeClass('targets')" class="sc-menu-li">
+    <a href="#!targets">
+    <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[4].num}}</span>{{menu.data[4].item}} </h2>
+    <div class="sc-menu-details">
+        <div class="sc-menu-desc">
+            <p class="sc-menu-desc-p">{{menu.data[4].discr}}</p>
+        </div>
+    </div>
+    </a>
+</div>
+
+<!--Пункт меню 06 Инструменты-->
+<div ng-class="menu.activeClass('instruments')" class="sc-menu-li">
+    <a href="#!instruments">
+    <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[5].num}}</span>{{menu.data[5].item}} </h2>
+    <div class="sc-menu-details">
+        <div class="sc-menu-desc">
+            <p class="sc-menu-desc-p">{{menu.data[5].discr}}</p>
+        </div>
+        <div class="sc-menu-desc" ng-repeat="item in menu.data[5].child">
+            <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
+        </div>
+
+    </div>
+    </a>
+</div>
+
+<!--Пункт меню 07 ИПР-->
+<div ng-class="menu.activeClass('ipr')" class="sc-menu-li get-apply-button">
+    <a href="#!ipr">
+    <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[6].num}}</span>{{menu.data[6].item}} </h2>
+    <div class="sc-menu-details">
+        <div class="sc-menu-desc" ng-repeat="item in menu.data[6].child">
+            <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
+        </div>
+    </div>
+    </a>
+</div>

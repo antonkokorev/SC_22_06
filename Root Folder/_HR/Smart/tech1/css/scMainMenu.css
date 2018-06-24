@@ -32,8 +32,11 @@
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
     cursor: default;
-}
 
+}
+.sc-menu a{
+    color:rgba(0,0,0,0);
+}
 .sc-menu-li:nth-child(n+2) {
     margin-top: 20px;
 }

@@ -1,0 +1,61 @@
+<div class="sc-main-slide">
+    <div id="sc-choice" class="sc-choice" >
+        <div class="sc-choice-v-slide">
+            <div class="choice-tools">
+                <p id="idSort" class="sort-choice"> Сортировка </p>
+                <p id="idRnd" class="get-lucky-choice"> Мне повезет </p>
+                <p class="filter-choice">
+                    <input id="idflt" class="filter-input"> <span class="filter-placeholder">Фильтр</span>
+                </p>
+            </div>
+            <div class="sc-choice-row">
+                <div class="negative-container">
+                    <div class="swiper-container swiper-negative-container">
+                        <div class="swiper-wrapper">
+                            <div id="id_negative" class="swiper-slide negative-slide"></div>
+                        </div>
+                    </div>
+                    <div class="negative-container-inner">
+                        <p class="choice-container-placeholder"> Не хочу</p>
+                    </div>
+                </div>
+                <div class="labels-container">
+                    <div class="swiper-container swiper-labels-container">
+                        <div class="swiper-wrapper">
+                            <div id="id_labels-slide" class="swiper-slide labels-slide"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="positive-container">
+                    <div class="swiper-container swiper-positive-container">
+                        <div class="swiper-wrapper">
+                            <div id="id_positive" class="swiper-slide positive-slide"></div>
+                        </div>
+                    </div>
+                    <div class="positive-container-inner">
+                        <p class="choice-container-placeholder"> Хочу </p>
+                    </div>
+                </div>
+            </div>
+            <div class="bunch-of-words">
+                <div class="split_p" id="decoys"></div>
+            </div>
+        </div>
+        <div class="sc-choice-v-slide">
+            <div class="sc-choice-structures">
+                <div class="sc-choice-structure-col">
+                    <div class="swiper-container swiper-structure-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide clearfix">
+                                <div class="sc-choice-structure" ng-repeat="structure in family">
+                                    <h3 class="sc-structure-heading" ng-click="chooseStructure($event)">
+                                        {{structure.sName}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

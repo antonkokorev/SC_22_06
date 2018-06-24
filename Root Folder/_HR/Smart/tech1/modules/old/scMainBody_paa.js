@@ -205,7 +205,7 @@ function classMainBody() {
 
         var html =
             this.headerView() +
-            this.menuView() +
+            this.scMenuView() +
             '<main id="id_main" class="sc-main">' +
             '<div class="sc-main-slider">' +
             this.profileView() +

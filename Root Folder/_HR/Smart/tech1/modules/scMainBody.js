@@ -1,11 +1,16 @@
 function classMainBody() {
+    console.warn("initMainBody");
     //========================================
     //подключение модулей
     //======================================
+    scMenuView.call(this);
+    dirMenu.call(this);
+
+    dirChoice.call(this);
+    dirProfile.call(this);
+
+
     classHeader.call(this);
-    classMainMenu.call(this);
-    classProfile.call(this);
-    classChoice.call(this);
     classPosition.call(this);
     classCompetences.call(this);
     classGoals.call(this);
@@ -15,9 +20,7 @@ function classMainBody() {
 
     //this.currentUser="Basic Z2VvcmdpZXYtZWk6cXdlcnR5MTIz",
     this.currentUser = "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
-        that_ = this,
-
-
+        that_ = this;
         this.ajax = function (param) {
             /*var that=this;*/
             //чтобы удобнее собирать параметры было
@@ -116,50 +119,10 @@ function classMainBody() {
 
 
     this.initMainBody = function () {
-        /*  */
-
        var path= $("head").find("link").last().attr("href").split("/");
         path[path.length - 1] = "";
         this.path=path.join("/");
-
-      var that = this;
-        console.warn("initMainBody");
-        //this.currentUser=this.globalSettings.Settings.user;
-
-        /*    for (var key in this.services) {
-              if (this.services[key].loadInStart) {
-                  this.ajax(this.services[key]);
-              }
-          }
-  */
-        that.reDrawMainBody()
-    };
-
-    /*************************************************************************************************************************/
-    /*   var html =
-           '<div id="sc-app" ng-app="scApp">' +
-           this.headerView() +
-           '<main-menu id="id_menu" class="sc-menu"></main-menu>'+
-           '<div ng-view class="sc-main-slide"></div>'+
-              // this.menuView() +
-          '   <main id="id_main" class="sc-main">' +
-           '   <div class="sc-main-slider">' +
-        //     '<p><a href="#/!">Main</a></p>' +
-        //    '<a href="#!banana">Banana</a>' +
-         //   '<a href="#!tomato">Tomato</a>' +
-        //  this.profileView() +
-       //   this.choiceView() +
-       //   this.positionView() +
-        //  this.competencesView() +
-        //  this.goalsView() +
-       //   this.instrumentsView() +
-      //    this.iprView() +
-           '   </div>' +
-           '   </main>' +
-           '</div>';*/
-    this.reDrawMainBody = function () {
         this.refresh();
-
         var globalSettings = this.globalSettings;
         //============================================================
         //создание html страницы
@@ -170,64 +133,32 @@ function classMainBody() {
             '<main-menu id="id_menu" class="sc-menu"></main-menu>'+
             '<main id="id_main" class="sc-main enter-active">' +
                 '<div ng-view ></div>'+
+           // '<a href="#!profile">Banana</a>' +
             '</main>' +
           '</div>';
         $(component).append(html);
         //============================================================
         //создание основного модуля и роутинга
         //============================================================
-        this.app = angular.module('scApp', ["ngRoute"]);
-        this.app.config(function($routeProvider) {
+        angular.module('scApp', ["ngRoute","mainMenuModule","choiceModule","profileModule"]);
+        angular.module('scApp').config(function($routeProvider) {
             $routeProvider
-                .when("/", {
+                .when("/profile", {
                     template : '<profile id="sc-profile" class="profile-slide sc-v-slide"></profile>'
                 })
-                .when("/banana", {
-                    template : "<h1>Banana</h1><p>Bananas contain around 75% water.</p>"
+                .when("/choice", {
+                    template : "<choice></choice>"
                 })
                 .when("/tomato", {
                     template : "<h1>Tomato</h1><p>Tomatoes contain around 95% water.</p>"
                 });
         });
-        //============================================================
-        //создание директив
-        //============================================================
-        this.app.directive('mainMenu', function() {
-            return {
-                restrict: 'AE',
-                scope:{},
-                templateUrl: that_.path+"modules/menu.html",
-                controller:  that_.menuController,
-                controllerAs: "menu"
-            };
-        });
 
-        this.app.directive('profile', function() {
-            return {
-                restrict: 'AE',
-                scope:{},
-                templateUrl: that_.path+"modules/profile.html",//that_.profileView(),
-                controller:  that_.profileController,
-                controllerAs: "profile"
-            };
-        });
-
-
-        this.app.factory('bar', function(a) {
-            return a * 2;
-        });
         //============================================================
         //регистрация приложения Angular
         //============================================================
         angular.element(function () {
            angular.bootstrap(document.getElementById("sc-app"), ['scApp']);
          });
-
-
-      /*  $(".sc-menu").addClass("enter-active");
-        $(".sc-main").addClass("enter-active");*/
-
-
     }
-
 }

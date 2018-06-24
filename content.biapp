@@ -77,6 +77,7 @@
 			<bi:property name="start">
 				<bi:value><![CDATA[Z_CONTROLLER._Action("init");]]></bi:value>
 			</bi:property>
+			<bi:property name="log" value=""/>
 		</bi:component>
 		<bi:component name="ZTLPOWER_1" type="com_sap_sbt_ztlpower_v4_ZtlPower"/>
 		<bi:component name="Z_CONTROLLER" type="GLOBAL_SCRIPTS_COMPONENT">

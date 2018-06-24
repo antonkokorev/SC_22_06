@@ -1,44 +1,188 @@
-function classMainMenu() {
+function dirMenu() {
+    (function () {
+        angular.module('mainMenuModule', ["ngRoute"])
+        //-------------------------------------------------------------
+            .directive('mainMenu', ['$location', function ($location) {
+                return {
+                    restrict: 'E',
+                    scope: true,
+                    template: that_.menuTemplate.mainMenu,
+                    controller: menuController,
+                    controllerAs: "menu"
+                };
+            }])
+            //-------------------------------------------------------------
+            .directive('menuChoice', function ($location) {
+                return {
+                    restrict: 'E',
+                    scope: true,
+                    template: that_.menuTemplate.menuChoice
+                };
+                //-------------------------------------------------------------
+            })
+            .directive('menuBasic', function ($location) {
+                return {
+                    restrict: 'E',
+                    scope: true,
+                    template: that_.menuTemplate.menuBasic
+                };
+            })
+            //-------------------------------------------------------------
+            .directive('menuPosition', function ($location) {
+                return {
+                    restrict: 'E',
+                    scope: true,
+                    template: that_.menuTemplate.menuPosition
+                };
+            })
+            //-------------------------------------------------------------
+            .directive('menuList', function ($location) {
+                return {
+                    restrict: 'E',
+                    scope: true,
+                    template: that_.menuTemplate.menuList
+                };
+            });
 
-    this.menuController = function($location) {
-        console.warn('menuController');
-        this.activeClass="";
-        this.onMainMenuClick=()=>{
-        	alert("test");
-            this.page=$location.path().substring(1);
-            this.activeClass="active";
-		};
-        this.data = [{
-            num:"01",
-            item:"Профиль",
-            discr:"Расскажите мне о себе то, чего я не знаю"
-        },{
-            num:"02",
-            item:"Выбор",
-            child:[
-                {
-                    name:"Желания",
-                    discr:"Укажите чем хотите заниматься"
-                },
-                {
-                    name:"Структура",
-                    discr:"Укажите где вы хотите этим заниматься"
+
+        function menuController($location) {
+            console.warn('menuController');
+            //============================================
+            //атрибуты
+            //============================================
+            this.data = data();
+            //============================================
+            //функции
+            //============================================
+            this.activeClass = activeClass;
+            this.acFilter = acFilter;
+
+            //==================================================================================
+
+            function acFilter(num) {
+                var n = parseInt(num) - 1;
+                this.data[n].showFlt = !this.data[n].showFlt;
+            };
+
+            function activeClass(page) {
+                var currentRoute = $location.path().substring(1) || 'profile';
+                return page === currentRoute ? 'active' : '';
+            };
+
+            function data() {
+                return [{
+                    num: "01",
+                    item: "Профиль",
+                    type: "menuBasic",
+                    page: "profile",
+                    discr: "Расскажите мне о себе то, чего я не знаю"
+                }, {
+                    num: "02",
+                    item: "Выбор",
+                    type: "menuChoice",
+                    page: "choice",
+                    child: [
+                        {
+                            name: "Желания",
+                            discr: "Укажите чем хотите заниматься"
+                        },
+                        {
+                            name: "Структура",
+                            discr: "Укажите где вы хотите этим заниматься"
+                        }
+                    ]
+                }, {
+                    num: "03",
+                    item: "Позиции",
+                    page: "position",
+                    type: "menuPosition",
+                    discr: "Расскажите мне о себе то, чего я не знаю",
+                    child: [
+                        {
+                            discr: "Мы подобрали подходящие для вас должности"
+                        },
+                        {
+                            discr: "Укажите наиболее интересные вам"
+                        }
+                    ],
+                    showFlt: false,
+                    nameFlt: "Фильтр",
+                    discrFlt: "Мы не будем показывать вам позиции, не подходящие под диапазон характеристик",
+                    childFlt: [
+                        {
+                            name: "Оборачиваемость",
+                            placeholder: "3"
+                        },
+                        {
+                            name: "Грейд",
+                            placeholder: "11"
+                        }
+                    ]
+                }, {
+                    num: "04",
+                    item: "Компетенции",
+                    type: "menuChoice",
+                    page: "competences",
+                    discr: "Выберите индикаторы компетенций для развития",
+                    child: [
+                        {
+                            name: "По позициям",
+                            discr: "Показываем компетенции по позициям"
+                        },
+                        {
+                            name: "По пересечениям",
+                            discr: "Показываем пересекающиеся компетенции"
+                        }
+                    ]
+                }, {
+                    num: "05",
+                    item: "Цели",
+                    type: "menuBasic",
+                    page: "target",
+                    discr: "Опишите цели по изучению индикаторов"
+                }, {
+                    num: "06",
+                    item: "Инструменты",
+                    page: "instruments",
+                    type: "menuList",
+                    discr: "Укажите инструменты, которыми вы будете добиваться целей",
+                    child: [
+                        {
+                            name: "Цель 1",
+                        },
+                        {
+                            name: "Цель 2",
+                        },
+                        {
+                            name: "Цель 3",
+                        }
+                    ]
+                }, {
+                    num: "07",
+                    item: "ИПР",
+                    page: "ipr",
+                    type: "menuList",
+                    child: [
+                        {
+                            name: "Цель 1",
+                        },
+                        {
+                            name: "Цель 2",
+                        },
+                        {
+                            name: "Цель 3",
+                        }
+                    ]
                 }
-            ]
-        },{
-            num:"03",
-            item:"Позиции",
-            discr:"Расскажите мне о себе то, чего я не знаю",
-            child:[
-                {
-                    discr:"Мы подобрали подходящие для вас должности"
-                },
-                {
-                    discr:"Укажите наиболее интересные вам"
-                }
-            ]
-        }]
-	}
+
+
+                ]
+            }
+
+        }
+    }());
+
+
     /*    this.menuController = function() {
 			var that=this;
 
