@@ -70,7 +70,7 @@
 				<bi:property name="inc" index="10" value="modules\scMainBody.js"/>
 				<bi:property name="inc" index="11" value="modules\startComponent\scStart.js"/>
 				<bi:property name="inc" index="12" value="css\scHeader.css"/>
-				<bi:property name="inc" index="13" value="css\fontawesome-all.css"/>
+				<bi:property name="inc" index="13" value="fontawesome-all.css"/>
 				<bi:property name="inc" index="14" value="css\scMainMenu.css"/>
 				<bi:property name="inc" index="15" value="css\scMainBody.css"/>
 				<bi:property name="inc" index="16" value="css\scStart.css"/>
