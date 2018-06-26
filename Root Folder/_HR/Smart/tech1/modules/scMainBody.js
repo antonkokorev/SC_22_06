@@ -83,9 +83,6 @@ function classMainBody() {
         });
 
         angular.module('scApp')
-            .service("cacheService", function() {
-
-            })
             .service("requestService", function($http) {
                 this.request = function (url) {
                     var _url = url + that_.user;

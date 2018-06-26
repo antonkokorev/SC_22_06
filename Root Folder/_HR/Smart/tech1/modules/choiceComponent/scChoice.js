@@ -6,7 +6,7 @@ function dirChoice() {
                 return {
                     restrict: 'AE',
                     scope: {},
-                    templateUrl: that_.path + "modules/views/choice.html",
+                    templateUrl: that_.path + "modules/choiceComponent/choice.html",
                     controller: choiceController,
                     controllerAs: "choice"
                 };

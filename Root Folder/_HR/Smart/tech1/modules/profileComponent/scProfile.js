@@ -8,7 +8,7 @@ function dirProfile() {
                 return {
                     restrict: 'AE',
                     scope: {},
-                    templateUrl: that_.path + "modules/views/profile.html",
+                    templateUrl: that_.path + "modules/profileComponent/profile.html",
                     controller: profileController,
                     controllerAs: "profile"
                 };
@@ -19,6 +19,7 @@ function dirProfile() {
             this.competencesTypes = ["Corp", "Role", "Func"];
             this.data = {};
             this.showAdditionalSkill = false;
+            this.additionalSkills = [];
             this.additionalSkill = {};
 
             this.range = function (n) {
@@ -41,16 +42,39 @@ function dirProfile() {
                 timelineService.renderTimelineLine(".profile-results");
             });
 
+            var addSkillLabels = document.querySelectorAll(".add-skill-label");
+
             this.addNewSkill = (e) => {
-                if (this.showAdditionalSkill) {
-                    console.log(this.additionalSkill);
-                    this.additionalSkill = {};
+                if (this.showAdditionalSkill && e.target.classList.contains("clicked")) {
+
+                    // Отправить запрос
+                    if (this.additionalSkill.name && this.additionalSkill.rate) {
+                        this.additionalSkills.push(this.additionalSkill);
+                        this.additionalSkill = {};
+                    }
+
+                    e.target.classList.remove("clicked");
+
+                    addSkillLabels.forEach((label) => {
+                        label.classList.remove("checked");
+                    });
+                } else {
+                    e.target.classList.add("clicked");
                 }
                 this.showAdditionalSkill = !this.showAdditionalSkill;
             }
 
-            this.rateNewSkill = (e) => {
+            this.rateNewSkill = (e, n) => {
 
+                addSkillLabels.forEach((label) => {
+                    label.classList.remove("checked");
+                });
+
+                addSkillLabels.forEach((label, index) => {
+                    if (index + 1 <= n) {
+                        label.classList.add("checked");
+                    }
+                });
             }
         }
     }());

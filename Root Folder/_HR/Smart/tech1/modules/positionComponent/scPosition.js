@@ -8,7 +8,7 @@ function dirPosition() {
                 return {
                     restrict: 'AE',
                     scope: {},
-                    templateUrl: that_.path + "modules/views/position.html",
+                    templateUrl: that_.path + "modules/positionComponent/position.html",
                     controller: positionController,
                     controllerAs: "position"
                 };
