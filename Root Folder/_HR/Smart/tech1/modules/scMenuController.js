@@ -20,15 +20,20 @@ function dirMenu() {
             .directive('menuBasic', function () {
                 return {
                     restrict: 'E',
-                    scope: true,
-                    template: that_.menuTemplate.menuBasic
+                    scope: {
+                        "inItem":'=item'
+                    },
+                    template: that_.menuTemplate.menuBasic,
+
                 };
             })
             //-------------------------------------------------------------
             .directive('menuChoice', function () {
                 return {
                     restrict: 'E',
-                    scope: true,
+                    scope: {
+                        "inItem":'=item'
+                    },
                     template: that_.menuTemplate.menuChoice
                 };
 
@@ -37,7 +42,9 @@ function dirMenu() {
             .directive('menuPosition', function () {
                 return {
                     restrict: 'E',
-                    scope: true,
+                    scope: {
+                        "inItem":'=item'
+                    },
                     template: that_.menuTemplate.menuPosition
                 };
             })
@@ -45,7 +52,9 @@ function dirMenu() {
             .directive('menuList', function () {
                 return {
                     restrict: 'E',
-                    scope: true,
+                    scope: {
+                        "inItem":'=item'
+                    },
                     template: that_.menuTemplate.menuList
                 };
             })
