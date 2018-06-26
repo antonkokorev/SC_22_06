@@ -62,6 +62,8 @@ function dirProfile() {
                     e.target.classList.add("clicked");
                 }
                 this.showAdditionalSkill = !this.showAdditionalSkill;
+
+                updateSwiper();
             }
 
             this.rateNewSkill = (e, n) => {
