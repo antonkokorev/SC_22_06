@@ -97,8 +97,8 @@
                             <h3 class="sc-slide-middle-heading"> Дополнительные навыки </h3>
 
                             <div class="add-block">
-                                <div class="add-skill-hr hide"></div>
-                                <div class="add-skill-form hide">
+                                <div class="add-skill-hr" ng-show="{{profile.showAdditionalSkill}}"></div>
+                                <div class="add-skill-form" ng-show="{{profile.showAdditionalSkill}}">
                                     <input type="text" class="add-new-skill-input" placeholder="Опишите свой навык"
                                            ng-model="additionalSkillName">
                                     <div class="add-skill-checkbox">
@@ -117,7 +117,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="add-new-skill add-buttons color-red" ng-click="addNewSkill($event)">
+                                <div class="add-new-skill add-buttons color-blue" ng-click="profile.addNewSkill($event)">
                                     Добавить
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                     <div class="slide-profile-col">
                         <div class="slide-profile-achievements">
                             <h3 class="sc-slide-middle-heading"> Достижения в развитии </h3>
-                            <div class="add-additional-skill add-buttons color-red"> Добавить</div>
+                            <div class="add-additional-skill add-buttons color-blue"> Добавить</div>
                         </div>
                     </div>
 
@@ -179,14 +179,14 @@
                     <div class="slide-profile-col">
                         <div class="slide-profile-achievements">
                             <h3 class="sc-slide-middle-heading"> Достижения </h3>
-                            <div class="add-additional-skill add-buttons color-red"> Добавить</div>
+                            <div class="add-additional-skill add-buttons color-blue"> Добавить</div>
                         </div>
                     </div>
 
                     <div class="slide-profile-col">
                         <div class="slide-profile-about">
                             <h3 class="sc-slide-middle-heading"> О себе </h3>
-                            <div class="add-additional-skill add-buttons color-red"> Добавить</div>
+                            <div class="add-additional-skill add-buttons color-blue"> Добавить</div>
                         </div>
                     </div>
                 </div>

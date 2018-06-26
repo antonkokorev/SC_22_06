@@ -303,7 +303,7 @@
     font-style: normal;
     font-stretch: normal;
     letter-spacing: normal;
-    color: #ff3d46;
+    color: #007aff;
 }
 
 /* Timeline */
@@ -748,7 +748,7 @@
     font-stretch: normal;
     line-height: normal;
     letter-spacing: 1px;
-    color: #ff3d46;
+    color: #007aff;
     font-weight: 600;
 }
 
@@ -793,7 +793,7 @@
 }
 
 .negative-container .highlight_red {
-    background: #ff3d46;
+    background: #007aff;
     color: #fff;
     text-shadow: 1px 1px 1px #333;
 }
@@ -1004,7 +1004,7 @@
     font-stretch: normal;
     line-height: normal;
     letter-spacing: -2px;
-    color: #ff3d46;
+    color: #007aff;
 }
 
 .choose-position {
@@ -1015,8 +1015,8 @@
     color: #88909d;
 }
 
-.choose-position:hover .position-heading.color-red {
-    text-decoration: #ff3d46 line-through;
+.choose-position:hover .position-heading.color-blue {
+    text-decoration: #007aff line-through;
 }
 
 .position-learn-more {
@@ -1027,7 +1027,7 @@
 }
 
 .color-red {
-    color: #ff3d46;
+    color: #007aff;
 }
 
 /* 04. ����������� */
@@ -1074,7 +1074,7 @@
     font-size: 16px;
     font-weight: bold;
     font-style: normal;
-    color: #ff3d46;
+    color: #007aff;
     cursor: pointer;
 }
 
@@ -1145,7 +1145,7 @@
 }
 
 .back-button-competence:hover {
-    color: #ff3d46;
+    color: #007aff;
     cursor: pointer;
 }
 
@@ -1177,7 +1177,7 @@
     font-size: 16px;
     font-weight: bold;
     text-align: left;
-    color: #ff3d46;
+    color: #007aff;
 }
 
 .delete-goal {
@@ -1235,7 +1235,7 @@
     margin-top: 10px;
     font-size: 16px;
     font-weight: bold;
-    color: #ff3d46;
+    color: #007aff;
     cursor: pointer;
 }
 
@@ -1243,7 +1243,7 @@
     margin-top: 10px;
     font-size: 16px;
     font-weight: bold;
-    color: #ff3d46;
+    color: #007aff;
     cursor: pointer;
 }
 
@@ -1287,7 +1287,7 @@
 .ipr-tool {
     font-size: 16px;
     font-weight: bold;
-    color: #ff3d46;
+    color: #007aff;
 }
 
 /* ������� */

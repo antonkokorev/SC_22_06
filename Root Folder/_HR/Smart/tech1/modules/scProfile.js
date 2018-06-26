@@ -4,44 +4,21 @@ function dirProfile() {
         console.warn("dirProfile");
         angular.module('profileModule', [])
 
-            .directive('profile', function ($location, profileSrv) {
+            .directive('profile', function ($location) {
                 return {
                     restrict: 'AE',
                     scope: {},
-                    templateUrl: that_.path + "modules/profile.html",//that_.profileView(),
+                    templateUrl: that_.path + "modules/views/profile.html",//that_.profileView(),
                     controller: profileController,
                     controllerAs: "profile"
                 };
             });
 
-
-        angular.module('profileModule')
-            .service("profileSrv", function () {
-                this.getProfile = function (user) {
-
-                    var _headers = {
-                        'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
-                        'Accept': 'application/json; charset=utf-8',
-                        'Content-Type': 'application/json; charset=utf-8'
-                    };
-                    var promise = $http({
-                        method: 'GET',
-                        url: _url,
-                        headers: _headers
-                    }).then(function (response) {
-                        return response.data
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                    return promise
-                };
-            });
-
-
         function profileController($scope, $timeout, requestService, swiperService, timelineService) {
             console.warn('profileController');
             this.competencesTypes = ["Corp", "Role", "Func"];
             this.data = {};
+            this.showAdditionalSkill = false;
 
 
             this.range = function (n) {
@@ -59,7 +36,14 @@ function dirProfile() {
                 console.log({"data": data})
             });
 
+            $(window).resize(function() {
+                timelineService.renderTimelineLine(".profile-education");
+                timelineService.renderTimelineLine(".profile-results");
+            });
 
+            this.addNewSkill = function(e) {
+                this.showAdditionalSkill = !this.showAdditionalSkill;
+            }
 
 
         }

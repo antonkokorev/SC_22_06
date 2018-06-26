@@ -121,7 +121,7 @@
 }
 
 .sc-menu-desc:hover .sc-menu-desc-heading {
-    color: #ff3d46;
+    color: #007aff;
 }
 
 .grade-from,
@@ -138,7 +138,7 @@
 .sc-menu-filter-input {
     border: 0;
     outline: 0;
-    color: #ff3d46;
+    color: #007aff;
     font-weight: bold;
     width: 25px;
     border-bottom: 1px solid #8d8d8d;
@@ -170,7 +170,7 @@
     margin-top: 30px;
     font-size: 30px;
     font-weight: bold;
-    color: #ff3d46;
+    color: #007aff;
     cursor: pointer;
     opacity: 0;
     -webkit-transition: opacity 0.3s;
