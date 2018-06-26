@@ -8,18 +8,18 @@ function dirProfile() {
                 return {
                     restrict: 'AE',
                     scope: {},
-                    templateUrl: that_.path + "modules/views/profile.html",//that_.profileView(),
+                    templateUrl: that_.path + "modules/views/profile.html",
                     controller: profileController,
                     controllerAs: "profile"
                 };
             });
 
-        function profileController($scope, $timeout, requestService, swiperService, timelineService) {
+        function profileController($scope, $timeout, requestService, updateSwiper, timelineService) {
             console.warn('profileController');
             this.competencesTypes = ["Corp", "Role", "Func"];
             this.data = {};
             this.showAdditionalSkill = false;
-
+            this.additionalSkill = {};
 
             this.range = function (n) {
                 return new Array(n);
@@ -29,7 +29,7 @@ function dirProfile() {
             requestService.request(url).then((data) => {
                 this.data = data;
                 $timeout(function() {
-                    swiperService.updateSwiper();
+                    updateSwiper();
                     timelineService.renderTimelineLine(".profile-education");
                     timelineService.renderTimelineLine(".profile-results");
                 }, 0);
@@ -41,11 +41,17 @@ function dirProfile() {
                 timelineService.renderTimelineLine(".profile-results");
             });
 
-            this.addNewSkill = function(e) {
+            this.addNewSkill = (e) => {
+                if (this.showAdditionalSkill) {
+                    console.log(this.additionalSkill);
+                    this.additionalSkill = {};
+                }
                 this.showAdditionalSkill = !this.showAdditionalSkill;
             }
 
+            this.rateNewSkill = (e) => {
 
+            }
         }
     }());
 }

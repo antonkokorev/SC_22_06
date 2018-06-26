@@ -57,7 +57,8 @@
 .sc-main-slide {
     position: relative;
     width: 100%;
-    height: calc(100% / 7);
+    /*height: calc(100% / 7);*/
+    height: 100%;
     overflow: hidden;
     padding: 0 15px;
 }
@@ -304,6 +305,7 @@
     font-stretch: normal;
     letter-spacing: normal;
     color: #007aff;
+    cursor: pointer;
 }
 
 /* Timeline */
@@ -696,7 +698,7 @@
 }
 
 .sc-choice-v-slide {
-    height: 50%;
+    height: 100vh;
     position: relative;
     overflow: hidden;
 }

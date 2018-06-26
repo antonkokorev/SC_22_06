@@ -8,10 +8,10 @@ function classMainBody() {
 
     dirChoice.call(this);
     dirProfile.call(this);
+    dirPosition.call(this);
 
 
     classHeader.call(this);
-    classPosition.call(this);
     classCompetences.call(this);
     classGoals.call(this);
     classInstruments.call(this);
@@ -65,6 +65,7 @@ function classMainBody() {
         //создание основного модуля и роутинга
         //============================================================
         angular.module('scApp', ["ngRoute", "mainMenuModule", "choiceModule", "profileModule"]);
+
         angular.module('scApp').config(function ($routeProvider) {
             $routeProvider
                 .when("/", {
@@ -76,13 +77,14 @@ function classMainBody() {
                 .when("/choice", {
                     template: "<choice></choice>"
                 })
+                .when("/position", {
+                    template: "<position></position>"
+                })
         });
 
         angular.module('scApp')
-            .service("swiperService", function() {
-                this.updateSwiper = () => {
-                    that_.profile_swiper.update();
-                }
+            .service("cacheService", function() {
+
             })
             .service("requestService", function($http) {
                 this.request = function (url) {
@@ -127,6 +129,12 @@ function classMainBody() {
                     })
                 }
             })
+            .factory("updateSwiper", function() {
+                return () => {
+                    that_.profile_swiper.update();
+                }
+            })
+
 
         //============================================================
         //регистрация приложения Angular

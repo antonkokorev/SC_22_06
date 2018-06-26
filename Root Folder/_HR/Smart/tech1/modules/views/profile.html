@@ -97,23 +97,23 @@
                             <h3 class="sc-slide-middle-heading"> Дополнительные навыки </h3>
 
                             <div class="add-block">
-                                <div class="add-skill-hr" ng-show="{{profile.showAdditionalSkill}}"></div>
-                                <div class="add-skill-form" ng-show="{{profile.showAdditionalSkill}}">
+                                <div class="add-skill-hr" ng-show="profile.showAdditionalSkill"></div>
+                                <div class="add-skill-form" ng-show="profile.showAdditionalSkill">
                                     <input type="text" class="add-new-skill-input" placeholder="Опишите свой навык"
-                                           ng-model="additionalSkillName">
+                                           ng-model="profile.additionalSkill.name">
                                     <div class="add-skill-checkbox">
                                         <p class="add-skill-checkbox-label"> Самооценка </p>
                                         <div class="add-skill-checkbox-wrapper">
-                                            <input id="1star" type="radio" name="self-rating" class="add-skill-check">
-                                            <label for="1star" class="add-skill-label"></label>
-                                            <input id="2star" type="radio" name="self-rating" class="add-skill-check">
-                                            <label for="2star" class="add-skill-label"></label>
-                                            <input id="3star" type="radio" name="self-rating" class="add-skill-check">
-                                            <label for="3star" class="add-skill-label"></label>
-                                            <input id="4star" type="radio" name="self-rating" class="add-skill-check">
-                                            <label for="4star" class="add-skill-label"></label>
-                                            <input id="5star" type="radio" name="self-rating" class="add-skill-check">
-                                            <label for="5star" class="add-skill-label"></label>
+                                            <input id="1star" ng-model="profile.additionalSkill.rate" type="radio" name="self-rating" value="1" class="add-skill-check">
+                                            <label for="1star" class="add-skill-label" ng-click="profile.rateNewSkill($event)"></label>
+                                            <input id="2star" ng-model="profile.additionalSkill.rate" type="radio" name="self-rating" value="2" class="add-skill-check">
+                                            <label for="2star" class="add-skill-label" ng-click="profile.rateNewSkill($event)"></label>
+                                            <input id="3star" ng-model="profile.additionalSkill.rate" type="radio" name="self-rating" value="3" class="add-skill-check">
+                                            <label for="3star" class="add-skill-label" ng-click="profile.rateNewSkill($event)"></label>
+                                            <input id="4star" ng-model="profile.additionalSkill.rate" type="radio" name="self-rating" value="4" class="add-skill-check">
+                                            <label for="4star" class="add-skill-label" ng-click="profile.rateNewSkill($event)"></label>
+                                            <input id="5star" ng-model="profile.additionalSkill.rate" type="radio" name="self-rating" value="5" class="add-skill-check">
+                                            <label for="5star" class="add-skill-label" ng-click="profile.rateNewSkill($event)"></label>
                                         </div>
                                     </div>
                                 </div>
