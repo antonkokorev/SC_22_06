@@ -83,8 +83,8 @@ function classMainBody() {
         });
 
         angular.module('scApp')
-            .service("requestService", function($http) {
-                this.request = function (url) {
+            .factory("requestService", function($http) {
+                return function (url) {
                     var _url = url + that_.user;
                     var _headers = {
                         'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",

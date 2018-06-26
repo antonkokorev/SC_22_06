@@ -27,7 +27,7 @@ function dirProfile() {
             };
 
             var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=empProfileNoCallback&user=";
-            requestService.request(url).then((data) => {
+            requestService(url).then((data) => {
                 this.data = data;
                 $timeout(function() {
                     updateSwiper();

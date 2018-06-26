@@ -18,7 +18,7 @@ function dirPosition() {
             console.warn('positionController');
 
             var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=positionNoCallback&requestType=model&family=[30000047]&row=1_2&user=";
-            requestService.request(url).then((data) => {
+            requestService(url).then((data) => {
                 this.data = data;
                 $timeout(updateSwiper, 0);
                 console.log({"data": data})

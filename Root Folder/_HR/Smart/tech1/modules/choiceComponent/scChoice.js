@@ -17,7 +17,7 @@ function dirChoice() {
             this.data = {};
 
             var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=dictNoCallback&user=";
-            requestService.request(url).then((data) => {
+            requestService(url).then((data) => {
                 this.data = data;
                 $timeout(function() {
                     updateSwiper();

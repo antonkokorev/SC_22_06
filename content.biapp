@@ -57,18 +57,18 @@
 				<bi:property name="lib" index="0" value="lib\loading_lib.json"/>
 			</bi:property>
 			<bi:property name="includes" type="ORDEREDLIST">
-				<bi:property name="inc" index="0" value="modules\scHeader.js"/>
-				<bi:property name="inc" index="1" value="modules\scMenuController.js"/>
-				<bi:property name="inc" index="2" value="modules\scMenuView.js"/>
+				<bi:property name="inc" index="0" value="modules\headerComponent\scHeader.js"/>
+				<bi:property name="inc" index="1" value="modules\menuComponent\scMenuController.js"/>
+				<bi:property name="inc" index="2" value="modules\menuComponent\scMenuView.js"/>
 				<bi:property name="inc" index="3" value="modules\profileComponent\scProfile.js"/>
 				<bi:property name="inc" index="4" value="modules\choiceComponent\scChoice.js"/>
 				<bi:property name="inc" index="5" value="modules\positionComponent\scPosition.js"/>
-				<bi:property name="inc" index="6" value="modules\scCompetences.js"/>
-				<bi:property name="inc" index="7" value="modules\scGoals.js"/>
-				<bi:property name="inc" index="8" value="modules\scInstruments.js"/>
-				<bi:property name="inc" index="9" value="modules\scIpr.js"/>
+				<bi:property name="inc" index="6" value="modules\competencesComponent\scCompetences.js"/>
+				<bi:property name="inc" index="7" value="modules\goalsComponent\scGoals.js"/>
+				<bi:property name="inc" index="8" value="modules\instrumentsComponent\scInstruments.js"/>
+				<bi:property name="inc" index="9" value="modules\iprComponent\scIpr.js"/>
 				<bi:property name="inc" index="10" value="modules\scMainBody.js"/>
-				<bi:property name="inc" index="11" value="modules\scStart.js"/>
+				<bi:property name="inc" index="11" value="modules\startComponent\scStart.js"/>
 				<bi:property name="inc" index="12" value="css\scHeader.css"/>
 				<bi:property name="inc" index="13" value="css\fontawesome-all.css"/>
 				<bi:property name="inc" index="14" value="css\scMainMenu.css"/>
