@@ -3,13 +3,13 @@
         <div class="swiper-container swiper-profile-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <h2 class="sc-slide-heading profile-name">{{model.sFullName}}</h2>
+                    <h2 class="sc-slide-heading profile-name">{{profile.data.sFullName}}</h2>
 
                     <div class="slide-profile-col">
                         <div class="slide-profile-obligation-info">
                             <h3 class="sc-slide-middle-heading"> Текущая должность </h3>
-                            <p class="sc-profile-obligation"> {{model.sPosition}} </p>
-                            <p class="sc-profile-obligation-from"> на текущей позиции {{jobExperience}}</p>
+                            <p class="sc-profile-obligation"> {{profile.data.sPosition}} </p>
+                            <p class="sc-profile-obligation-from"> на текущей позиции {{profile.data.iCountExperienceYear}} год</p>
                         </div>
                     </div>
 
@@ -18,21 +18,21 @@
                             <h3 class="sc-slide-middle-heading"> Компетенции </h3>
                             <h4 class="sc-profile-competences-heading">Корпоративные</h4>
                             <div class="sc-profile-competences-wrapper clearfix">
-                                <div class="profile-competence" ng-repeat="competence in model.aCompetentions" ng-if="competence.sType === competencesTypes[0]">
+                                <div class="profile-competence" ng-repeat="competence in profile.data.aCompetentions" ng-if="competence.sType === profile.competencesTypes[0]">
                                     <p class="profile-competence-label"> {{competence.sFullName}} </p>
                                     <p class="profile-competence-ratings"><span class="profile-competence-rating"> {{competence.iRate360}} </span></p>
                                 </div>
                             </div>
                             <h4 class="sc-profile-competences-heading">Ролевые</h4>
                             <div class="sc-profile-competences-wrapper clearfix">
-                                <div class="profile-competence" ng-repeat="competence in model.aCompetentions" ng-if="competence.sType === competencesTypes[1]">
+                                <div class="profile-competence" ng-repeat="competence in  profile.data.aCompetentions" ng-if="competence.sType === profile.competencesTypes[1]">
                                     <p class="profile-competence-label"> {{competence.sFullName}} </p>
                                     <p class="profile-competence-ratings"><span class="profile-competence-rating"> {{competence.iRate360}} </span></p>
                                 </div>
                             </div>
                             <h4 class="sc-profile-competences-heading">Профессиональные</h4>
                             <div class="sc-profile-competences-wrapper clearfix">
-                                <div class="profile-competence" ng-repeat="competence in model.aCompetentions" ng-if="competence.sType === competencesTypes[2]">
+                                <div class="profile-competence" ng-repeat="competence in  profile.data.aCompetentions" ng-if="competence.sType === profile.competencesTypes[2]">
                                     <p class="profile-competence-label"> {{competence.sFullName}} </p>
                                     <p class="profile-competence-ratings"><span class="profile-competence-rating"> {{competence.iRate360}} </span></p>
                                 </div>
@@ -44,26 +44,18 @@
                         <div class="slide-profile-skills">
                             <h3 id="id_nav" class="sc-slide-middle-heading"> Навыки </h3>
 
-                            <div class="profile-skill-col" ng-repeat="skill in model.aSkills">
+                            <div class="profile-skill-col" ng-repeat="skill in profile.data.aSkills">
                                 <h4 class="profile-skill-label"> {{skill.sName}} </h4>
                                 <div class="profile-skill-rating slide-row">
                                     <p class="profile-skill-name">Оценка</p>
                                     <div class="profile-skill-stars">
                                         <div class="profile-skill-stars-filled-wrapper" style="width: {{skill.iManagerRate * 20}}% ">
                                             <div class="profile-skill-stars-filled">
-                                                <div class="profile-skill-star"></div>
-                                                <div class="profile-skill-star"></div>
-                                                <div class="profile-skill-star"></div>
-                                                <div class="profile-skill-star"></div>
-                                                <div class="profile-skill-star"></div>
+                                                <div class="profile-skill-star" ng-repeat="a in profile.range(5) track by $index"></div>
                                             </div>
                                         </div>
                                         <div class="profile-skill-stars-rated">
-                                            <div class="profile-skill-star"></div>
-                                            <div class="profile-skill-star"></div>
-                                            <div class="profile-skill-star"></div>
-                                            <div class="profile-skill-star"></div>
-                                            <div class="profile-skill-star"></div>
+                                            <div class="profile-skill-star" ng-repeat="a in profile.range(5) track by $index"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -73,19 +65,11 @@
                                     <div class="profile-skill-stars">
                                         <div class="profile-skill-stars-filled-wrapper" style="width:{{skill.iPersonRate * 20}}% ">
                                             <div class="profile-skill-stars-filled">
-                                                <div class="profile-skill-star"></div>
-                                                <div class="profile-skill-star"></div>
-                                                <div class="profile-skill-star"></div>
-                                                <div class="profile-skill-star"></div>
-                                                <div class="profile-skill-star"></div>
+                                                <div class="profile-skill-star"ng-repeat="a in profile.range(5) track by $index"></div>
                                             </div>
                                         </div>
                                         <div class="profile-skill-stars-rated">
-                                            <div class="profile-skill-star"></div>
-                                            <div class="profile-skill-star"></div>
-                                            <div class="profile-skill-star"></div>
-                                            <div class="profile-skill-star"></div>
-                                            <div class="profile-skill-star"></div>
+                                            <div class="profile-skill-star"ng-repeat="a in profile.range(5) track by $index"></div>
                                         </div>
                                     </div>
                                 </div>

@@ -21,6 +21,7 @@ function classMainBody() {
     //this.currentUser="Basic Z2VvcmdpZXYtZWk6cXdlcnR5MTIz",
     this.currentUser = "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
         that_ = this;
+        that_.user="Krylova-YV";
         this.ajax = function (param) {
             /*var that=this;*/
             //чтобы удобнее собирать параметры было
@@ -132,10 +133,33 @@ function classMainBody() {
             '<div id="sc-app" ng-app="scApp">' +
             '<main-menu id="id_menu" class="sc-menu"></main-menu>'+
             '<main id="id_main" class="sc-main enter-active">' +
-                '<div ng-view ></div>'+
+                '<div id="swiper-container" class="swiper-container">'+
+                    '<div class="swiper-wrapper">'+
+                        '<div class="swiper-slide">'+
+                            '<div ng-view ></div>'+
+                        '</div>'+
+                    '</div>'+
+                '<div class="swiper-scrollbar"></div>'+
+                '</div>'+
             '</main>' +
           '</div>';
+
+
+
+
+
         $(component).append(html);
+
+        this.profile_swiper = new Swiper('#swiper-container', {
+            direction: 'vertical',
+            slidesPerView: 'auto',
+            mousewheel: true,
+            freeMode: false
+        });
+
+
+
+
         //============================================================
         //создание основного модуля и роутинга
         //============================================================
