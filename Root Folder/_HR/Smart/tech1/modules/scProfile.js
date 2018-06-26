@@ -16,9 +16,9 @@ function dirProfile() {
 
 
         angular.module('profileModule')
-            .service("profileSrv", function ($http) {
+            .service("profileSrv", function () {
                 this.getProfile = function (user) {
-                    var _url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=empProfileNoCallback&user=" + user;
+
                     var _headers = {
                         'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
                         'Accept': 'application/json; charset=utf-8',
@@ -38,7 +38,7 @@ function dirProfile() {
             });
 
 
-        function profileController($scope, $timeout, profileSrv, swiperService) {
+        function profileController($scope, $timeout, requestService, swiperService, timelineService) {
             console.warn('profileController');
             this.competencesTypes = ["Corp", "Role", "Func"];
             this.data = {};
@@ -48,32 +48,20 @@ function dirProfile() {
                 return new Array(n);
             };
 
-            profileSrv.getProfile(that_.user).then((data) => {
+            var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=empProfileNoCallback&user=";
+            requestService.request(url).then((data) => {
                 this.data = data;
-                $timeout(swiperService.updateSwiper, 0);
+                $timeout(function() {
+                    swiperService.updateSwiper();
+                    timelineService.renderTimelineLine(".profile-education");
+                    timelineService.renderTimelineLine(".profile-results");
+                }, 0);
                 console.log({"data": data})
             });
 
-            function renderTimelineLine(parent) {
 
-                // Перерисовка линии таймлайна
-                var first_circle = $(parent + " .timeline-circle").first();
-                var last_circle = $(parent + " .timeline-circle").last();
 
-                var line_y_offset = ($(parent + " .timeline-center").first().height() - first_circle.height()) / 2;
-                var line_x_offset = first_circle.position().left + first_circle.width() / 2;
 
-                var line_y1 = first_circle.offset().top;
-                var line_y2 = last_circle.offset().top + last_circle.height();
-
-                var line_height = line_y2 - line_y1;
-
-                $(parent + " .timeline-line").css({
-                    "height": line_height,
-                    "top": 0,
-                    "left": line_x_offset
-                })
-            };
         }
     }());
 }

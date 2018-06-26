@@ -22,100 +22,7 @@ function classMainBody() {
     this.currentUser = "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
         that_ = this;
     that_.user = "Krylova-YV";
-    this.ajax = function (param) {
-        /*var that=this;*/
-        //чтобы удобнее собирать параметры было
-        if (param.params_) {
-            param.params = "";
-            for (key in param.params_) {
-                param.params += "&" + key + "=" + param.params_[key]
-            }
-        }
 
-        $.ajax
-        ({
-            type: "GET",
-            url: param.url + param.params,
-            dataType: 'jsonp',
-            name: key,
-            async: true,
-            jsonpCallback: param.callback,
-            //headers:{"Authorization":"Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi"},
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("Authorization", "Form " + btoa("domozhako_mv:12345Tgb")/*"Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi"*/);
-            },
-            success: function (json) {
-                param.status = true;
-
-                (param.return) ? param[param.return] = json : param.result = json;
-
-                if (param.activeController) {
-                    try {
-                        console.warn("Контроллер " + param.callback + " пошел работать");
-                        param.activeController();
-                    } catch (err) {
-                        console.error("Контроллер " + param.callback + " не существует");
-                    }
-
-                }
-            },
-            error: function (json) {
-                console.error("Ошибка выполнения AJAX " + param.callback);
-            },
-        });
-    },
-
-
-        this.services = {
-            "profile": {
-                "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=empProfile",
-                "status": false,
-                "params": "&user=102838",
-
-                "loadInStart": true,
-                "callback": "getEmpProfile",
-                "activeController": that_.profileController
-            },
-
-            "dict":
-                {
-                    "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=dict",
-                    "status": false,
-                    "params": "&user=102838",
-                    "callback": "getDicts",
-                    "loadInStart": true,
-                    "activeController": that_.choiceController
-                },
-
-            "instrument": {
-                "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument",
-                "status": false,
-                "params": "&compitentId=2000001154&user=102838",
-                "loadInStart": false,
-                "callback": "getCompetetionInstrument"
-            },
-
-            "position": {
-                "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=position",
-                "status": false,
-                "params": "&user=102838&requestType=model&family=[30000047]&row=1_2",
-                "params_": {"user": "102838", "requestType": "model", "family": "[30000047]", "row": "1_40"},
-                "loadInStart": true,
-                "callback": "getRecommendatedPosition",
-                "activeController": that_.positionController
-
-            }
-            ,
-            "competention": {
-                "url": "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=positionCompetentions",
-                "status": false,
-                "params": "&user=102838&position=[30007047,30006541]",
-                "loadInStart": true,
-                "callback": "getPositionCompetetions",
-                "activeController": that_.competencesController
-            }
-
-        };
 
 
     this.initMainBody = function () {
@@ -176,7 +83,50 @@ function classMainBody() {
                 this.updateSwiper = () => {
                     that_.profile_swiper.update();
                 }
-            });
+            })
+            .service("requestService", function($http) {
+                this.request = function (url) {
+                    var _url = url + that_.user;
+                    var _headers = {
+                        'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
+                        'Accept': 'application/json; charset=utf-8',
+                        'Content-Type': 'application/json; charset=utf-8'
+                    };
+
+                    var promise = $http({
+                        method: 'GET',
+                        url: _url,
+                        headers: _headers
+                    }).then(function (response) {
+                        return response.data
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    return promise
+                };
+            })
+            .service("timelineService", function() {
+                this.renderTimelineLine = function(parent) {
+
+                    // Перерисовка линии таймлайна
+                    var first_circle = $(parent + " .timeline-circle").first();
+                    var last_circle = $(parent + " .timeline-circle").last();
+
+                    var line_y_offset = ($(parent + " .timeline-center").first().height() - first_circle.height()) / 2;
+                    var line_x_offset = first_circle.position().left + first_circle.width() / 2;
+
+                    var line_y1 = first_circle.offset().top;
+                    var line_y2 = last_circle.offset().top + last_circle.height();
+
+                    var line_height = line_y2 - line_y1;
+
+                    $(parent + " .timeline-line").css({
+                        "height": line_height,
+                        "top": 0,
+                        "left": line_x_offset
+                    })
+                }
+            })
 
 
 
