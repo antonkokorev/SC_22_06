@@ -1,4 +1,9 @@
 /* sc-main */
+#sc-app {
+    font-size: 0;
+    height: 100%;
+    width: 100%;
+}
 
 .clearfix:after {
     content: '';
@@ -8,13 +13,14 @@
 
 .sc-main {
     width: 70%;
-    height: calc(100% - 100px);
+    height: 100%;
     display: inline-block;
     vertical-align: top;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     overflow: hidden;
+    font-size: 16px;
 
     opacity: 0;
     -webkit-transition: opacity 0.4s;
