@@ -1,0 +1,72 @@
+.your-item {
+    display: flex;
+}
+
+.your-item__icon-block {
+    width: 40px;
+}
+
+.your-item__icon {
+    width: 24px;
+    height: 24px;
+    margin-top: 10px;
+    display: block;
+    background: url(http://s1.iconbird.com/ico/2013/8/429/w512h5121377939770185083likelovestreamline.png) center no-repeat;
+    background-size: contain;
+}
+
+.your-item__content {
+    width: 400px
+}
+
+.your-item__title {
+    font-family: Raleway;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 2;
+    letter-spacing: -0.3px;
+    color: #16181c;
+    margin-bottom: 10px;
+}
+
+.your-item__elements {
+    width: 100%;
+    display: flex;
+}
+
+.your-item__element:not(:last-child) {
+    margin-right: 15px;
+}
+
+.your-item__element>span,
+.your-item__element>b {
+    font-size: 16px;
+    font-weight: normal;
+    color: #8d8d8d;
+}
+
+.your-item__element>b {
+    color: #16181c;
+    font-weight: 600;
+}
+
+.your-item__element>span:last-child {
+    width: 27px;
+    height: 27px;
+    background-color: rgba(255, 149, 0, 0.7);
+    border: solid 1px #ff9500;
+    border-radius: 50%;
+    font-family: Raleway;
+    display: block;
+    font-size: 16px;
+    margin-top: -4px;
+    margin-left: 9px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: normal;
+    text-align: center;
+    float: right;
+    color: #ffffff;
+}

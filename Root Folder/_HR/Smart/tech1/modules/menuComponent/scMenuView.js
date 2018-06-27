@@ -3,7 +3,7 @@ function scMenuView() {
 //=====================================================================================================================
         this.menuTemplate.mainMenu =
             `<div ng-class="menu.activeClass('{{mItem.page}}')"  class="sc-menu-li" ng-repeat="mItem in menu.data">
-                <a href="#!{{mItem.page}}">
+                <a ui-sref="{{mItem.page}}">
                     <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{mItem.num}}</span>{{mItem.item}}
                     </h2>
                     <menu-basic     item="mItem" ng-show="'{{mItem.type}}'=='menuBasic'">    </menu-basic>

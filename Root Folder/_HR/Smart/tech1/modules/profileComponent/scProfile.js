@@ -7,7 +7,7 @@ function dirProfile() {
             .directive('profile', function ($location) {
                 return {
                     restrict: 'AE',
-                    scope: {},
+                    scope: {profileData:"=profilemodeldata"},
                     templateUrl: that_.path + "modules/profileComponent/profile.html",
                     controller: profileController,
                     controllerAs: "profile"
@@ -15,9 +15,10 @@ function dirProfile() {
             });
 
         function profileController($scope, $timeout, requestService, updateSwiper, timelineService) {
+
             console.warn('profileController');
             this.competencesTypes = ["Corp", "Role", "Func"];
-            this.data = {};
+            //this.data =$scope.data ;
             this.showAdditionalSkill = false;
             this.additionalSkills = [];
             this.additionalSkill = {};
@@ -26,7 +27,10 @@ function dirProfile() {
                 return new Array(n);
             };
 
-            var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=empProfileNoCallback&user=";
+
+
+
+         /*   var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=empProfileNoCallback&user=";
             requestService(url).then((data) => {
                 this.data = data;
                 $timeout(function() {
@@ -35,7 +39,7 @@ function dirProfile() {
                     timelineService.renderTimelineLine(".profile-results");
                 }, 0);
                 console.log({"data": data})
-            });
+            });*/
 
             $(window).resize(function() {
                 timelineService.renderTimelineLine(".profile-education");

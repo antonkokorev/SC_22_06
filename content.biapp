@@ -68,18 +68,19 @@
 				<bi:property name="inc" index="8" value="modules\instrumentsComponent\scInstruments.js"/>
 				<bi:property name="inc" index="9" value="modules\iprComponent\scIpr.js"/>
 				<bi:property name="inc" index="10" value="modules\scMainBody.js"/>
-				<bi:property name="inc" index="11" value="modules\startComponent\scStart.js"/>
-				<bi:property name="inc" index="12" value="css\scHeader.css"/>
-				<bi:property name="inc" index="13" value="fontawesome-all.css"/>
-				<bi:property name="inc" index="14" value="css\scMainMenu.css"/>
-				<bi:property name="inc" index="15" value="css\scMainBody.css"/>
-				<bi:property name="inc" index="16" value="css\scStart.css"/>
-				<bi:property name="inc" index="17" value="css\media.css"/>
+				<bi:property name="inc" index="11" value="modules\scServices.js"/>
+				<bi:property name="inc" index="12" value="modules\startComponent\scStart.js"/>
+				<bi:property name="inc" index="13" value="css\scHeader.css"/>
+				<bi:property name="inc" index="14" value="css\fontawesome-all.css"/>
+				<bi:property name="inc" index="15" value="css\scMainMenu.css"/>
+				<bi:property name="inc" index="16" value="css\scMainBody.css"/>
+				<bi:property name="inc" index="17" value="css\scPosition.css"/>
+				<bi:property name="inc" index="18" value="css\scStart.css"/>
+				<bi:property name="inc" index="19" value="css\media.css"/>
 			</bi:property>
 			<bi:property name="start">
 				<bi:value><![CDATA[Z_CONTROLLER._Action("init");]]></bi:value>
 			</bi:property>
-			<bi:property name="log" value=""/>
 		</bi:component>
 		<bi:component name="ZTLPOWER_1" type="com_sap_sbt_ztlpower_v4_ZtlPower"/>
 		<bi:component name="Z_CONTROLLER" type="GLOBAL_SCRIPTS_COMPONENT">

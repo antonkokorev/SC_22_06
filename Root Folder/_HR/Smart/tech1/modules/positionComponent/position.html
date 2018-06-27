@@ -1,8 +1,10 @@
+
 <div id="sc-position" class="sc-main-slide">
     <div class="position-slide sc-v-slide">
         <div class="slide-row">
             <div class="slide-position-col">
                 <h2 class="sc-slide-heading"> Все </h2>
+
                 <div class="position-all">
 
                     <div id="swiper-positions-container" class="swiper-container swiper-auto-container">
@@ -10,14 +12,38 @@
                             <div class="swiper-slide">
 
 
-                                <div class="position choose-position" ng-repeat="position in position.data">
-                                    <h3 class="position-heading"> {{position.sJobProfileId}}</h3>
-                                    <p class="position-learn-more">{{position.sJobProfileName}} </p>
-                                    <p class="position-learn-more">
-                                        <span class="position-more">Грейд {{position.iGrade}}</span>
-                                        <span class="position-more">Оборачиваемость {{position.iTurnover}}</span>
-                                    </p>
-                                </div>
+                                    <div class="your-item" ng-repeat="position in positionData">
+                                        <div class="your-item__icon-block">
+                                            <i class="far fa-heart"></i>
+                                        </div>
+                                        <div class="your-item__content">
+                                            <div class="your-item__title">{{position.sJobProfileName}}</div>
+                                            <div class="your-item__elements">
+                                                <div class="your-item__element">
+                                                    <span>Грейд</span>
+                                                    <span>{{position.iGrade}}</span>
+                                                </div>
+                                                <div class="your-item__element">
+                                                    <span>Соответсвие:</span>
+                                                    <b>88%</b>
+                                                </div>
+                                                <div class="your-item__element">
+                                                    <span>Открытость:</span>
+                                                    <b>{{position.iTurnover}}</b>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                              <!--div class="position choose-position" ng-repeat="position in position.data">-->
+                                    <!--<h3 class="position-heading"> {{position.sJobProfileId}}</h3>-->
+                                    <!--<p class="position-learn-more">{{position.sJobProfileName}} </p>-->
+                                    <!--<p class="position-learn-more">-->
+                                        <!--<span class="position-more">Грейд {{position.iGrade}}</span>-->
+                                        <!--<span class="position-more">Оборачиваемость {{position.iTurnover}}</span>-->
+                                    <!--</p>-->
+                                <!--</div>-->
 
                             </div>
                         </div>
@@ -25,9 +51,7 @@
 
                 </div>
             </div>
-            <div class="slide-position-col chosen-positions">
-                <h2 class="sc-slide-heading"> Избранные </h2>
-            </div>
+
         </div>
     </div>
 </div>

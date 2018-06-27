@@ -9,13 +9,19 @@
 	"TweenMax": "$$path$$lib/TweenMax",
 	"Draggable":"$$path$$lib/Draggable",
 	"CSSPlugin":"$$path$$lib/CSSPlugin",
-	"TweenLite":"$$path$$lib/TweenLite"
+	"TweenLite":"$$path$$lib/TweenLite",
+	"uiRoute":"$$path$$lib/angular-ui-router",
+	"anim":"$$path$$lib/angular-animate"
    },
    "shim": {
 	"SplitText":{
 		"deps":["TweenMax"]
 	},
 		"route":{
+		"deps":["angular"]
+	},"uiRoute":{
+		"deps":["angular"]
+	},"anim":{
 		"deps":["angular"]
 	}
    }

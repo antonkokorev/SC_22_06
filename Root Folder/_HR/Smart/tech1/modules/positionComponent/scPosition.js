@@ -7,23 +7,15 @@ function dirPosition() {
             .directive('position', function ($location) {
                 return {
                     restrict: 'AE',
-                    scope: {},
+                    scope: {positionData:"=positionmodeldata"},
                     templateUrl: that_.path + "modules/positionComponent/position.html",
                     controller: positionController,
                     controllerAs: "position"
                 };
             });
 
-        function positionController($scope, $timeout, requestService, updateSwiper) {
+        function positionController($scope, requestService) {
             console.warn('positionController');
-
-            var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=positionNoCallback&requestType=model&family=[30000047]&row=1_10&user=";
-            requestService(url).then((data) => {
-                this.data = data;
-                $timeout(updateSwiper, 0);
-                console.log({"data": data})
-            });
-
 
             // Выбор позиций
             var choose_position = document.querySelectorAll(".choose-position");

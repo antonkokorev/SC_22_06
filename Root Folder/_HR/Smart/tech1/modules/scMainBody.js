@@ -5,7 +5,6 @@ function classMainBody() {
     //======================================
     scMenuView.call(this);
     dirMenu.call(this);
-
     dirChoice.call(this);
     dirProfile.call(this);
     dirPosition.call(this);
@@ -20,9 +19,9 @@ function classMainBody() {
 
     //this.currentUser="Basic Z2VvcmdpZXYtZWk6cXdlcnR5MTIz",
     this.currentUser = "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
+        this.srvLink = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs",
         that_ = this;
     that_.user = "Krylova-YV";
-
 
 
     this.initMainBody = function () {
@@ -37,13 +36,14 @@ function classMainBody() {
         //============================================================
         var component = '#' + globalSettings.teg + '_COMPONENT ';
         var html =
-            '<div id="sc-app" ng-app="scApp">' +
+            '<div id="sc-app" ng-app="scApp" ng-controller="scAppController as appController">' +
+            // '<header class="sc-header"></header>'+
             '   <main-menu id="id_menu" class="sc-menu"></main-menu>' +
             '   <main id="id_main" class="sc-main enter-active">' +
             '   <div id="swiper-container" class="swiper-auto-container">' +
             '       <div class="swiper-wrapper">' +
             '           <div class="swiper-slide">' +
-            '               <div ng-view ></div>' +
+            '              <ui-view></ui-view>' +
             '            </div>' +
             '           </div>' +
             //'       <div class="swiper-scrollbar"></div>' +
@@ -52,87 +52,104 @@ function classMainBody() {
             '</div>';
 
 
+        //============================================================
+        //создание прелоадера
+        //============================================================
+        $(component).append(`
+            <div id="preId" class="preClass"'>
+                <div class='cssload-loader'>
+                    <div class='cssload-inner cssload-one'></div>
+                    <div class='cssload-inner cssload-two'></div>
+                    <div class='cssload-inner cssload-three'></div>
+                </div>
+            </div>`);
         $(component).append(html);
-
+        //============================================================
+        //основной свайпер
+        //============================================================
         this.profile_swiper = new Swiper('#swiper-container', {
             direction: 'vertical',
             slidesPerView: 'auto',
             mousewheel: true,
             freeMode: true
         });
+        //============================================================
+        //создание основного модуля
+        //============================================================
+        angular.module('scApp', ["ngAnimate","ui.router", "mainMenuModule", "choiceModule", "profileModule", "positionModule"])
+            .controller('scAppController', function (requestService, $timeout, updateSwiper, timelineService, preloader, updateSwiper, $state, $timeout) {
+                var url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_10&user=";
+
+                //*************************************************************
+                requestService(url).then((data) => {
+                    this.positionModelData = data;
+                    if ($state.current.name == "position")
+                        $timeout(function () {
+                            updateSwiper()
+                        }, 0);
+                });
+                //*************************************************************
+                var url = that_.srvLink + "?entity=empProfileNoCallback&user=";
+                requestService(url).then((data) => {
+                    this.profileModelData = data;
+                    if ($state.current.name == "profile")
+                        $timeout(function () {
+                            timelineService.renderTimelineLine(".profile-education");
+                            timelineService.renderTimelineLine(".profile-results");
+                            updateSwiper()
+                        }, 0);
+
+                });
+                //*************************************************************
+            });
+        //============================================================
+        //роутер
+        //============================================================
+        angular.module('scApp').config(function ($stateProvider) {
+            $stateProvider.state({
+                name: 'profile',
+                url: '/profile',
+                template: '<profile profilemodeldata="appController.profileModelData" id="sc-profile" class="profile-slide sc-v-slide"></profile>',
+                controller: allController
+            });
+
+            $stateProvider.state({
+                name: 'choice',
+                url: '/choice',
+                template: "<choice></choice>",
+                controller: allController
+            });
+
+            $stateProvider.state({
+                name: 'position',
+                url: '/position',
+                template: "<position positionmodeldata='appController.positionModelData'></position>",
+                controller: allController
+            });
+        }).run(['$state', function ($state) {
+            $state.transitionTo('profile');
+        }]);
+
+        //общий контроллер для состояний с обновлением основного свайпера
+        function allController($state, $scope, $timeout, updateSwiper, timelineService, preloader) {
+            preloader.on();
+            var state = $state.current.name;
+            $scope.$on('$viewContentLoaded', function (event) {
+                $timeout(function () {
+                    if (state == "profile") {
+                        timelineService.renderTimelineLine(".profile-education");
+                        timelineService.renderTimelineLine(".profile-results");
+                    }
+                    updateSwiper();
+                    preloader.off();
+                }, 0);
+            });
+        }
 
         //============================================================
-        //создание основного модуля и роутинга
+        //загрузка сервисов
         //============================================================
-        angular.module('scApp', ["ngRoute", "mainMenuModule", "choiceModule", "profileModule","positionModule"]);
-
-        angular.module('scApp').config(function ($routeProvider) {
-            $routeProvider
-                .when("/", {
-                    redirectTo: '/profile'
-                })
-                .when("/profile", {
-                    template: '<profile id="sc-profile" class="profile-slide sc-v-slide"></profile>'
-                })
-                .when("/choice", {
-                    template: "<choice></choice>"
-                })
-                .when("/position", {
-                    template: "<position></position>"
-                })
-        });
-
-        angular.module('scApp')
-            .factory("requestService", function($http) {
-                return function (url) {
-                    var _url = url + that_.user;
-                    var _headers = {
-                        'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
-                        'Accept': 'application/json; charset=utf-8',
-                        'Content-Type': 'application/json; charset=utf-8'
-                    };
-
-                    var promise = $http({
-                        method: 'GET',
-                        url: _url,
-                        headers: _headers
-                    }).then(function (response) {
-                        return response.data
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                    return promise
-                };
-            })
-            .service("timelineService", function() {
-                this.renderTimelineLine = function(parent) {
-
-                    // Перерисовка линии таймлайна
-                    var first_circle = $(parent + " .timeline-circle").first();
-                    var last_circle = $(parent + " .timeline-circle").last();
-
-                    var line_y_offset = ($(parent + " .timeline-center").first().height() - first_circle.height()) / 2;
-                    var line_x_offset = first_circle.position().left + first_circle.width() / 2;
-
-                    var line_y1 = first_circle.offset().top;
-                    var line_y2 = last_circle.offset().top + last_circle.height();
-
-                    var line_height = line_y2 - line_y1;
-
-                    $(parent + " .timeline-line").css({
-                        "height": line_height,
-                        "top": 0,
-                        "left": line_x_offset
-                    })
-                }
-            })
-            .factory("updateSwiper", function() {
-                return () => {
-                    that_.profile_swiper.update();
-                }
-            })
-
-
+        Services.call(this);
         //============================================================
         //регистрация приложения Angular
         //============================================================
