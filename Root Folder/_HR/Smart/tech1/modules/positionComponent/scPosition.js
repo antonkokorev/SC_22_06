@@ -14,7 +14,7 @@ function dirPosition() {
                 };
             });
 
-        function positionController($scope, $timeout, requestService, updateSwiper, timelineService) {
+        function positionController($scope, $timeout, requestService, updateSwiper) {
             console.warn('positionController');
 
             var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=positionNoCallback&requestType=model&family=[30000047]&row=1_10&user=";
