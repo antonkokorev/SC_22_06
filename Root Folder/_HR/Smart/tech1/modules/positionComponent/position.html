@@ -1,8 +1,8 @@
-<div id="sc-position" ng-controller="positionController" class="sc-main-slide">
+<div id="sc-position" class="sc-main-slide">
     <div class="position-slide sc-v-slide">
         <div class="slide-row">
             <div class="slide-position-col">
-                <h2 class="sc-slide-heading"> {{all}} </h2>
+                <h2 class="sc-slide-heading"> Все </h2>
                 <div class="position-all">
 
                     <div id="swiper-positions-container" class="swiper-container swiper-auto-container">
@@ -10,7 +10,7 @@
                             <div class="swiper-slide">
 
 
-                                <div class="position choose-position" ng-repeat="position in model">
+                                <div class="position choose-position" ng-repeat="position in position.data">
                                     <h3 class="position-heading"> {{position.sJobProfileId}}</h3>
                                     <p class="position-learn-more">{{position.sJobProfileName}} </p>
                                     <p class="position-learn-more">
@@ -30,4 +30,4 @@
             </div>
         </div>
     </div>
-</div>;
+</div>

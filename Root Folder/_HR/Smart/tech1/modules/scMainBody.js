@@ -64,7 +64,7 @@ function classMainBody() {
         //============================================================
         //создание основного модуля и роутинга
         //============================================================
-        angular.module('scApp', ["ngRoute", "mainMenuModule", "choiceModule", "profileModule"]);
+        angular.module('scApp', ["ngRoute", "mainMenuModule", "choiceModule", "profileModule","positionModule"]);
 
         angular.module('scApp').config(function ($routeProvider) {
             $routeProvider
