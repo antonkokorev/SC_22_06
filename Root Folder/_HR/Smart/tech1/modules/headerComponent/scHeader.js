@@ -8,7 +8,7 @@ function dirHeader() {
                 return {
                     restrict: 'AE',
                     scope: {},
-                    templateUrl: that_.path + "modules/headerComponent/header.html",
+                    templateUrl: that_.path + "modules/headerComponent/scHeaderView.html",
                     controller: headerController,
                     controllerAs: "header"
                 };

@@ -8,7 +8,7 @@ function dirProfile() {
                 return {
                     restrict: 'AE',
                     scope: {profileData:"=profilemodeldata"},
-                    templateUrl: that_.path + "modules/profileComponent/profile.html",
+                    templateUrl: that_.path + "modules/profileComponent/scProfileView.html",
                     controller: profileController,
                     controllerAs: "profile"
                 };
