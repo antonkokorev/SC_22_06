@@ -1,5 +1,5 @@
 <div class="sc-main-slide">
-    <div id="sc-choice" class="sc-choice" >
+    <div id="sc-choice" class="sc-choice">
         <!--
         <div class="sc-choice-v-slide">
             <div class="choice-tools">
@@ -46,15 +46,11 @@
         <div class="sc-choice-v-slide">
             <div class="sc-choice-structures">
                 <div class="sc-choice-structure-col">
-                    <div class="swiper-container swiper-structure-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide clearfix">
-                                <div class="sc-choice-structure" ng-repeat="structure in choice.data.aFamily">
-                                    <h3 class="sc-structure-heading" ng-click="chooseStructure($event)">
-                                        {{structure.sName}}</h3>
-                                </div>
-                            </div>
-                        </div>
+
+                    <div class="sc-choice-structure" ng-repeat="structure in choice.data.aFamily">
+                        <h3 class="sc-structure-heading" ng-click="chooseStructure($event)">
+                            {{structure.sName}}</h3>
+
                     </div>
                 </div>
             </div>

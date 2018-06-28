@@ -42,7 +42,7 @@ function classMainBody() {
             '   <div id="swiper-container" class="swiper-auto-container">' +
             '       <div class="swiper-wrapper">' +
             '           <div class="swiper-slide">' +
-            '              <ui-view></ui-view>' +
+            '              <ui-view class="main-view"></ui-view>' +
             '            </div>' +
             '           </div>' +
             //'       <div class="swiper-scrollbar"></div>' +

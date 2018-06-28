@@ -7,7 +7,9 @@ function dirPosition() {
             .directive('position', function ($location) {
                 return {
                     restrict: 'AE',
-                    scope: {positionData:"=positionmodeldata"},
+                    scope: {
+                        positionData: "=positionmodeldata"
+                    },
                     templateUrl: that_.path + "modules/positionComponent/position.html",
                     controller: positionController,
                     controllerAs: "position"

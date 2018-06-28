@@ -18,7 +18,7 @@
 			</bi:property>
 		</bi:property>
 		<bi:property name="ON_STARTUP">
-			<bi:value><![CDATA[gv_user=APPLICATION.getInfo().user;]]></bi:value>
+			<bi:value><![CDATA[gv_user= APPLICATION.getInfo().user;]]></bi:value>
 		</bi:property>
 	</bi:component>
 	<bi:component name="ROOT" type="ABSOLUTE_LAYOUT_COMPONENT">
