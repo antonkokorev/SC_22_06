@@ -23,6 +23,16 @@ function dirPosition() {
 
             this.liked={};
             this.countLike=0;
+            this.onlyLiked="";
+            this.likeClick=()=>{
+                console.log("!");
+                this.onlyLiked=(this.onlyLiked=="")?true:"";
+
+            };
+
+
+
+
             this.likeCurrentPosition = (index, position) => {
                 $scope.likedPositions.push(position);
                (this.liked[position.sJobProfileId])?delete this.liked[position.sJobProfileId]:this.liked[position.sJobProfileId]=true;
