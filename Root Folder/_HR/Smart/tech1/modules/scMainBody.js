@@ -79,6 +79,7 @@ function classMainBody() {
         //============================================================
         angular.module('scApp', [
             "ngAnimate",
+            "rzModule",
             "ui.router",
             "scApp.header",
             "scApp.menu",

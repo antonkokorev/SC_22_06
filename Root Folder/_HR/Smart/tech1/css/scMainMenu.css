@@ -166,6 +166,13 @@
     transition: max-height 0.4s;
 }
 
+.filter-range {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .sc-menu-apply {
     margin-top: 30px;
     font-size: 30px;

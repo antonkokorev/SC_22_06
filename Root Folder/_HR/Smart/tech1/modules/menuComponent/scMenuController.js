@@ -45,6 +45,7 @@ function dirMenu() {
                     scope: {
                         "inItem":'=item'
                     },
+                    controller: menuController,
                     template: that_.menuTemplate.menuPosition
                 };
             })
@@ -60,7 +61,7 @@ function dirMenu() {
             })
 
 
-        function menuController($location,menuDataService) {
+        function menuController($scope, $location,menuDataService) {
 
             //============================================
             //атрибуты
@@ -71,6 +72,29 @@ function dirMenu() {
             //============================================
             this.activeClass = activeClass;
             this.acFilter = acFilter;
+
+
+            $scope.gradeSlider = {
+                minValue: 10,
+                maxValue: 12,
+                options: {
+                    floor: 1,
+                    ceil: 20,
+                    step: 1,
+                    noSwitching: true
+                }
+            };
+
+            $scope.conformitySlider = {
+                minValue: 0,
+                maxValue: 100,
+                options: {
+                    floor: 0,
+                    ceil: 100,
+                    step: 1,
+                    noSwitching: true
+                }
+            };
 
             //==================================================================================
 
