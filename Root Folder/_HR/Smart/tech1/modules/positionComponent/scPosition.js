@@ -21,16 +21,20 @@ function dirPosition() {
             console.warn('positionController');
             $scope.likedPositions = [];
 
+            this.liked={};
 
             this.likeCurrentPosition = (index, position) => {
                 $scope.likedPositions.push(position);
+                this.liked[position.sJobProfileId]=(this.liked[position.sJobProfileId])?undefined:true;
+
+
                 $scope.positionData[index].like = ($scope.positionData[index].like) ? false : true;
-                console.log($scope.likedPositions);
+                console.log(this.liked);
 
             }
 
             // Выбор позиций
-            var choose_position = document.querySelectorAll(".choose-position");
+           /* var choose_position = document.querySelectorAll(".choose-position");
             var chosen_position = document.querySelector(".chosen-positions");
             choose_position.forEach(function (item) {
                 item.addEventListener(eventBr, function () {
@@ -50,10 +54,10 @@ function dirPosition() {
                     });
                     chosen_position.appendChild(newItem);
                 });
-            });
+            });*/
         }
 
-        3
+
 
     }());
 }
