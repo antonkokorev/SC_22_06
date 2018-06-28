@@ -74,3 +74,18 @@
     color: #ffffff;
     background: #007aff;
 }
+
+.position-liked-wrapper .fa-heart {
+    font-size: 50px;
+    color: #ff3d46;
+}
+
+.positions-liked-number {
+    font-size: 60px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -2px;
+    color: #ff3d46;
+}

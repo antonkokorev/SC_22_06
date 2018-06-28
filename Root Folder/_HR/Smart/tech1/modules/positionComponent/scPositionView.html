@@ -6,7 +6,7 @@
 
                 <div class="position-all">
 
-                    <div class="sc-position__item" ng-click="positionCtrl.likeCurrentPosition($index)" ng-repeat="positions in positionData">
+                    <div class="sc-position__item" ng-click="positionCtrl.likeCurrentPosition($index, positions)" ng-repeat="positions in positionData">
                         <div class="sc-position__icon-block">
                             <i class="fa-heart" ng-class="{far: !positions.like, fas: positions.like}" ></i>
                             <!--<i class="fas fa-heart" ng-show="positions.like"></i>-->
@@ -40,6 +40,12 @@
                     <!--</p>-->
                     <!--</div>-->
 
+                </div>
+            </div>
+            <div class="slide-position-col">
+                <div class="position-liked-wrapper">
+                    <i class="fa-heart fas"></i>
+                    <span class="positions-liked-number">{{likedPositions.length}}</span>
                 </div>
             </div>
         </div>

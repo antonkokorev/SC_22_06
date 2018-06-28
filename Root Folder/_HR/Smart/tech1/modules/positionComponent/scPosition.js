@@ -18,11 +18,13 @@ function dirPosition() {
 
         function positionController($scope, requestService) {
             console.warn('positionController');
+            $scope.likedPositions = [];
 
 
-            this.likeCurrentPosition = (index) => {
-
-                $scope.positionData[index].like=($scope.positionData[index].like)?false:true;
+            this.likeCurrentPosition = (index, position) => {
+                $scope.likedPositions.push(position);
+                $scope.positionData[index].like = ($scope.positionData[index].like) ? false : true;
+                console.log($scope.likedPositions);
 
             }
 
@@ -48,8 +50,10 @@ function dirPosition() {
                     chosen_position.appendChild(newItem);
                 });
             });
-        }3
-        
+        }
+
+        3
+
     }());
 }
 
