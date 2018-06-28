@@ -68,7 +68,7 @@ function dirProfile() {
                 this.showAdditionalSkill = !this.showAdditionalSkill;
 
                 updateSwiper();
-            }
+            };
 
             this.rateNewSkill = (e, n) => {
 
