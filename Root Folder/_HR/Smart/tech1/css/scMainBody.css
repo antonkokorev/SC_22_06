@@ -61,6 +61,27 @@
     height: 100%;
     overflow: hidden;
     padding: 0 15px;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: opacity 0.5s;
+    -ms-transition: opacity 0.5s;
+    -o-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+.main-view.ng-enter .sc-main-slide{
+    opacity: 0;
+}
+
+.main-view.ng-enter.ng-enter-active  .sc-main-slide {
+    opacity: 1;
+}
+
+.main-view.ng-leave .sc-main-slide{
+    opacity: 1;
+}
+
+.main-view.ng-leave.ng-leave-active  .sc-main-slide {
+    opacity: 0;
 }
 
 .sc-slide-heading {

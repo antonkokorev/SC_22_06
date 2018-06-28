@@ -7,8 +7,15 @@
     width: 40px;
     font-size: 26px;
     font-weight: 300;
+    cursor: pointer;
+}
+
+.sc-position__icon-block > .far {
     color: #555555;
-    cusor: pointer;
+}
+
+.sc-position__icon-block > .fas {
+    color: #ff3d46;
 }
 
 .sc-position__content {
@@ -45,7 +52,7 @@
     font-size: 16px;
     font-weight: normal;
     color: #8d8d8d;
-    margin-right: 4px;
+    margin-right: 6px;
 }
 
 .sc-position__conformity,
@@ -54,7 +61,7 @@
     font-weight: 600;
 }
 
-.sc-position__grade  {
+.sc-position__grade {
     width: 28px;
     height: 28px;
     display: flex;
