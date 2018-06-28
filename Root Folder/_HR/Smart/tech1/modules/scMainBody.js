@@ -10,10 +10,9 @@ function classMainBody() {
     dirPosition.call(this);
     dirHeader.call(this);
     dirCompetences.call(this);
+    dirGoals.call(this);
 
 
-
-    classGoals.call(this);
     classInstruments.call(this);
     classIpr.call(this);
     //======================================
@@ -23,6 +22,9 @@ function classMainBody() {
         this.srvLink = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs",
         that_ = this;
     that_.user = "Krylova-YV";
+
+
+
 
 
     this.initMainBody = function () {
@@ -80,12 +82,13 @@ function classMainBody() {
         angular.module('scApp', [
             "ngAnimate",
             "ui.router",
-            "headerModule",
-            "mainMenuModule",
-            "choiceModule",
-            "profileModule",
-            "positionModule",
-            "mod-competences"])
+            "mod-header",
+            "mod-menu",
+            "mod-choice",
+            "mod-profile",
+            "mod-position",
+            "mod-competences",
+            "mod-goals"])
             .controller('scAppController', function (requestService, $timeout, updateSwiper, timelineService, preloader, updateSwiper, $state, $timeout) {
                 var url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_10&user=";
 

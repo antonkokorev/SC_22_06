@@ -14,7 +14,7 @@
 			<bi:property name="GLOBALVARIABLE" index="1">
 				<bi:property name="NAME" value="gv_user"/>
 				<bi:property name="GLOBAL_VAR_TYPE" value="String"/>
-				<bi:property name="VALUE" value="&apos;&apos;"/>
+				<bi:property name="VALUE" value="&apos;Krylova-YV&apos;"/>
 			</bi:property>
 		</bi:property>
 		<bi:property name="ON_STARTUP">
