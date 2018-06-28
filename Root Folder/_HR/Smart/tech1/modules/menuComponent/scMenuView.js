@@ -34,27 +34,23 @@ function scMenuView() {
                     <p class="sc-menu-desc-p">{{item.discr}}</p>
                 </div>
 
-                <div ng-click="menu.acFilter(inItem.num)" class="sc-menu-desc ">
+                <div ng-click="acFilter(inItem.num)" class="sc-menu-desc ">
                     <h3 class="sc-menu-desc-heading sc-menu-pop-filter">{{inItem.nameFlt}} </h3>
                 </div>
 
-                    <div class="filter-range range-slider-conformity">
-                        <rzslider rz-slider-model="gradeSlider.minValue" rz-slider-high="gradeSlider.maxValue" rz-slider-options="gradeSlider.options"></rzslider>
-                    </div>
-                    <div class="filter-range range-slider-grade">
-                        <rzslider rz-slider-model="conformitySlider.minValue" rz-slider-high="conformitySlider.maxValue" rz-slider-options="conformitySlider.options"></rzslider>
-                    </div>
-                
-                <div ng-show="mItem.showFlt">
+                <div ng-show="showFlt">
                     <div class="sc-menu-desc">
                         <p class="sc-menu-desc-p">{{inItem.discrFlt}}</p>
                     </div>
 
                     <div class="sc-menu-desc" ng-repeat="item in inItem.childFlt">
                         <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
-                        <p class="sc-menu-desc-p">от <input class="sc-menu-filter-input color-red"
-                                                            placeholder="1"> до <input
-                                class="sc-menu-filter-input color-red turnover-to" placeholder="{{item.placeholder}}"></p>
+                            <!--<div class="filter-range range-slider-conformity">-->
+                                <!--<rzslider rz-slider-model="gradeSlider.minValue" rz-slider-high="gradeSlider.maxValue" rz-slider-options="gradeSlider.options"></rzslider>-->
+                            <!--</div>-->
+                            <div class="filter-range range-slider-grade">
+                                <rzslider rz-slider-model="conformitySlider.minValue" rz-slider-high="conformitySlider.maxValue" rz-slider-options="conformitySlider.options"></rzslider>
+                            </div>
                     </div>
 
                     <div class="sc-menu-desc">

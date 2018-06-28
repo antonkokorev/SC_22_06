@@ -102,6 +102,7 @@ function classMainBody() {
                             updateSwiper()
                         }, 0);
                 });
+
                 //*************************************************************
                 var url = that_.srvLink + "?entity=empProfileNoCallback&user=";
                 requestService(url).then((data) => {
