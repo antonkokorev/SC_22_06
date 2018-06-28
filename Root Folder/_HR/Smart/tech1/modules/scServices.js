@@ -62,7 +62,7 @@ function Services() {
         .factory("updateSwiper", function () {
             return () => {
                 that_.profile_swiper.update();
-                that_.profile_swiper.slideTo(0, 0, false)
+                //that_.profile_swiper.slideTo(0, 0, false)
             }
         })
 
