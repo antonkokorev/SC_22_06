@@ -66,6 +66,13 @@ function Services() {
             }
         })
 
+
+        .factory("resetSwiper", function () {
+            return () => {
+                that_.profile_swiper.slideTo(0, 0, false)
+            }
+        })
+
 }
 
 

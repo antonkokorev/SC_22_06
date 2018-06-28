@@ -9,14 +9,13 @@
                     <div class="sc-position__item" ng-click="positionCtrl.likeCurrentPosition($index)" ng-repeat="positions in positionData">
                         <div class="sc-position__icon-block">
                             <i class="fa-heart" ng-class="{far: !positions.like, fas: positions.like}" ></i>
-                            <!--<i class="fas fa-heart" ng-show="positions.like"></i>-->
                         </div>
                         <div class="sc-position__content">
                             <div class="sc-position__title">{{positions.sJobProfileName}}</div>
                             <div class="sc-position__elements">
                                 <div class="sc-position__element">
                                     <span class="sc-position__label">Грейд</span>
-                                    <span class="sc-position__grade">{{positions.iGrade}}</span>
+                                    <span class="sc-position__grade" ng-class="{current_grade: positions.iGrade==iGrade, next_grade: positions.iGrade>iGrade,prev_grade:positions.iGrade<iGrade}" >{{positions.iGrade}}</span>
                                 </div>
                                 <div class="sc-position__element">
                                     <span class="sc-position__label"> Соответсвие:</span>
