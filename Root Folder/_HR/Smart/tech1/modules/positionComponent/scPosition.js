@@ -18,6 +18,12 @@ function dirPosition() {
 
         function positionController($scope, requestService) {
             console.warn('positionController');
+            this.showLikedPosition = false;
+
+            this.likeCurrentPosition = () => {
+                console.log(1);
+                this.showLikedPosition = !this.showLikedPosition;
+            }
 
             // Выбор позиций
             var choose_position = document.querySelectorAll(".choose-position");

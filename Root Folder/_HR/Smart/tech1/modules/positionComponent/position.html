@@ -8,8 +8,8 @@
 
                     <div class="sc-position__item" ng-repeat="position in positionData">
                         <div class="sc-position__icon-block">
-                            <i class="far fa-heart"></i>
-                            <i class="fas fa-heart hidden"></i>
+                            <i class="far fa-heart" ng-hide="{{position.showLikedPosition}}" ng-click="position.likeCurrentPosition()"></i>
+                            <i class="fas fa-heart" ng-show="{{position.showLikedPosition}}"></i>
                         </div>
                         <div class="sc-position__content">
                             <div class="sc-position__title">{{position.sJobProfileName}}</div>
