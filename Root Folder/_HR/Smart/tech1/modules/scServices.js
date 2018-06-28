@@ -52,7 +52,7 @@ function Services() {
         //====================================================================================================
         .service("preloader", function () {
             this.on = function () {
-                $("#preId").css({display: "inherit"})
+                $("#preId").css({display: "none"})
             };
             this.off = function () {
                 $("#preId").css({display: "none"})

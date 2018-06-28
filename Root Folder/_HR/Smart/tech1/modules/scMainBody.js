@@ -38,7 +38,7 @@ function classMainBody() {
         var component = '#' + globalSettings.teg + '_COMPONENT ';
         var html =
             '<div id="sc-app" ng-app="scApp" ng-controller="scAppController as appController">' +
-            '   <sc-header class="sc-header"></sc-header>' +
+            '   <dir-header class="sc-header"></dir-header>' +
             '   <dir-main-menu id="id_menu" class="sc-menu"></dir-main-menu>' +
             '   <main id="id_main" class="sc-main enter-active">' +
             '   <div id="swiper-container" class="swiper-auto-container">' +
@@ -110,7 +110,7 @@ function classMainBody() {
                             timelineService.renderTimelineLine(".profile-education");
                             timelineService.renderTimelineLine(".profile-results");
                             updateSwiper()
-                        }, 0);
+                        },0);
 
                 });
                 //*************************************************************

@@ -16,9 +16,7 @@ function dirHeader() {
 
         function headerController() {
 
-        }
 
+        }
     }());
 }
-
-
