@@ -22,11 +22,11 @@ function dirPosition() {
             $scope.likedPositions = [];
 
             this.liked={};
-
+            this.countLike=0;
             this.likeCurrentPosition = (index, position) => {
                 $scope.likedPositions.push(position);
-                this.liked[position.sJobProfileId]=(this.liked[position.sJobProfileId])?undefined:true;
-
+               (this.liked[position.sJobProfileId])?delete this.liked[position.sJobProfileId]:this.liked[position.sJobProfileId]=true;
+                this.countLike=Object.keys(this.liked).length;
 
                 $scope.positionData[index].like = ($scope.positionData[index].like) ? false : true;
                 console.log(this.liked);
