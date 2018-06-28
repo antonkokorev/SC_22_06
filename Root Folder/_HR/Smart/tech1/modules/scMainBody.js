@@ -8,9 +8,8 @@ function classMainBody() {
     dirChoice.call(this);
     dirProfile.call(this);
     dirPosition.call(this);
+    dirHeader.call(this);
 
-
-    classHeader.call(this);
     classCompetences.call(this);
     classGoals.call(this);
     classInstruments.call(this);
@@ -37,7 +36,7 @@ function classMainBody() {
         var component = '#' + globalSettings.teg + '_COMPONENT ';
         var html =
             '<div id="sc-app" ng-app="scApp" ng-controller="scAppController as appController">' +
-            // '<header class="sc-header"></header>'+
+            '   <sc-header class="sc-header"></sc-header>'+
             '   <main-menu id="id_menu" class="sc-menu"></main-menu>' +
             '   <main id="id_main" class="sc-main enter-active">' +
             '   <div id="swiper-container" class="swiper-auto-container">' +
@@ -76,7 +75,7 @@ function classMainBody() {
         //============================================================
         //создание основного модуля
         //============================================================
-        angular.module('scApp', ["ngAnimate","ui.router", "mainMenuModule", "choiceModule", "profileModule", "positionModule"])
+        angular.module('scApp', ["ngAnimate","ui.router","headerModule", "mainMenuModule", "choiceModule", "profileModule", "positionModule"])
             .controller('scAppController', function (requestService, $timeout, updateSwiper, timelineService, preloader, updateSwiper, $state, $timeout) {
                 var url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_10&user=";
 
@@ -105,7 +104,7 @@ function classMainBody() {
         //============================================================
         //роутер
         //============================================================
-        angular.module('scApp').config(function ($stateProvider) {
+        angular.module('scApp').config(function ($stateProvider, $urlRouterProvider) {
             $stateProvider.state({
                 name: 'profile',
                 url: '/profile',
@@ -126,9 +125,13 @@ function classMainBody() {
                 template: "<position positionmodeldata='appController.positionModelData'></position>",
                 controller: allController
             });
-        }).run(['$state', function ($state) {
-            $state.transitionTo('profile');
-        }]);
+
+            $urlRouterProvider.when('/', 'profile');
+        });
+
+        //     .run(['$state', function ($state) {
+        //     $state.transitionTo('profile');
+        // }]);
 
         //общий контроллер для состояний с обновлением основного свайпера
         function allController($state, $scope, $timeout, updateSwiper, timelineService, preloader) {

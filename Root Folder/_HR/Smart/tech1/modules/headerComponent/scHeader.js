@@ -1,11 +1,24 @@
-function classHeader() {
+function dirHeader() {
 
-  this.headerView = function() {
-    var html = "";
+    (function () {
+        console.warn("dirHeader");
+        angular.module('headerModule', [])
 
-    html += '<header class="sc-header"></header>';
+            .directive('scHeader', function ($location) {
+                return {
+                    restrict: 'AE',
+                    scope: {},
+                    templateUrl: that_.path + "modules/headerComponent/header.html",
+                    controller: headerController,
+                    controllerAs: "header"
+                };
+            });
 
-    return html;
-  }
+        function headerController() {
+            console.warn('profileController');
+        }
 
+    }());
 }
+
+

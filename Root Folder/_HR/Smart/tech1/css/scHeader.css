@@ -1,3 +1,50 @@
 .sc-header {
-  height: 100px;
+    height: 100px;
+    width: 100%;
+    display: flex;
+}
+
+.back-from-sc {
+    width: 50%;
+    height: 100%;
+    margin-left: 130px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #8d8d8d;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    cursor: pointer;
+}
+
+.finish-sc {
+    width: 50%;
+    height: 100%;
+    margin-right: 130px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #8d8d8d;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+}
+
+.back-span,
+.finish-span {
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    -ms-transition: color 0.3s;
+    -o-transition: color 0.3s;
+    transition: color 0.3s;
+}
+
+.back-span:hover {
+    color: #007aff;
+}
+
+.finish-span:hover {
+    color: #007aff;
 }

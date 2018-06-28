@@ -13,7 +13,7 @@
 
 .sc-main {
     width: 70%;
-    height: 100%;
+    height: calc(100% - 100px);
     display: inline-block;
     vertical-align: top;
     -webkit-box-sizing: border-box;
