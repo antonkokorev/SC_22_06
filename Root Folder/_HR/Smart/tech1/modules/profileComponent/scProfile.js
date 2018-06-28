@@ -2,9 +2,9 @@ function dirProfile() {
 
     (function () {
         console.warn("dirProfile");
-        angular.module('mod-profile', [])
+        angular.module('scApp.profile', [])
 
-            .directive('profile', function ($location) {
+            .directive('dirProfile', function ($location) {
                 return {
                     restrict: 'AE',
                     scope: {profileData:"=profilemodeldata"},

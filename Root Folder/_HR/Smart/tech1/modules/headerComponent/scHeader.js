@@ -2,9 +2,9 @@ function dirHeader() {
 
     (function () {
         console.warn("dirHeader");
-        angular.module('mod-header', [])
+        angular.module('scApp.header', [])
 
-            .directive('scHeader', function ($location) {
+            .directive('dirHeader', function ($location) {
                 return {
                     restrict: 'AE',
                     scope: {},
@@ -15,7 +15,7 @@ function dirHeader() {
             });
 
         function headerController() {
-            console.warn('profileController');
+
         }
 
     }());

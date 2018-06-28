@@ -1,8 +1,8 @@
 function dirCompetences() {
     (function () {
         console.warn("dirCompetences");
-        angular.module('mod-competences', [])
-            .directive('competences', function () {
+        angular.module('scApp.competences', [])
+            .directive('dirCompetences', function () {
                 return {
                     scope: {},
                     templateUrl: that_.path + "modules/competencesComponent/scCompetrncesView.html",

@@ -6,10 +6,10 @@ function scMenuView() {
                 <a ui-sref="{{mItem.page}}">
                     <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{mItem.num}}</span>{{mItem.item}}
                     </h2>
-                    <menu-basic     item="mItem" ng-show="'{{mItem.type}}'=='menuBasic'">    </menu-basic>
-                    <menu-choice    item="mItem" ng-show="'{{mItem.type}}'=='menuChoice'">   </menu-choice>
-                    <menu-position  item="mItem" ng-show="'{{mItem.type}}'=='menuPosition'"> </menu-position>
-                    <menu-list      item="mItem" ng-show="'{{mItem.type}}'=='menuList'">     </menu-list>
+                    <dir-menu-basic     item="mItem" ng-show="'{{mItem.type}}'=='menuBasic'">    </dir-menu-basic>
+                    <dir-menu-choice    item="mItem" ng-show="'{{mItem.type}}'=='menuChoice'">   </dir-menu-choice>
+                    <dir-menu-position  item="mItem" ng-show="'{{mItem.type}}'=='menuPosition'"> </dir-menu-position>
+                    <dir-menu-list      item="mItem" ng-show="'{{mItem.type}}'=='menuList'">     </dir-menu-list>
                 </a>
             </div>`,
 //=====================================================================================================================

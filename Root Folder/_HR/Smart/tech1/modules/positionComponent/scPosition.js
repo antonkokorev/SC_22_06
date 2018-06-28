@@ -2,9 +2,9 @@ function dirPosition() {
 
     (function () {
         console.warn("dirPosition");
-        angular.module('mod-position', [])
+        angular.module('scApp.position', [])
 
-            .directive('position', function ($location) {
+            .directive('dirPosition', function ($location) {
                 return {
                     restrict: 'AE',
                     scope: {

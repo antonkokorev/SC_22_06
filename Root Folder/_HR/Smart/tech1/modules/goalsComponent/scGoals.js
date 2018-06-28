@@ -3,8 +3,8 @@
 function dirGoals() {
     (function () {
         console.warn("dirGoals");
-        angular.module('mod-goals', [])
-            .directive('goals', function () {
+        angular.module('scApp.goals', [])
+            .directive('dirGoals', function () {
                 return {
                     scope: {},
                     templateUrl: that_.path + "modules/goalsComponent/scGoalsView.html",

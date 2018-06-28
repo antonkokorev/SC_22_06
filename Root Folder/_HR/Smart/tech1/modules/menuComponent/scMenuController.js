@@ -2,12 +2,12 @@ function dirMenu() {
 
     (function () {
         console.warn("dirMenu")
-        angular.module('mod-menu', ["ngRoute"])
+        angular.module('scApp.menu', ["ngRoute"])
          /*   .controller('menuController', function (menuDataService) {
             this.data=menuDataService.data;
         })*/
             //-------------------------------------------------------------
-            .directive('mainMenu', ['$location','menuDataService', function ($location,menuDataService) {
+            .directive('dirMainMenu', ['$location','menuDataService', function ($location,menuDataService) {
                 return {
                     restrict: 'E',
                     scope: true,
@@ -17,7 +17,7 @@ function dirMenu() {
                 };
             }])
             //-------------------------------------------------------------
-            .directive('menuBasic', function () {
+            .directive('dirMenuBasic', function () {
                 return {
                     restrict: 'E',
                     scope: {
@@ -28,7 +28,7 @@ function dirMenu() {
                 };
             })
             //-------------------------------------------------------------
-            .directive('menuChoice', function () {
+            .directive('dirMenuChoice', function () {
                 return {
                     restrict: 'E',
                     scope: {
@@ -39,7 +39,7 @@ function dirMenu() {
 
             })
             //-------------------------------------------------------------
-            .directive('menuPosition', function () {
+            .directive('dirMenuPosition', function () {
                 return {
                     restrict: 'E',
                     scope: {
@@ -49,7 +49,7 @@ function dirMenu() {
                 };
             })
             //-------------------------------------------------------------
-            .directive('menuList', function () {
+            .directive('dirMenuList', function () {
                 return {
                     restrict: 'E',
                     scope: {
@@ -61,7 +61,7 @@ function dirMenu() {
 
 
         function menuController($location,menuDataService) {
-            console.warn('menuController');
+
             //============================================
             //атрибуты
             //============================================
@@ -91,7 +91,7 @@ function dirMenu() {
         }
 
 
-        angular.module('mainMenuModule')
+        angular.module('scApp.menu')
             .service('menuDataService', function () {
                 this.data = [{
                     num: "01",

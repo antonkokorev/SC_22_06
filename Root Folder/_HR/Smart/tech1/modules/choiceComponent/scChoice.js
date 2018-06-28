@@ -1,8 +1,8 @@
 function dirChoice() {
 
     (function () {
-        angular.module('mod-choice', [])
-            .directive('choice', function ($location) {
+        angular.module('scApp.choice', [])
+            .directive('dirChoice', function ($location) {
                 return {
                     restrict: 'AE',
                     scope: {},

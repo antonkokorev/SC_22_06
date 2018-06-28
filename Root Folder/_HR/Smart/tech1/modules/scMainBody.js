@@ -11,10 +11,8 @@ function classMainBody() {
     dirHeader.call(this);
     dirCompetences.call(this);
     dirGoals.call(this);
-
-
-    classInstruments.call(this);
-    classIpr.call(this);
+    dirInstruments.call(this);
+    dirIpr.call(this);
     //======================================
 
     //this.currentUser="Basic Z2VvcmdpZXYtZWk6cXdlcnR5MTIz",
@@ -41,7 +39,7 @@ function classMainBody() {
         var html =
             '<div id="sc-app" ng-app="scApp" ng-controller="scAppController as appController">' +
             '   <sc-header class="sc-header"></sc-header>' +
-            '   <main-menu id="id_menu" class="sc-menu"></main-menu>' +
+            '   <dir-main-menu id="id_menu" class="sc-menu"></dir-main-menu>' +
             '   <main id="id_main" class="sc-main enter-active">' +
             '   <div id="swiper-container" class="swiper-auto-container">' +
             '       <div class="swiper-wrapper">' +
@@ -82,13 +80,16 @@ function classMainBody() {
         angular.module('scApp', [
             "ngAnimate",
             "ui.router",
-            "mod-header",
-            "mod-menu",
-            "mod-choice",
-            "mod-profile",
-            "mod-position",
-            "mod-competences",
-            "mod-goals"])
+            "scApp.header",
+            "scApp.menu",
+            "scApp.choice",
+            "scApp.profile",
+            "scApp.position",
+            "scApp.competences",
+            "scApp.goals",
+            "scApp.instruments",
+            "scApp.ipr"
+         ])
             .controller('scAppController', function (requestService, $timeout, updateSwiper, timelineService, preloader, updateSwiper, $state, $timeout) {
                 var url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_10&user=";
 
@@ -121,51 +122,51 @@ function classMainBody() {
             $stateProvider.state({
                 name: 'profile',
                 url: '/profile',
-                template: '<profile profilemodeldata="appController.profileModelData" id="sc-profile" class="profile-slide sc-v-slide"></profile>',
+                template: '<dir-profile profilemodeldata="appController.profileModelData" id="sc-profile" class="profile-slide sc-v-slide"></dir-profile>',
                 controller: allController
             });
             $stateProvider.state({
                 name: 'choice',
                 url: '/choice',
-                template: "<choice></choice>",
+                template: "<dir-choice></dir-choice>",
                 controller: allController
             });
             $stateProvider.state({
                 name: 'position',
                 url: '/position',
-                template: "<position positionmodeldata='appController.positionModelData'></position>",
+                template: "<dir-position positionmodeldata='appController.positionModelData'></dir-position>",
                 controller: allController
             });
             $stateProvider.state({
                 name: 'competences',
                 url: '/competences',
-                template: "<competences></competences>",
+                template: "<dir-competences></dir-competences>",
                 controller: allController
             });
             $stateProvider.state({
                 name: 'goals',
                 url: '/goals',
-                template: "<goals></goals>",
+                template: "<dir-goals></dir-goals>",
                 controller: allController
             });
             $stateProvider.state({
                 name: 'instruments',
                 url: '/instruments',
-                template: "<instruments></instruments>",
+                template: "<dir-instruments></dir-instruments>",
                 controller: allController
             });
             $stateProvider.state({
                 name: 'ipr',
                 url: '/ipr',
-                template: "<ipr></ipr>",
+                template: "<dir-ipr></dir-ipr>",
                 controller: allController
             });
             $urlRouterProvider.when('/', 'profile');
-        });
+        })
 
-        //     .run(['$state', function ($state) {
-        //     $state.transitionTo('profile');
-        // }]);
+            .run(['$state', function ($state) {
+           $state.transitionTo('profile');
+         }]);
 
         //общий контроллер для состояний с обновлением основного свайпера
         function allController($state, $scope, $timeout, updateSwiper, timelineService, preloader) {
