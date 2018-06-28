@@ -10,7 +10,7 @@ function dirPosition() {
                     scope: {
                         positionData: "=positionmodeldata"
                     },
-                    templateUrl: that_.path + "modules/positionComponent/position.html",
+                    templateUrl: that_.path + "modules/positionComponent/scPositionView.html",
                     controller: positionController,
                     controllerAs: "position"
                 };
