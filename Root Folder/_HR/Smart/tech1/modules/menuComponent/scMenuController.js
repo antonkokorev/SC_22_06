@@ -161,7 +161,7 @@ function dirMenu() {
                     num: "05",
                     item: "Цели",
                     type: "menuBasic",
-                    page: "target",
+                    page: "goals",
                     discr: "Опишите цели по изучению индикаторов"
                 }, {
                     num: "06",

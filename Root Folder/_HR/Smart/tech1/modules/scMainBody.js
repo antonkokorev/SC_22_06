@@ -9,8 +9,10 @@ function classMainBody() {
     dirProfile.call(this);
     dirPosition.call(this);
     dirHeader.call(this);
+    dirCompetences.call(this);
 
-    classCompetences.call(this);
+
+
     classGoals.call(this);
     classInstruments.call(this);
     classIpr.call(this);
@@ -36,7 +38,7 @@ function classMainBody() {
         var component = '#' + globalSettings.teg + '_COMPONENT ';
         var html =
             '<div id="sc-app" ng-app="scApp" ng-controller="scAppController as appController">' +
-            '   <sc-header class="sc-header"></sc-header>'+
+            '   <sc-header class="sc-header"></sc-header>' +
             '   <main-menu id="id_menu" class="sc-menu"></main-menu>' +
             '   <main id="id_main" class="sc-main enter-active">' +
             '   <div id="swiper-container" class="swiper-auto-container">' +
@@ -75,7 +77,15 @@ function classMainBody() {
         //============================================================
         //создание основного модуля
         //============================================================
-        angular.module('scApp', ["ngAnimate","ui.router","headerModule", "mainMenuModule", "choiceModule", "profileModule", "positionModule"])
+        angular.module('scApp', [
+            "ngAnimate",
+            "ui.router",
+            "headerModule",
+            "mainMenuModule",
+            "choiceModule",
+            "profileModule",
+            "positionModule",
+            "mod-competences"])
             .controller('scAppController', function (requestService, $timeout, updateSwiper, timelineService, preloader, updateSwiper, $state, $timeout) {
                 var url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_10&user=";
 
@@ -111,21 +121,42 @@ function classMainBody() {
                 template: '<profile profilemodeldata="appController.profileModelData" id="sc-profile" class="profile-slide sc-v-slide"></profile>',
                 controller: allController
             });
-
             $stateProvider.state({
                 name: 'choice',
                 url: '/choice',
                 template: "<choice></choice>",
                 controller: allController
             });
-
             $stateProvider.state({
                 name: 'position',
                 url: '/position',
                 template: "<position positionmodeldata='appController.positionModelData'></position>",
                 controller: allController
             });
-
+            $stateProvider.state({
+                name: 'competences',
+                url: '/competences',
+                template: "<competences></competences>",
+                controller: allController
+            });
+            $stateProvider.state({
+                name: 'goals',
+                url: '/goals',
+                template: "<goals></goals>",
+                controller: allController
+            });
+            $stateProvider.state({
+                name: 'instruments',
+                url: '/instruments',
+                template: "<instruments></instruments>",
+                controller: allController
+            });
+            $stateProvider.state({
+                name: 'ipr',
+                url: '/ipr',
+                template: "<ipr></ipr>",
+                controller: allController
+            });
             $urlRouterProvider.when('/', 'profile');
         });
 
