@@ -30,16 +30,16 @@ function dirProfile() {
 
 
 
-         /*   var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=empProfileNoCallback&user=";
-            requestService(url).then((data) => {
-                this.data = data;
-                $timeout(function() {
-                    updateSwiper();
-                    timelineService.renderTimelineLine(".profile-education");
-                    timelineService.renderTimelineLine(".profile-results");
-                }, 0);
-                console.log({"data": data})
-            });*/
+            /*   var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=empProfileNoCallback&user=";
+               requestService(url).then((data) => {
+                   this.data = data;
+                   $timeout(function() {
+                       updateSwiper();
+                       timelineService.renderTimelineLine(".profile-education");
+                       timelineService.renderTimelineLine(".profile-results");
+                   }, 0);
+                   console.log({"data": data})
+               });*/
 
             $(window).resize(function() {
                 timelineService.renderTimelineLine(".profile-education");
