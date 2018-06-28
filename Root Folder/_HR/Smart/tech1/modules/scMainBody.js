@@ -92,7 +92,7 @@ function classMainBody() {
             "scApp.ipr"
          ])
             .controller('scAppController', function (requestService, $timeout, updateSwiper, timelineService, preloader, updateSwiper, $state, $timeout) {
-                var url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_10&user=";
+                var url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_30&user=";
 
                 //*************************************************************
                 requestService(url).then((data) => {
@@ -136,7 +136,7 @@ function classMainBody() {
             $stateProvider.state({
                 name: 'position',
                 url: '/position',
-                template: "<dir-position positionmodeldata='appController.positionModelData'></dir-position>",
+                template: "<dir-position grade='appController.profileModelData.iGrade' positionmodeldata='appController.positionModelData'></dir-position>",
                 controller: allController
             });
             $stateProvider.state({
@@ -171,18 +171,22 @@ function classMainBody() {
          }]);
 
         //общий контроллер для состояний с обновлением основного свайпера
-        function allController($state, $scope, $timeout, updateSwiper, timelineService, preloader) {
+        function allController($state, $scope, $timeout, updateSwiper, timelineService, preloader,resetSwiper) {
             preloader.on();
             var state = $state.current.name;
+
             $scope.$on('$viewContentLoaded', function (event) {
                 $timeout(function () {
                     if (state == "profile") {
                         timelineService.renderTimelineLine(".profile-education");
                         timelineService.renderTimelineLine(".profile-results");
                     }
+                    resetSwiper();
                     updateSwiper();
                     preloader.off();
-                }, 0);
+                },400);
+
+
             });
         }
 

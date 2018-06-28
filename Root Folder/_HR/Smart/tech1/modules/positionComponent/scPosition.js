@@ -8,7 +8,8 @@ function dirPosition() {
                 return {
                     restrict: 'AE',
                     scope: {
-                        positionData: "=positionmodeldata"
+                        positionData: "=positionmodeldata",
+                        iGrade:"=grade"
                     },
                     templateUrl: that_.path + "modules/positionComponent/scPositionView.html",
                     controller: positionController,
