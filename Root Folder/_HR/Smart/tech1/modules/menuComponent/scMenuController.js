@@ -71,7 +71,11 @@ function dirMenu() {
             //функции
             //============================================
             this.activeClass = activeClass;
-            this.acFilter = acFilter;
+            $scope.acFilter = (num) => {
+                console.log(1);
+                var n = parseInt(num) - 1;
+                $scope.showFlt = !$scope.showFlt;
+            };
 
 
             $scope.gradeSlider = {
@@ -98,10 +102,7 @@ function dirMenu() {
 
             //==================================================================================
 
-            function acFilter(num) {
-                var n = parseInt(num) - 1;
-                this.data[n].showFlt = !this.data[n].showFlt;
-            };
+            //function acFilter
 
             function activeClass(page) {
                 var currentRoute = $location.path().substring(1) || 'profile';
