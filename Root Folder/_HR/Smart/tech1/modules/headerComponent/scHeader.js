@@ -2,7 +2,7 @@ function dirHeader() {
 
     (function () {
         console.warn("dirHeader");
-        angular.module('headerModule', [])
+        angular.module('mod-header', [])
 
             .directive('scHeader', function ($location) {
                 return {

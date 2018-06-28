@@ -1,7 +1,7 @@
 function dirChoice() {
 
     (function () {
-        angular.module('choiceModule', [])
+        angular.module('mod-choice', [])
             .directive('choice', function ($location) {
                 return {
                     restrict: 'AE',

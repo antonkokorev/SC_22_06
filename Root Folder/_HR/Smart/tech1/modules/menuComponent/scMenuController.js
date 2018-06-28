@@ -2,7 +2,7 @@ function dirMenu() {
 
     (function () {
         console.warn("dirMenu")
-        angular.module('mainMenuModule', ["ngRoute"])
+        angular.module('mod-menu', ["ngRoute"])
          /*   .controller('menuController', function (menuDataService) {
             this.data=menuDataService.data;
         })*/

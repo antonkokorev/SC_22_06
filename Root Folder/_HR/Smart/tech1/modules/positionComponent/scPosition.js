@@ -2,7 +2,7 @@ function dirPosition() {
 
     (function () {
         console.warn("dirPosition");
-        angular.module('positionModule', [])
+        angular.module('mod-position', [])
 
             .directive('position', function ($location) {
                 return {

@@ -2,7 +2,7 @@ function dirProfile() {
 
     (function () {
         console.warn("dirProfile");
-        angular.module('profileModule', [])
+        angular.module('mod-profile', [])
 
             .directive('profile', function ($location) {
                 return {
