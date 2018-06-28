@@ -12,17 +12,18 @@ function dirPosition() {
                     },
                     templateUrl: that_.path + "modules/positionComponent/scPositionView.html",
                     controller: positionController,
-                    controllerAs: "position"
+                    controllerAs: "positionCtrl"
                 };
             });
 
         function positionController($scope, requestService) {
             console.warn('positionController');
-            this.showLikedPosition = false;
 
-            this.likeCurrentPosition = () => {
-                console.log(1);
-                this.showLikedPosition = !this.showLikedPosition;
+
+            this.likeCurrentPosition = (index) => {
+
+                $scope.positionData[index].like=($scope.positionData[index].like)?false:true;
+
             }
 
             // Выбор позиций

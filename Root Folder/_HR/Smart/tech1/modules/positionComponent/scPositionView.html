@@ -6,17 +6,17 @@
 
                 <div class="position-all">
 
-                    <div class="sc-position__item" ng-repeat="position in positionData">
+                    <div class="sc-position__item" ng-click="positionCtrl.likeCurrentPosition($index)" ng-repeat="positions in positionData">
                         <div class="sc-position__icon-block">
-                            <i class="far fa-heart" ng-hide="{{position.showLikedPosition}}" ng-click="position.likeCurrentPosition()"></i>
-                            <i class="fas fa-heart" ng-show="{{position.showLikedPosition}}"></i>
+                            <i class="fa-heart" ng-class="{far: !positions.like, fas: positions.like}" ></i>
+                            <!--<i class="fas fa-heart" ng-show="positions.like"></i>-->
                         </div>
                         <div class="sc-position__content">
-                            <div class="sc-position__title">{{position.sJobProfileName}}</div>
+                            <div class="sc-position__title">{{positions.sJobProfileName}}</div>
                             <div class="sc-position__elements">
                                 <div class="sc-position__element">
                                     <span class="sc-position__label">Грейд</span>
-                                    <span class="sc-position__grade">{{position.iGrade}}</span>
+                                    <span class="sc-position__grade">{{positions.iGrade}}</span>
                                 </div>
                                 <div class="sc-position__element">
                                     <span class="sc-position__label"> Соответсвие:</span>
@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="sc-position__element">
                                     <span class="sc-position__label"> Открытость:</span>
-                                    <span class="sc-position__turnover"> {{position.iTurnover}}</span>
+                                    <span class="sc-position__turnover"> {{positions.iTurnover}}</span>
                                 </div>
                             </div>
                         </div>
