@@ -1,14 +1,14 @@
 <div class="sc-main-slide">
     <div id="sc-profile" class="profile-slide sc-v-slide">
 
-        <h2 class="sc-slide-heading profile-name">{{profileData.sFullName}}</h2>
+        <h2 class="sc-slide-heading profile-name">{{profile.data.user.sFullName}}{{profile.data.user.sFullName}}</h2>
 
         <div class="slide-profile-col">
             <div class="slide-profile-obligation-info">
                 <h3 class="sc-slide-middle-heading"> Текущая должность </h3>
-                <p class="sc-profile-obligation"> {{profileData.sPosition}} </p>
+                <p class="sc-profile-obligation"> {{profile.data.user.sPosition}} </p>
                 <p class="sc-profile-obligation-from"> на текущей позиции
-                    {{profileData.iCountExperienceYear}} год</p>
+                    {{profile.data.user.iCountExperienceYear}} год</p>
             </div>
         </div>
 
@@ -17,7 +17,7 @@
                 <h3 class="sc-slide-middle-heading"> Компетенции </h3>
                 <h4 class="sc-profile-competences-heading">Корпоративные</h4>
                 <div class="sc-profile-competences-wrapper clearfix">
-                    <div class="profile-competence" ng-repeat="competence in profileData.aCompetentions"
+                    <div class="profile-competence" ng-repeat="competence in profile.data.user.aCompetentions"
                          ng-if="competence.sType === profile.competencesTypes[0]">
                         <p class="profile-competence-label"> {{competence.sFullName}} </p>
                         <p class="profile-competence-ratings"><span class="profile-competence-rating"> {{competence.iRate360}} </span>
@@ -26,7 +26,7 @@
                 </div>
                 <h4 class="sc-profile-competences-heading">Ролевые</h4>
                 <div class="sc-profile-competences-wrapper clearfix">
-                    <div class="profile-competence" ng-repeat="competence in  profileData.aCompetentions"
+                    <div class="profile-competence" ng-repeat="competence in  profile.data.user.aCompetentions"
                          ng-if="competence.sType === profile.competencesTypes[1]">
                         <p class="profile-competence-label"> {{competence.sFullName}} </p>
                         <p class="profile-competence-ratings"><span class="profile-competence-rating"> {{competence.iRate360}} </span>
@@ -35,7 +35,7 @@
                 </div>
                 <h4 class="sc-profile-competences-heading">Профессиональные</h4>
                 <div class="sc-profile-competences-wrapper clearfix">
-                    <div class="profile-competence" ng-repeat="competence in  profileData.aCompetentions"
+                    <div class="profile-competence" ng-repeat="competence in  profile.data.user.aCompetentions"
                          ng-if="competence.sType === profile.competencesTypes[2]">
                         <p class="profile-competence-label"> {{competence.sFullName}} </p>
                         <p class="profile-competence-ratings"><span class="profile-competence-rating"> {{competence.iRate360}} </span>
@@ -49,7 +49,7 @@
             <div class="slide-profile-skills">
                 <h3 id="id_nav" class="sc-slide-middle-heading"> Навыки </h3>
 
-                <div class="profile-skill-col" ng-repeat="skill in profileData.aSkills">
+                <div class="profile-skill-col" ng-repeat="skill in profile.data.user.aSkills">
                     <h4 class="profile-skill-label"> {{skill.sName}} </h4>
                     <div class="profile-skill-rating slide-row">
                         <p class="profile-skill-name">Оценка</p>
@@ -169,7 +169,7 @@
 
                     <div class="timeline">
                         <div class="timeline-line"></div>
-                        <div class="timeline-element" ng-repeat="job in profileData.aJobs">
+                        <div class="timeline-element" ng-repeat="job in profile.data.user.aJobs">
                             <div class="timeline-when"> {{job.sFrom}} - {{job.sTo}}</div>
                             <div class="timeline-center">
                                 <div class="timeline-circle"></div>
@@ -191,7 +191,7 @@
                 <div class="profile-results">
                     <div class="timeline">
                         <div class="timeline-line"></div>
-                        <div class="timeline-element" ng-repeat="result in profileData.aResults">
+                        <div class="timeline-element" ng-repeat="result in profile.data.user.aResults">
                             <div class="timeline-when"> {{result.iYear}}</div>
                             <div class="timeline-center">
                                 <div class="timeline-circle"></div>

@@ -7,14 +7,18 @@ function dirProfile() {
             .directive('dirProfile', function ($location) {
                 return {
                     restrict: 'AE',
-                    scope: {profileData:"=profilemodeldata"},
+                    scope: {},
                     templateUrl: that_.path + "modules/profileComponent/scProfileView.html",
                     controller: profileController,
                     controllerAs: "profile"
                 };
             });
 
-        function profileController($scope, $timeout, requestService, updateSwiper, timelineService) {
+        function profileController($scope, $timeout, requestService, updateSwiper, timelineService,getProfile) {
+            var that=this;
+            this.data=getProfile.profileData;
+
+
 
             console.warn('profileController');
             this.competencesTypes = ["Corp", "Role", "Func"];

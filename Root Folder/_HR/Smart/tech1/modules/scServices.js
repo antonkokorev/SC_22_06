@@ -23,21 +23,60 @@ function Services() {
             };
         })
         //====================================================================================================
+        .service("getDict", function (requestService, $state, updateSwiper, $timeout) {
+            console.warn("serviceGetDict")
+            this.dictData = [];
+            this.getDictData = () => {
+                var url = that_.srvLink + "?entity=dictNoCallback&user=";
+                requestService(url).then((data) => {
+                    this.dictModelData = data;
+                    if ($state.current.name == "choice")
+                        $timeout(updateSwiper, 0);
+                });
+            }
+        })
+        //====================================================================================================
+        .service("getPosition", function (requestService, $state, updateSwiper, $timeout) {
+            console.warn("getProfile")
+            this.positionData = {data: []};
+            this.getPositionData = () => {
+                var url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_30&user=";
+                requestService(url).then((data) => {
+                    this.positionData.data = data;
+                    if ($state.current.name == "position")
+                        $timeout(updateSwiper, 0);
+                });
+            }
+        })
+        //====================================================================================================
+        .service("getProfile", function (requestService, $state, updateSwiper, timelineService, $timeout) {
+            this.profileData = {user: []};
+            this.getProfileData = () => {
+                var url = that_.srvLink + "?entity=empProfileNoCallback&user=";
+                requestService(url).then((data) => {
+                    this.profileData.user = data;
+                    if ($state.current.name == "profile")
+                        $timeout(function () {
+                            timelineService.renderTimelineLine(".profile-education");
+                            timelineService.renderTimelineLine(".profile-results");
+                            updateSwiper()
+                        }, 0);
+                });
+            }
+        })
+
+        //====================================================================================================
         .service("timelineService", function () {
                 this.renderTimelineLine = function (parent) {
                     try {
                         // Перерисовка линии таймлайна
                         var first_circle = $(parent + " .timeline-circle").first();
                         var last_circle = $(parent + " .timeline-circle").last();
-
                         var line_y_offset = ($(parent + " .timeline-center").first().height() - first_circle.height()) / 2;
                         var line_x_offset = first_circle.position().left + first_circle.width() / 2;
-
                         var line_y1 = first_circle.offset().top;
                         var line_y2 = last_circle.offset().top + last_circle.height();
-
                         var line_height = line_y2 - line_y1;
-
                         $(parent + " .timeline-line").css({
                             "height": line_height,
                             "top": 0,
@@ -72,7 +111,7 @@ function Services() {
             }
         })
         //====================================================================================================
-        .service("positionsService", function() {
+        .service("positionsService", function () {
             var positions = [];
 
             this.setPositions = (newPositions) => {

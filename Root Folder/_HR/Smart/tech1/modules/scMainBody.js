@@ -91,29 +91,10 @@ function classMainBody() {
             "scApp.instruments",
             "scApp.ipr"
          ])
-            .controller('scAppController', function (requestService, $timeout, updateSwiper, timelineService, preloader, updateSwiper, $state, $timeout) {
-                var url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_30&user=";
-
-                //*************************************************************
-                requestService(url).then((data) => {
-                    this.positionModelData = data;
-                    if ($state.current.name == "position")
-                        $timeout(updateSwiper, 0);
-                });
-
-                //*************************************************************
-                var url = that_.srvLink + "?entity=empProfileNoCallback&user=";
-                requestService(url).then((data) => {
-                    this.profileModelData = data;
-                    if ($state.current.name == "profile")
-                        $timeout(function () {
-                            timelineService.renderTimelineLine(".profile-education");
-                            timelineService.renderTimelineLine(".profile-results");
-                            updateSwiper()
-                        },0);
-
-                });
-                //*************************************************************
+            .controller('scAppController', function (getProfile,getPosition,getDict) {
+                getDict.getDictData();
+                getProfile.getProfileData();
+                getPosition.getPositionData();
             });
         //============================================================
         //роутер

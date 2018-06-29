@@ -1,4 +1,4 @@
-<bi:biapp bi:version="2003" xmlns:bi="http://xml.sap.com/2011/biml/biapp" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/TR/REC-html40" xmlns:h="http://www.w3.org/TR/REC-html40" xmlns:sdk1="com.sap.sbt.component.v4" sdk1:version="1.2" xmlns:sdk2="com.sap.sbt.datapower.v3" sdk2:version="3.0" xmlns:sdk3="com.sap.sbt.ztlpower.v4" sdk3:version="1.4">
+<bi:biapp bi:version="2003" xmlns:bi="http://xml.sap.com/2011/biml/biapp" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/TR/REC-html40" xmlns:h="http://www.w3.org/TR/REC-html40" xmlns:sdk1="com.sap.sbt.component.v4" sdk1:version="1.2" xmlns:sdk2="com.sap.sbt.datapower.v3" sdk2:version="3.0">
 	<bi:component name="APPLICATION_PROPERTIES" type="APPLICATION_PROPERTIES">
 		<bi:property name="THEME" value="sap_belize"/>
 		<bi:property name="MERGE_PROMPTS" value=" "/>
@@ -23,15 +23,6 @@
 		</bi:property>
 	</bi:component>
 	<bi:component name="ROOT" type="ABSOLUTE_LAYOUT_COMPONENT">
-		<bi:component name="CC_MENU" type="com_sap_sbt_component_v4_Component">
-			<bi:property name="TOP_MARGIN" value="100"/>
-			<bi:property name="HEIGHT" value="auto"/>
-			<bi:property name="BOTTOM_MARGIN" value="0"/>
-			<bi:property name="LEFT_MARGIN" value="0"/>
-			<bi:property name="WIDTH" value="500"/>
-			<bi:property name="VISIBLE" value=""/>
-			<bi:property name="DESIGNER_VISIBLE" value=""/>
-		</bi:component>
 		<bi:component name="CC_BODY" type="com_sap_sbt_component_v4_Component">
 			<bi:property name="LEFT_MARGIN" value="0"/>
 			<bi:property name="TOP_MARGIN" value="0"/>
@@ -84,7 +75,6 @@
 				<bi:value><![CDATA[Z_CONTROLLER._Action("init");]]></bi:value>
 			</bi:property>
 		</bi:component>
-		<bi:component name="ZTLPOWER_1" type="com_sap_sbt_ztlpower_v4_ZtlPower"/>
 		<bi:component name="Z_CONTROLLER" type="GLOBAL_SCRIPTS_COMPONENT">
 			<bi:property name="FUNCTIONS" type="ORDEREDLIST">
 				<bi:property name="FUNCTION" index="0">
@@ -132,7 +122,7 @@ Z_MODEL._Action(action);]]></bi:value>
 					<bi:property name="NAME" value="_Action"/>
 					<bi:property name="FUNCTION_BODY">
 						<bi:value><![CDATA[if(action=='init'){
-	CC_MENU.ioAttr(actionType.SET, "event$$_$$include","initMainMenu$$_$$classMainMenu");
+//	CC_MENU.ioAttr(actionType.SET, "event$$_$$include","initMainMenu$$_$$classMainMenu");
 	CC_BODY.ioAttr(actionType.SET, "event$$_$$include$$_$$user","initMainBody$$_$$classMainBody$$_$$"+gv_user);
 	//CC_START.ioAttr(actionType.SET, "event$$_$$include","initStart$$_$$classStart");
 }
