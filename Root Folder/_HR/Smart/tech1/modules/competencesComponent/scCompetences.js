@@ -11,8 +11,9 @@ function dirCompetences() {
                 };
             });
 
-        function competencesController(requestService, updateSwiper, $timeout) {
+        function competencesController(requestService, updateSwiper, $timeout, positionsService) {
             this.data = {};
+            console.log(positionsService.getLikedPositions());
 
             var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=positionCompetentionsNoCallback&position=[30007047,30006541]&user=";
             requestService(url)

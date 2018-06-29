@@ -65,12 +65,24 @@ function Services() {
                 //that_.profile_swiper.slideTo(0, 0, false)
             }
         })
-
-
+        //====================================================================================================
         .factory("resetSwiper", function () {
             return () => {
                 that_.profile_swiper.slideTo(0, 0, false)
             }
+        })
+        //====================================================================================================
+        .service("positionsService", function() {
+            var positions = [];
+
+            this.setPositions = (newPositions) => {
+                positions = newPositions;
+            };
+
+            this.getLikedPositions = () => {
+                return positions;
+            }
+
         })
 
 }

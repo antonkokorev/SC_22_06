@@ -6,7 +6,7 @@
 
                 <div class="position-all">
 
-                    <div class="sc-position__item" ng-click="positionCtrl.likeCurrentPosition($index, positions)" ng-repeat="positions in positionData | filter:positionCtrl.onlyLiked">
+                    <div class="sc-position__item" ng-click="positionCtrl.likeCurrentPosition($event, $index, positions)" ng-repeat="positions in positionData | filter:positionCtrl.onlyLiked">
                         <div class="sc-position__icon-block">
                             <i class="fa-heart" ng-class="{far: !positions.like, fas: positions.like}" ></i>
                         </div>

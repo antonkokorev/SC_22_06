@@ -98,9 +98,7 @@ function classMainBody() {
                 requestService(url).then((data) => {
                     this.positionModelData = data;
                     if ($state.current.name == "position")
-                        $timeout(function () {
-                            updateSwiper()
-                        }, 0);
+                        $timeout(updateSwiper, 0);
                 });
 
                 //*************************************************************
