@@ -11,7 +11,10 @@ function scMenuView() {
                     <dir-menu-position  item="mItem" ng-show="'{{mItem.type}}'=='menuPosition'"> </dir-menu-position>
                     <dir-menu-list      item="mItem" ng-show="'{{mItem.type}}'=='menuList'">     </dir-menu-list>
                 </a>
-            </div>`,
+               
+            </div>
+             <div class="button_next" ng-click="menu.changePage()" ng-show="menu.state=='choice'">Продолжить</div>
+`,
 //=====================================================================================================================
         this.menuTemplate.menuChoice =
             `<div class="sc-menu-details" ng-repeat="item in inItem.child">

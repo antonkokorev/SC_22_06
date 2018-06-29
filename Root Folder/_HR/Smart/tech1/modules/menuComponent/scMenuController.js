@@ -10,7 +10,7 @@ function dirMenu() {
             .directive('dirMainMenu', ['$location','menuDataService', function ($location,menuDataService) {
                 return {
                     restrict: 'E',
-                    scope: true,
+                    scope: {"page":"="},
                     template: that_.menuTemplate.mainMenu,
                     controller: menuController,
                     controllerAs: "menu"
@@ -61,15 +61,24 @@ function dirMenu() {
             })
 
 
-        function menuController($scope, $location,menuDataService) {
-
+        function menuController($scope, $location,menuDataService,$state) {
+            this.state=$state.current.name;
+            var that=this;
             //============================================
             //атрибуты
             //============================================
             this.data = menuDataService.data;
+            this.changePage=()=>{$scope.page=($scope.page==1)?2:1};
+            var that=this;
             //============================================
             //функции
             //============================================
+
+
+
+
+
+
             this.activeClass = activeClass;
             $scope.acFilter = (num) => {
                 console.log(1);
@@ -105,6 +114,7 @@ function dirMenu() {
             //function acFilter
 
             function activeClass(page) {
+                that.state=$state.current.name;
                 var currentRoute = $location.path().substring(1) || 'profile';
                 return page === currentRoute ? 'active' : '';
             };

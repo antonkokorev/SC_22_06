@@ -24,12 +24,12 @@ function Services() {
         })
         //====================================================================================================
         .service("getDict", function (requestService, $state, updateSwiper, $timeout) {
-            console.warn("serviceGetDict")
-            this.dictData = [];
+            //console.error("getDict")
+            this.dictData = {dict: []};
             this.getDictData = () => {
                 var url = that_.srvLink + "?entity=dictNoCallback&user=";
                 requestService(url).then((data) => {
-                    this.dictModelData = data;
+                    this.dictData.dict = data;
                     if ($state.current.name == "choice")
                         $timeout(updateSwiper, 0);
                 });
@@ -37,7 +37,6 @@ function Services() {
         })
         //====================================================================================================
         .service("getPosition", function (requestService, $state, updateSwiper, $timeout) {
-            console.warn("getProfile")
             this.positionData = {data: []};
             this.getPositionData = () => {
                 var url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_30&user=";

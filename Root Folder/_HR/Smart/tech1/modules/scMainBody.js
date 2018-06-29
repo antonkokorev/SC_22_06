@@ -39,7 +39,7 @@ function classMainBody() {
         var html =
             '<div id="sc-app" ng-controller="scAppController as appController">' +
             '   <dir-header class="sc-header"></dir-header>' +
-            '   <dir-main-menu id="id_menu" class="sc-menu"></dir-main-menu>' +
+            '   <dir-main-menu page="appController.choiceCurentPage" id="id_menu" class="sc-menu"></dir-main-menu>' +
             '   <main id="id_main" class="sc-main enter-active">' +
             '   <div id="swiper-container" class="swiper-auto-container">' +
             '       <div class="swiper-wrapper">' +
@@ -92,6 +92,7 @@ function classMainBody() {
             "scApp.ipr"
          ])
             .controller('scAppController', function (getProfile,getPosition,getDict) {
+                this.choiceCurentPage=1;
                 getDict.getDictData();
                 getProfile.getProfileData();
                 getPosition.getPositionData();
@@ -109,7 +110,7 @@ function classMainBody() {
             $stateProvider.state({
                 name: 'choice',
                 url: '/choice',
-                template: "<dir-choice></dir-choice>",
+                template: "<dir-choice page='appController.choiceCurentPage'></dir-choice>",
                 controller: allController
             });
             $stateProvider.state({
