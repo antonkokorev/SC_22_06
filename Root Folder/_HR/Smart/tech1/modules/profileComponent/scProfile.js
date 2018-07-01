@@ -19,7 +19,6 @@ function dirProfile() {
             this.data=getProfile.profileData;
 
 
-
             console.warn('profileController');
             this.competencesTypes = ["Corp", "Role", "Func"];
             //this.data =$scope.data ;

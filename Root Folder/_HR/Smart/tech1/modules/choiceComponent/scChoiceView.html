@@ -17,8 +17,8 @@
                     </div>
                 </div>
                 <div class="sc-choice-structure-col">
-                    <div class="sc-choice-structure"  ng-click="choice.selectObject($index)" ng-class="{selectTeg: structure.selected==true }" ng-repeat="structure in choice.data.dict.aDoTags| filter:choice.isVandN() " ng-show="page==2">
-                        <h3 class="sc-structure-heading" >
+                    <div class="sc-choice-structure"  ng-click="choice.selectObject(structure.index)" ng-repeat="structure in choice.data.dict.aDoTags| filter:choice.isVandN() " ng-show="page==2">
+                        <h3 class="sc-structure-heading" ng-class="{selectTeg: structure.selected==true }"  >
                             {{structure.sObject}}</h3>
                     </div>
                 </div>

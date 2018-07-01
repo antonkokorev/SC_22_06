@@ -48,7 +48,7 @@ function Services() {
             }
         })
         //====================================================================================================
-        .service("getProfile", function (requestService, $state, updateSwiper, timelineService, $timeout) {
+    .service("getProfile", function (requestService, $state, updateSwiper, timelineService, $timeout) {
             this.profileData = {user: []};
             this.getProfileData = () => {
                 var url = that_.srvLink + "?entity=empProfileNoCallback&user=";
@@ -63,7 +63,46 @@ function Services() {
                 });
             }
         })
+    /*    .factory("srvGetData", function ($http) {
+            var ProfileData=false;
 
+
+            function prGetProfile(){
+                var url = that_.srvLink + "?entity=empProfileNoCallback&user=";
+                if(ProfileData){
+                    return  http(url).then((response)=>{return response})
+                }
+                return  http(url).then((response)=>{return response})
+
+            };
+            function prGetDict(){
+                var url = that_.srvLink + "?entity=dictNoCallback&user=";
+                return  http(url).then((response)=>{return response})
+            };
+
+
+
+
+            function http(url){
+                return $http({
+                    method: 'GET',
+                    url: url + that_.user,
+                    headers: {
+                        'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
+                        'Accept': 'application/json; charset=utf-8',
+                        'Content-Type': 'application/json; charset=utf-8'
+                    }
+                }).then(function (response) {
+                    return response.data
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+
+            return {
+                getProfile:prGetProfile,
+                getDict:prGetDict}
+        })*/
         //====================================================================================================
         .service("timelineService", function () {
                 this.renderTimelineLine = function (parent) {

@@ -21,6 +21,9 @@ function dirChoice() {
             for(let i=0;i<this.data.dict.aDo.length;i++){
                 this.data.dict.aDo[i].index=i;
             }
+            for(let i=0;i<this.data.dict.aDoTags.length;i++){
+                this.data.dict.aDoTags[i].index=i;
+            }
             this.chooseADoTags = chooseADoTags;
             this.isVandN = isVandN;
             this.deleteThisItem=deleteThisItem
@@ -48,7 +51,7 @@ function dirChoice() {
             function selectObject(index) {
 
                 if (that.data.dict.aDoTags[index].selected) {
-                    delete that.data.dict.aDoTags[index].selected; 
+                    delete that.data.dict.aDoTags[index].selected;
                 } else {
                     that.data.dict.aDoTags[index].selected = true;
                 }
