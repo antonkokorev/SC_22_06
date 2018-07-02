@@ -38,6 +38,19 @@ function Services() {
         //====================================================================================================
         .service("getPosition", function (requestService, $state, updateSwiper, $timeout) {
             this.positionData = {data: []};
+            this.getLiked=()=>{
+                let pos=[];
+                for(let i=0;i<this.positionData.data.length;i++){
+                    if(this.positionData.data[i].liked)
+                    {
+                        pos.push(this.positionData.data[i].sJobProfileId)
+                    }
+
+                }
+               return pos;
+            };
+
+
             this.getPositionData = () => {
                 var url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_30&user=";
                 requestService(url).then((data) => {

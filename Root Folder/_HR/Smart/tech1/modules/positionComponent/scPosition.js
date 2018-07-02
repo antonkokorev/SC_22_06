@@ -8,18 +8,23 @@ function dirPosition() {
                 return {
                     restrict: 'AE',
                     scope: {
-                        positionData: "=positionmodeldata",
+                       // positionData: "=positionmodeldata",
                         iGrade: "=grade"
                     },
+                    bindToController: true,
                     templateUrl: that_.path + "modules/positionComponent/scPositionView.html",
                     controller: positionController,
                     controllerAs: "positionCtrl"
                 };
             });
 
-        function positionController($scope, requestService, positionsService) {
+        function positionController($scope, requestService, positionsService,getPosition) {
+
+            this.posModelData = getPosition.positionData;
+
             console.warn('positionController');
             $scope.likedPositions = [];
+
 
             this.liked = {};
             this.countLike = 0;
@@ -31,14 +36,17 @@ function dirPosition() {
             };
 
             this.likeCurrentPosition = (e, index, position) => {
-                $scope.likedPositions.push(position);
+                var data= this.posModelData.data;
+                (data[index].liked)?delete data[index].liked: data[index].liked=true;
+                this.countLike =getPosition.getLiked().length
+                /*$scope.likedPositions.push(position);
 
                 console.log($scope.likedPositions);
                 (this.liked[position.sJobProfileId]) ? delete this.liked[position.sJobProfileId] : this.liked[position.sJobProfileId] = true;
                 this.countLike = Object.keys(this.liked).length;
 
                 $scope.positionData[index].like = ($scope.positionData[index].like) ? false : true;
-                positionsService.setPositions($scope.likedPositions);
+                positionsService.setPositions($scope.likedPositions);*/
             }
 
             // Выбор позиций
