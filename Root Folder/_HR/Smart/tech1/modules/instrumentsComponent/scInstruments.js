@@ -1,4 +1,3 @@
-
 function dirInstruments() {
 
     (function () {
@@ -15,29 +14,28 @@ function dirInstruments() {
                 };
             });
 
-        function instrumentsController($scope) {
+        function instrumentsController($timeout, requestService, updateSwiper, formGoalsService, instrumentsService) {
+
+            this.currentGoal = formGoalsService.getGoals()[0];
+            this.tools = [];
+
+            var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument&competentionId="+ this.currentGoal.sCompetentionId +"&user=";
+            requestService(url).then((data) => {
+                this.tools = data;
+                console.log(data);
+            });
 
 
-            this.openTab = (evt, cityName) => {
-                // Declare all variables
-                var i, tabcontent, tablinks;
+            this.toolsHeadings = ["Практические советы", "Книги", "Обучающие видео", "Очные курсы"];
 
-                // Get all elements with class="tabcontent" and hide them
-                tabcontent = document.getElementsByClassName("tabcontent");
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
-                }
+            var sections = document.querySelector(".tools-sections");
+            var underline = document.querySelector(".tools-underline");
 
-                // Get all elements with class="tablinks" and remove the class "active"
-                tablinks = document.getElementsByClassName("tablinks");
-                for (i = 0; i < tablinks.length; i++) {
-                    tablinks[i].className = tablinks[i].className.replace(" active", "");
-                }
-
-                // Show the current tab, and add an "active" class to the button that opened the tab
-                document.getElementById(cityName).style.display = "block";
-                evt.currentTarget.className += " active";
+            this.switchTool = (index) => {
+                sections.style.transform = "translateX(-" + 25 * index + "%)";
+                underline.style.left = 25 * index + "%";
             }
+
         }
 
     }());

@@ -247,12 +247,26 @@ function Services() {
 
             this.getGoals = () => {
                 goals = indicators.concat(competences);
-                // console.log(goals);
-
                 return goals;
             }
+        })
+        //====================================================================================================
+        .service("instrumentsService", function () {
+            var currentGoal = null;
+            var instruments = [];
 
+            this.setGoalAndInstruments = (obj) => {
+                currentGoal = obj.goal;
+                instruments = obj.instruments;
+            };
 
+            this.getGoal = () => {
+                return currentGoal;
+            };
+
+            this.getInstruments = () => {
+                return instruments;
+            };
         })
 }
 

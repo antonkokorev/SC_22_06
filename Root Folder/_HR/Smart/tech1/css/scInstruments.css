@@ -1,115 +1,56 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
-@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-
-*, *:before, *:after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.tools-slider-menu {
+    margin-top: 20px;
+    height: 40px;
+    position: relative;
+    display: flex;
 }
 
-html, body {
-    height: 100vh;
+.tools-menu-element {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-body {
-    font: 14px/1 'Open Sans', sans-serif;
-    color: #555;
-    background: #eee;
+.tools-sections {
+    display: flex;
+    width: 400%;
+    -webkit-transition: transform 0.3s;
+    -moz-transition: transform 0.3s;
+    -ms-transition: transform 0.3s;
+    -o-transition: transform 0.3s;
+    transition: transform 0.3s;
 }
 
-h1 {
-    padding: 50px 0;
-    font-weight: 400;
-    text-align: center;
+.tools-section {
+    width: 25%;
+    padding-right: 30px;
 }
 
-p {
-    margin: 0 0 20px;
-    line-height: 1.5;
+.tools-slider-menu {
+    margin-right: 30px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ccc;
 }
 
-main {
-    min-width: 320px;
-    max-width: 800px;
-    padding: 50px;
-    margin: 0 auto;
-    background: #fff;
-}
-
-section {
-    display: none;
-    padding: 20px 0 0;
-    border-top: 1px solid #ddd;
-}
-
-input {
-    display: none;
-}
-
-label {
-    display: inline-block;
-    margin: 0 0 -1px;
-    padding: 15px 25px;
-    font-weight: 600;
-    text-align: center;
-    color: #bbb;
-    border: 1px solid transparent;
-}
-
-label:before {
-    font-family: fontawesome;
-    font-weight: normal;
-    margin-right: 10px;
-}
-
-label[for*='1']:before {
-    content: '\f1cb';
-}
-
-label[for*='2']:before {
-    content: '\f17d';
-}
-
-label[for*='3']:before {
-    content: '\f16b';
-}
-
-label[for*='4']:before {
-    content: '\f1a9';
-}
-
-label:hover {
-    color: #888;
+.tools-menu-element {
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
 }
 
-input:checked + label {
-    color: #555;
-    border: 1px solid #ddd;
-    border-top: 2px solid orange;
-    border-bottom: 1px solid #fff;
-}
-
-#tab1:checked ~ #content1,
-#tab2:checked ~ #content2,
-#tab3:checked ~ #content3,
-#tab4:checked ~ #content4 {
-    display: block;
-}
-
-@media screen and (max-width: 650px) {
-    label {
-        font-size: 0;
-    }
-
-    label:before {
-        margin: 0;
-        font-size: 18px;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    label {
-        padding: 15px;
-    }
+.tools-underline {
+    position: absolute;
+    height: 2px;
+    width: 25%;
+    bottom: -1px;
+    left: 0;
+    background: #007aff;
+    border-radius: 1px 1px 0 0;
+    -webkit-transition: left 0.3s;
+    -moz-transition: left 0.3s;
+    -ms-transition: left 0.3s;
+    -o-transition: left 0.3s;
+    transition: left 0.3s;
 }

@@ -22,9 +22,6 @@ function classMainBody() {
     that_.user = "Krylova-YV";
 
 
-
-
-
     this.initMainBody = function () {
 
         var path = $("head").find("link").last().attr("href").split("/");
@@ -90,9 +87,9 @@ function classMainBody() {
             "scApp.goals",
             "scApp.instruments",
             "scApp.ipr"
-         ])
-            .controller('scAppController', function (getProfile,getPosition,getDict) {
-                this.choiceCurentPage=1;
+        ])
+            .controller('scAppController', function (getProfile, getPosition, getDict) {
+                this.choiceCurentPage = 1;
 
                 getDict.getDictData();
                 getProfile.getProfileData();
@@ -113,10 +110,10 @@ function classMainBody() {
                 url: '/choice',
                 template: "<dir-choice page='appController.choiceCurentPage'></dir-choice>",
                 controller: allController,
-                onExit: function(getDict,getPosition){
+                onExit: function (getDict, getPosition) {
                     console.error("test")
-                    var result=getDict.getSelected();
-                    if(result.isChange){
+                    var result = getDict.getSelected();
+                    if (result.isChange) {
                         getPosition.getUserPositionData(result.selected)
                     }
                 }
@@ -126,16 +123,12 @@ function classMainBody() {
                 url: '/position',
                 template: "<dir-position  modelposition='appController.modelPosition'></dir-position>",
                 controller: allController,
-                onExit: function(getPosition){
+                onExit: function (getPosition) {
                     //alert("test")
-                    var test=getPosition.getLiked();
+                    var test = getPosition.getLiked();
 
                 }
             });
-
-
-
-
             $stateProvider.state({
                 name: 'competences',
                 url: '/competences',
@@ -164,11 +157,11 @@ function classMainBody() {
         })
 
             .run(['$state', function ($state) {
-           $state.transitionTo('profile');
-         }]);
+                $state.transitionTo('profile');
+            }]);
 
         //общий контроллер для состояний с обновлением основного свайпера
-        function allController($state, $scope, $timeout, updateSwiper, timelineService, preloader,resetSwiper) {
+        function allController($state, $scope, $timeout, updateSwiper, timelineService, preloader, resetSwiper) {
             preloader.on();
             var state = $state.current.name;
 
@@ -181,7 +174,7 @@ function classMainBody() {
                     resetSwiper();
                     updateSwiper();
                     preloader.off();
-                },400);
+                }, 400);
 
 
             });

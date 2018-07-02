@@ -69,23 +69,12 @@ function dirMenu() {
             })
 
 */
-        function menuController($scope, $location,menuDataService,$state,positionSettings) {
+        function menuController($scope, $location,menuDataService,$state,positionSettings, formGoalsService, instrumentsService, requestService) {
 
             //============================================
             //атрибуты
             //============================================
             this.data = menuDataService.data;
-
-
-
-
-
-
-
-
-
-
-
 
             this.state=$state.current.name;
             var that=this;
@@ -116,13 +105,29 @@ function dirMenu() {
               }
             };
 
+            this.goals = [];
+            this.getGoals = () => {
+                this.goals = formGoalsService.getGoals();
+                console.log(this.goals);
+            };
+
+            this.switchGoal = (goal) => {
+                var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument&competentionId="+ goal.sCompetentionId +"&user=";
+                requestService(url).then((data) => {
+
+                    var obj = {
+                        goal: goal,
+                        instruments: data
+                    };
+                    instrumentsService.setGoalAndInstruments(obj);
+                    $state.go("instruments");
+                });
+
+            };
+
             //============================================
             //функции
             //============================================
-
-
-
-
 
             this.activeClass = activeClass;
             this.acFilter = (num) => {
