@@ -8,19 +8,19 @@ function dirPosition() {
                 return {
                     restrict: 'AE',
                     scope: {
-                        modelPosition: "=",
-                        iGrade: "=grade"
+                        modelPosition: "=modelposition"
                     },
-                    bindToController: true,
+                   // bindToController: true,
                     templateUrl: that_.path + "modules/positionComponent/scPositionView.html",
                     controller: positionController,
                     controllerAs: "positionCtrl"
                 };
             });
 
-        function positionController($scope, requestService, positionsService,getPosition) {
+        function positionController($scope, requestService, positionsService,getPosition,getProfile) {
 
-            if(this.modelPosition)
+            this.iGrade=getProfile.profileData.user.iGrade;
+            if($scope.modelPosition)
                 this.posModelData = getPosition.positionData;
             else{
                 this.posModelData = getPosition.userPositionData;

@@ -93,7 +93,7 @@ function classMainBody() {
          ])
             .controller('scAppController', function (getProfile,getPosition,getDict) {
                 this.choiceCurentPage=1;
-                this.modelPosition=true;
+                this.modelPosition=1;
                 getDict.getDictData();
                 getProfile.getProfileData();
                 getPosition.getPositionData();
@@ -124,7 +124,7 @@ function classMainBody() {
             $stateProvider.state({
                 name: 'position',
                 url: '/position',
-                template: "<dir-position grade='appController.profileModelData.iGrade' model-position='appController.modelPosition''></dir-position>",
+                template: "<dir-position  modelposition='appController.modelPosition'></dir-position>",
                 controller: allController,
                 onExit: function(getPosition){
                     //alert("test")
