@@ -187,11 +187,16 @@ function dirMenu() {
                     discrFlt: "Мы не будем показывать вам позиции, не подходящие под диапазон характеристик",
                     childFlt: [
                         {
-                            name: "Оборачиваемость",
+                            name: "Грейд"
+                        },
+                        {
+                            name: "Соответствие",
+                            type: "slider",
                             placeholder: "3"
                         },
                         {
-                            name: "Грейд",
+                            name: "Открытость",
+                            type: "slider",
                             placeholder: "11"
                         }
                     ]
