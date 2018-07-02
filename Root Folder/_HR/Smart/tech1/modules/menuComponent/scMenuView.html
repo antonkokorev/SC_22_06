@@ -18,7 +18,7 @@
         </h2>
         <div class="sc-menu-details" ng-repeat="item in menu.data[1].child">
             <div class="sc-menu-desc">
-                <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
+                <h3 class="sc-menu-desc-heading" ng-click="menu.changePageChoice()"  ng-class="{colorBlue:menu.page==( $index+1) }">{{item.name}}</h3>
                 <p class="sc-menu-desc-p">{{item.discr}}</p>
             </div>
         </div>
@@ -35,11 +35,11 @@
         <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[2].num}}</span>{{menu.data[2].item}}
         </h2>
         <div class="sc-menu-details">
-            <div class="sc-menu-desc" ng-repeat=" item in menu.data[2].child">
-                <p class="sc-menu-desc-p" ng-click="changeModel(item)" ng-class="{colorBlue:positionSettings.show=='model'&& $index==0}">{{item.discr}}</p>
+            <div class="sc-menu-desc" ng-repeat="item in menu.data[2].child">
+                <p class="sc-menu-desc-p" ng-click="menu.changeModel($index)" ng-class="{colorBlue:(menu.positionSettings.show=='model'&& $index==0)||(menu.positionSettings.show=='user'&& $index==1)}">{{item.discr}}</p>
             </div>
 
-            <div ng-click="acFilter()" class="sc-menu-desc ">
+            <div ng-click="menu.acFilter(menu.data[2])" class="sc-menu-desc ">
                 <h3 class="sc-menu-desc-heading sc-menu-pop-filter">{{menu.data[2].nameFlt}} </h3>
             </div>
 
@@ -60,7 +60,7 @@
                 <div class="sc-menu-desc" ng-repeat="item in menu.data[2].childFlt" ng-if="item.type === 'slider'">
                     <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
                     <div class="filter-range range-slider-grade">
-                        <rzslider rz-slider-model="conformitySlider.minValue" rz-slider-high="conformitySlider.maxValue" rz-slider-options="conformitySlider.options"></rzslider>
+                        <rzslider rz-slider-model="menu.sliders[item.id].minValue" rz-slider-high="menu.sliders[item.id].maxValue" rz-slider-options="menu.sliders[item.id].options"></rzslider>
                     </div>
                 </div>
 
@@ -71,6 +71,17 @@
         </div>
     </a>
 </div>
+
+
+
+
+
+
+
+
+
+
+
 
 <!--Пункт меню 04 Компетенции-->
 <div ng-class="menu.activeClass('competences')"  class="sc-menu-li">
@@ -129,3 +140,6 @@
         </div>
     </a>
 </div>
+
+</div>
+<div class="button_next" ng-click="menu.changePageChoice()" ng-show="menu.state=='choice'">{{menu.btnText}}</div>

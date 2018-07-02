@@ -19,67 +19,61 @@ function dirPosition() {
 
         function positionController($scope, requestService, positionsService,getPosition,getProfile,positionSettings) {
 
-
+            //ИНТЕРФЕЙСНАЯ ЧАСТЬ
+            //============================================
+            //атрибуты
+            //============================================
+            var that = this;
             this.iGrade=getProfile.profileData.user.iGrade;
-            if(positionSettings.show=="model")
-                this.posModelData = getPosition.positionData;
-            else{
-                this.posModelData = getPosition.userPositionData;
-            }
-
-
-            console.warn('positionController');
-            $scope.likedPositions = [];
-
-
-            this.liked = {};
-            this.countLike = 0;
+            this.posModelData=getModelData();
+            this.positionSettings = positionSettings;//данные фильтрации
+            this.countLike = 0;//количество пролайканых позиций
             this.onlyLiked = "";
-            this.likeClick = () => {
-                console.log("!");
-                this.onlyLiked = (this.onlyLiked == "") ? true : "";
+            //============================================
+            //функции
+            //============================================
+            this.likeCurrentPosition=likeCurrentPosition;// добавление в избранное
+            this.likeClick=likeClick;
+            this.setFilter=setFilter;
+            //============================================
+            //watch
+            //============================================
 
-            };
 
-            this.likeCurrentPosition = (e, index, position) => {
-                var data= this.posModelData.data;
-                (data[index].liked)?delete data[index].liked: data[index].liked=true;
-                this.countLike =getPosition.getLiked().length
-                /*$scope.likedPositions.push(position);
+            $scope.$watch('positionSettings.show', function() {
+                alert('hey, myVar has changed!');
+            });
+            $scope.$on('positionSettings.show:updated', function(event,data) {
+                alert('hey, myVar has changed!');
+            });
+            //***********************************************************************************************************
+            function setFilter(obj){
+               return function (structure) {
+                        let tags = that.posModelData;
+                        let ps=that.positionSettings
+                        let result = true;
+                  if (structure.iTurnover<ps.open[0]|| structure.iTurnover>ps.open[1])result=false;
+                  if (structure.iProbability< (ps.conformity[0]/100)|| structure.iProbability>(ps.conformity[1]/100))result=false;
+                  if (that.onlyLiked==true && !structure.liked)result=false;
 
-                console.log($scope.likedPositions);
-                (this.liked[position.sJobProfileId]) ? delete this.liked[position.sJobProfileId] : this.liked[position.sJobProfileId] = true;
-                this.countLike = Object.keys(this.liked).length;
 
-                $scope.positionData[index].like = ($scope.positionData[index].like) ? false : true;
-                positionsService.setPositions($scope.likedPositions);*/
+                        return result;
+                    }
+
             }
-
-            // Выбор позиций
-            /* var choose_position = document.querySelectorAll(".choose-position");
-             var chosen_position = document.querySelector(".chosen-positions");
-             choose_position.forEach(function (item) {
-                 item.addEventListener(eventBr, function () {
-                     if (item.classList.contains("disabled")) {
-                         return;
-                     }
-
-                     var newItem = item.cloneNode(true);
-
-                     // Запрещаем повторный клик
-                     item.classList.add("disabled");
-
-                     newItem.firstElementChild.classList.add("color-red");
-                     newItem.addEventListener(eventBr, function () {
-                         chosen_position.removeChild(newItem);
-                         item.classList.remove("disabled");
-                     });
-                     chosen_position.appendChild(newItem);
-                 });
-             });*/
+            function getModelData(){
+                return (positionSettings.show=="model")?getPosition.positionData:getPosition.userPositionData;
+            }
+            function likeCurrentPosition(e, index, position){
+                let data= that.posModelData.data;
+                (data[index].liked)?delete data[index].liked: data[index].liked=true;
+                that.countLike =getPosition.getLiked().length
+            }
+            function likeClick(){
+                that.onlyLiked = (that.onlyLiked=="")?true:"";
+            }
+            //***********************************************************************************************************
         }
-
-
     }());
 }
 

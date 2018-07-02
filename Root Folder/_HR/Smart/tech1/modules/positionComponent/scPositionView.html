@@ -6,8 +6,8 @@
 
                 <div class="position-all">
 
-                    <div class="sc-position__item" ng-click="positionCtrl.likeCurrentPosition($event, $index, positions)" ng-repeat="positions in positionCtrl.posModelData.data | filter:positionCtrl.onlyLiked">
-                        <div class="sc-position__icon-block">
+                    <div class="sc-position__item"  ng-repeat="positions in positionCtrl.posModelData.data |  filter:positionCtrl.setFilter()">
+                        <div class="sc-position__icon-block" ng-click="positionCtrl.likeCurrentPosition($event, $index, positions)">
                             <i class="fa-heart" ng-class="{far: !positions.liked, fas: positions.liked}" ></i>
                         </div>
                         <div class="sc-position__content">
@@ -19,7 +19,7 @@
                                 </div>
                                 <div class="sc-position__element">
                                     <span class="sc-position__label"> Соответсвие:</span>
-                                    <span class="sc-position__conformity"> {{100*positions.sProbability| number:0}}% </span>
+                                    <span class="sc-position__conformity"> {{100*positions.iProbability| number:0}}% </span>
                                 </div>
                                 <div class="sc-position__element">
                                     <span class="sc-position__label"> Открытость:</span>
