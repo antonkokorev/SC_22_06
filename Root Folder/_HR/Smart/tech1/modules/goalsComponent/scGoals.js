@@ -16,8 +16,6 @@ function dirGoals() {
         function goalsController(formGoalsService) {
 
             this.indicators = formGoalsService.getIndicators();
-            this.competences = formGoalsService.getCompetences();
-
 
         }
     }());

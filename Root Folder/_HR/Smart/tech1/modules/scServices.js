@@ -188,12 +188,16 @@ function Services() {
             }
 
             this.setCompetences = (newCompetences) => {
-                competences = newCompetences;
+                newCompetences.forEach((item) => {
+                    var obj =  {
+                        competenceName: item.sCompetentionName,
+                        sIndicatorName: null
+                    };
+
+                    indicators.push(obj);
+                });
             };
 
-            this.getCompetences = () => {
-                return competences;
-            }
 
         })
 }

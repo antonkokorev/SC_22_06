@@ -83,7 +83,6 @@ function dirCompetences() {
 
                 } else {
                     event.target.classList.add("chosen");
-                    console.log(competence);
                     indicator.competenceName = competence.sCompetentionName;
                     indicator.competenceId = competence.sCompetentionId;
                     this.chosenIndicators.push(indicator);
