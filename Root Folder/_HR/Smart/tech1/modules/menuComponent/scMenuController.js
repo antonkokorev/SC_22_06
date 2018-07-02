@@ -13,9 +13,11 @@ function dirMenu() {
                     controller: menuController,
                     controllerAs: "menu"
                 };
+
             }]);
 
-        function menuController($scope, $location, menuDataService, $state, positionSettings, $timeout) {
+        function menuController($scope, $location,menuDataService,$state,positionSettings, formGoalsService, instrumentsService, requestService,$timeout) {
+
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
             //атрибуты
@@ -65,10 +67,32 @@ function dirMenu() {
                     });
                 }
             }
-
             function changeModel (item) {
-               this.positionSettings.show=(item)? "user":"model";
+                this.positionSettings.show=(item)? "user":"model";
             };
+
+
+            this.goals = [];
+            this.getGoals = () => {
+                this.goals = formGoalsService.getGoals();
+                console.log(this.goals);
+            };
+
+            this.switchGoal = (goal) => {
+                var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument&competentionId="+ goal.sCompetentionId +"&user=";
+                requestService(url).then((data) => {
+
+                    var obj = {
+                        goal: goal,
+                        instruments: data
+                    };
+                    instrumentsService.setGoalAndInstruments(obj);
+                    $state.go("instruments");
+                });
+
+            };
+
+
         }
 
 

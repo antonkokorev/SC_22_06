@@ -17,7 +17,7 @@ function dirPosition() {
                 };
             });
 
-        function positionController($scope, requestService, positionsService,getPosition,getProfile,positionSettings) {
+        function positionController($scope, requestService, positionsService, getPosition, getProfile, positionSettings) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
