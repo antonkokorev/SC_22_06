@@ -15,7 +15,13 @@ function dirGoals() {
 
         function goalsController(formGoalsService) {
 
-            this.indicators = formGoalsService.getIndicators();
+            this.goals = formGoalsService.getGoals();
+            console.log(this.goals);
+            //
+            // this.deleteGoal = (index) => {
+            //     this.goals.splice(index, 1);
+            //     formGoalsService.formGoals(this.goals);
+            // }
 
         }
     }());

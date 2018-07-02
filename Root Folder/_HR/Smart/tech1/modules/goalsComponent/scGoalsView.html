@@ -1,8 +1,8 @@
-<div class="goal" ng-repeat="goal in goals.indicators">
-    <h3 class="goal-heading"> {{$index + 1}}. {{goal.competenceName}} </h3>
-    <p class="goal-desc"> {{goal.sIndicatorName}}</p>
+<div class="goal" ng-repeat="goal in goals.goals">
+    <h3 class="goal-heading"> {{$index + 1}}. {{goal.sCompetentionName}} </h3>
+    <p class="goal-desc"> {{goal.sIndicatorId}}</p>
     <p class="add-goal"> Ввести цель </p>
-    <p class="delete-goal"> Удалить </p>
+    <p class="delete-goal" ng-click="goals.deleteGoal($index)"> Удалить </p>
 </div>
 
 
