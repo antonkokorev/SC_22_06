@@ -12,12 +12,12 @@ function dirMenu() {
                     restrict: 'E',
                     scope: {"page":"="},
                     bindToController: true,
-                    template: that_.menuTemplate.mainMenu,
+                    templateUrl: that_.path + "modules/menuComponent/scMenuView.html",
                     controller: menuController,
                     controllerAs: "menu"
                 };
             }])
-            //-------------------------------------------------------------
+         /*   //-------------------------------------------------------------
             .directive('dirMenuBasic', function () {
                 return {
                     restrict: 'E',
@@ -49,6 +49,8 @@ function dirMenu() {
                     restrict: 'E',
                     scope: {
                         "inItem":'=item',
+                        "positionSettings":"=",
+                        "changeModel":"&",
                         "acFilter":"&"
                     },
                     controller: menuController,
@@ -66,16 +68,42 @@ function dirMenu() {
                 };
             })
 
-
-        function menuController($scope, $location,menuDataService,$state) {
-            this.state=$state.current.name;
-            var that=this;
-            this.btnText="Продолжить";
+*/
+        function menuController($scope, $location,menuDataService,$state,positionSettings) {
 
             //============================================
             //атрибуты
             //============================================
             this.data = menuDataService.data;
+
+
+
+
+
+
+
+
+
+
+
+
+            this.state=$state.current.name;
+            var that=this;
+            this.btnText="Продолжить";
+            this.positionSettings=positionSettings;
+
+            this.data = menuDataService.data;
+            this.changeModel=(item)=>{
+                if( this.positionSettings.show=="model"){
+                    this.positionSettings.show="user"
+                }else{
+                    this.positionSettings.show="model"
+                }
+
+
+            };
+
+
             this.changePage=(item)=>{
                 var k=item;
                 console.error("test")

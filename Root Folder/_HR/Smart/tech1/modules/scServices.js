@@ -23,6 +23,20 @@ function Services() {
             };
         })
         //====================================================================================================
+        .factory("positionSettings",function(){
+
+            this.positionSettings={
+                show: "model",
+                conformity:[0,100],
+                grade:[],
+                open:[0,10]
+            };
+
+            return this.positionSettings;
+
+        })
+
+
         .service("getDict", function (requestService, $state, updateSwiper, $timeout) {
 
             this.getSelected=()=>{

@@ -93,7 +93,7 @@ function classMainBody() {
          ])
             .controller('scAppController', function (getProfile,getPosition,getDict) {
                 this.choiceCurentPage=1;
-                this.modelPosition=1;
+
                 getDict.getDictData();
                 getProfile.getProfileData();
                 getPosition.getPositionData();
@@ -105,7 +105,7 @@ function classMainBody() {
             $stateProvider.state({
                 name: 'profile',
                 url: '/profile',
-                template: '<dir-profile profilemodeldata="appController.profileModelData" id="sc-profile" class="profile-slide sc-v-slide"></dir-profile>',
+                template: '<dir-profile id="sc-profile" class="profile-slide sc-v-slide"></dir-profile>',
                 controller: allController
             });
             $stateProvider.state({

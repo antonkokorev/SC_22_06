@@ -8,7 +8,7 @@ function scMenuView() {
                     </h2>
                     <dir-menu-basic     item="mItem" ng-show="'{{mItem.type}}'=='menuBasic'">    </dir-menu-basic>
                     <dir-menu-choice    item="mItem" page="menu.page" change-page="menu.changePage()" ng-show="'{{mItem.type}}'=='menuChoice'">   </dir-menu-choice>
-                    <dir-menu-position  item="mItem" ac-filter="menu.acFilter(num)" ng-show="'{{mItem.type}}'=='menuPosition'"> </dir-menu-position>
+                    <dir-menu-position  item="mItem" change-model="menu.changeModel(item)" position-settings="menu.positionSettings" ac-filter="menu.acFilter(num)" ng-show="'{{mItem.type}}'=='menuPosition'"> </dir-menu-position>
                     <dir-menu-list      item="mItem" ng-show="'{{mItem.type}}'=='menuList'">     </dir-menu-list>
                 </a>
                
@@ -36,7 +36,7 @@ function scMenuView() {
         this.menuTemplate.menuPosition =
             `<div class="sc-menu-details">
                 <div class="sc-menu-desc" ng-repeat=" item in inItem.child">
-                    <p class="sc-menu-desc-p">{{item.discr}}</p>
+                    <p class="sc-menu-desc-p" ng-click="changeModel(item)" ng-class="{colorBlue:positionSettings.show=='model'&& $index==0}">{{item.discr}}</p>
                 </div>
 
                 <div ng-click="acFilter()" class="sc-menu-desc ">
