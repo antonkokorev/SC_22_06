@@ -68,9 +68,13 @@ function dirMenu() {
                 }
             }
             function changeModel (item) {
+
                 this.positionSettings.show=(item)? "user":"model";
+                $state.reload();
             };
 
+
+            //todo:говнокод переделать как выше сделано, убрать сервис к сервисам
 
             this.goals = [];
             this.getGoals = () => {
@@ -91,7 +95,7 @@ function dirMenu() {
                 });
 
             };
-
+            //todo:говнокод
 
         }
 
@@ -102,10 +106,10 @@ function dirMenu() {
                     this.sliderOptions = {
                         openSlider: {
                             minValue: 0,
-                            maxValue: 10,
+                            maxValue: 100,
                             options: {
                                 floor: 0,
-                                ceil: 10,
+                                ceil: 100,
                                 step: 1,
                                 noSwitching: true
                             }

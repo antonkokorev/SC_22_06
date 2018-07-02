@@ -29,8 +29,10 @@ function Services() {
                 show: "model",
                 conformity:[0,100],
                 grade:[],
-                open:[0,10]
+                open:[0,100]
             };
+
+            this.getShow = function() { return this.positionSettings.show };
 
             return this.positionSettings;
 

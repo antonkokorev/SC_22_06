@@ -35,17 +35,6 @@ function dirPosition() {
             this.likeCurrentPosition=likeCurrentPosition;// добавление в избранное
             this.likeClick=likeClick;
             this.setFilter=setFilter;
-            //============================================
-            //watch
-            //============================================
-
-
-            $scope.$watch('positionSettings.show', function() {
-                alert('hey, myVar has changed!');
-            });
-            $scope.$on('positionSettings.show:updated', function(event,data) {
-                alert('hey, myVar has changed!');
-            });
             //***********************************************************************************************************
             function setFilter(obj){
                return function (structure) {
