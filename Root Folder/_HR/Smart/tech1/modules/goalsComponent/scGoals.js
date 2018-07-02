@@ -22,9 +22,23 @@ function dirGoals() {
             console.log(this.goals);
 
             this.deleteGoal = (goal) => {
-                console.log(goal);
+                if (goal.iIndicatorId) {
+                    var index = this.indicators.map(function (item) {
+                        return item.iIndicatorId;
+                    }).indexOf(goal.iIndicatorId);
 
+                    this.indicators.splice(index, 1);
+                    formGoalsService.setIndicators(this.indicators);
+                } else {
+                    let index = this.competences.map(function (item) {
+                        return item.sCompetentionId;
+                    }).indexOf(goal.sCompetentionId);
 
+                    this.competences.splice(index, 1);
+                    formGoalsService.setCompetences(this.competences);
+                }
+
+                this.goals = formGoalsService.getGoals();
             }
 
         }
