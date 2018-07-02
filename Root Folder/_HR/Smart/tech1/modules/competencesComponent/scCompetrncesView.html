@@ -16,7 +16,7 @@
                 <h2 class="sc-slide-heading"> {{competences.positionCurrent.sJobProfileName}} </h2>
                 <div class="back-button-competence back1" ng-click="competences.getBack(0)"> Назад</div>
 
-                <div class="competence-position-current"
+                <div class="competence-position-current {{competences.getChosenCompetences(competence)}}"
                      ng-repeat="competence in competences.currentPositionCompetences"
                      ng-click="competences.getCompetencesIndicators($event, $index, competence)">
                     <h3 class="competence-position-heading"> {{competence.sCompetentionName}}</h3>
@@ -28,7 +28,7 @@
             <div class="competences-h-slide competences-by-position-competence">
                 <h2 class="sc-slide-heading competence-name"> {{competences.competenceCurrent.sCompetentionName}} </h2>
                 <div class="back-button-competence back2" ng-click="competences.getBack(1)"> Назад</div>
-                <p class="competence-about" ng-repeat="indicator in competences.currentCompetencesIndicators" ng-click="competences.chooseIndicator($event, indicator, competences.competenceCurrent)">
+                <p class="competence-about {{competences.getChosenIndicators(indicator)}}" ng-repeat="indicator in competences.currentCompetencesIndicators" ng-click="competences.chooseIndicator($event, indicator, competences.competenceCurrent)">
                     {{indicator.sIndicatorName}} </p>
             </div>
         </div>
