@@ -12,6 +12,11 @@
     letter-spacing: normal;
     color: #007aff;
 }
+
+
+.colorBlue{
+    color: #007aff!important;
+}
 .sc-menu {
     width: 30%;
     height: calc(100% - 100px);

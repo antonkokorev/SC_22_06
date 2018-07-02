@@ -116,7 +116,7 @@ function classMainBody() {
             $stateProvider.state({
                 name: 'position',
                 url: '/position',
-                template: "<dir-position positionmodeldata='appController.positionModelData'></dir-position>",
+                template: "<dir-position grade='appController.profileModelData.iGrade' positionmodeldata='appController.positionModelData'></dir-position>",
                 controller: allController
             });
             $stateProvider.state({

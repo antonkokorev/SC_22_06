@@ -7,20 +7,22 @@ function scMenuView() {
                     <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{mItem.num}}</span>{{mItem.item}}
                     </h2>
                     <dir-menu-basic     item="mItem" ng-show="'{{mItem.type}}'=='menuBasic'">    </dir-menu-basic>
-                    <dir-menu-choice    item="mItem" ng-show="'{{mItem.type}}'=='menuChoice'">   </dir-menu-choice>
+                    <dir-menu-choice    item="mItem" page="menu.page" change-page="menu.changePage()" ng-show="'{{mItem.type}}'=='menuChoice'">   </dir-menu-choice>
                     <dir-menu-position  item="mItem" ng-show="'{{mItem.type}}'=='menuPosition'"> </dir-menu-position>
                     <dir-menu-list      item="mItem" ng-show="'{{mItem.type}}'=='menuList'">     </dir-menu-list>
                 </a>
                
             </div>
-             <div class="button_next" ng-click="menu.changePage()" ng-show="menu.state=='choice'">Продолжить</div>
+             <div class="button_next" ng-click="menu.changePage()" ng-show="menu.state=='choice'">{{menu.btnText}}</div>
 `,
 //=====================================================================================================================
         this.menuTemplate.menuChoice =
             `<div class="sc-menu-details" ng-repeat="item in inItem.child">
-                <div class="sc-menu-desc">
-                    <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
-                    <p class="sc-menu-desc-p">{{item.discr}}</p>
+                <div class="sc-menu-desc" ">
+
+                    <h3  ng-click="changePage()"  ng-class="{colorBlue:page==( $index+1) }" class="sc-menu-desc-heading"> {{item.name}}</h3>
+                     <p  class="sc-menu-desc-p">{{item.discr}}</p>
+       
                 </div>
              </div>`,
 //=====================================================================================================================

@@ -11,6 +11,7 @@ function dirMenu() {
                 return {
                     restrict: 'E',
                     scope: {"page":"="},
+                    bindToController: true,
                     template: that_.menuTemplate.mainMenu,
                     controller: menuController,
                     controllerAs: "menu"
@@ -31,10 +32,14 @@ function dirMenu() {
             .directive('dirMenuChoice', function () {
                 return {
                     restrict: 'E',
+                    require:"dirMainMenu",
                     scope: {
-                        "inItem":'=item'
+                        "inItem":'=item',
+                        "page":'=',
+                        "changePage":"&"
                     },
                     template: that_.menuTemplate.menuChoice
+
                 };
 
             })
@@ -64,16 +69,24 @@ function dirMenu() {
         function menuController($scope, $location,menuDataService,$state) {
             this.state=$state.current.name;
             var that=this;
+            this.btnText="Продолжить";
             //============================================
             //атрибуты
             //============================================
             this.data = menuDataService.data;
-            this.changePage=()=>{$scope.page=($scope.page==1)?2:1};
-            var that=this;
+            this.changePage=()=>{
+              if(this.page == 1){
+                  this.page=2;
+                  this.btnText="Вернуться";
+              }else{
+                  this.page=1;
+                  this.btnText="Продолжить";
+              }
+            };
+
             //============================================
             //функции
             //============================================
-
 
 
 
