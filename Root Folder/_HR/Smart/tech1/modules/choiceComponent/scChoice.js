@@ -24,10 +24,10 @@ function dirChoice() {
             for(let i=0;i<this.data.dict.aDoTags.length;i++){
                 this.data.dict.aDoTags[i].index=i;
             }
-            this.chooseADoTags = chooseADoTags;
+            this.chooseADoTags = chooseADoTags;     // выбор глаголов
             this.isVandN = isVandN;
-            this.deleteThisItem=deleteThisItem
-            this.selectObject=selectObject;
+            this.deleteThisItem=deleteThisItem;     //удалить выбор
+            this.selectObject=selectObject;         // выбор существительного
             //**********************************************
             function deleteThisItem(index){
               delete this.data.dict.aDo[index].selected;
@@ -58,7 +58,6 @@ function dirChoice() {
             }
 
             function chooseADoTags(index) {
-
                 if (that.data.dict.aDo[index].selected) {
                     delete that.data.dict.aDo[index].selected;
                 } else {

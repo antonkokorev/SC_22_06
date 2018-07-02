@@ -8,7 +8,7 @@ function scMenuView() {
                     </h2>
                     <dir-menu-basic     item="mItem" ng-show="'{{mItem.type}}'=='menuBasic'">    </dir-menu-basic>
                     <dir-menu-choice    item="mItem" page="menu.page" change-page="menu.changePage()" ng-show="'{{mItem.type}}'=='menuChoice'">   </dir-menu-choice>
-                    <dir-menu-position  item="mItem" ng-show="'{{mItem.type}}'=='menuPosition'"> </dir-menu-position>
+                    <dir-menu-position  item="mItem" ac-filter="menu.acFilter(num)" ng-show="'{{mItem.type}}'=='menuPosition'"> </dir-menu-position>
                     <dir-menu-list      item="mItem" ng-show="'{{mItem.type}}'=='menuList'">     </dir-menu-list>
                 </a>
                
@@ -39,11 +39,11 @@ function scMenuView() {
                     <p class="sc-menu-desc-p">{{item.discr}}</p>
                 </div>
 
-                <div ng-click="acFilter(inItem.num)" class="sc-menu-desc ">
+                <div ng-click="acFilter()" class="sc-menu-desc ">
                     <h3 class="sc-menu-desc-heading sc-menu-pop-filter">{{inItem.nameFlt}} </h3>
                 </div>
 
-                <div ng-show="showFlt">
+                <div ng-show="inItem.showFlt">
                     <div class="sc-menu-desc">
                         <p class="sc-menu-desc-p">{{inItem.discrFlt}}</p>
                     </div>

@@ -48,7 +48,8 @@ function dirMenu() {
                 return {
                     restrict: 'E',
                     scope: {
-                        "inItem":'=item'
+                        "inItem":'=item',
+                        "acFilter":"&"
                     },
                     controller: menuController,
                     template: that_.menuTemplate.menuPosition
@@ -70,11 +71,14 @@ function dirMenu() {
             this.state=$state.current.name;
             var that=this;
             this.btnText="Продолжить";
+
             //============================================
             //атрибуты
             //============================================
             this.data = menuDataService.data;
-            this.changePage=()=>{
+            this.changePage=(item)=>{
+                var k=item;
+                console.error("test")
               if(this.page == 1){
                   this.page=2;
                   this.btnText="Вернуться";
@@ -93,10 +97,12 @@ function dirMenu() {
 
 
             this.activeClass = activeClass;
-            $scope.acFilter = (num) => {
-                console.log(1);
-                var n = parseInt(num) - 1;
-                $scope.showFlt = !$scope.showFlt;
+            this.acFilter = (num) => {
+
+              console.log(1);
+                this.data[2].showFlt=!this.data[2].showFlt;
+                /*    var n = parseInt(num) - 1;
+                  $scope.showFlt = !$scope.showFlt;*/
             };
 
 

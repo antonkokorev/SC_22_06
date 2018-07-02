@@ -24,7 +24,28 @@ function Services() {
         })
         //====================================================================================================
         .service("getDict", function (requestService, $state, updateSwiper, $timeout) {
-            //console.error("getDict")
+
+            this.getSelected=()=>{
+                let pos=[];
+                for(let i=0;i<this.dictData.dict.aDoTags.length;i++){
+                    if(this.dictData.dict.aDoTags[i].selected)
+                    {
+                        pos.push(this.dictData.dict.aDoTags[i].iFamilyId)
+                    }
+                }
+                var change=true;
+                if(JSON.stringify(pos)==JSON.stringify( this.sData))
+                {
+                    change=false;
+                }
+                this.sData=pos;
+                return {
+                            selected:pos,
+                            isChange:change
+                        };
+            };
+
+            this.sData=[]
             this.dictData = {dict: []};
             this.getDictData = () => {
                 var url = that_.srvLink + "?entity=dictNoCallback&user=";
@@ -38,6 +59,7 @@ function Services() {
         //====================================================================================================
         .service("getPosition", function (requestService, $state, updateSwiper, $timeout) {
             this.positionData = {data: []};
+            this.userPositionData = {data: []};
             this.getLiked=()=>{
                 let pos=[];
                 for(let i=0;i<this.positionData.data.length;i++){
@@ -50,9 +72,17 @@ function Services() {
                return pos;
             };
 
+            this.getUserPositionData = (family) => {
+                let url = that_.srvLink + "?entity=positionNoCallback&requestType=list&family="+JSON.stringify(family)+"&row=1_30&user=";
+                requestService(url).then((data) => {
+                    this.userPositionData.data = data;
+                    if ($state.current.name == "position")
+                        $timeout(updateSwiper, 0);
+                });
+            };
 
             this.getPositionData = () => {
-                var url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_30&user=";
+                let url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_30&user=";
                 requestService(url).then((data) => {
                     this.positionData.data = data;
                     if ($state.current.name == "position")

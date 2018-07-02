@@ -8,7 +8,7 @@ function dirPosition() {
                 return {
                     restrict: 'AE',
                     scope: {
-                       // positionData: "=positionmodeldata",
+                        modelPosition: "=",
                         iGrade: "=grade"
                     },
                     bindToController: true,
@@ -20,7 +20,12 @@ function dirPosition() {
 
         function positionController($scope, requestService, positionsService,getPosition) {
 
-            this.posModelData = getPosition.positionData;
+            if(this.modelPosition)
+                this.posModelData = getPosition.positionData;
+            else{
+                this.posModelData = getPosition.userPositionData;
+            }
+
 
             console.warn('positionController');
             $scope.likedPositions = [];

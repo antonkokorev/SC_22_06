@@ -93,6 +93,7 @@ function classMainBody() {
          ])
             .controller('scAppController', function (getProfile,getPosition,getDict) {
                 this.choiceCurentPage=1;
+                this.modelPosition=true;
                 getDict.getDictData();
                 getProfile.getProfileData();
                 getPosition.getPositionData();
@@ -111,14 +112,30 @@ function classMainBody() {
                 name: 'choice',
                 url: '/choice',
                 template: "<dir-choice page='appController.choiceCurentPage'></dir-choice>",
-                controller: allController
+                controller: allController,
+                onExit: function(getDict,getPosition){
+                    console.error("test")
+                    var result=getDict.getSelected();
+                    if(result.isChange){
+                        getPosition.getUserPositionData(result.selected)
+                    }
+                }
             });
             $stateProvider.state({
                 name: 'position',
                 url: '/position',
-                template: "<dir-position grade='appController.profileModelData.iGrade' positionmodeldata='appController.positionModelData'></dir-position>",
-                controller: allController
+                template: "<dir-position grade='appController.profileModelData.iGrade' model-position='appController.modelPosition''></dir-position>",
+                controller: allController,
+                onExit: function(getPosition){
+                    //alert("test")
+                    var test=getPosition.getLiked();
+
+                }
             });
+
+
+
+
             $stateProvider.state({
                 name: 'competences',
                 url: '/competences',
