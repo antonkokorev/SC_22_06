@@ -13,7 +13,10 @@ function dirGoals() {
                 };
             });
 
-        function goalsController() {
+        function goalsController(formGoalsService) {
+
+            this.indicators = formGoalsService.getIndicators();
+            this.competences = formGoalsService.getCompetences();
 
 
         }

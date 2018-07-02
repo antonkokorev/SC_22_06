@@ -1,16 +1,6 @@
-<div class="goal">
-    <h3 class="goal-heading"> 1. Системное мышление и решение проблем </h3>
-    <p class="goal-desc"> Детально раскладывает проблему/задачу, устанавливая взаимосвязь с другими
-        задачами. Анализирует до глубины, необходимой для обоснованного принятия решения, учитывает
-        риски.</p>
-    <p class="add-goal"> Ввести цель </p>
-    <p class="delete-goal"> Удалить </p>
-</div>
-<div class="goal">
-    <h3 class="goal-heading"> 2. Системное мышление и решение проблем </h3>
-    <p class="goal-desc"> Детально раскладывает проблему/задачу, устанавливая взаимосвязь с другими
-        задачами. Анализирует до глубины, необходимой для обоснованного принятия решения, учитывает
-        риски.</p>
+<div class="goal" ng-repeat="goal in goals.indicators">
+    <h3 class="goal-heading"> {{goal.competenceName}} </h3>
+    <p class="goal-desc"> {{goals.sIndicatorName }}</p>
     <p class="add-goal"> Ввести цель </p>
     <p class="delete-goal"> Удалить </p>
 </div>

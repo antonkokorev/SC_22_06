@@ -161,7 +161,28 @@ function Services() {
             }
 
         })
+        //====================================================================================================
+        .service("formGoalsService", function () {
+            var indicators = [];
+            var competences = [];
 
+            this.setIndicators = (newIndicators) => {
+                indicators = newIndicators;
+            };
+
+            this.getIndicators = () => {
+                return indicators;
+            }
+
+            this.setCompetences = (newCompetences) => {
+                competences = newCompetences;
+            };
+
+            this.getCompetences = () => {
+                return competences;
+            }
+
+        })
 }
 
 
