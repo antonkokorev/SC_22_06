@@ -12,6 +12,11 @@
     letter-spacing: normal;
     color: #007aff;
 }
+
+
+.colorBlue{
+    color: #007aff!important;
+}
 .sc-menu {
     width: 30%;
     height: calc(100% - 100px);
@@ -180,7 +185,7 @@
 
 .filter-range {
     height: 50px;
-    margin-top: 10px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
     align-items: center;

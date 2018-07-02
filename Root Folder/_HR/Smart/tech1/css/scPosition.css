@@ -99,5 +99,24 @@
     line-height: normal;
     letter-spacing: -2px;
     color: #ff3d46;
+}
 
+.sc-grade-filter {
+    display: flex;
+    margin-top: 10px;
+}
+
+.sc-grade {
+    margin-right: 10px;
+    width: 27px;
+    height: 27px;
+    line-height: 27px;
+    text-align: center;
+    color: #fff;
+    background: #adb3bc;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.sc-grade.active {
+    background: #007aff;
 }

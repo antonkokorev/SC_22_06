@@ -18,6 +18,14 @@ function dirGoals() {
             this.indicators = formGoalsService.getIndicators();
             this.competences = formGoalsService.getCompetences();
 
+            this.goals = formGoalsService.getGoals();
+            console.log(this.goals);
+
+            this.deleteGoal = (goal) => {
+                console.log(goal);
+
+
+            }
 
         }
     }());

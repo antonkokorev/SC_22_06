@@ -24,7 +24,28 @@ function Services() {
         })
         //====================================================================================================
         .service("getDict", function (requestService, $state, updateSwiper, $timeout) {
-            //console.error("getDict")
+
+            this.getSelected=()=>{
+                let pos=[];
+                for(let i=0;i<this.dictData.dict.aDoTags.length;i++){
+                    if(this.dictData.dict.aDoTags[i].selected)
+                    {
+                        pos.push(this.dictData.dict.aDoTags[i].iFamilyId)
+                    }
+                }
+                var change=true;
+                if(JSON.stringify(pos)==JSON.stringify( this.sData))
+                {
+                    change=false;
+                }
+                this.sData=pos;
+                return {
+                            selected:pos,
+                            isChange:change
+                        };
+            };
+
+            this.sData=[]
             this.dictData = {dict: []};
             this.getDictData = () => {
                 var url = that_.srvLink + "?entity=dictNoCallback&user=";
@@ -38,21 +59,32 @@ function Services() {
         //====================================================================================================
         .service("getPosition", function (requestService, $state, updateSwiper, $timeout) {
             this.positionData = {data: []};
+
+            this.userPositionData = {data: []};
             this.getLiked=()=>{
                 let pos=[];
                 for(let i=0;i<this.positionData.data.length;i++){
                     if(this.positionData.data[i].liked)
                     {
+
                         pos.push(this.positionData.data[i].sJobProfileId)
                     }
 
                 }
-               return pos;
+                return pos;
             };
 
+            this.getUserPositionData = (family) => {
+                let url = that_.srvLink + "?entity=positionNoCallback&requestType=list&family="+JSON.stringify(family)+"&row=1_30&user=";
+                requestService(url).then((data) => {
+                    this.userPositionData.data = data;
+                    if ($state.current.name == "position")
+                        $timeout(updateSwiper, 0);
+                });
+            };
 
             this.getPositionData = () => {
-                var url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_30&user=";
+                let url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_30&user=";
                 requestService(url).then((data) => {
                     this.positionData.data = data;
                     if ($state.current.name == "position")
@@ -61,7 +93,7 @@ function Services() {
             }
         })
         //====================================================================================================
-    .service("getProfile", function (requestService, $state, updateSwiper, timelineService, $timeout) {
+        .service("getProfile", function (requestService, $state, updateSwiper, timelineService, $timeout) {
             this.profileData = {user: []};
             this.getProfileData = () => {
                 var url = that_.srvLink + "?entity=empProfileNoCallback&user=";
@@ -76,46 +108,46 @@ function Services() {
                 });
             }
         })
-    /*    .factory("srvGetData", function ($http) {
-            var ProfileData=false;
+        /*    .factory("srvGetData", function ($http) {
+                var ProfileData=false;
 
 
-            function prGetProfile(){
-                var url = that_.srvLink + "?entity=empProfileNoCallback&user=";
-                if(ProfileData){
-                    return  http(url).then((response)=>{return response})
-                }
-                return  http(url).then((response)=>{return response})
-
-            };
-            function prGetDict(){
-                var url = that_.srvLink + "?entity=dictNoCallback&user=";
-                return  http(url).then((response)=>{return response})
-            };
-
-
-
-
-            function http(url){
-                return $http({
-                    method: 'GET',
-                    url: url + that_.user,
-                    headers: {
-                        'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
-                        'Accept': 'application/json; charset=utf-8',
-                        'Content-Type': 'application/json; charset=utf-8'
+                function prGetProfile(){
+                    var url = that_.srvLink + "?entity=empProfileNoCallback&user=";
+                    if(ProfileData){
+                        return  http(url).then((response)=>{return response})
                     }
-                }).then(function (response) {
-                    return response.data
-                }).catch(function (error) {
-                    console.log(error);
-                });
-            }
+                    return  http(url).then((response)=>{return response})
 
-            return {
-                getProfile:prGetProfile,
-                getDict:prGetDict}
-        })*/
+                };
+                function prGetDict(){
+                    var url = that_.srvLink + "?entity=dictNoCallback&user=";
+                    return  http(url).then((response)=>{return response})
+                };
+
+
+
+
+                function http(url){
+                    return $http({
+                        method: 'GET',
+                        url: url + that_.user,
+                        headers: {
+                            'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
+                            'Accept': 'application/json; charset=utf-8',
+                            'Content-Type': 'application/json; charset=utf-8'
+                        }
+                    }).then(function (response) {
+                        return response.data
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
+
+                return {
+                    getProfile:prGetProfile,
+                    getDict:prGetDict}
+            })*/
         //====================================================================================================
         .service("timelineService", function () {
                 this.renderTimelineLine = function (parent) {
@@ -178,6 +210,7 @@ function Services() {
         .service("formGoalsService", function () {
             var indicators = [];
             var competences = [];
+            var goals = [];
 
             this.setIndicators = (newIndicators) => {
                 indicators = newIndicators;
@@ -185,7 +218,7 @@ function Services() {
 
             this.getIndicators = () => {
                 return indicators;
-            }
+            };
 
             this.setCompetences = (newCompetences) => {
                 competences = newCompetences;
@@ -193,7 +226,18 @@ function Services() {
 
             this.getCompetences = () => {
                 return competences;
+            };
+
+            this.setGoals = () => {
+            };
+
+            this.getGoals = () => {
+                goals = indicators.concat(competences);
+                // console.log(goals);
+
+                return goals;
             }
+
 
         })
 }

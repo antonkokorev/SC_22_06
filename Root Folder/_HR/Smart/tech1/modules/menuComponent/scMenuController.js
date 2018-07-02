@@ -11,6 +11,7 @@ function dirMenu() {
                 return {
                     restrict: 'E',
                     scope: {"page":"="},
+                    bindToController: true,
                     template: that_.menuTemplate.mainMenu,
                     controller: menuController,
                     controllerAs: "menu"
@@ -31,10 +32,14 @@ function dirMenu() {
             .directive('dirMenuChoice', function () {
                 return {
                     restrict: 'E',
+                    require:"dirMainMenu",
                     scope: {
-                        "inItem":'=item'
+                        "inItem":'=item',
+                        "page":'=',
+                        "changePage":"&"
                     },
                     template: that_.menuTemplate.menuChoice
+
                 };
 
             })
@@ -43,7 +48,8 @@ function dirMenu() {
                 return {
                     restrict: 'E',
                     scope: {
-                        "inItem":'=item'
+                        "inItem":'=item',
+                        "acFilter":"&"
                     },
                     controller: menuController,
                     template: that_.menuTemplate.menuPosition
@@ -64,12 +70,24 @@ function dirMenu() {
         function menuController($scope, $location,menuDataService,$state) {
             this.state=$state.current.name;
             var that=this;
+            this.btnText="Продолжить";
+
             //============================================
             //атрибуты
             //============================================
             this.data = menuDataService.data;
-            this.changePage=()=>{$scope.page=($scope.page==1)?2:1};
-            var that=this;
+            this.changePage=(item)=>{
+                var k=item;
+                console.error("test")
+              if(this.page == 1){
+                  this.page=2;
+                  this.btnText="Вернуться";
+              }else{
+                  this.page=1;
+                  this.btnText="Продолжить";
+              }
+            };
+
             //============================================
             //функции
             //============================================
@@ -78,12 +96,13 @@ function dirMenu() {
 
 
 
-
             this.activeClass = activeClass;
-            $scope.acFilter = (num) => {
-                console.log(1);
-                var n = parseInt(num) - 1;
-                $scope.showFlt = !$scope.showFlt;
+            this.acFilter = (num) => {
+
+              console.log(1);
+                this.data[2].showFlt=!this.data[2].showFlt;
+                /*    var n = parseInt(num) - 1;
+                  $scope.showFlt = !$scope.showFlt;*/
             };
 
 
@@ -168,11 +187,16 @@ function dirMenu() {
                     discrFlt: "Мы не будем показывать вам позиции, не подходящие под диапазон характеристик",
                     childFlt: [
                         {
-                            name: "Оборачиваемость",
+                            name: "Грейд"
+                        },
+                        {
+                            name: "Соответствие",
+                            type: "slider",
                             placeholder: "3"
                         },
                         {
-                            name: "Грейд",
+                            name: "Открытость",
+                            type: "slider",
                             placeholder: "11"
                         }
                     ]
