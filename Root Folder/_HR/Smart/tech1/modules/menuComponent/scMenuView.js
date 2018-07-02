@@ -47,15 +47,21 @@ function scMenuView() {
                     <div class="sc-menu-desc">
                         <p class="sc-menu-desc-p">{{inItem.discrFlt}}</p>
                     </div>
-
-                    <div class="sc-menu-desc" ng-repeat="item in inItem.childFlt">
+                    
+                    <div class="sc-menu-desc" ng-repeat="item in inItem.childFlt" ng-if="item.type !== 'slider'">
                         <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
-                            <!--<div class="filter-range range-slider-conformity">-->
-                                <!--<rzslider rz-slider-model="gradeSlider.minValue" rz-slider-high="gradeSlider.maxValue" rz-slider-options="gradeSlider.options"></rzslider>-->
-                            <!--</div>-->
-                            <div class="filter-range range-slider-grade">
-                                <rzslider rz-slider-model="conformitySlider.minValue" rz-slider-high="conformitySlider.maxValue" rz-slider-options="conformitySlider.options"></rzslider>
-                            </div>
+                        <div class="sc-grade-filter">
+                            <div class="sc-grade">11</div>
+                            <div class="sc-grade">12</div>
+                            <div class="sc-grade">13</div>
+                        </div>
+                    </div>
+
+                    <div class="sc-menu-desc" ng-repeat="item in inItem.childFlt" ng-if="item.type === 'slider'">
+                        <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
+                        <div class="filter-range range-slider-grade">
+                            <rzslider rz-slider-model="conformitySlider.minValue" rz-slider-high="conformitySlider.maxValue" rz-slider-options="conformitySlider.options"></rzslider>
+                        </div>
                     </div>
 
                     <div class="sc-menu-desc">
