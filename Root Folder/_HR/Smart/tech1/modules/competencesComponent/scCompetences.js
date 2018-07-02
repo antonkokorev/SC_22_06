@@ -11,7 +11,7 @@ function dirCompetences() {
                 };
             });
 
-        function competencesController(requestService, updateSwiper, $timeout, positionsService) {
+        function competencesController(requestService, updateSwiper, $timeout, positionsService, formGoalsService) {
             this.data = {};
             console.log(positionsService.getLikedPositions());
 
@@ -25,6 +25,8 @@ function dirCompetences() {
             this.positionCurrent = null;
             this.currentIndex = null;
             this.currentPositionCompetences = [];
+            this.chosenIndicators = [];
+            this.chosenCompetences = [];
 
             var competences_h_slider = document.querySelector(".competences-by-position");
 
@@ -39,7 +41,26 @@ function dirCompetences() {
             this.competenceCurrent = null;
             this.currentCompetencesIndicators = [];
 
-            this.getCompetencesIndicators = function (index, competence) {
+            this.getCompetencesIndicators = function (event, index, competence) {
+                if (competence.sCompetentionType !== 'Corp') {
+
+                    if (event.currentTarget.classList.contains("chosen")) {
+                        event.currentTarget.classList.remove("chosen");
+
+                        let index = this.chosenCompetences.map(function (item) {
+                            return item.sCompetentionId;
+                        }).indexOf(competence.sCompetentionId);
+
+                        this.chosenCompetences.splice(index, 1);
+
+                    } else {
+                        event.currentTarget.classList.add("chosen");
+                        this.chosenCompetences.push(competence);
+                    }
+                    formGoalsService.setCompetences(this.chosenCompetences);
+                    return;
+                }
+
                 competences_h_slider.style.transform = "translateX(-66.6666%)";
                 this.competenceCurrent = competence;
                 this.currentCompetencesIndicators = this.data.aPositions[this.currentIndex].aCompetentions[index].aIndicators;
@@ -48,6 +69,25 @@ function dirCompetences() {
 
             this.getBack = function (n) {
                 competences_h_slider.style.transform = "translateX(-" + 33.3333 * n + "%)";
+            };
+
+            this.chooseIndicator = function (event, indicator, competence) {
+                if (event.target.classList.contains("chosen")) {
+                    event.target.classList.remove("chosen");
+
+                    let index = this.chosenIndicators.map(function (item) {
+                        return item.iIndicatorId;
+                    }).indexOf(indicator.iIndicatorId);
+
+                    this.chosenIndicators.splice(index, 1);
+
+                } else {
+                    event.target.classList.add("chosen");
+                    indicator.competenceName = competence.sCompetentionName;
+                    indicator.competenceId = competence.sCompetentionId;
+                    this.chosenIndicators.push(indicator);
+                }
+                formGoalsService.setIndicators(this.chosenIndicators);
             }
         }
     }());

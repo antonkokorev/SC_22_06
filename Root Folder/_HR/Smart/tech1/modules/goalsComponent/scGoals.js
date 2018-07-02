@@ -13,8 +13,9 @@ function dirGoals() {
                 };
             });
 
-        function goalsController() {
+        function goalsController(formGoalsService) {
 
+            this.indicators = formGoalsService.getIndicators();
 
         }
     }());

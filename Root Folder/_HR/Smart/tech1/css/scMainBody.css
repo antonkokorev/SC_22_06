@@ -1069,6 +1069,10 @@
     margin-top: 30px;
 }
 
+.competence-position-current.chosen .competence-position-heading {
+    color: #007aff;
+}
+
 .competence-position-heading {
     font-size: 30px;
     font-weight: bold;
@@ -1121,6 +1125,10 @@
     letter-spacing: 1px;
     text-align: left;
     color: #adb3bc;
+}
+
+.competence-about.chosen {
+    color: #007aff;
 }
 
 .competences-slide {
