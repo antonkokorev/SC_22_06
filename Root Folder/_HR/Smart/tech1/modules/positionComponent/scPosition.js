@@ -38,7 +38,7 @@ function dirPosition() {
             this.likeCurrentPosition = (e, index, position) => {
                 var data= this.posModelData.data;
                 (data[index].liked)?delete data[index].liked: data[index].liked=true;
-                this.countLike =getPosition.getLikedCount().length
+                this.countLike =getPosition.getLiked().length
                 /*$scope.likedPositions.push(position);
 
                 console.log($scope.likedPositions);

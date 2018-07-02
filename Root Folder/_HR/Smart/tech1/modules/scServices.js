@@ -38,7 +38,7 @@ function Services() {
         //====================================================================================================
         .service("getPosition", function (requestService, $state, updateSwiper, $timeout) {
             this.positionData = {data: []};
-            this.getLikedCount=()=>{
+            this.getLiked=()=>{
                 let pos=[];
                 for(let i=0;i<this.positionData.data.length;i++){
                     if(this.positionData.data[i].liked)
