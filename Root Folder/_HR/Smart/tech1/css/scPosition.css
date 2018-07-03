@@ -77,8 +77,7 @@
 
 .current_grade{
 
-    color: black;
-
+    color: black!important;
     border: 1px solid #015a9a;
 }
 
@@ -122,4 +121,142 @@
 
 .sc-grade.active {
     background: #007aff;
+}
+
+
+
+.sc-main-slide_pos{
+    width: 200%;
+    height: 50%;
+    display: flex;
+    overflow: hidden;
+    -webkit-transition: transform 0.4s;
+    -moz-transition: transform 0.4s;
+    -ms-transition: transform 0.4s;
+    -o-transition: transform 0.4s;
+    transition: transform 0.4s;
+}
+
+.green_box {
+    width: 50%;
+    /*background: green;*/
+    position: absolute;
+    height: calc(100% - 70px);
+    left: 50%;
+}
+
+
+.your-item__elements {
+    width: 100%;
+    display: flex;
+    margin-top: 20px;
+}
+
+.your-item__element:not(:last-child) {
+    margin-right: 15px;
+}
+
+.your-item__element>span,
+.your-item__element>b {
+    font-size: 16px;
+    font-weight: normal;
+    color: #8d8d8d;
+}
+
+.your-item__element>b {
+    color: #16181c;
+    font-weight: 600;
+}
+
+.main__wrapper h2{
+
+    font-size: 60px;
+    font-weight: bold;
+    letter-spacing: -2px;
+    color: #16181c;
+    margin-bottom: 20px
+}
+
+.your-item__element>span:last-child {
+
+    display: block;
+    font-size: 16px;
+    margin-top: -4px;
+    margin-left: 9px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: normal;
+    text-align: center;
+    float: right;
+
+}
+
+
+.main__nav{
+    margin-top: -20px;
+}
+.main__nav > ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px
+}
+
+.main__nav > ul > li > span {
+
+    font-size: 20px;
+    font-weight: bold;
+    color: #007aff;
+}
+.main__nav > ul > li:not(:last-child) {
+    margin-right: 30px;
+}
+.main__nav > ul > li.active > span{
+    color: #000;
+    border-bottom: 2px solid #000
+}
+
+.main-blocks {
+    display: flex;
+}
+.main-blocks > div {
+    width: 100%;
+}
+.main-blocks__column_right {
+    margin: 0 0 auto auto
+}
+.main-blocks__item {
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.4;
+    letter-spacing: normal;
+    color: #16181c;
+}
+.main__title_h3 {
+
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #16181c;
+}
+
+.smallMenu{
+       display: flex;
+       width: 100%;
+       height: 90px;
+   }
+
+.bigMenu{
+
+    width: 100%;
+    height: 180px;
 }

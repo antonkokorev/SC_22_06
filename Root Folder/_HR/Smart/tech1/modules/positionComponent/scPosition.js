@@ -17,7 +17,7 @@ function dirPosition() {
                 };
             });
 
-        function positionController($scope, requestService, positionsService, getPosition, getProfile, positionSettings,$timeout) {
+        function positionController($scope, requestService, positionsService, getPosition, getProfile, positionSettings,$timeout,updateSwiper,getCustomData) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
@@ -27,10 +27,48 @@ function dirPosition() {
             this.iGrade=getProfile.profileData.user.iGrade;
             this.posModelData=getModelData();
             this.positionSettings = positionSettings;//данные фильтрации
-            this.competences_h_slider = document.querySelector(".position-details");
+            this.competences_h_slider = document.querySelector(".sc-main-slide_pos");
             this.competenceCurrent = null;//текущая выбранная позиция
             this.currentIndex=null;//индекс выбранной позиции
             this.currentPositionCompetences=null;
+            this.positionDiscr={};
+            this.positionDiscrPart={};
+            this.selectedMenu=positionSettings.selectedMenu;
+
+            //============================================
+            //вотчеры
+            //============================================
+            $scope.$watch(function(){
+                return positionSettings.selectedMenu
+            }, function(newVal, oldVal){
+                try {
+                    that.selectedMenu = positionSettings.selectedMenu;
+                    switch (that.selectedMenu) {
+                        case 0:
+                            that.positionDiscrPart = that.positionDiscr.aCompetentions;
+                            break;
+
+                        case 1:
+                            that.positionDiscrPart =that.positionDiscr.aExperience;
+                            break;
+                        case 2:
+                            that.positionDiscrPart =that.positionDiscr.aSkills;
+                              break;
+                        case 3:
+                            that.positionDiscrPart =that.positionDiscr.aLanguages;
+                            break;
+                        case 4:
+                            that.positionDiscrPart =that.positionDiscr.aCertification
+                            break;
+
+
+                    }
+                }catch(e){}
+
+
+                
+            });
+
             //============================================
             //функции
             //============================================
@@ -40,16 +78,34 @@ function dirPosition() {
             //***********************************************************************************************************
 
 
+
+
+
+
             function getPositionCompetences  (index, position) {
-                debugger
+               console.log("");
 
-               that.competences_h_slider.style.transform = "translateX(-33.3333%)";
-                that.positionCurrent = position;
+                positionSettings.showMenu=true;
+                that.competences_h_slider.style.transform = "translateX(-50%)";
+                positionSettings.positionStaticMenu = position;
                 that.currentIndex = index;
-
-                that.currentPositionCompetences = [];
                 $timeout(updateSwiper, 0);
+                getCustomData.jobProfile(position.sJobProfileId).then(function(data){
+                    that.positionDiscr=data;
+                    that.positionDiscrPart = that.positionDiscr.aCompetentions;
+                    
+
+                        
+                        
+                        
+                    console.log(data)
+                })
+
+
             };
+
+
+
 
 
 
