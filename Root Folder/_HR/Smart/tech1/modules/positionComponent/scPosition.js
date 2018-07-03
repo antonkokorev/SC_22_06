@@ -47,7 +47,6 @@ function dirPosition() {
                         case 0:
                             that.positionDiscrPart = that.positionDiscr.aCompetentions;
                             break;
-
                         case 1:
                             that.positionDiscrPart =that.positionDiscr.aExperience;
                             break;
@@ -58,10 +57,8 @@ function dirPosition() {
                             that.positionDiscrPart =that.positionDiscr.aLanguages;
                             break;
                         case 4:
-                            that.positionDiscrPart =that.positionDiscr.aCertification
+                            that.positionDiscrPart =that.positionDiscr.aCertification;
                             break;
-
-
                     }
                 }catch(e){}
 
