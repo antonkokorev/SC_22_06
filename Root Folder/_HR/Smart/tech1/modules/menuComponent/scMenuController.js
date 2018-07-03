@@ -16,21 +16,22 @@ function dirMenu() {
 
             }]);
 
-        function menuController($scope, $location,menuDataService,$state,positionSettings, getProfile,formGoalsService, instrumentsService, requestService,$timeout) {
+        function menuController($scope, $location, menuDataService, updateSwiper, resetSwiper, $state, positionSettings, getProfile,getDict, formGoalsService, instrumentsService, requestService, $timeout) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
             //атрибуты
             //============================================
-            var that = this;
-            this.profileData=getProfile.profileData;
+            let that = this;
+            this.profileData = getProfile.profileData;
             this.state = $state.current.name;// текущий роутер
             this.data = menuDataService.data;//данные меню
+            this.userChoice=getDict;
             this.btnText = menuDataService.choiceData[1];// текст кнопки меню выбора
             this.positionSettings = positionSettings;// данные для передачи в страницу позиции
             this.sliders = menuDataService.sliderOptions;// данные настройки слайдеров
-            this.goals = formGoalsService.goals.goals; // получаем выбранные цели
-            console.log(this.goals);
+            this.goals = formGoalsService.goals; // получаем выбранные цели
+            //  console.log(this.goals);
 
             //============================================
             //функции
@@ -40,36 +41,36 @@ function dirMenu() {
             this.activeClass = activeClass;// активный пункт меню
             menuDataService.sliderOptions.openSlider.options.onChange = openSliderOnChange;// изменение слайдера openSlider
             menuDataService.sliderOptions.conformitySlider.options.onChange = conformitySliderOnChange;// изменение слайдера conformitySlider
-            this.changeModel=changeModel;//смена позиций модель/пользовательская
-            this.range = (n) =>{return new Array(n)};// генерация массива нужной размерности
-            this.gradeFltClick=gradeFltClick;
+            this.changeModel = changeModel;//смена позиций модель/пользовательская
+            this.range = (n) => {return new Array(n)};// генерация массива нужной размерности
+            this.gradeFltClick = gradeFltClick;//клик по фильтру грейда
             this.switchGoals = switchGoal; // переключаем цель
-
+            this.sw = () =>{$timeout(()=>{updateSwiper(); resetSwiper()},0)};//update swiper
             //***********************************************************************************************************
-            function gradeFltClick(index,value){
-                let num=that.profileData.user.iGrade -2+index;
-                (that.positionSettings.grade[num])?delete that.positionSettings.grade[num]:that.positionSettings.grade[num] =true;
+            function gradeFltClick(index, value) {
+                let num = that.profileData.user.iGrade - 2 + index;
+                (that.positionSettings.grade[num]) ? delete that.positionSettings.grade[num] : that.positionSettings.grade[num] = true;
+                that.sw();
             }
-
-
 
             function openSliderOnChange(a, b, c) {
                 that.positionSettings.open = [b, c];
+                that.sw();
             }
 
             function conformitySliderOnChange(a, b, c) {
                 that.positionSettings.conformity = [b, c];
+                that.sw();
             }
 
             function changePageChoice(item) {
-                console.log("changePageChoice");
                 that.page = (that.page == 1) ? 2 : 1;
                 that.btnText = menuDataService.choiceData[that.page];
             }
 
             function activeClass(page) {
                 that.state = $state.current.name;
-                var currentRoute = $location.path().substring(1) || 'profile';
+                let currentRoute = $location.path().substring(1) || 'profile';
                 return page === currentRoute ? 'active' : '';
             }
 
@@ -81,17 +82,19 @@ function dirMenu() {
                     });
                 }
             }
-            function changeModel (item) {
 
-                this.positionSettings.show=(item)? "user":"model";
-                $state.reload();
-            };
+            function changeModel(item) {
+                if(that.userChoice.sData.length!=0){
+                    that.positionSettings.show = (item) ? "user" : "model";
+                    $state.reload();
+                }
+           }
 
 
             function switchGoal(goalId) {
                 instrumentsData.getInstrumentsData(goalId);
-                console.log("switching");
-            };
+                // console.log("switching");
+            }
 
         }
 

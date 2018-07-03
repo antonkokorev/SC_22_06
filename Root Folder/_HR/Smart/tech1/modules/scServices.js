@@ -42,23 +42,30 @@ function Services() {
         .service("getDict", function (requestService, $state, updateSwiper, $timeout) {
 
             this.getSelected=()=>{
-                let pos=[];
-                for(let i=0;i<this.dictData.dict.aDoTags.length;i++){
-                    if(this.dictData.dict.aDoTags[i].selected)
-                    {
-                        pos.push(this.dictData.dict.aDoTags[i].iFamilyId)
+                try {
+                    var pos = [];
+                    for (let i = 0; i < this.dictData.dict.aDoTags.length; i++) {
+                        if (this.dictData.dict.aDoTags[i].selected) {
+                            pos.push(this.dictData.dict.aDoTags[i].iFamilyId)
+                        }
                     }
+                    var change = true;
+                    if (JSON.stringify(pos) == JSON.stringify(this.sData)) {
+                        change = false;
+                    }
+                    this.sData=pos;
+                }catch(e){
+                    pos=[];
+                   change=false;
                 }
-                var change=true;
-                if(JSON.stringify(pos)==JSON.stringify( this.sData))
-                {
-                    change=false;
-                }
-                this.sData=pos;
+
+
+
                 return {
-                            selected:pos,
+                            selected: this.sData,
                             isChange:change
                         };
+
             };
 
             this.sData=[]
@@ -75,8 +82,9 @@ function Services() {
         //====================================================================================================
         .service("getPosition", function (requestService, $state, updateSwiper, $timeout) {
             this.positionData = {data: []};
-
+            console.error("error");
             this.userPositionData = {data: []};
+
             this.getLiked=()=>{
                 let pos=[];
                 for(let i=0;i<this.positionData.data.length;i++){
