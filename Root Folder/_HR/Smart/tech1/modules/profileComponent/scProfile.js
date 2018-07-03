@@ -109,22 +109,24 @@ function dirProfile() {
             };
 
             this.addAboutMe = (e) => {
-                // if (this.aboutField && e.currentTarget.classList.contains("clicked")) {
-                //     console.log(this.additionalAchievement);
-                //
-                //     // Отправить запрос
-                //     if (this.aboutField.length > 0 ) {
-                //         console.log(this.aboutField);
-                //         this.aboutField = "";
-                //     }
-                //     e.currentTarget.classList.remove("clicked");
-                // } else {
-                //     e.currentTarget.classList.add("clicked");
-                // }
-                //
-                // this.showAboutForm = !this.showAboutForm;
-                // updateSwiper();
+                if (this.aboutField && e.currentTarget.classList.contains("clicked")) {
+                    console.log(this.additionalAchievement);
+
+                    // Отправить запрос
+                    if (this.aboutField.length > 0 ) {
+                        console.log(this.aboutField);
+                        this.aboutField = "";
+                    }
+                    e.currentTarget.classList.remove("clicked");
+                } else {
+                    e.currentTarget.classList.add("clicked");
+                }
+
+                this.showAboutForm = !this.showAboutForm;
+                updateSwiper();
             };
+
+            this.updateSw = updateSwiper;
         }
     }());
 }

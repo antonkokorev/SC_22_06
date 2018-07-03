@@ -294,20 +294,20 @@ function Services() {
         //====================================================================================================
         .service("iprService", function ($timeout, requestService, updateSwiper) {
             this.data = {
-                goal: {
-                    goalInfo: {},
-                    instruments: {
-                        books: [],
-                        videos: [],
-                        courses: [],
-                        advises: []
-                    }
-                }
+                goals: []
             };
             this.currentGoal = {goal: {}};
 
             this.setCurrentGoal = (goal) => {
                 this.currentGoal.goal = goal;
+            };
+
+            this.addToIpr = (obj) => {
+                this.data.goals.push(obj);
+            };
+
+            this.getIpr = (goal) => {
+
             }
         })
 }

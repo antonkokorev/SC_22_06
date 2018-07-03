@@ -1,6 +1,14 @@
-<div class="ipr" ng-repeat="goal in ipr.goalsData.goals">
-    <h3 class="ipr-heading"> {{$index + 1}}. {{goal.sCompetentionName}} </h3>
-    <p class="ipr-desc"> {{goal.sIndicatorName}}</p>
-    <p class="ipr-tool"> Инструменты </p>
-    <p class="delete-goal" ng-click="ipr.deleteGoal(goal)"> Удалить </p>
+<div class="ipr-h-slider">
+
+    <div class="ipr-h-slide">
+        <div class="ipr" ng-repeat="goal in ipr.goalsData.goals" ng-click="ipr.showIpr(goal)">
+            <h3 class="ipr-heading"> {{$index + 1}}. {{goal.sCompetentionName}} </h3>
+            <p class="ipr-desc"> {{goal.sIndicatorName}}</p>
+            <p class="ipr-tool"> Инструменты </p>
+            <p class="delete-goal" ng-click="ipr.deleteGoal(goal)"> Удалить </p>
+        </div>
+    </div>
+
+    <div class="ipr-h-slide"></div>
+
 </div>

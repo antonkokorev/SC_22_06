@@ -28,8 +28,12 @@
             <div class="competences-h-slide competences-by-position-competence">
                 <h2 class="sc-slide-heading competence-name"> {{competences.competenceCurrent.sCompetentionName}} </h2>
                 <div class="back-button-competence back2" ng-click="competences.getBack(1)"> Назад</div>
-                <p class="competence-about {{competences.getChosenIndicators(indicator)}}" ng-repeat="indicator in competences.currentCompetencesIndicators" ng-click="competences.chooseIndicator($event, indicator, competences.competenceCurrent)">
-                    {{indicator.sIndicatorName}} </p>
+
+                <div ng-repeat="indicator in competences.currentCompetencesIndicators">
+                    <p class="competence-about {{competences.getChosenIndicators(indicator)}}" ng-click="competences.chooseIndicator($event, indicator, competences.competenceCurrent)">
+                        {{indicator.sIndicatorName}} </p>
+                    <p class="competence-indicator-rating"> Оценка: <span class="{{competences.getColor(indicator.sIndicatorExistRating)}}">{{indicator.sIndicatorExistRating | number: 2}}</span> </p>
+                </div>
             </div>
         </div>
         <div class="competence-by-intersections">

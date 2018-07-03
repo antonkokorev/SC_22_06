@@ -38,21 +38,33 @@ function dirInstruments() {
             }
 
             this.addToIpr = (item) => {
-                iprService.data.goal.goalInfo = this.currentGoal.goal;
+
+                const obj = {
+                    goalInfo: {},
+                    instruments: {
+                        books: [],
+                        videos: [],
+                        courses: [],
+                        advises: []
+                    }
+                };
+
+                obj.goalInfo = this.currentGoal.goal;
+
                 if (item.sType === "book") {
-                    iprService.data.goal.instruments.books.push(item);
+                    obj.instruments.books.push(item);
                 }
                 if (item.sType === "video") {
-                    iprService.data.goal.instruments.videos.push(item);
+                    obj.instruments.videos.push(item);
                 }
                 if (item.sType === "course") {
-                    iprService.data.goal.instruments.courses.push(item);
+                    obj.instruments.courses.push(item);
                 }
                 if (item.sType === "advise") {
-                    iprService.data.goal.instruments.advises.push(item);
+                    obj.instruments.advises.push(item);
                 }
 
-                console.log(iprService.data);
+                console.log(obj);
             }
 
         }

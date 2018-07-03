@@ -127,6 +127,17 @@ function dirCompetences() {
             this.getBack = function (n) {
                 competences_h_slider.style.transform = "translateX(-" + 33.3333 * n + "%)";
             };
+
+            this.getColor = (i) => {
+                if (i > 3) {
+                    return "color-green";
+                } else if (i < 3) {
+                    return "color-red";
+                } else {
+                    return "color-yellow";
+                }
+            }
+
         }
     }());
 }

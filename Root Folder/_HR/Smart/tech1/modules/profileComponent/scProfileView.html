@@ -256,8 +256,11 @@
         <div class="slide-profile-col">
             <div class="slide-profile-about">
                 <h3 class="sc-slide-middle-heading"> О себе </h3>
+                <p class="profile-about-me">
+                    {{profile.aboutField}}
+                </p>
                 <form class="about-me-form">
-                    <textarea class="about-me-textarea" ng-model="profile.aboutField" ng-show="profile.showAboutForm"></textarea>
+                    <textarea class="about-me-textarea" ng-model="profile.aboutField" ng-change="profile.updateSw()" ng-if="profile.showAboutForm"></textarea>
                 </form>
                 <div class="add-additional-skill add-buttons color-blue" ng-click="profile.addAboutMe($event)"> Добавить</div>
             </div>

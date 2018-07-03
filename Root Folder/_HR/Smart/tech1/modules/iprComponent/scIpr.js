@@ -43,6 +43,12 @@ function dirIpr() {
 
                 formGoalsService.getGoals();
                 this.goalsData = formGoalsService.goalsData;
+            };
+
+            this.showIpr = (goal) => {
+                var hslider = document.querySelector(".ipr-h-slider");
+                hslider.style.transform = "translateX(-50%)";
+                console.log(goal);
             }
         }
 
