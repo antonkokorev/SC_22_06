@@ -35,8 +35,8 @@
         <div class="sc-menu-details">
             <div class="sc-menu-desc" ng-repeat="item in menu.data[2].child">
                 <p class="sc-menu-desc-p" ng-click="menu.changeModel($index)"
-                   ng-class="{colorBlue:(menu.positionSettings.show=='model'&& $index==0)||(menu.positionSettings.show=='user'&& $index==1)}">
-                    {{item.discr}}</p>
+                   ng-class="{colorBlue:(menu.positionSettings.show=='model'&& $index==0)||(menu.positionSettings.show=='user'&& $index==1),colorInviz:menu.userChoice.sData.length==0&& $index==1}">
+                   {{item.discr}}</p>
             </div>
 
             <div ng-click="menu.acFilter(menu.data[2])" class="sc-menu-desc ">

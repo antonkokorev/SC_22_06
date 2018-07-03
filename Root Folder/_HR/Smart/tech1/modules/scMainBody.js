@@ -111,7 +111,6 @@ function classMainBody() {
                 template: "<dir-choice page='appController.choiceCurentPage'></dir-choice>",
                 controller: allController,
                 onExit: function (getDict, getPosition) {
-                    console.error("test")
                     var result = getDict.getSelected();
                     if (result.isChange) {
                         getPosition.getUserPositionData(result.selected)

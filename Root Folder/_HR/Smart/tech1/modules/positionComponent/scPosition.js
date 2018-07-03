@@ -27,7 +27,7 @@ function dirPosition() {
             this.iGrade=getProfile.profileData.user.iGrade;
             this.posModelData=getModelData();
             this.positionSettings = positionSettings;//данные фильтрации
-            this.countLike = 0;//количество пролайканых позиций
+            this.countLike = getPosition.getLiked().length||0;//количество пролайканых позиций
             this.onlyLiked = "";
             //============================================
             //функции
