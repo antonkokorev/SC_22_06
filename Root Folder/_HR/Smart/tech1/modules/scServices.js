@@ -226,7 +226,7 @@ function Services() {
         .service("formGoalsService", function () {
             var indicators = [];
             var competences = [];
-            var goals = [];
+            this.goals = {goals:[]};
 
             this.setIndicators = (newIndicators) => {
                 indicators = newIndicators;
@@ -244,31 +244,21 @@ function Services() {
                 return competences;
             };
 
-            this.setGoals = () => {
-            };
-
             this.getGoals = () => {
-                goals = indicators.concat(competences);
-                return goals;
+                this.goals.goals = indicators.concat(competences);
             }
         })
         //====================================================================================================
-        .service("instrumentsService", function () {
-            var currentGoal = null;
-            var instruments = [];
-
-            this.setGoalAndInstruments = (obj) => {
-                currentGoal = obj.goal;
-                instruments = obj.instruments;
-            };
-
-            this.getGoal = () => {
-                return currentGoal;
-            };
-
-            this.getInstruments = () => {
-                return instruments;
-            };
+        .service("instrumentsService", function ($timeout,requestService) {
+            this.instrumentsData = {instruments: []};
+            this.getInstrumentsData = (goalId) => {
+                var url = that_.srvLink + "?entity=competentionInstrument&competentionId="+ goalId +"&user=";
+                requestService(url).then((data) => {
+                    this.instrumentsData.instruments = data;
+                    console.log(data);
+                    $timeout(updateSwiper, 0);
+                });
+            }
         })
 }
 
