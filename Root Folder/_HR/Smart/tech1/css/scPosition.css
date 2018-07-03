@@ -76,14 +76,22 @@
 }
 
 .current_grade{
-    background: #007aff;
+
+    color: black;
+
+    border: 1px solid #015a9a;
 }
 
 .next_grade{
     background: #063b75;
 }
 .prev_grade {
-    background: #6da8e8;
+    /* background: #6da8e8; */
+    color: black;
+    border: 1px solid #015a9a;
+    -webkit-box-shadow: 10px 10px 61px 5px rgba(0,0,0,0.35);
+    -moz-box-shadow: 10px 10px 61px 5px rgba(0,0,0,0.35);
+    box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.15);
 }
 
 

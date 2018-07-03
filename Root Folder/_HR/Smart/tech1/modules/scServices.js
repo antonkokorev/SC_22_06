@@ -29,7 +29,11 @@ function Services() {
                 show: "model",
                 conformity: [0, 100],
                 grade: {},
-                open: [0, 100]
+
+                open: [0, 100],
+                onlyLiked:false,
+                countLiked:0
+
             };
 
             this.getShow = function () {
@@ -43,7 +47,7 @@ function Services() {
 
         .service("getDict", function (requestService, $state, updateSwiper, $timeout) {
 
-            this.getSelected=()=>{
+            this.getSelected = () => {
                 try {
                     var pos = [];
                     for (let i = 0; i < this.dictData.dict.aDoTags.length; i++) {
@@ -56,19 +60,17 @@ function Services() {
                     if (JSON.stringify(pos) == JSON.stringify(this.sData)) {
                         change = false;
                     }
-                    this.sData=pos;
-                }catch(e){
-                    pos=[];
-                   change=false;
+                    this.sData = pos;
+                } catch (e) {
+                    pos = [];
+                    change = false;
                 }
 
 
-
-
                 return {
-                            selected: this.sData,
-                            isChange:change
-                        };
+                    selected: this.sData,
+                    isChange: change
+                };
 
 
             };
@@ -87,23 +89,27 @@ function Services() {
         //====================================================================================================
         .service("getPosition", function (requestService, $state, updateSwiper, $timeout) {
             this.positionData = {data: []};
-            console.error("error");
             this.userPositionData = {data: []};
 
+            this.getLiked = () => {
 
-            this.getLiked=()=>{
-                let pos=[];
-                for(let i=0;i<this.positionData.data.length;i++){
-                    if(this.positionData.data[i].liked)
-                    {
-                        
-
+                var  pos = [];
+                for (let i = 0; i < this.positionData.data.length; i++) {
+                    if (this.positionData.data[i].liked) {
                         pos.push(this.positionData.data[i].sJobProfileId)
                     }
-
                 }
+                for (let i = 0; i < this.userPositionData.data.length; i++) {
+                    if (this.userPositionData.data[i].liked) {
+                        pos.push(this.userPositionData.data[i].sJobProfileId)
+                    }
+                }
+
                 return pos;
             };
+
+
+
 
             this.getUserPositionData = (family) => {
                 let url = that_.srvLink + "?entity=positionNoCallback&requestType=list&family=" + JSON.stringify(family) + "&row=1_30&user=";

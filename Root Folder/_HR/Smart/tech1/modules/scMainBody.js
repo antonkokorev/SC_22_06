@@ -6,6 +6,7 @@ function classMainBody() {
 
     dirMenu.call(this);
     dirChoice.call(this);
+    dirSwHeader.call(this);
     dirProfile.call(this);
     dirPosition.call(this);
     dirHeader.call(this);
@@ -38,6 +39,7 @@ function classMainBody() {
             '   <dir-header class="sc-header"></dir-header>' +
             '   <dir-main-menu page="appController.choiceCurentPage" id="id_menu" class="sc-menu"></dir-main-menu>' +
             '   <main id="id_main" class="sc-main enter-active">' +
+            '   <dir-sw-header style="background:red;width: 100%;height: 90px;"></dir-sw-header>' +
             '   <div id="swiper-container" class="swiper-auto-container">' +
             '       <div class="swiper-wrapper">' +
             '           <div class="swiper-slide">' +
@@ -46,7 +48,7 @@ function classMainBody() {
             '           </div>' +
             //'       <div class="swiper-scrollbar"></div>' +
             '   </div>' +
-            '</main>' +
+            '</div>' +
             '</div>';
 
 
@@ -83,6 +85,7 @@ function classMainBody() {
             "scApp.choice",
             "scApp.profile",
             "scApp.position",
+            "scApp.swHeader",
             "scApp.competences",
             "scApp.goals",
             "scApp.instruments",
