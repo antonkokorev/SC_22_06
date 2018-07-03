@@ -37,34 +37,21 @@ function dirInstruments() {
                 underline.style.left = 25 * index + "%";
             }
 
+
+
+
             this.addToIpr = (item) => {
 
-                const obj = {
-                    goalInfo: {},
-                    instruments: {
-                        books: [],
-                        videos: [],
-                        courses: [],
-                        advises: []
-                    }
-                };
+                this.ipr = iprService.data;
 
-                obj.goalInfo = this.currentGoal.goal;
+                const indexOfCurrentGoal = this.ipr.goals.map(function (item) {
+                    return item.iIndicatorId;
+                }).indexOf(this.currentGoal.iIndicatorId);
 
-                if (item.sType === "book") {
-                    obj.instruments.books.push(item);
-                }
-                if (item.sType === "video") {
-                    obj.instruments.videos.push(item);
-                }
-                if (item.sType === "course") {
-                    obj.instruments.courses.push(item);
-                }
-                if (item.sType === "advise") {
-                    obj.instruments.advises.push(item);
-                }
 
-                console.log(obj);
+                this.ipr.goals[indexOfCurrentGoal].books.push(item);
+
+                iprService.addToIpr();
             }
 
         }
