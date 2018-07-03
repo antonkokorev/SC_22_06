@@ -18,15 +18,13 @@
         </h2>
         <div class="sc-menu-details" ng-repeat="item in menu.data[1].child">
             <div class="sc-menu-desc">
-                <h3 class="sc-menu-desc-heading" ng-click="menu.changePageChoice()"  ng-class="{colorBlue:menu.page==( $index+1) }">{{item.name}}</h3>
+                <h3 class="sc-menu-desc-heading" ng-click="menu.changePageChoice()"
+                    ng-class="{colorBlue:menu.page==( $index+1) }">{{item.name}}</h3>
                 <p class="sc-menu-desc-p">{{item.discr}}</p>
             </div>
         </div>
     </a>
 </div>
-
-
-
 
 
 <!--Пункт меню 03 Позиции-->
@@ -36,7 +34,9 @@
         </h2>
         <div class="sc-menu-details">
             <div class="sc-menu-desc" ng-repeat="item in menu.data[2].child">
-                <p class="sc-menu-desc-p" ng-click="menu.changeModel($index)" ng-class="{colorBlue:(menu.positionSettings.show=='model'&& $index==0)||(menu.positionSettings.show=='user'&& $index==1)}">{{item.discr}}</p>
+                <p class="sc-menu-desc-p" ng-click="menu.changeModel($index)"
+                   ng-class="{colorBlue:(menu.positionSettings.show=='model'&& $index==0)||(menu.positionSettings.show=='user'&& $index==1)}">
+                    {{item.discr}}</p>
             </div>
 
             <div ng-click="menu.acFilter(menu.data[2])" class="sc-menu-desc ">
@@ -51,16 +51,20 @@
                 <div class="sc-menu-desc" ng-repeat="item in menu.data[2].childFlt" ng-if="item.type !== 'slider'">
                     <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
                     <div class="sc-grade-filter">
-                        <div class="sc-grade">11</div>
-                        <div class="sc-grade">12</div>
-                        <div class="sc-grade">13</div>
+                        <div class="sc-grade"
+                             ng-class="{scGradeGray:menu.positionSettings.grade[menu.profileData.user.iGrade -2+$index]}"
+                             ng-click="menu.gradeFltClick($index,$value)"
+                             ng-repeat="gr in menu.range(5) track by $index">{{menu.profileData.user.iGrade -2+$index}}
+                        </div>
                     </div>
                 </div>
 
                 <div class="sc-menu-desc" ng-repeat="item in menu.data[2].childFlt" ng-if="item.type === 'slider'">
                     <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
                     <div class="filter-range range-slider-grade">
-                        <rzslider rz-slider-model="menu.sliders[item.id].minValue" rz-slider-high="menu.sliders[item.id].maxValue" rz-slider-options="menu.sliders[item.id].options"></rzslider>
+                        <rzslider rz-slider-model="menu.sliders[item.id].minValue"
+                                  rz-slider-high="menu.sliders[item.id].maxValue"
+                                  rz-slider-options="menu.sliders[item.id].options"></rzslider>
                     </div>
                 </div>
 
@@ -73,18 +77,8 @@
 </div>
 
 
-
-
-
-
-
-
-
-
-
-
 <!--Пункт меню 04 Компетенции-->
-<div ng-class="menu.activeClass('competences')"  class="sc-menu-li">
+<div ng-class="menu.activeClass('competences')" class="sc-menu-li">
     <a ui-sref="{{menu.data[3].page}}">
         <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[3].num}}</span>{{menu.data[3].item}}
         </h2>
@@ -104,7 +98,8 @@
 
 <div ng-class="menu.activeClass('targets')" class="sc-menu-li">
     <a ui-sref="{{menu.data[4].page}}">
-        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[4].num}}</span>{{menu.data[4].item}} </h2>
+        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[4].num}}</span>{{menu.data[4].item}}
+        </h2>
         <div class="sc-menu-details">
             <div class="sc-menu-desc">
                 <p class="sc-menu-desc-p">{{menu.data[4].discr}}</p>
@@ -116,14 +111,16 @@
 <!--Пункт меню 06 Инструменты-->
 <div ng-class="menu.activeClass('instruments')" class="sc-menu-li">
     <a ui-sref="{{menu.data[5].page}}" ng-click="menu.getGoals()">
-        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[5].num}}</span>{{menu.data[5].item}} </h2>
+        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[5].num}}</span>{{menu.data[5].item}}
+        </h2>
         <div class="sc-menu-details">
             <div class="sc-menu-desc">
-                <p class="sc-menu-desc-p" ng-repeat="goal in menu.goals" ng-click="menu.switchGoal(goal)"> Цель {{$index + 1}}</p>
+                <p class="sc-menu-desc-p" ng-repeat="goal in menu.goals" ng-click="menu.switchGoal(goal)"> Цель {{$index
+                    + 1}}</p>
             </div>
 
             <!--<div class="sc-menu-desc" ng-repeat="item in menu.data[5].child">-->
-                <!--<h3 class="sc-menu-desc-heading">{{item.name}}</h3>-->
+            <!--<h3 class="sc-menu-desc-heading">{{item.name}}</h3>-->
             <!--</div>-->
 
         </div>
@@ -133,7 +130,8 @@
 <!--Пункт меню 07 ИПР-->
 <div ng-class="menu.activeClass('ipr')" class="sc-menu-li get-apply-button">
     <a ui-sref="{{menu.data[6].page}}">
-        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[6].num}}</span>{{menu.data[6].item}} </h2>
+        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[6].num}}</span>{{menu.data[6].item}}
+        </h2>
         <div class="sc-menu-details">
             <div class="sc-menu-desc" ng-repeat="item in menu.data[6].child">
                 <h3 class="sc-menu-desc-heading">{{item.name}}</h3>

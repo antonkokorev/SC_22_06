@@ -16,19 +16,19 @@ function dirMenu() {
 
             }]);
 
-        function menuController($scope, $location,menuDataService,$state,positionSettings, formGoalsService, instrumentsService, requestService,$timeout) {
+        function menuController($scope, $location,menuDataService,$state,positionSettings, getProfile,formGoalsService, instrumentsService, requestService,$timeout) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
             //атрибуты
             //============================================
             var that = this;
+            this.profileData=getProfile.profileData;
             this.state = $state.current.name;// текущий роутер
             this.data = menuDataService.data;//данные меню
             this.btnText = menuDataService.choiceData[1];// текст кнопки меню выбора
             this.positionSettings = positionSettings;// данные для передачи в страницу позиции
             this.sliders = menuDataService.sliderOptions;// данные настройки слайдеров
-
             //============================================
             //функции
             //============================================
@@ -38,7 +38,16 @@ function dirMenu() {
             menuDataService.sliderOptions.openSlider.options.onChange = openSliderOnChange;// изменение слайдера openSlider
             menuDataService.sliderOptions.conformitySlider.options.onChange = conformitySliderOnChange;// изменение слайдера conformitySlider
             this.changeModel=changeModel;//смена позиций модель/пользовательская
+            this.range = (n) =>{return new Array(n)};// генерация массива нужной размерности
+            this.gradeFltClick=gradeFltClick;
             //***********************************************************************************************************
+            function gradeFltClick(index,value){
+                let num=that.profileData.user.iGrade -2+index;
+                (that.positionSettings.grade[num])?delete that.positionSettings.grade[num]:that.positionSettings.grade[num] =true;
+            }
+
+
+
             function openSliderOnChange(a, b, c) {
                 that.positionSettings.open = [b, c];
             }
