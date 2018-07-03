@@ -29,7 +29,6 @@ function dirMenu() {
             this.positionSettings = positionSettings;// данные для передачи в страницу позиции
             this.sliders = menuDataService.sliderOptions;// данные настройки слайдеров
             this.goals = formGoalsService.goals.goals; // получаем выбранные цели
-            console.log(this.goals);
 
             //============================================
             //функции

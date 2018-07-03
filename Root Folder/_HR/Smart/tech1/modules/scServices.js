@@ -23,16 +23,18 @@ function Services() {
             };
         })
         //====================================================================================================
-        .factory("positionSettings",function(){
+        .factory("positionSettings", function () {
 
-            this.positionSettings={
+            this.positionSettings = {
                 show: "model",
-                conformity:[0,100],
-                grade:[],
-                open:[0,100]
+                conformity: [0, 100],
+                grade: [],
+                open: [0, 100]
             };
 
-            this.getShow = function() { return this.positionSettings.show };
+            this.getShow = function () {
+                return this.positionSettings.show
+            };
 
             return this.positionSettings;
 
@@ -41,27 +43,25 @@ function Services() {
 
         .service("getDict", function (requestService, $state, updateSwiper, $timeout) {
 
-            this.getSelected=()=>{
-                let pos=[];
-                for(let i=0;i<this.dictData.dict.aDoTags.length;i++){
-                    if(this.dictData.dict.aDoTags[i].selected)
-                    {
+            this.getSelected = () => {
+                let pos = [];
+                for (let i = 0; i < this.dictData.dict.aDoTags.length; i++) {
+                    if (this.dictData.dict.aDoTags[i].selected) {
                         pos.push(this.dictData.dict.aDoTags[i].iFamilyId)
                     }
                 }
-                var change=true;
-                if(JSON.stringify(pos)==JSON.stringify( this.sData))
-                {
-                    change=false;
+                var change = true;
+                if (JSON.stringify(pos) == JSON.stringify(this.sData)) {
+                    change = false;
                 }
-                this.sData=pos;
+                this.sData = pos;
                 return {
-                            selected:pos,
-                            isChange:change
-                        };
+                    selected: pos,
+                    isChange: change
+                };
             };
 
-            this.sData=[]
+            this.sData = []
             this.dictData = {dict: []};
             this.getDictData = () => {
                 var url = that_.srvLink + "?entity=dictNoCallback&user=";
@@ -77,11 +77,10 @@ function Services() {
             this.positionData = {data: []};
 
             this.userPositionData = {data: []};
-            this.getLiked=()=>{
-                let pos=[];
-                for(let i=0;i<this.positionData.data.length;i++){
-                    if(this.positionData.data[i].liked)
-                    {
+            this.getLiked = () => {
+                let pos = [];
+                for (let i = 0; i < this.positionData.data.length; i++) {
+                    if (this.positionData.data[i].liked) {
 
                         pos.push(this.positionData.data[i].sJobProfileId)
                     }
@@ -91,7 +90,7 @@ function Services() {
             };
 
             this.getUserPositionData = (family) => {
-                let url = that_.srvLink + "?entity=positionNoCallback&requestType=list&family="+JSON.stringify(family)+"&row=1_30&user=";
+                let url = that_.srvLink + "?entity=positionNoCallback&requestType=list&family=" + JSON.stringify(family) + "&row=1_30&user=";
                 requestService(url).then((data) => {
                     this.userPositionData.data = data;
                     if ($state.current.name == "position")
@@ -226,7 +225,7 @@ function Services() {
         .service("formGoalsService", function () {
             var indicators = [];
             var competences = [];
-            this.goals = {goals:[]};
+            this.goals = {goals: []};
 
             this.setIndicators = (newIndicators) => {
                 indicators = newIndicators;
@@ -249,10 +248,10 @@ function Services() {
             }
         })
         //====================================================================================================
-        .service("instrumentsService", function ($timeout,requestService) {
+        .service("instrumentsService", function ($timeout, requestService) {
             this.instrumentsData = {instruments: []};
             this.getInstrumentsData = (goalId) => {
-                var url = that_.srvLink + "?entity=competentionInstrument&competentionId="+ goalId +"&user=";
+                var url = that_.srvLink + "?entity=competentionInstrument&competentionId=" + goalId + "&user=";
                 requestService(url).then((data) => {
                     this.instrumentsData.instruments = data;
                     console.log(data);
