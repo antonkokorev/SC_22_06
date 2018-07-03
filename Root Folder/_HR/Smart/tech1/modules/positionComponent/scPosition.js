@@ -17,7 +17,7 @@ function dirPosition() {
                 };
             });
 
-        function positionController($scope, requestService, positionsService, getPosition, getProfile, positionSettings) {
+        function positionController($scope, requestService, positionsService, getPosition, getProfile, positionSettings,$timeout) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
@@ -27,14 +27,35 @@ function dirPosition() {
             this.iGrade=getProfile.profileData.user.iGrade;
             this.posModelData=getModelData();
             this.positionSettings = positionSettings;//данные фильтрации
-
+            this.competences_h_slider = document.querySelector(".position-details");
+            this.competenceCurrent = null;//текущая выбранная позиция
+            this.currentIndex=null;//индекс выбранной позиции
+            this.currentPositionCompetences=null;
             //============================================
             //функции
             //============================================
             this.likeCurrentPosition=likeCurrentPosition;// добавление в избранное
-
+            this.getPositionCompetences=getPositionCompetences;//переход на описание позиции
             this.setFilter=setFilter;
             //***********************************************************************************************************
+
+
+            function getPositionCompetences  (index, position) {
+                debugger
+
+               that.competences_h_slider.style.transform = "translateX(-33.3333%)";
+                that.positionCurrent = position;
+                that.currentIndex = index;
+
+                that.currentPositionCompetences = [];
+                $timeout(updateSwiper, 0);
+            };
+
+
+
+
+
+
             function setFilter(obj){
                return function (structure) {
                         let tags = that.posModelData;
@@ -47,7 +68,6 @@ function dirPosition() {
 
                         return result;
                     }
-
             }
             function getModelData(){
                 return (positionSettings.show=="model")?getPosition.positionData:getPosition.userPositionData;

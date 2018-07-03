@@ -1,46 +1,48 @@
 <div id="sc-position" class="sc-main-slide">
     <div class="position-slide sc-v-slide">
         <div class="slide-row">
-            <div class="slide-position-col">
-                <!--<h2 class="sc-slide-heading"> Для вас </h2>-->
 
-                <div class="position-all">
 
-                    <div class="sc-position__item"  ng-repeat="positions in positionCtrl.posModelData.data  |  filter:positionCtrl.setFilter()">
-                        <div class="sc-position__icon-block" ng-click="positionCtrl.likeCurrentPosition($event, $index, positions)">
-                            <i class="fa-heart" ng-class="{far: !positions.liked, fas: positions.liked}" ></i>
-                        </div>
-                        <div class="sc-position__content">
-                            <div class="sc-position__title">{{positions.sJobProfileName}}</div>
-                            <div class="sc-position__elements">
-                                <div class="sc-position__element">
-                                    <span class="sc-position__label">Грейд</span>
-                                    <span class="sc-position__grade" ng-class="{current_grade: positions.iGrade==positionCtrl.iGrade, next_grade: positions.iGrade>positionCtrl.iGrade,prev_grade:positions.iGrade<positionCtrl.iGrade}" >{{positions.iGrade}}</span>
-                                </div>
-                                <div class="sc-position__element">
-                                    <span class="sc-position__label"> Соответсвие:</span>
-                                    <span class="sc-position__conformity"> {{100*positions.iProbability| number:0}}% </span>
-                                </div>
-                                <div class="sc-position__element">
-                                    <span class="sc-position__label"> Открытость:</span>
-                                    <span class="sc-position__turnover"> {{positions.iTurnover}}</span>
+            <div class="position-details">
+
+                    <div class="position-all">
+
+                        <div class="sc-position__item"  ng-repeat="positions in positionCtrl.posModelData.data  |  filter:positionCtrl.setFilter()">
+                            <div class="sc-position__icon-block" ng-click="positionCtrl.likeCurrentPosition($event, $index, positions)">
+                                <i class="fa-heart" ng-class="{far: !positions.liked, fas: positions.liked}" ></i>
+                            </div>
+                            <div ng-click="positionCtrl.getPositionCompetences($index,positions)" class="sc-position__content">
+                                <div class="sc-position__title">{{positions.sJobProfileName}}</div>
+                                <div class="sc-position__elements">
+                                    <div class="sc-position__element">
+                                        <span class="sc-position__label">Грейд</span>
+                                        <span class="sc-position__grade current_grade"  >{{positions.iGrade}}</span>
+                                    </div>
+                                    <div class="sc-position__element">
+                                        <span class="sc-position__label"> Соответсвие:</span>
+                                        <span class="sc-position__conformity"> {{100*positions.iProbability| number:0}}% </span>
+                                    </div>
+                                    <div class="sc-position__element">
+                                        <span class="sc-position__label"> Открытость:</span>
+                                        <span class="sc-position__turnover"> {{positions.iTurnover}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
 
-                    <!--div class="position choose-position" ng-repeat="position in position.data">-->
-                    <!--<h3 class="position-heading"> {{position.sJobProfileId}}</h3>-->
-                    <!--<p class="position-learn-more">{{position.sJobProfileName}} </p>-->
-                    <!--<p class="position-learn-more">-->
-                    <!--<span class="position-more">Грейд {{position.iGrade}}</span>-->
-                    <!--<span class="position-more">Оборачиваемость {{position.iTurnover}}</span>-->
-                    <!--</p>-->
-                    <!--</div>-->
+                <div style="color:red" class="competences-h-slide current-position-details">
 
                 </div>
+
+
+
             </div>
+
+
+
+
         </div>
 
     </div>
