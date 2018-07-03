@@ -14,40 +14,31 @@ function dirProfile() {
                 };
             });
 
-        function profileController($scope, $timeout, requestService, updateSwiper, timelineService,getProfile) {
-            var that=this;
-            this.data=getProfile.profileData;
+        function profileController($scope, $state, $timeout, requestService, updateSwiper, timelineService, getProfile) {
+            var that = this;
+            this.data = getProfile.profileData;
 
 
             console.warn('profileController');
             this.competencesTypes = ["Corp", "Role", "Func"];
             //this.data =$scope.data ;
             this.showAdditionalSkill = false;
+            this.showAdditionalAchievement = false;
             this.additionalSkills = [];
             this.additionalSkill = {};
+
+            this.additionalAchievements = [];
+            this.additionalAchievement = {};
 
             this.range = function (n) {
                 return new Array(n);
             };
 
-
-
-
-            /*   var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=empProfileNoCallback&user=";
-               requestService(url).then((data) => {
-                   this.data = data;
-                   $timeout(function() {
-                       updateSwiper();
-                       timelineService.renderTimelineLine(".profile-education");
-                       timelineService.renderTimelineLine(".profile-results");
-                   }, 0);
-                   console.log({"data": data})
-               });*/
-
-            $(window).resize(function() {
+            $(window).resize(function () {
                 timelineService.renderTimelineLine(".profile-education");
                 timelineService.renderTimelineLine(".profile-results");
             });
+
 
             var addSkillLabels = document.querySelectorAll(".add-skill-label");
 
@@ -60,13 +51,13 @@ function dirProfile() {
                         this.additionalSkill = {};
                     }
 
-                    e.target.classList.remove("clicked");
+                    e.currentTarget.classList.remove("clicked");
 
                     addSkillLabels.forEach((label) => {
                         label.classList.remove("checked");
                     });
                 } else {
-                    e.target.classList.add("clicked");
+                    e.currentTarget.classList.add("clicked");
                 }
                 this.showAdditionalSkill = !this.showAdditionalSkill;
 
@@ -85,6 +76,23 @@ function dirProfile() {
                     }
                 });
             }
+
+            this.addNewAchievement = (e) => {
+                if (this.additionalAchievement && e.currentTarget.classList.contains("clicked")) {
+
+                    // Отправить запрос
+                    if (this.additionalAchievement.name && this.additionalAchievement.when && this.additionalAchievement.where) {
+                        this.additionalAchievements.push(this.additionalAchievement);
+                        console.log(this.additionalAchievements);
+                        this.additionalAchievement = {};
+                    }
+                    e.currentTarget.classList.remove("clicked");
+                } else {
+                    e.currentTarget.classList.add("clicked");
+                }
+                this.showAdditionalAchievement = !this.showAdditionalAchievement;
+                updateSwiper();
+            };
         }
     }());
 }

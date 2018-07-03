@@ -197,7 +197,7 @@ function Services() {
                             "left": line_x_offset
                         })
                     } catch (e) {
-                        console.log("ошибка timelineService")
+
                     }
                 }
             }

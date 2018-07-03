@@ -46,7 +46,7 @@ function dirMenu() {
             this.changeModel = changeModel;//смена позиций модель/пользовательская
             this.range = (n) => {return new Array(n)};// генерация массива нужной размерности
             this.gradeFltClick = gradeFltClick;//клик по фильтру грейда
-            this.switchGoals = switchGoal; // переключаем цель
+            this.switchGoal = switchGoal; // переключаем цель
             this.sw = () =>{$timeout(()=>{updateSwiper(); resetSwiper()},0)};//update swiper
 
             //***********************************************************************************************************

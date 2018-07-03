@@ -86,7 +86,7 @@
             <div class="sc-menu-desc">
                 <p class="sc-menu-desc-p">{{menu.data[3].discr}}</p>
             </div>
-            <div class="sc-menu-desc " ng-repeat="item  in menu.data[3].child ">
+            <div class="sc-menu-desc " ng-repeat="item  in menu.data[3].child " ng-if="$index === 0">
                 <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
                 <p class="sc-menu-desc-p">{{item.discr}}</p>
             </div>
