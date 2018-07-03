@@ -14,7 +14,7 @@ function dirInstruments() {
                 };
             });
 
-        function instrumentsController($timeout, requestService, updateSwiper, formGoalsService, instrumentsService) {
+        function instrumentsController($timeout, requestService, updateSwiper, formGoalsService, instrumentsService, iprService) {
 
             this.preloader = instrumentsService.preloader;
             this.currentGoal = instrumentsService.currentGoal;
@@ -35,6 +35,24 @@ function dirInstruments() {
             this.switchTool = (index) => {
                 sections.style.transform = "translateX(-" + 25 * index + "%)";
                 underline.style.left = 25 * index + "%";
+            }
+
+            this.addToIpr = (item) => {
+                iprService.data.goal.goalInfo = this.currentGoal.goal;
+                if (item.sType === "book") {
+                    iprService.data.goal.instruments.books.push(item);
+                }
+                if (item.sType === "video") {
+                    iprService.data.goal.instruments.videos.push(item);
+                }
+                if (item.sType === "course") {
+                    iprService.data.goal.instruments.courses.push(item);
+                }
+                if (item.sType === "advise") {
+                    iprService.data.goal.instruments.advises.push(item);
+                }
+
+                console.log(iprService.data);
             }
 
         }

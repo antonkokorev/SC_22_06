@@ -29,9 +29,11 @@ function Services() {
                 show: "model",
                 conformity: [0, 100],
                 grade: {},
+
                 open: [0, 100],
                 onlyLiked:false,
                 countLiked:0
+
             };
 
             this.getShow = function () {
@@ -271,7 +273,7 @@ function Services() {
         //====================================================================================================
         .service("instrumentsService", function ($timeout, requestService, updateSwiper) {
             this.instrumentsData = {instruments: []};
-            this.currentGoal = {goal: {}};
+            this.currentGoal = {goal: {}, label: ""};
             this.preloader = {show: false};
 
             this.getInstrumentsData = (goal) => {
@@ -283,6 +285,26 @@ function Services() {
                     $timeout(updateSwiper, 0);
                 });
             }
+
+            this.setCurrentGoal = (goal, i) => {
+                this.currentGoal.goal = goal;
+                this.currentGoal.label = "Цель №" + i;
+            }
+        })
+        //====================================================================================================
+        .service("iprService", function ($timeout, requestService, updateSwiper) {
+            this.data = {
+                goal: {
+                    goalInfo: {},
+                    instruments: {
+                        books: [],
+                        videos: [],
+                        courses: [],
+                        advises: []
+                    }
+                }
+            };
+            this.currentGoal = {goal: {}};
 
             this.setCurrentGoal = (goal) => {
                 this.currentGoal.goal = goal;
