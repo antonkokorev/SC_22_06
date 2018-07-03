@@ -42,14 +42,12 @@ function dirMenu() {
             this.changeModel=changeModel;//смена позиций модель/пользовательская
             this.range = (n) =>{return new Array(n)};// генерация массива нужной размерности
             this.gradeFltClick=gradeFltClick;
-            this.switchGoals = switchGoal; // переключаем цель
+            this.switchGoal = switchGoal; // переключаем цель
             //***********************************************************************************************************
             function gradeFltClick(index,value){
                 let num=that.profileData.user.iGrade -2+index;
                 (that.positionSettings.grade[num])?delete that.positionSettings.grade[num]:that.positionSettings.grade[num] =true;
             }
-
-
 
             function openSliderOnChange(a, b, c) {
                 that.positionSettings.open = [b, c];
@@ -94,7 +92,6 @@ function dirMenu() {
                 if (q > 0) {
                     return "(" + q + ")";
                 }
-
             }
 
         }
