@@ -159,25 +159,26 @@
             <div class="slide-profile-achievements">
                 <h3 class="sc-slide-middle-heading"> Достижения в развитии </h3>
 
-                <div class="timeline">
-                    <div class="timeline-line"></div>
-                    <div class="timeline-element" ng-repeat="achievement in profile.additionalAchievements">
-                        <div class="timeline-when"> {{achievement.when}} </div>
-                        <div class="timeline-center">
-                            <div class="timeline-circle"></div>
-                        </div>
-                        <div class="timeline-what">
-                            <h3 class="timeline-what-heading"> {{}} </h3>
-                            <p class="timeline-what-text"> {{job.sPosition}}, {{job.sDepartment}} </p>
+                <div class="profile-achievements">
+                    <div class="timeline">
+                        <div class="timeline-line" ng-show="profile.showAchievementLine"></div>
+                        <div class="timeline-element" ng-repeat="achievement in profile.additionalAchievements">
+                            <div class="timeline-when"> {{achievement.when}} </div>
+                            <div class="timeline-center">
+                                <div class="timeline-circle"></div>
+                            </div>
+                            <div class="timeline-what">
+                                <h3 class="timeline-what-heading"> {{achievement.what}} </h3>
+                                <p class="timeline-what-text"> {{achievement.where}} </p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="add-additional-skill add-buttons color-blue" ng-click="profile.addNewAchievement($event)"> Добавить</div>
                 <form class="add-achievement-form" ng-show="profile.showAdditionalAchievement">
                     <div class="ach-form-row">
                         <input type="text" class="add-new-achievement-input" placeholder="Достижение"
-                               ng-model="profile.additionalAchievement.name">
+                               ng-model="profile.additionalAchievement.what">
                         <div class="new-ach-underline">
                             <div class="underline"></div>
                         </div>
@@ -197,6 +198,7 @@
                         </div>
                     </div>
                 </form>
+                <div class="add-additional-ach add-buttons color-blue" ng-click="profile.addNewAchievement($event)"> Добавить</div>
             </div>
         </div>
 
@@ -254,7 +256,10 @@
         <div class="slide-profile-col">
             <div class="slide-profile-about">
                 <h3 class="sc-slide-middle-heading"> О себе </h3>
-                <div class="add-additional-skill add-buttons color-blue"> Добавить</div>
+                <form class="about-me-form">
+                    <textarea class="about-me-textarea" ng-model="profile.aboutField" ng-show="profile.showAboutForm"></textarea>
+                </form>
+                <div class="add-additional-skill add-buttons color-blue" ng-click="profile.addAboutMe($event)"> Добавить</div>
             </div>
         </div>
     </div>

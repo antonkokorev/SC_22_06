@@ -29,6 +29,10 @@ function dirProfile() {
 
             this.additionalAchievements = [];
             this.additionalAchievement = {};
+            this.showAchievementLine = false;
+
+            this.aboutField = "";
+            this.showAboutForm = false;
 
             this.range = function (n) {
                 return new Array(n);
@@ -37,6 +41,7 @@ function dirProfile() {
             $(window).resize(function () {
                 timelineService.renderTimelineLine(".profile-education");
                 timelineService.renderTimelineLine(".profile-results");
+                timelineService.renderTimelineLine(".profile-achievement");
             });
 
 
@@ -79,19 +84,46 @@ function dirProfile() {
 
             this.addNewAchievement = (e) => {
                 if (this.additionalAchievement && e.currentTarget.classList.contains("clicked")) {
+                    console.log(this.additionalAchievement);
 
                     // Отправить запрос
-                    if (this.additionalAchievement.name && this.additionalAchievement.when && this.additionalAchievement.where) {
+                    if (this.additionalAchievement.what && this.additionalAchievement.when && this.additionalAchievement.where) {
                         this.additionalAchievements.push(this.additionalAchievement);
                         console.log(this.additionalAchievements);
                         this.additionalAchievement = {};
+
+                        if (this.additionalAchievements.length > 1) {
+                            this.showAchievementLine = true;
+                            $timeout(function() {
+                                timelineService.renderTimelineLine(".profile-achievements");
+                            }, 0)
+                        }
                     }
                     e.currentTarget.classList.remove("clicked");
                 } else {
                     e.currentTarget.classList.add("clicked");
                 }
+
                 this.showAdditionalAchievement = !this.showAdditionalAchievement;
                 updateSwiper();
+            };
+
+            this.addAboutMe = (e) => {
+                // if (this.aboutField && e.currentTarget.classList.contains("clicked")) {
+                //     console.log(this.additionalAchievement);
+                //
+                //     // Отправить запрос
+                //     if (this.aboutField.length > 0 ) {
+                //         console.log(this.aboutField);
+                //         this.aboutField = "";
+                //     }
+                //     e.currentTarget.classList.remove("clicked");
+                // } else {
+                //     e.currentTarget.classList.add("clicked");
+                // }
+                //
+                // this.showAboutForm = !this.showAboutForm;
+                // updateSwiper();
             };
         }
     }());

@@ -556,6 +556,10 @@
     background: #FF8A65;
 }
 
+.add-additional-ach {
+    margin-top: 25px;
+}
+
 .add-skill-checkbox {
   display: flex;
   align-items: center;

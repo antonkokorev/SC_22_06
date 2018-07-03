@@ -203,7 +203,7 @@ function Services() {
                             "left": line_x_offset
                         })
                     } catch (e) {
-
+                        console.log(e.message)
                     }
                 }
             }
