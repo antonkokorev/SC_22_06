@@ -27,9 +27,9 @@ function Services() {
 
             this.positionSettings = {
                 show: "model",
-                conformity:[0,100],
-                grade:{},
-                open:[0,100]
+                conformity: [0, 100],
+                grade: {},
+                open: [0, 100]
             };
 
             this.getShow = function () {
@@ -251,18 +251,38 @@ function Services() {
         //====================================================================================================
         .service("instrumentsService", function ($timeout, requestService, updateSwiper) {
             this.instrumentsData = {instruments: []};
-            this.currentGoal = {goal: {}};
+            this.currentGoal = {goal: {}, label: ""};
             this.preloader = {show: false};
 
             this.getInstrumentsData = (goal) => {
-                this.preloader.show = !this.preloader.show ;
+                this.preloader.show = !this.preloader.show;
                 var url = that_.srvLink + "?entity=competentionInstrument&competentionId=" + goal.sCompetentionId + "&user=";
                 requestService(url).then((data) => {
                     this.instrumentsData.instruments = data;
-                    this.preloader.show = !this.preloader.show ;
+                    this.preloader.show = !this.preloader.show;
                     $timeout(updateSwiper, 0);
                 });
             }
+
+            this.setCurrentGoal = (goal, i) => {
+                this.currentGoal.goal = goal;
+                this.currentGoal.label = "Цель №" + i;
+            }
+        })
+        //====================================================================================================
+        .service("iprService", function ($timeout, requestService, updateSwiper) {
+            this.data = {
+                goal: {
+                    goalInfo: {},
+                    instruments: {
+                        books: [],
+                        videos: [],
+                        courses: [],
+                        advises: []
+                    }
+                }
+            };
+            this.currentGoal = {goal: {}};
 
             this.setCurrentGoal = (goal) => {
                 this.currentGoal.goal = goal;

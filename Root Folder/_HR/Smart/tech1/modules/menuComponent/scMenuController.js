@@ -82,9 +82,10 @@ function dirMenu() {
                 $state.reload();
             };
 
-            function switchGoal(event, goal) {
+            function switchGoal(event, goal, index) {
+                var i = index+ 1;
                 instrumentsService.getInstrumentsData(goal);
-                instrumentsService.setCurrentGoal(goal);
+                instrumentsService.setCurrentGoal(goal, i);
             };
 
             function getGoalsQuantity() {
