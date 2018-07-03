@@ -3,7 +3,7 @@ function classMainBody() {
     //========================================
     //подключение модулей
     //======================================
-    scMenuView.call(this);
+
     dirMenu.call(this);
     dirChoice.call(this);
     dirProfile.call(this);

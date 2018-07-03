@@ -43,8 +43,8 @@ function dirPosition() {
                         let result = true;
                   if (structure.iTurnover<ps.open[0]|| structure.iTurnover>ps.open[1])result=false;
                   if (structure.iProbability< (ps.conformity[0]/100)|| structure.iProbability>(ps.conformity[1]/100))result=false;
-                  if (that.onlyLiked==true && !structure.liked)result=false;
-
+                  if (ps.grade[structure.iGrade])result=false;
+                  //if (that.onlyLiked==true && !structure.liked)result=false;
 
                         return result;
                     }

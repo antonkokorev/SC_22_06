@@ -114,10 +114,15 @@
     line-height: 27px;
     text-align: center;
     color: #fff;
-    background: #adb3bc;
+   background: #007aff;
     border-radius: 50%;
     cursor: pointer;
 }
+.scGradeGray {
+    background: #adb3bc!important;
+}
+
+
 .sc-grade.active {
     background: #007aff;
 }

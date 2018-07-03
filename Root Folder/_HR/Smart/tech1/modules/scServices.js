@@ -27,9 +27,9 @@ function Services() {
 
             this.positionSettings = {
                 show: "model",
-                conformity: [0, 100],
-                grade: [],
-                open: [0, 100]
+                conformity:[0,100],
+                grade:{},
+                open:[0,100]
             };
 
             this.getShow = function () {
