@@ -66,7 +66,7 @@ function dirProfile() {
                 }
                 this.showAdditionalSkill = !this.showAdditionalSkill;
 
-                updateSwiper();
+                $timeout(updateSwiper, 0);
             };
 
             this.rateNewSkill = (e, n) => {
@@ -105,7 +105,7 @@ function dirProfile() {
                 }
 
                 this.showAdditionalAchievement = !this.showAdditionalAchievement;
-                updateSwiper();
+                $timeout(updateSwiper, 0);
             };
 
             this.addAboutMe = (e) => {
@@ -115,7 +115,6 @@ function dirProfile() {
                     // Отправить запрос
                     if (this.aboutField.length > 0 ) {
                         console.log(this.aboutField);
-                        this.aboutField = "";
                     }
                     e.currentTarget.classList.remove("clicked");
                 } else {
@@ -123,7 +122,7 @@ function dirProfile() {
                 }
 
                 this.showAboutForm = !this.showAboutForm;
-                updateSwiper();
+                $timeout(updateSwiper, 0);
             };
 
             this.updateSw = updateSwiper;

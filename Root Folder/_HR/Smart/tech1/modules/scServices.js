@@ -292,22 +292,37 @@ function Services() {
             }
         })
         //====================================================================================================
-        .service("iprService", function ($timeout, requestService, updateSwiper) {
+        .service("iprService", function ($timeout, requestService, updateSwiper, formGoalsService) {
+            const goals = formGoalsService.goalsData.goals;
+
             this.data = {
-                goals: []
+                goals: goals.map((item) => {
+                    return {
+                        goal: item,
+                        instruments: {
+                            books: [],
+                            videos: [],
+                            courses: [],
+                            advises: []
+                        }
+                    }
+                })
             };
+
+
             this.currentGoal = {goal: {}};
 
             this.setCurrentGoal = (goal) => {
                 this.currentGoal.goal = goal;
             };
 
-            this.addToIpr = (obj) => {
-                this.data.goals.push(obj);
-            };
 
             this.getIpr = (goal) => {
+                const indexOfCurrentGoal = this.data.goals.map(function (item) {
+                    return item.iIndicatorId;
+                }).indexOf(goal.iIndicatorId);
 
+                return this.data.goals[indexOfCurrentGoal].instruments;
             }
         })
 }

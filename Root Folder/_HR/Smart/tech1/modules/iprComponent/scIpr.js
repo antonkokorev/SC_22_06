@@ -14,8 +14,9 @@ function dirIpr() {
                 };
             });
 
-        function iprController(formGoalsService) {
+        function iprController(formGoalsService,iprService) {
             this.goalsData = formGoalsService.goalsData;
+            this.ipr = {};
 
             // костыль для удаления
             this.indicators = [];
@@ -48,7 +49,9 @@ function dirIpr() {
             this.showIpr = (goal) => {
                 var hslider = document.querySelector(".ipr-h-slider");
                 hslider.style.transform = "translateX(-50%)";
-                console.log(goal);
+                this.ipr = iprService.getIpr(goal);
+
+                console.log(this.ipr);
             }
         }
 
