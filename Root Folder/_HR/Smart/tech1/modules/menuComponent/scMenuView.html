@@ -104,7 +104,7 @@
 
 <div ng-class="menu.activeClass('targets')" class="sc-menu-li">
     <a ui-sref="{{menu.data[4].page}}">
-        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[4].num}}</span>{{menu.data[4].item}} </h2>
+        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[4].num}}</span>{{menu.data[4].item}} {{menu.getGoalsQuantity()}}</h2>
         <div class="sc-menu-details">
             <div class="sc-menu-desc">
                 <p class="sc-menu-desc-p">{{menu.data[4].discr}}</p>
@@ -119,7 +119,7 @@
         <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[5].num}}</span>{{menu.data[5].item}} </h2>
         <div class="sc-menu-details">
             <div class="sc-menu-desc">
-                <p class="sc-menu-desc-p" ng-repeat="goal in menu.goals" ng-click="menu.switchGoal(goal.sCompetentionId)"> Цель {{$index + 1}}</p>
+                <p class="sc-menu-desc-p" ng-repeat="goal in menu.goalsData.goals" ng-click="menu.switchGoal($event, goal, $index)"> Цель {{$index + 1}}</p>
             </div>
 
             <!--<div class="sc-menu-desc" ng-repeat="item in menu.data[5].child">-->

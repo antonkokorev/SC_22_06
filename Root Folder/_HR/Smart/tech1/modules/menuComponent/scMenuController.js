@@ -28,8 +28,8 @@ function dirMenu() {
             this.btnText = menuDataService.choiceData[1];// текст кнопки меню выбора
             this.positionSettings = positionSettings;// данные для передачи в страницу позиции
             this.sliders = menuDataService.sliderOptions;// данные настройки слайдеров
-            this.goals = formGoalsService.goals.goals; // получаем выбранные цели
-
+            this.goalsData = formGoalsService.goalsData; // получаем выбранные цели
+            this.getGoalsQuantity = getGoalsQuantity;
             //============================================
             //функции
             //============================================
@@ -39,7 +39,7 @@ function dirMenu() {
             menuDataService.sliderOptions.openSlider.options.onChange = openSliderOnChange;// изменение слайдера openSlider
             menuDataService.sliderOptions.conformitySlider.options.onChange = conformitySliderOnChange;// изменение слайдера conformitySlider
             this.changeModel=changeModel;//смена позиций модель/пользовательская
-            this.switchGoals = switchGoal; // переключаем цель
+            this.switchGoal = switchGoal; // переключаем цель
             //***********************************************************************************************************
             function openSliderOnChange(a, b, c) {
                 that.positionSettings.open = [b, c];
@@ -70,16 +70,22 @@ function dirMenu() {
                 }
             }
             function changeModel (item) {
-
                 this.positionSettings.show=(item)? "user":"model";
                 $state.reload();
             };
 
-
-            function switchGoal(goalId) {
-                instrumentsData.getInstrumentsData(goalId);
-                console.log("switching");
+            function switchGoal(event, goal) {
+                instrumentsService.getInstrumentsData(goal);
+                instrumentsService.setCurrentGoal(goal);
             };
+
+            function getGoalsQuantity() {
+                var q = that.goalsData.goals.length;
+                if (q > 0) {
+                    return "(" + q + ")";
+                }
+
+            }
 
         }
 

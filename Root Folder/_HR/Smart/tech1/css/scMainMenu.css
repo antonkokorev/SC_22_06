@@ -124,6 +124,10 @@
     align-content: center;
 }
 
+.sc-menu-desc-p.activeGoal {
+    color: #007aff;
+}
+
 .sc-menu-desc-heading {
     font-size: 16px;
     font-weight: bold;

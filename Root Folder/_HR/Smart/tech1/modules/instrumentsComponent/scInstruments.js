@@ -16,8 +16,9 @@ function dirInstruments() {
 
         function instrumentsController($timeout, requestService, updateSwiper, formGoalsService, instrumentsService) {
 
-            //this.currentGoal = formGoalsService.getGoals()[0];
-            this.tools = []; //instrumentsService.instrumentsData
+            this.preloader = instrumentsService.preloader;
+            this.currentGoal = instrumentsService.currentGoal;
+            this.instrumentsData = instrumentsService.instrumentsData;
 
             // var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument&competentionId="+ this.currentGoal.sCompetentionId +"&user=";
             // requestService(url).then((data) => {

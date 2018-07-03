@@ -45,6 +45,40 @@
     cursor: default;
 }
 
+.preloader-wrapper {
+    width: 100%;
+    padding-right: 30px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preloader {
+    float: right;
+    width: 34px;
+    height: 34px;
+    margin-right: 20px;
+}
+
+.circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #ECEFF1;
+    border-top-color: #4587D3;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .sc-main-slider {
     height: 700%;
     -webkit-transition: transform 0.5s;
