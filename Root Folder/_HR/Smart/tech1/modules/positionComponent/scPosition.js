@@ -27,7 +27,7 @@ function dirPosition() {
             this.iGrade=getProfile.profileData.user.iGrade;
             this.posModelData=getModelData();
             this.positionSettings = positionSettings;//данные фильтрации
-            
+
             //============================================
             //функции
             //============================================
