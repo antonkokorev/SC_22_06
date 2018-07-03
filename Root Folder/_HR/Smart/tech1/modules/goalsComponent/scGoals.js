@@ -1,5 +1,3 @@
-
-
 function dirGoals() {
     (function () {
         console.warn("dirGoals");
@@ -19,29 +17,6 @@ function dirGoals() {
             this.competences = formGoalsService.getCompetences();
             formGoalsService.getGoals();
             this.goalsData = formGoalsService.goalsData;
-
-
-            this.deleteGoal = (goal) => {
-                if (goal.iIndicatorId) {
-                    var index = this.indicators.map(function (item) {
-                        return item.iIndicatorId;
-                    }).indexOf(goal.iIndicatorId);
-
-                    this.indicators.splice(index, 1);
-                    formGoalsService.setIndicators(this.indicators);
-                } else {
-                    let index = this.competences.map(function (item) {
-                        return item.sCompetentionId;
-                    }).indexOf(goal.sCompetentionId);
-
-                    this.competences.splice(index, 1);
-                    formGoalsService.setCompetences(this.competences);
-                }
-
-                formGoalsService.getGoals();
-                this.goalsData = formGoalsService.goalsData;
-            }
-
         }
     }());
 }
