@@ -28,16 +28,19 @@ function dirMenu() {
             this.btnText = menuDataService.choiceData[1];// текст кнопки меню выбора
             this.positionSettings = positionSettings;// данные для передачи в страницу позиции
             this.sliders = menuDataService.sliderOptions;// данные настройки слайдеров
+            this.goals = formGoalsService.goals.goals; // получаем выбранные цели
+            console.log(this.goals);
 
             //============================================
             //функции
             //============================================
             this.changePageChoice = changePageChoice;// меняет тексты
-            this.acFilter = acFilter//скрывает/показывает фильтр
+            this.acFilter = acFilter; //скрывает/показывает фильтр
             this.activeClass = activeClass;// активный пункт меню
             menuDataService.sliderOptions.openSlider.options.onChange = openSliderOnChange;// изменение слайдера openSlider
             menuDataService.sliderOptions.conformitySlider.options.onChange = conformitySliderOnChange;// изменение слайдера conformitySlider
             this.changeModel=changeModel;//смена позиций модель/пользовательская
+            this.switchGoals = switchGoal; // переключаем цель
             //***********************************************************************************************************
             function openSliderOnChange(a, b, c) {
                 that.positionSettings.open = [b, c];
@@ -74,28 +77,10 @@ function dirMenu() {
             };
 
 
-            //todo:говнокод переделать как выше сделано, убрать сервис к сервисам
-
-            this.goals = [];
-            this.getGoals = () => {
-                this.goals = formGoalsService.getGoals();
-                console.log(this.goals);
+            function switchGoal(goalId) {
+                instrumentsData.getInstrumentsData(goalId);
+                console.log("switching");
             };
-
-            this.switchGoal = (goal) => {
-                var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument&competentionId="+ goal.sCompetentionId +"&user=";
-                requestService(url).then((data) => {
-
-                    var obj = {
-                        goal: goal,
-                        instruments: data
-                    };
-                    instrumentsService.setGoalAndInstruments(obj);
-                    $state.go("instruments");
-                });
-
-            };
-            //todo:говнокод
 
         }
 

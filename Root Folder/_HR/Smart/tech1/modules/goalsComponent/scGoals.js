@@ -17,9 +17,10 @@ function dirGoals() {
 
             this.indicators = formGoalsService.getIndicators();
             this.competences = formGoalsService.getCompetences();
+            formGoalsService.getGoals();
+            this.goals = formGoalsService.goals.goals;
 
-            this.goals = formGoalsService.getGoals();
-            console.log(this.goals);
+            console.log(this.goals.goals);
 
             this.deleteGoal = (goal) => {
                 if (goal.iIndicatorId) {
@@ -38,7 +39,8 @@ function dirGoals() {
                     formGoalsService.setCompetences(this.competences);
                 }
 
-                this.goals = formGoalsService.getGoals();
+                formGoalsService.getGoals();
+                this.goals = formGoalsService.goals.goals;
             }
 
         }

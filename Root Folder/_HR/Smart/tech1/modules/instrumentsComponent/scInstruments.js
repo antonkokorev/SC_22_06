@@ -16,14 +16,14 @@ function dirInstruments() {
 
         function instrumentsController($timeout, requestService, updateSwiper, formGoalsService, instrumentsService) {
 
-            this.currentGoal = formGoalsService.getGoals()[0];
-            this.tools = [];
+            //this.currentGoal = formGoalsService.getGoals()[0];
+            this.tools = []; //instrumentsService.instrumentsData
 
-            var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument&competentionId="+ this.currentGoal.sCompetentionId +"&user=";
-            requestService(url).then((data) => {
-                this.tools = data;
-                console.log(data);
-            });
+            // var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument&competentionId="+ this.currentGoal.sCompetentionId +"&user=";
+            // requestService(url).then((data) => {
+            //     this.tools = data;
+            //     console.log(data);
+            // });
 
 
             this.toolsHeadings = ["Практические советы", "Книги", "Обучающие видео", "Очные курсы"];
