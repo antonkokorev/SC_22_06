@@ -23,16 +23,18 @@ function Services() {
             };
         })
         //====================================================================================================
-        .factory("positionSettings",function(){
+        .factory("positionSettings", function () {
 
-            this.positionSettings={
+            this.positionSettings = {
                 show: "model",
                 conformity:[0,100],
                 grade:{},
                 open:[0,100]
             };
 
-            this.getShow = function() { return this.positionSettings.show };
+            this.getShow = function () {
+                return this.positionSettings.show
+            };
 
             return this.positionSettings;
 
@@ -48,6 +50,7 @@ function Services() {
                         if (this.dictData.dict.aDoTags[i].selected) {
                             pos.push(this.dictData.dict.aDoTags[i].iFamilyId)
                         }
+
                     }
                     var change = true;
                     if (JSON.stringify(pos) == JSON.stringify(this.sData)) {
@@ -61,14 +64,16 @@ function Services() {
 
 
 
+
                 return {
                             selected: this.sData,
                             isChange:change
                         };
 
+
             };
 
-            this.sData=[]
+            this.sData = []
             this.dictData = {dict: []};
             this.getDictData = () => {
                 var url = that_.srvLink + "?entity=dictNoCallback&user=";
@@ -85,11 +90,13 @@ function Services() {
             console.error("error");
             this.userPositionData = {data: []};
 
+
             this.getLiked=()=>{
                 let pos=[];
                 for(let i=0;i<this.positionData.data.length;i++){
                     if(this.positionData.data[i].liked)
                     {
+                        
 
                         pos.push(this.positionData.data[i].sJobProfileId)
                     }
@@ -99,7 +106,7 @@ function Services() {
             };
 
             this.getUserPositionData = (family) => {
-                let url = that_.srvLink + "?entity=positionNoCallback&requestType=list&family="+JSON.stringify(family)+"&row=1_30&user=";
+                let url = that_.srvLink + "?entity=positionNoCallback&requestType=list&family=" + JSON.stringify(family) + "&row=1_30&user=";
                 requestService(url).then((data) => {
                     this.userPositionData.data = data;
                     if ($state.current.name == "position")
@@ -234,7 +241,7 @@ function Services() {
         .service("formGoalsService", function () {
             var indicators = [];
             var competences = [];
-            this.goals = {goals:[]};
+            this.goalsData = {goals: []};
 
             this.setIndicators = (newIndicators) => {
                 indicators = newIndicators;
@@ -253,19 +260,28 @@ function Services() {
             };
 
             this.getGoals = () => {
-                this.goals.goals = indicators.concat(competences);
+                this.goalsData.goals = indicators.concat(competences);
+                console.log(this.goalsData.goals);
             }
         })
         //====================================================================================================
-        .service("instrumentsService", function ($timeout,requestService) {
+        .service("instrumentsService", function ($timeout, requestService, updateSwiper) {
             this.instrumentsData = {instruments: []};
-            this.getInstrumentsData = (goalId) => {
-                var url = that_.srvLink + "?entity=competentionInstrument&competentionId="+ goalId +"&user=";
+            this.currentGoal = {goal: {}};
+            this.preloader = {show: false};
+
+            this.getInstrumentsData = (goal) => {
+                this.preloader.show = !this.preloader.show ;
+                var url = that_.srvLink + "?entity=competentionInstrument&competentionId=" + goal.sCompetentionId + "&user=";
                 requestService(url).then((data) => {
                     this.instrumentsData.instruments = data;
-                    console.log(data);
+                    this.preloader.show = !this.preloader.show ;
                     $timeout(updateSwiper, 0);
                 });
+            }
+
+            this.setCurrentGoal = (goal) => {
+                this.currentGoal.goal = goal;
             }
         })
 }

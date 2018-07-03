@@ -30,8 +30,9 @@ function dirMenu() {
             this.btnText = menuDataService.choiceData[1];// текст кнопки меню выбора
             this.positionSettings = positionSettings;// данные для передачи в страницу позиции
             this.sliders = menuDataService.sliderOptions;// данные настройки слайдеров
-            this.goals = formGoalsService.goals; // получаем выбранные цели
-            //  console.log(this.goals);
+
+            this.goalsData = formGoalsService.goalsData; // получаем выбранные цели
+            this.getGoalsQuantity = getGoalsQuantity;
 
             //============================================
             //функции
@@ -41,11 +42,13 @@ function dirMenu() {
             this.activeClass = activeClass;// активный пункт меню
             menuDataService.sliderOptions.openSlider.options.onChange = openSliderOnChange;// изменение слайдера openSlider
             menuDataService.sliderOptions.conformitySlider.options.onChange = conformitySliderOnChange;// изменение слайдера conformitySlider
+
             this.changeModel = changeModel;//смена позиций модель/пользовательская
             this.range = (n) => {return new Array(n)};// генерация массива нужной размерности
             this.gradeFltClick = gradeFltClick;//клик по фильтру грейда
             this.switchGoals = switchGoal; // переключаем цель
             this.sw = () =>{$timeout(()=>{updateSwiper(); resetSwiper()},0)};//update swiper
+
             //***********************************************************************************************************
             function gradeFltClick(index, value) {
                 let num = that.profileData.user.iGrade - 2 + index;
@@ -83,6 +86,7 @@ function dirMenu() {
                 }
             }
 
+
             function changeModel(item) {
                 if(that.userChoice.sData.length!=0){
                     that.positionSettings.show = (item) ? "user" : "model";
@@ -91,9 +95,17 @@ function dirMenu() {
            }
 
 
-            function switchGoal(goalId) {
-                instrumentsData.getInstrumentsData(goalId);
-                // console.log("switching");
+            function switchGoal(event, goal) {
+                instrumentsService.getInstrumentsData(goal);
+                instrumentsService.setCurrentGoal(goal);
+            };
+
+
+            function getGoalsQuantity() {
+                var q = that.goalsData.goals.length;
+                if (q > 0) {
+                    return "(" + q + ")";
+                }
             }
 
         }

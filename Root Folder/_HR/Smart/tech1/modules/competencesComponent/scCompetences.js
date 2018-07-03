@@ -93,6 +93,7 @@ function dirCompetences() {
                     }
 
                     formGoalsService.setCompetences(this.chosenCompetences);
+                    formGoalsService.getGoals();
                     return;
                 }
 
@@ -120,6 +121,7 @@ function dirCompetences() {
                     this.chosenIndicators.push(indicator);
                 }
                 formGoalsService.setIndicators(this.chosenIndicators);
+                formGoalsService.getGoals();
             }
 
             this.getBack = function (n) {
