@@ -1360,7 +1360,10 @@
 .book-img {
     width: 150px;
     height: 180px;
-    background: #000;
+    background: url("../img/book1.jpg") no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    background-size: cover;
 }
 
 .book-description {

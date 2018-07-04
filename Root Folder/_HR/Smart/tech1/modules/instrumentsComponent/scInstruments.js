@@ -28,6 +28,7 @@ function dirInstruments() {
 
             this.toolsHeadings = ["Практические советы", "Книги", "Обучающие видео", "Очные курсы"];
 
+
             var sections = document.querySelector(".tools-sections");
             var underline = document.querySelector(".tools-underline");
 
