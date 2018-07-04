@@ -75,7 +75,12 @@ function dirMenu() {
             function activeClass(page) {
                 that.state = $state.current.name;
                 let currentRoute = $location.path().substring(1) || 'profile';
-                return page === currentRoute ? 'active' : '';
+                let result =(page === currentRoute) ? true : false;
+
+                return {"active":result,"disableClick":that.menuSettings[0].selectedPositions==0 &&  ["competences","targets","instruments","ipr"].indexOf(page)!=-1 };
+
+
+               // {"text-box-icon": true, 'used': $scope.entry_map[entry.guid] > 0}
             }
 
             function acFilter(num) {

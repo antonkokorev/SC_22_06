@@ -15,7 +15,11 @@
 
 .disableClick  {
     pointer-events: none;
-    background: red;
+
+}
+
+.disableClick .sc-menu-heading{
+    color: #f0eaf2 !important;
 }
 
 
