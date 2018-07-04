@@ -53,6 +53,9 @@ function dirProfile() {
                     // Отправить запрос
                     if (this.additionalSkill.name && this.additionalSkill.rate) {
                         this.additionalSkills.push(this.additionalSkill);
+
+                        getProfile.postNewSkill(this.additionalSkills);
+
                         this.additionalSkill = {};
                     }
 

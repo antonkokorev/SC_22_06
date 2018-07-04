@@ -7,10 +7,8 @@ function dirPosition() {
             .directive('dirPosition', function ($location) {
                 return {
                     restrict: 'AE',
-                    scope: {
-
-                    },
-                   // bindToController: true,
+                    scope: {},
+                    // bindToController: true,
                     templateUrl: that_.path + "modules/positionComponent/scPositionView.html",
                     controller: positionController,
                     controllerAs: "positionCtrl"
@@ -24,8 +22,8 @@ function dirPosition() {
             //атрибуты
             //============================================
             var that = this;
-            this.iGrade=getProfile.profileData.user.iGrade;
-            this.posModelData=getModelData();
+            this.iGrade = getProfile.profileData.user.iGrade;
+            this.posModelData = getModelData();
             this.positionSettings = positionSettings;//данные фильтрации
             this.competences_h_slider = document.querySelector(".sc-main-slide_pos");
             this.competenceCurrent = null;//текущая выбранная позиция
@@ -36,69 +34,67 @@ function dirPosition() {
             this.positionDiscrPart={};
             this.selectedMenu=positionSettings.selectedMenu;
 
+
             //============================================
             //вотчеры
             //============================================
-            $scope.$watch(function(){
+            $scope.$watch(function () {
                 return positionSettings.selectedMenu
-            }, function(newVal, oldVal){
+            }, function (newVal, oldVal) {
                 try {
                     that.selectedMenu = positionSettings.selectedMenu;
                     switch (that.selectedMenu) {
                         case 0:
-                            that.positionDiscrPart = that.positionDiscr.aCompetentions;
+                            that.positionDiscrPart = that.positionDiscr.aFunctions;
                             break;
                         case 1:
-                            that.positionDiscrPart =that.positionDiscr.aExperience;
+                            that.positionDiscrPart = that.positionDiscr.aCompetentions;
                             break;
                         case 2:
-                            that.positionDiscrPart =that.positionDiscr.aSkills;
-                              break;
+                            that.positionDiscrPart = that.positionDiscr.aExperience;
+                            break;
                         case 3:
-                            that.positionDiscrPart =that.positionDiscr.aLanguages;
+                            that.positionDiscrPart = that.positionDiscr.aSkills;
                             break;
                         case 4:
-                            that.positionDiscrPart =that.positionDiscr.aCertification;
+                            that.positionDiscrPart = that.positionDiscr.aLanguages;
+                            break;
+                        case 5:
+                            that.positionDiscrPart = that.positionDiscr.aCertification;
                             break;
                     }
-                }catch(e){}
+                } catch (e) {
+                }
 
 
-                
             });
 
             //============================================
             //функции
             //============================================
-            this.likeCurrentPosition=likeCurrentPosition;// добавление в избранное
-            this.getPositionCompetences=getPositionCompetences;//переход на описание позиции
-            this.setFilter=setFilter;
+            this.likeCurrentPosition = likeCurrentPosition;// добавление в избранное
+            this.getPositionCompetences = getPositionCompetences;//переход на описание позиции
+            this.setFilter = setFilter;
+
             //***********************************************************************************************************
 
 
+            function getPositionCompetences(index, position) {
+                console.log("");
 
-
-
-
-            function getPositionCompetences  (index, position) {
-               console.log("");
-
-                positionSettings.showMenu=true;
+                positionSettings.showMenu = true;
                 that.competences_h_slider.style.transform = "translateX(-50%)";
                 positionSettings.positionStaticMenu = position;
                 that.currentIndex = index;
                 $timeout(updateSwiper, 0);
-                getCustomData.jobProfile(position.sJobProfileId).then(function(data){
-                    that.positionDiscr=data;
+                getCustomData.jobProfile(position.sJobProfileId).then(function (data) {
+                    that.positionDiscr = data;
                     that.positionDiscrPart = that.positionDiscr.aCompetentions;
-
                     console.log(data)
                 })
 
 
             };
-
-
 
 
 
@@ -118,15 +114,19 @@ function dirPosition() {
 
                         return result;
                     }
+
             }
-            function getModelData(){
-                return (positionSettings.show=="model")?getPosition.positionData:getPosition.userPositionData;
+
+            function getModelData() {
+                return (positionSettings.show == "model") ? getPosition.positionData : getPosition.userPositionData;
             }
+
             function likeCurrentPosition(e, index, position){
                 let data= that.posModelData.data;
                 (data[index].liked)?delete data[index].liked: data[index].liked=true;
                 positionSettings.countLiked=getPosition.getLiked().length;
                 menuSettings[0].selectedPositions=positionSettings.countLiked;
+
             }
 
             //***********************************************************************************************************

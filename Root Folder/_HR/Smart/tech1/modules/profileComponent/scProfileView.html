@@ -51,22 +51,22 @@
 
                 <div class="profile-skill-col" ng-repeat="skill in profile.data.user.aSkills">
                     <h4 class="profile-skill-label"> {{skill.sName}} </h4>
-                    <div class="profile-skill-rating slide-row">
-                        <p class="profile-skill-name">Оценка</p>
-                        <div class="profile-skill-stars">
-                            <div class="profile-skill-stars-filled-wrapper"
-                                 style="width: {{skill.iManagerRate * 20}}% ">
-                                <div class="profile-skill-stars-filled">
-                                    <div class="profile-skill-star"
-                                         ng-repeat="a in profile.range(5) track by $index"> <i class="fas fa-star"></i> </div>
-                                </div>
-                            </div>
-                            <div class="profile-skill-stars-rated">
-                                <div class="profile-skill-star"
-                                     ng-repeat="a in profile.range(5) track by $index"> <i class="far fa-star"></i> </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="profile-skill-rating slide-row">-->
+                        <!--<p class="profile-skill-name">Оценка</p>-->
+                        <!--<div class="profile-skill-stars">-->
+                            <!--<div class="profile-skill-stars-filled-wrapper"-->
+                                 <!--style="width: {{skill.iManagerRate * 20}}% ">-->
+                                <!--<div class="profile-skill-stars-filled">-->
+                                    <!--<div class="profile-skill-star"-->
+                                         <!--ng-repeat="a in profile.range(5) track by $index"> <i class="fas fa-star"></i> </div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="profile-skill-stars-rated">-->
+                                <!--<div class="profile-skill-star"-->
+                                     <!--ng-repeat="a in profile.range(5) track by $index"> <i class="far fa-star"></i> </div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
 
                     <div class="profile-skill-rating slide-row">
                         <p class="profile-skill-name">Самооценка</p>
