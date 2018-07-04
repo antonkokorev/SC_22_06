@@ -30,11 +30,11 @@ function Services() {
                 conformity: [0, 100],
                 grade: {},
                 open: [0, 100],
-                onlyLiked:false,
-                countLiked:0,
-                showMenu:false,
-                selectedMenu:0,
-                positionStaticMenu:{}
+                onlyLiked: false,
+                countLiked: 0,
+                showMenu: false,
+                selectedMenu: 0,
+                positionStaticMenu: {}
 
             };
 
@@ -95,7 +95,7 @@ function Services() {
 
             this.getLiked = () => {
 
-                var  pos = [];
+                var pos = [];
                 for (let i = 0; i < this.positionData.data.length; i++) {
                     if (this.positionData.data[i].liked) {
                         pos.push(this.positionData.data[i].sJobProfileId)
@@ -109,8 +109,6 @@ function Services() {
 
                 return pos;
             };
-
-
 
 
             this.getUserPositionData = (family) => {
@@ -151,14 +149,17 @@ function Services() {
 
 
 
-   // http://sbt-oopp-009.sigma.sbrf.ru:8091/hr/smartcareer/services/data.xsjs?entity=jobProfile&user=krylova-yv&jobProfileId=1595747
+        // http://sbt-oopp-009.sigma.sbrf.ru:8091/hr/smartcareer/services/data.xsjs?entity=jobProfile&user=krylova-yv&jobProfileId=1595747
         .factory("getCustomData", function (requestService) {
-            function jobProfile(jId){
-                var url = that_.srvLink + "?entity=jobProfile&jobProfileId="+jId+"&user=";
-                return  requestService(url).then((response)=>{return response})
+            function jobProfile(jId) {
+                var url = that_.srvLink + "?entity=jobProfile&jobProfileId=" + jId + "&user=";
+                return requestService(url).then((response) => {
+                    return response
+                })
             }
+
             return {
-                jobProfile:jobProfile,
+                jobProfile: jobProfile,
 
             }
         })
@@ -311,35 +312,60 @@ function Services() {
         })
         //====================================================================================================
         .service("iprService", function ($timeout, requestService, updateSwiper, formGoalsService) {
-            const goals = formGoalsService.goalsData.goals;
+            this.data = formGoalsService.goalsData;
 
+            this.setInstrument = (goal, item) => {
+                console.log(goal);
+                console.log(item);
+                let indexOfCurrentGoal;
 
-            this.createIpr = () => {
-                this.data = goals.map((item) => {
-                    return {
-                        goal: item,
-                        books: [],
-                        videos: [],
-                        courses: [],
-                        advises: []
+                // Проверка Индикатор или Компетенция
+                if (goal.hasOwnProperty("iIndicatorId")) {
+                    indexOfCurrentGoal = this.data.goals.map(function (goalItem) {
+                        return goalItem.iIndicatorId;
+                    }).indexOf(goal.iIndicatorId);
+                } else {
+                    indexOfCurrentGoal = this.data.goals.map(function (goalItem) {
+                        return goalItem.sCompetentionId;
+                    }).indexOf(goal.sCompetentionId);
+                }
+
+                console.log(this.data);
+
+                // Проверка на наличие инструмента в списке
+                const type = item.sType + 's'; // тип инструмента
+
+                if (this.data.goals[indexOfCurrentGoal].hasOwnProperty(type)) {
+                    const iIdIndex = this.data.goals[indexOfCurrentGoal][type].map(function (item) {
+                        return item.iId;
+                    }).indexOf(item.iId);
+
+                    if (iIdIndex < 0) {
+                        this.data.goals[indexOfCurrentGoal][type].push(item);
+                    } else {
+                        console.log("Этот инструмента уже есть в списке");
                     }
-                });
-            }
-
-            this.currentGoal = {goal: {}};
-
-            this.setCurrentGoal = (goal) => {
-                this.currentGoal.goal = goal;
+                } else {
+                    this.data.goals[indexOfCurrentGoal][type] = [];
+                    this.data.goals[indexOfCurrentGoal][type].push(item);
+                }
             };
 
-
             this.getIpr = (goal) => {
-                const indexOfCurrentGoal = this.data.goals.map(function (item) {
-                    return item.iIndicatorId;
-                }).indexOf(goal.iIndicatorId);
+                let indexOfCurrentGoal
+                if (goal.hasOwnProperty("iIndicatorId")) {
+                    indexOfCurrentGoal = this.data.goals.map(function (goalItem) {
+                        return goalItem.iIndicatorId;
+                    }).indexOf(goal.iIndicatorId);
+                } else {
+                    indexOfCurrentGoal = this.data.goals.map(function (goalItem) {
+                        return goalItem.sCompetentionId;
+                    }).indexOf(goal.sCompetentionId);
+                }
 
-                return this.data.goals[indexOfCurrentGoal].instruments;
+                return this.data.goals[indexOfCurrentGoal];
             }
+
         })
 }
 
