@@ -1,13 +1,16 @@
 <div ng-show='swHeader.state=="position"' ng-class='{smallMenu:!swHeader.showMenu,bigMenu: swHeader.showMenu}'>
 
 
-
-    <h2 class="sc-slide-heading" ng-click="swHeader.yankiGoHome()"> <i style="padding-right: 30px" class="fas fa-long-arrow-alt-left"  ng-show="swHeader.showMenu"></i>{{swHeader.sText}} </h2>
+    <h2 class="sc-slide-heading" ng-click="swHeader.yankiGoHome()"><i style="padding-right: 30px"
+                                                                      class="fas fa-long-arrow-alt-left"
+                                                                      ng-show="swHeader.showMenu"></i>{{swHeader.sText}}
+    </h2>
 
     <div class="your-item__elements" ng-show="swHeader.showMenu">
         <div class="your-item__element">
 
-                <i class="fa-heart far" style="  font-size: 28px;   margin-left: 5px;margin-top: -5px;" ng-class="{far: !positions.liked, fas: positions.liked}"></i>
+            <i  ng-click="swHeader.likePos()" class="fa-heart"  ng-class="{far: !swHeader.settings.liked, fas: swHeader.settings.liked}" style="color:#ff3d46;  font-size: 28px;   margin-left: 5px;margin-top: -5px;"
+               ng-class="{far: !positions.liked, fas: positions.liked}"></i>
 
         </div>
         <div class="your-item__element">
@@ -23,18 +26,18 @@
             <b>{{swHeader.settings.iTurnover}}</b>
         </div>
     </div>
-    <div class="main__nav"  ng-show="swHeader.showMenu">
+    <div class="main__nav" ng-show="swHeader.showMenu">
         <ul>
-            <!--<li class="active"><span>Функции</span></li>-->
-            <li ng-class="{active: swHeader.selected==$index}" ng-click="swHeader.menuClick($index)" ng-repeat="item in swHeader.menu"><span>{{item}}</span></li>
+
+            <li ng-class="{active: swHeader.selected==$index}" ng-click="swHeader.menuClick($index)"
+                ng-repeat="item in swHeader.menu"><span>{{item}}</span></li>
 
         </ul>
     </div>
 
 
-
-
-    <div style="margin-left: 20%" ng-show="!swHeader.showMenu" class="slide-position-col " ng-click="swHeader.likeClick()">
+    <div style="margin-left: 20%" ng-show="!swHeader.showMenu" class="slide-position-col "
+         ng-click="swHeader.likeClick()">
         <div class="position-liked-wrapper">
             <i class="fa-heart fas"></i>
             <span class="positions-liked-number">{{swHeader.likeCount}}</span>

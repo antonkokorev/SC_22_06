@@ -35,6 +35,7 @@ function dirSwHeader() {
             this.likeClick=likeClick;//фильтр по лайкам
             this.yankiGoHome=yankiGoHome;//назад на 1 экран
             this.menuClick=menuClick;
+            this.likePos=likePos;
             //============================================
             //вотчеры
             //============================================
@@ -62,6 +63,10 @@ function dirSwHeader() {
 
             });
             //***********************************************************************************************************
+            function likePos() {
+                (positionSettings.positionStaticMenu.liked)?delete positionSettings.positionStaticMenu.liked:positionSettings.positionStaticMenu.liked=true;
+
+            }
             function menuClick(index){
                 that.selected=index;
                 positionSettings.selectedMenu=index;
