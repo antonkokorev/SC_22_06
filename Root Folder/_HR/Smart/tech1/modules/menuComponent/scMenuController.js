@@ -101,7 +101,7 @@ function dirMenu() {
            }
 
 
-            function switchGoal(event, goal, index) {
+            function switchGoal(goal, index) {
                 var i = index+ 1;
                 instrumentsService.getInstrumentsData(goal);
                 instrumentsService.setCurrentGoal(goal, i);

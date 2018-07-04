@@ -183,8 +183,6 @@ function Services() {
                     this.profileData.user = data;
                 });
             }
-
-
         })
 
 

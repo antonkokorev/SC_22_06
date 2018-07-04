@@ -111,10 +111,10 @@
 <div ng-class="menu.activeClass('instruments')" class="sc-menu-li">
 
     <a ui-sref="{{menu.data[5].page}}">
-        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[5].num}}</span>{{menu.data[5].item}} </h2>
+        <h2 class="sc-menu-heading"  ng-click="menu.switchGoal(menu.goalsData.goals[0], 0)"><span class="sc-menu-heading-number">{{menu.data[5].num}}</span>{{menu.data[5].item}} </h2>
         <div class="sc-menu-details">
             <div class="sc-menu-desc">
-                <p class="sc-menu-desc-p" ng-repeat="goal in menu.goalsData.goals" ng-click="menu.switchGoal($event, goal, $index)"> Цель {{$index + 1}}</p>
+                <p class="sc-menu-desc-p" ng-repeat="goal in menu.goalsData.goals" ng-click="menu.switchGoal(goal, $index)"> Цель {{$index + 1}}</p>
             </div>
 
 
