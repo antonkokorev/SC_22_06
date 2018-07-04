@@ -29,10 +29,12 @@ function Services() {
                 show: "model",
                 conformity: [0, 100],
                 grade: {},
-
                 open: [0, 100],
                 onlyLiked:false,
-                countLiked:0
+                countLiked:0,
+                showMenu:false,
+                selectedMenu:0,
+                positionStaticMenu:{}
 
             };
 
@@ -145,6 +147,22 @@ function Services() {
                 });
             }
         })
+
+
+
+
+   // http://sbt-oopp-009.sigma.sbrf.ru:8091/hr/smartcareer/services/data.xsjs?entity=jobProfile&user=krylova-yv&jobProfileId=1595747
+        .factory("getCustomData", function (requestService) {
+            function jobProfile(jId){
+                var url = that_.srvLink + "?entity=jobProfile&jobProfileId="+jId+"&user=";
+                return  requestService(url).then((response)=>{return response})
+            }
+            return {
+                jobProfile:jobProfile,
+
+            }
+        })
+
         /*    .factory("srvGetData", function ($http) {
                 var ProfileData=false;
 

@@ -125,9 +125,10 @@ function classMainBody() {
                 url: '/position',
                 template: "<dir-position  modelposition='appController.modelPosition'></dir-position>",
                 controller: allController,
-                onExit: function (getPosition) {
+                onExit: function (getPosition,positionSettings) {
                     //alert("test")
                     var test = getPosition.getLiked();
+                    positionSettings.showMenu=false;
 
                 }
             });

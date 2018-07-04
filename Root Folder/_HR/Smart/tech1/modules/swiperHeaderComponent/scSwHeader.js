@@ -23,11 +23,18 @@ function dirSwHeader() {
             //============================================
             var that=this;
             this.state ="";// текущий роутер
+            this.sText="Для вас";
             this.likeCount=positionSettings.countLiked;
+            this.showMenu=positionSettings.showMenu;
+            this.settings=positionSettings.positionStaticMenu;
+            this.selected=positionSettings.selectedMenu;
+            this.menu= ["Компетенции","Образование","Навыки","Языки","Сетификаты"]   ;
             //============================================
             //функции
             //============================================
             this.likeClick=likeClick;//фильтр по лайкам
+            this.yankiGoHome=yankiGoHome;//назад на 1 экран
+            this.menuClick=menuClick;
             //============================================
             //вотчеры
             //============================================
@@ -42,10 +49,32 @@ function dirSwHeader() {
             }, function(newVal, oldVal){
                 that.likeCount=newVal;
             });
-            //***********************************************************************************************************
 
+            $scope.$watch(function(){
+                return positionSettings.showMenu
+            }, function(newVal, oldVal){
+                that.showMenu=newVal;
+                if(that.showMenu)
+                {that.settings=positionSettings.positionStaticMenu;
+                that.sText=that.settings.sJobProfileName;}else{
+                    that.sText="Для вас";
+                }
+
+            });
+            //***********************************************************************************************************
+            function menuClick(index){
+                that.selected=index;
+                positionSettings.selectedMenu=index;
+            }
+            function yankiGoHome() {
+                positionSettings.showMenu=false;
+
+                var teg= document.querySelector(".sc-main-slide_pos");
+                teg.style.transform = "translateX(0%)";
+            }
             function likeClick(){
                 positionSettings.onlyLiked=!positionSettings.onlyLiked
+
             }
 
 
