@@ -89,7 +89,8 @@
     cursor: pointer;
 }
 
-.sc-menu-li.active .sc-menu-heading {
+.sc-menu-li.active .sc-menu-heading-number ,
+.sc-menu-li.active .sc-menu-heading-text{
     color: #16181c;
 }
 
