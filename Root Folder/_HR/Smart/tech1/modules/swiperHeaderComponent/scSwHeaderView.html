@@ -9,7 +9,9 @@
     <div class="your-item__elements" ng-show="swHeader.showMenu">
         <div class="your-item__element">
 
-            <i  ng-click="swHeader.likePos()" class="fa-heart"  ng-class="{far: !swHeader.settings.liked, fas: swHeader.settings.liked}" style="color:#ff3d46;  font-size: 28px;   margin-left: 5px;margin-top: -5px;"
+            <i ng-click="swHeader.likePos()" class="fa-heart"
+               ng-class="{far: !swHeader.settings.liked, fas: swHeader.settings.liked}"
+               style="color:#ff3d46;  font-size: 28px;   margin-left: 5px;margin-top: -5px;"
                ng-class="{far: !positions.liked, fas: positions.liked}"></i>
 
         </div>
@@ -28,7 +30,6 @@
     </div>
     <div class="main__nav" ng-show="swHeader.showMenu">
         <ul>
-
             <li ng-class="{active: swHeader.selected==$index}" ng-click="swHeader.menuClick($index)"
                 ng-repeat="item in swHeader.menu"><span>{{item}}</span></li>
 
