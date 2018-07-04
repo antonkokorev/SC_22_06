@@ -26,7 +26,6 @@ function dirInstruments() {
             //     console.log(data);
             // });
 
-
             this.toolsHeadings = ["Практические советы", "Книги", "Обучающие видео", "Очные курсы"];
 
             var sections = document.querySelector(".tools-sections");
@@ -35,23 +34,10 @@ function dirInstruments() {
             this.switchTool = (index) => {
                 sections.style.transform = "translateX(-" + 25 * index + "%)";
                 underline.style.left = 25 * index + "%";
-            }
-
-
-
+            };
 
             this.addToIpr = (item) => {
-
-                this.ipr = iprService.data;
-
-                const indexOfCurrentGoal = this.ipr.goals.map(function (item) {
-                    return item.iIndicatorId;
-                }).indexOf(this.currentGoal.iIndicatorId);
-
-
-                this.ipr.goals[indexOfCurrentGoal].books.push(item);
-
-                iprService.addToIpr();
+                iprService.setInstrument(this.currentGoal.goal, item);
             }
 
         }

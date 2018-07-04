@@ -15,6 +15,8 @@ function dirIpr() {
             });
 
         function iprController(formGoalsService,iprService) {
+            this.toolsHeadings = ["Практические советы", "Книги", "Обучающие видео", "Очные курсы"];
+
             this.goalsData = formGoalsService.goalsData;
             this.ipr = {};
 
@@ -49,9 +51,24 @@ function dirIpr() {
             this.showIpr = (goal) => {
                 var hslider = document.querySelector(".ipr-h-slider");
                 hslider.style.transform = "translateX(-50%)";
-                this.ipr = iprService.getIpr(goal);
+                this.iprData = iprService.getIpr(goal);
 
-                console.log(this.ipr);
+                console.log(this.iprData);
+            };
+
+            var sections = document.querySelector(".ipr-sections");
+            var underline = document.querySelector(".ipr-underline");
+
+            this.switchTool = (index) => {
+                sections.style.transform = "translateX(-" + 25 * index + "%)";
+                underline.style.left = 25 * index + "%";
+            };
+
+            this.backToGoals = () => {
+                var hslider = document.querySelector(".ipr-h-slider");
+                hslider.style.transform = "translateX(0%)";
+                sections.style.transform = "translateX(0%)";
+                underline.style.left = "0%";
             }
         }
 

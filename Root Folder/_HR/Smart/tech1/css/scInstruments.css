@@ -1,8 +1,11 @@
 .tools-slider-menu {
     margin-top: 20px;
+    margin-right: 30px;
+    padding-bottom: 8px;
     height: 40px;
     position: relative;
     display: flex;
+    border-bottom: 1px solid #ccc;
 }
 
 .tools-menu-element {
@@ -26,12 +29,6 @@
 .tools-section {
     width: 25%;
     padding-right: 30px;
-}
-
-.tools-slider-menu {
-    margin-right: 30px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #ccc;
 }
 
 .tools-menu-element {
