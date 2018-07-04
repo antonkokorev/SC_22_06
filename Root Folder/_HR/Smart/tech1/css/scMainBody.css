@@ -1281,6 +1281,10 @@
     color: #f5a623;
 }
 
+.competence-indicator-rating {
+    margin-top: 10px;
+}
+
 
 /* ���� */
 
@@ -1398,8 +1402,26 @@
 
 /* ��� */
 
+.ipr-back-to-goals {
+    padding-top: 30px;
+    padding-bottom: 10px;
+    background: #fff;
+    position: relative;
+    z-index: 10;
+    color: #8d8d8d;
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    -ms-transition: color 0.3s;
+    -o-transition: color 0.3s;
+    transition: color 0.3s;
+}
+
+.ipr-back-to-goals:hover {
+    color: #007aff;
+}
+
 .ipr-h-slider {
-    height: 100%;
+    display: flex;
     width: 200%;
 
     -webkit-transition: transform 0.3s;
@@ -1411,7 +1433,61 @@
 
 .ipr-h-slide {
     width: 50%;
+    overflow: hidden;
+}
+
+.ipr-slider-menu {
+    margin-top: 20px;
+    margin-right: 30px;
+    padding-bottom: 8px;
+    height: 40px;
+    position: relative;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.ipr-menu-element {
+    width: 25%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ipr-sections {
+    display: flex;
+    width: 400%;
+    -webkit-transition: transform 0.3s;
+    -moz-transition: transform 0.3s;
+    -ms-transition: transform 0.3s;
+    -o-transition: transform 0.3s;
+    transition: transform 0.3s;
+}
+
+.ipr-section {
+    width: 25%;
+    padding-right: 30px;
+}
+
+.ipr-menu-element {
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ipr-underline {
+    position: absolute;
+    height: 2px;
+    width: 25%;
+    bottom: -1px;
+    left: 0;
+    background: #007aff;
+    border-radius: 1px 1px 0 0;
+    -webkit-transition: left 0.3s;
+    -moz-transition: left 0.3s;
+    -ms-transition: left 0.3s;
+    -o-transition: left 0.3s;
+    transition: left 0.3s;
 }
 
 .ipr:nth-child(n+2) {
