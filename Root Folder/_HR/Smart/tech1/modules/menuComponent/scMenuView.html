@@ -11,16 +11,16 @@
     </a>
 </div>
 
-<!--Пункт меню 02 Выбор-->
+<!--Пункт меню 02 Выбор{{menu.menuSettings[0].selectedVerbs}}-->
 <div ng-class="menu.activeClass('choice')" class="sc-menu-li">
     <a ui-sref="{{menu.data[1].page}}">
         <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[1].num}}</span>{{menu.data[1].item}}
         </h2>
-        <div class="sc-menu-details" ng-repeat="item in menu.data[1].child">
+        <div class="sc-menu-details" ng-repeat="item in menu.data[1].child" ng-show=" !(menu.menuSettings[0].selectedVerbs==0 && $index==1)">
             <div class="sc-menu-desc">
                 <h3 class="sc-menu-desc-heading" ng-click="menu.changePageChoice()"
-                    ng-class="{colorBlue:menu.page==( $index+1) }">{{item.name}}</h3>
-                <p class="sc-menu-desc-p">{{item.discr}}</p>
+                    ng-class="{colorBlue:menu.page==( $index+1)}">{{item.name}}</h3>
+                <p class="sc-menu-desc-p" >{{item.discr}}</p>
             </div>
         </div>
     </a>
@@ -78,9 +78,9 @@
 
 
 <!--Пункт меню 04 Компетенции-->
-<div ng-class="menu.activeClass('competences')" class="sc-menu-li">
-    <a ui-sref="{{menu.data[3].page}}">
-        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[3].num}}</span>{{menu.data[3].item}}
+<div ng-class="menu.activeClass('competences')"class="sc-menu-li">
+    <a ui-sref="{{menu.data[3].page}}"  >
+        <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[3].num}}</span>{{menu.data[3].item}} ({{menu.menuSettings[0].selectedPositions}})
         </h2>
         <div class="sc-menu-details">
             <div class="sc-menu-desc">
@@ -136,4 +136,4 @@
 </div>
 
 </div>
-<div class="button_next" ng-click="menu.changePageChoice()" ng-show="menu.state=='choice'">{{menu.btnText}}</div>
+<div class="button_next" ng-click="menu.changePageChoice()" ng-show="menu.state=='choice'&& menu.menuSettings[0].selectedVerbs!=0">{{menu.btnText}}</div>

@@ -16,7 +16,7 @@ function dirMenu() {
 
             }]);
 
-        function menuController($scope, $location, menuDataService, updateSwiper, resetSwiper, $state, positionSettings, getProfile,getDict, formGoalsService, instrumentsService, requestService, $timeout) {
+        function menuController($scope, $location, menuDataService, updateSwiper, resetSwiper, $state, positionSettings, getProfile,getDict, formGoalsService, instrumentsService, requestService, $timeout,menuSettings) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
@@ -30,7 +30,7 @@ function dirMenu() {
             this.btnText = menuDataService.choiceData[1];// текст кнопки меню выбора
             this.positionSettings = positionSettings;// данные для передачи в страницу позиции
             this.sliders = menuDataService.sliderOptions;// данные настройки слайдеров
-
+            this.menuSettings=menuSettings;
             this.goalsData = formGoalsService.goalsData; // получаем выбранные цели
             this.getGoalsQuantity = getGoalsQuantity;
 
@@ -69,6 +69,7 @@ function dirMenu() {
             function changePageChoice(item) {
                 that.page = (that.page == 1) ? 2 : 1;
                 that.btnText = menuDataService.choiceData[that.page];
+                menuSettings[0].page=that.page;
             }
 
             function activeClass(page) {

@@ -17,7 +17,7 @@ function dirPosition() {
                 };
             });
 
-        function positionController($scope, requestService, positionsService, getPosition, getProfile, positionSettings,$timeout,updateSwiper,getCustomData) {
+        function positionController($scope, requestService, positionsService, getPosition, getProfile, positionSettings,$timeout,updateSwiper,getCustomData,menuSettings) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
@@ -30,6 +30,7 @@ function dirPosition() {
             this.competences_h_slider = document.querySelector(".sc-main-slide_pos");
             this.competenceCurrent = null;//текущая выбранная позиция
             this.currentIndex=null;//индекс выбранной позиции
+            this.menuSettings=menuSettings;
             this.currentPositionCompetences=null;
             this.positionDiscr={};
             this.positionDiscrPart={};
@@ -90,11 +91,7 @@ function dirPosition() {
                 getCustomData.jobProfile(position.sJobProfileId).then(function(data){
                     that.positionDiscr=data;
                     that.positionDiscrPart = that.positionDiscr.aCompetentions;
-                    
 
-                        
-                        
-                        
                     console.log(data)
                 })
 
@@ -112,7 +109,7 @@ function dirPosition() {
             function setFilter(obj){
                return function (structure) {
                         let tags = that.posModelData;
-                        let ps=that.positionSettings
+                        let ps=that.positionSettings;
                         let result = true;
                   if (structure.iTurnover<ps.open[0]|| structure.iTurnover>ps.open[1])result=false;
                   if (structure.iProbability< (ps.conformity[0]/100)|| structure.iProbability>(ps.conformity[1]/100))result=false;
@@ -129,6 +126,7 @@ function dirPosition() {
                 let data= that.posModelData.data;
                 (data[index].liked)?delete data[index].liked: data[index].liked=true;
                 positionSettings.countLiked=getPosition.getLiked().length;
+                menuSettings[0].selectedPositions=positionSettings.countLiked;
             }
 
             //***********************************************************************************************************

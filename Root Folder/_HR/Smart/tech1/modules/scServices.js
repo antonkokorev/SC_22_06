@@ -41,11 +41,19 @@ function Services() {
             this.getShow = function () {
                 return this.positionSettings.show
             };
-
             return this.positionSettings;
+        })
+        .factory("menuSettings", function () {
+
+            return  this.menuSettings = [{
+                page: 1,
+                selectedVerbs:0,
+                selectedPositions:0,
+
+            }];
+
 
         })
-
 
         .service("getDict", function (requestService, $state, updateSwiper, $timeout) {
 
