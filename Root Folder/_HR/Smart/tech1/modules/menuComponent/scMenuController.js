@@ -77,7 +77,9 @@ function dirMenu() {
                 let currentRoute = $location.path().substring(1) || 'profile';
                 let result =(page === currentRoute) ? true : false;
 
-                return {"active":result,"disableClick":that.menuSettings[0].selectedPositions==0 &&  ["competences","targets","instruments","ipr"].indexOf(page)!=-1 };
+                return {"active":result,"disableClick":(that.menuSettings[0].selectedPositions==0 &&  ["competences"].indexOf(page)!=-1)||(
+                        that.getGoalsQuantity()==0&&["targets","instruments","ipr"].indexOf(page)!=-1
+                    ) };
 
 
                // {"text-box-icon": true, 'used': $scope.entry_map[entry.guid] > 0}
@@ -110,9 +112,9 @@ function dirMenu() {
 
             function getGoalsQuantity() {
                 var q = that.goalsData.goals.length;
-                if (q > 0) {
-                    return "(" + q + ")";
-                }
+               /* if (q > 0) {*/
+                    return   q ;
+               /* }*/
             }
 
         }

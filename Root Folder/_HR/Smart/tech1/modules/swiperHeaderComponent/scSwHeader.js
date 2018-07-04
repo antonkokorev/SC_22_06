@@ -13,7 +13,7 @@ function dirSwHeader() {
                 };
             });
 
-        function swHeaderController($scope, $state, positionSettings, getPosition) {
+        function swHeaderController($scope, $state, positionSettings, getPosition,menuSettings) {
 
 
 
@@ -21,12 +21,14 @@ function dirSwHeader() {
             //============================================
             //атрибуты
             //============================================
+
             var that = this;
             this.state = "";// текущий роутер
             this.sText = "Для вас";
             this.likeCount = positionSettings.countLiked;
             this.showMenu = positionSettings.showMenu;
             this.settings = positionSettings.positionStaticMenu;
+            this.menuSettings=menuSettings;
             this.selected = positionSettings.selectedMenu;
             this.menu = ["Функции", "Компетенции", "Образование", "Навыки", "Языки", "Сетификаты"];
             //============================================
@@ -66,7 +68,13 @@ function dirSwHeader() {
 
             //***********************************************************************************************************
             function likePos() {
-                (positionSettings.positionStaticMenu.liked) ? delete positionSettings.positionStaticMenu.liked : positionSettings.positionStaticMenu.liked = true;
+               if (positionSettings.positionStaticMenu.liked) {
+                   delete positionSettings.positionStaticMenu.liked;
+                   menuSettings[0].selectedPositions--;
+               }else{
+                   positionSettings.positionStaticMenu.liked = true;
+                   menuSettings[0].selectedPositions++;
+               }
 
             }
 
