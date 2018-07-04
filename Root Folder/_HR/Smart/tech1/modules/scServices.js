@@ -295,20 +295,18 @@ function Services() {
         .service("iprService", function ($timeout, requestService, updateSwiper, formGoalsService) {
             const goals = formGoalsService.goalsData.goals;
 
-            this.data = {
-                goals: goals.map((item) => {
+
+            this.createIpr = () => {
+                this.data = goals.map((item) => {
                     return {
                         goal: item,
-                        instruments: {
-                            books: [],
-                            videos: [],
-                            courses: [],
-                            advises: []
-                        }
+                        books: [],
+                        videos: [],
+                        courses: [],
+                        advises: []
                     }
-                })
-            };
-
+                });
+            }
 
             this.currentGoal = {goal: {}};
 
