@@ -94,7 +94,7 @@ function dirCompetences() {
 
                     formGoalsService.setCompetences(this.chosenCompetences);
                     formGoalsService.getGoals();
-                    return;
+                    return
                 }
 
                 competences_h_slider.style.transform = "translateX(-66.6666%)";
