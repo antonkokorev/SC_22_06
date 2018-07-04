@@ -54,7 +54,13 @@ function dirProfile() {
                     if (this.additionalSkill.name && this.additionalSkill.rate) {
                         this.additionalSkills.push(this.additionalSkill);
 
-                        getProfile.postNewSkill(this.additionalSkills);
+                        const data = {};
+                        data.rating = this.additionalSkill.rate;
+                        data.name = this.additionalSkill.name;
+                        data.entity = "skill";
+                        data.user = that_.user;
+
+                        getProfile.postRequest(data);
 
                         this.additionalSkill = {};
                     }
@@ -92,7 +98,16 @@ function dirProfile() {
                     // Отправить запрос
                     if (this.additionalAchievement.what && this.additionalAchievement.when && this.additionalAchievement.where) {
                         this.additionalAchievements.push(this.additionalAchievement);
-                        console.log(this.additionalAchievements);
+
+                        const data = {};
+                        data.year = this.additionalAchievement.when;
+                        data.place = this.additionalAchievement.where;
+                        data.name = this.additionalAchievement.what;
+                        data.entity = "selfachievement";
+                        data.user = that_.user;
+
+                        getProfile.postRequest(data);
+
                         this.additionalAchievement = {};
 
                         if (this.additionalAchievements.length > 1) {
@@ -113,11 +128,14 @@ function dirProfile() {
 
             this.addAboutMe = (e) => {
                 if (this.aboutField && e.currentTarget.classList.contains("clicked")) {
-                    console.log(this.additionalAchievement);
-
-                    // Отправить запрос
+                     // Отправить запрос
                     if (this.aboutField.length > 0 ) {
-                        console.log(this.aboutField);
+                        const data = {};
+                        data.year = this.aboutField;
+                        data.entity = "aboutme";
+                        data.user = that_.user;
+
+                        getProfile.postRequest(data);
                     }
                     e.currentTarget.classList.remove("clicked");
                 } else {

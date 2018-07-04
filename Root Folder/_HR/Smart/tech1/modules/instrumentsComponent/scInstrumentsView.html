@@ -50,7 +50,7 @@
 
         <div class="video" ng-repeat="video in instruments.instrumentsData.instruments | filter: {sType: 'video'}">
             <h4 class="tools-heading"> {{video.sName}} </h4>
-            <p class="tools-text"><a href="{{video.sUrl}}"> Ссылка на просмотр</a> </p>
+            <div class="tools-video-cover"></div>
             <p class="add-tool add-book" ng-click="instruments.addToIpr(video)"> В список для просмотра </p>
         </div>
     </div>

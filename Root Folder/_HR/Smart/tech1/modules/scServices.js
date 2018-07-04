@@ -23,8 +23,9 @@ function Services() {
             };
         })
         .factory("postService", function ($http) {
-            return function (url) {
-                var _url = url + that_.user;
+            return function (url, body) {
+
+                var _url = url;
                 var _headers = {
                     'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
                     'Accept': 'application/json; charset=utf-8',
@@ -34,7 +35,8 @@ function Services() {
                 return $http({
                     method: 'POST',
                     url: _url,
-                    headers: _headers
+                    headers: _headers,
+                    data: body
                 }).then(function (response) {
                     return response.data
                 }).catch(function (error) {
@@ -174,14 +176,9 @@ function Services() {
                 });
             }
 
-            this.postNewSkill = (body) => {
-                var qs = "name=" + body.name + "&rating=" + body.rate + "&";
-
-                var url = that_.srvLink + "?"+ qs +"entity=skill&user=";
-                console.log(url);
-                postService(url).then((data) => {
-                    this.profileData.user = data;
-                });
+            this.postRequest = (body) => {
+                var url = that_.srvLink;
+                postService(url, body);
             }
         })
 

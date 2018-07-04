@@ -1403,6 +1403,16 @@
     color: #adb3bc;
 }
 
+.tools-video-cover {
+    width: 500px;
+    height: 282px;
+    background: url("../img/videocover.jpg") no-repeat;
+    background-position: center;
+    -webkit-background-size: cover;
+    background-size: cover;
+    margin-top: 10px;
+}
+
 /* ��� */
 
 .ipr-back-to-goals {
