@@ -85,8 +85,7 @@
 <div ng-class="menu.activeClass('competences')" class="sc-menu-li">
     <a ui-sref="{{menu.data[3].page}}">
         <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[3].num}}</span>
-            <span class="sc-menu-heading-text">{{menu.data[3].item}}</span>
-            ({{menu.menuSettings[0].selectedPositions}})
+            <span class="sc-menu-heading-text">{{menu.data[3].item}} ({{menu.menuSettings[0].selectedPositions}})</span>
         </h2>
         <div class="sc-menu-details">
             <div class="sc-menu-desc">
@@ -105,8 +104,8 @@
 <div ng-class="menu.activeClass('targets')" class="sc-menu-li">
     <a ui-sref="{{menu.data[4].page}}">
         <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[4].num}}</span>
-            <span class="sc-menu-heading-text">{{menu.data[4].item}}</span>
-            ({{menu.getGoalsQuantity()}})</h2>
+            <span class="sc-menu-heading-text">{{menu.data[4].item}} ({{menu.getGoalsQuantity()}})</span>
+        </h2>
         <div class="sc-menu-details">
             <div class="sc-menu-desc">
                 <p class="sc-menu-desc-p">{{menu.data[4].discr}}</p>
