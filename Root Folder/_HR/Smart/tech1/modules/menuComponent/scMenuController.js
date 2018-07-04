@@ -237,17 +237,7 @@ function dirMenu() {
                         item: "ИПР",
                         page: "ipr",
                         type: "menuList",
-                        child: [
-                            {
-                                name: "Цель 1",
-                            },
-                            {
-                                name: "Цель 2",
-                            },
-                            {
-                                name: "Цель 3",
-                            }
-                        ]
+                        child: []
                     }
                     ]
             })
