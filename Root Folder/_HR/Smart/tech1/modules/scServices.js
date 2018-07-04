@@ -22,6 +22,27 @@ function Services() {
                 return promise
             };
         })
+        .factory("postService", function ($http) {
+            return function (url) {
+                var _url = url + that_.user;
+                var _headers = {
+                    'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
+                    'Accept': 'application/json; charset=utf-8',
+                    'Content-Type': 'application/json; charset=utf-8'
+                };
+
+                return $http({
+                    method: 'POST',
+                    url: _url,
+                    headers: _headers
+                }).then(function (response) {
+                    return response.data
+                }).catch(function (error) {
+                    console.log(error);
+                });
+
+            };
+        })
         //====================================================================================================
         .factory("positionSettings", function () {
 
@@ -43,7 +64,6 @@ function Services() {
             };
 
             return this.positionSettings;
-
         })
 
 
@@ -127,10 +147,10 @@ function Services() {
                     if ($state.current.name == "position")
                         $timeout(updateSwiper, 0);
                 });
-            }
+            };
         })
         //====================================================================================================
-        .service("getProfile", function (requestService, $state, updateSwiper, timelineService, $timeout) {
+        .service("getProfile", function (requestService, postService, $state, updateSwiper, timelineService, $timeout) {
             this.profileData = {user: []};
             this.getProfileData = () => {
                 var url = that_.srvLink + "?entity=empProfileNoCallback&user=";
@@ -144,6 +164,18 @@ function Services() {
                         }, 0);
                 });
             }
+
+            this.postNewSkill = (body) => {
+                var qs = "name=" + body.name + "&rating=" + body.rate + "&";
+
+                var url = that_.srvLink + "?"+ qs +"entity=skill&user=";
+                console.log(url);
+                postService(url).then((data) => {
+                    this.profileData.user = data;
+                });
+            }
+
+
         })
 
 
