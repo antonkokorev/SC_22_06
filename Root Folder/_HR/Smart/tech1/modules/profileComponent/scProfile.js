@@ -29,7 +29,7 @@ function dirProfile() {
 
             this.additionalAchievements = [];
             this.additionalAchievement = {};
-            this.showAchievementLine = false;
+            this.showAchievementLine = true;
 
             this.aboutField = "";
             this.showAboutForm = false;
@@ -41,7 +41,7 @@ function dirProfile() {
             $(window).resize(function () {
                 timelineService.renderTimelineLine(".profile-education");
                 timelineService.renderTimelineLine(".profile-results");
-                timelineService.renderTimelineLine(".profile-achievement");
+                timelineService.renderTimelineLine(".profile-achievements");
             });
 
 
@@ -110,7 +110,7 @@ function dirProfile() {
 
                         this.additionalAchievement = {};
 
-                        if (this.additionalAchievements.length > 1) {
+                        if ((this.additionalAchievements.length + this.data.user.aSelfAchievments.length) > 1) {
                             this.showAchievementLine = true;
                             $timeout(function() {
                                 timelineService.renderTimelineLine(".profile-achievements");
@@ -132,7 +132,7 @@ function dirProfile() {
                     if (this.aboutField.length > 0 ) {
                         const data = {};
                         data.year = this.aboutField;
-                        data.entity = "aboutme";
+                        data.entity = "description";
                         data.user = that_.user;
 
                         getProfile.postRequest(data);

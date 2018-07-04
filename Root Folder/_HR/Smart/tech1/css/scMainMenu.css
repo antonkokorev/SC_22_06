@@ -18,15 +18,15 @@
 
 }
 
-.disableClick .sc-menu-heading{
+.disableClick .sc-menu-heading,
+.disableClick .sc-menu-heading-text {
     color: #f0eaf2 !important;
 }
-
 
 .colorBlue{
     color: #007aff!important;
 }
-.colorInviz{
+.colorInviz {
     color: #f0eaf2 !important;
 }
 .sc-menu {
@@ -72,7 +72,7 @@
 }
 
 .sc-menu-heading {
-    font-size: 24px;
+    font-size: 0px;
     font-weight: bold;
     text-align: left;
     color: #8d8d8d;
@@ -97,6 +97,18 @@
     display: inline-block;
     width: 40px;
     margin-right: 5px;
+    vertical-align: middle;
+}
+
+.sc-menu-heading-text {
+    display: inline-block;
+    width: calc(100% - 45px);
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+    color: #8d8d8d;
+    vertical-align: middle;
+    cursor: pointer;
 }
 
 .sc-menu-details {

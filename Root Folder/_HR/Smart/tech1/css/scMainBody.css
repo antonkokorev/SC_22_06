@@ -468,7 +468,7 @@
 .timeline-line {
     position: absolute;
     width: 1px;
-    height: 100px;
+    /*height: 100px;*/
     background: #ccc;
 }
 

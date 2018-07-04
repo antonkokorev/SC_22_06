@@ -171,6 +171,7 @@ function Services() {
                         $timeout(function () {
                             timelineService.renderTimelineLine(".profile-education");
                             timelineService.renderTimelineLine(".profile-results");
+                            timelineService.renderTimelineLine(".profile-achievements");
                             updateSwiper()
                         }, 0);
                 });

@@ -94,6 +94,26 @@
             <div class="slide-profile-skills">
                 <h3 class="sc-slide-middle-heading"> Дополнительные навыки </h3>
 
+                <div class="profile-skill-col" ng-repeat="skill in profile.data.user.aAddSkills">
+                    <h4 class="profile-skill-label"> {{skill.sName}} </h4>
+                    <div class="profile-skill-rating slide-row">
+                        <p class="profile-skill-name"> Самооценка </p>
+                        <div class="profile-skill-stars">
+                            <div class="profile-skill-stars-filled-wrapper"
+                                 style="width: {{skill.iPersonRate * 20}}% ">
+                                <div class="profile-skill-stars-filled">
+                                    <div class="profile-skill-star"
+                                         ng-repeat="a in profile.range(5) track by $index"> <i class="fas fa-star"></i> </div>
+                                </div>
+                            </div>
+                            <div class="profile-skill-stars-rated">
+                                <div class="profile-skill-star"
+                                     ng-repeat="a in profile.range(5) track by $index"> <i class="far fa-star"></i> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- сделать директиву -->
                 <div class="profile-skill-col" ng-repeat="skill in profile.additionalSkills">
                     <h4 class="profile-skill-label"> {{skill.name}} </h4>
@@ -162,6 +182,18 @@
                 <div class="profile-achievements">
                     <div class="timeline">
                         <div class="timeline-line" ng-show="profile.showAchievementLine"></div>
+
+                        <div class="timeline-element" ng-repeat="achievement in profile.data.user.aSelfAchievments">
+                            <div class="timeline-when"> {{achievement.iYear}} </div>
+                            <div class="timeline-center">
+                                <div class="timeline-circle"></div>
+                            </div>
+                            <div class="timeline-what">
+                                <h3 class="timeline-what-heading"> {{achievement.sName}} </h3>
+                                <p class="timeline-what-text"> {{achievement.sPlace}} </p>
+                            </div>
+                        </div>
+
                         <div class="timeline-element" ng-repeat="achievement in profile.additionalAchievements">
                             <div class="timeline-when"> {{achievement.when}} </div>
                             <div class="timeline-center">
@@ -256,6 +288,7 @@
         <div class="slide-profile-col">
             <div class="slide-profile-about">
                 <h3 class="sc-slide-middle-heading"> О себе </h3>
+                <p class="profile-about-me"> {{profile.data.user.sAboutMe}}</p>
                 <p class="profile-about-me">
                     {{profile.aboutField}}
                 </p>
