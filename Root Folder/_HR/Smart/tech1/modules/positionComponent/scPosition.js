@@ -15,7 +15,7 @@ function dirPosition() {
                 };
             });
 
-        function positionController($scope, requestService, positionsService, getPosition, getProfile, positionSettings, $timeout, updateSwiper, getCustomData) {
+        function positionController($scope, requestService, positionsService, getPosition, getProfile, positionSettings,$timeout,updateSwiper,getCustomData,menuSettings) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
@@ -27,11 +27,13 @@ function dirPosition() {
             this.positionSettings = positionSettings;//данные фильтрации
             this.competences_h_slider = document.querySelector(".sc-main-slide_pos");
             this.competenceCurrent = null;//текущая выбранная позиция
-            this.currentIndex = null;//индекс выбранной позиции
-            this.currentPositionCompetences = null;
-            this.positionDiscr = {};
-            this.positionDiscrPart = {};
-            this.selectedMenu = positionSettings.selectedMenu;
+            this.currentIndex=null;//индекс выбранной позиции
+            this.menuSettings=menuSettings;
+            this.currentPositionCompetences=null;
+            this.positionDiscr={};
+            this.positionDiscrPart={};
+            this.selectedMenu=positionSettings.selectedMenu;
+
 
             //============================================
             //вотчеры
@@ -88,8 +90,6 @@ function dirPosition() {
                 getCustomData.jobProfile(position.sJobProfileId).then(function (data) {
                     that.positionDiscr = data;
                     that.positionDiscrPart = that.positionDiscr.aCompetentions;
-
-
                     console.log(data)
                 })
 
@@ -97,28 +97,36 @@ function dirPosition() {
             };
 
 
-            function setFilter(obj) {
-                return function (structure) {
-                    let tags = that.posModelData;
-                    let ps = that.positionSettings
-                    let result = true;
-                    if (structure.iTurnover < ps.open[0] || structure.iTurnover > ps.open[1]) result = false;
-                    if (structure.iProbability < (ps.conformity[0] / 100) || structure.iProbability > (ps.conformity[1] / 100)) result = false;
-                    if (ps.grade[structure.iGrade]) result = false;
-                    if (ps.onlyLiked == true && !structure.liked) result = false;
 
-                    return result;
-                }
+
+
+
+
+            function setFilter(obj){
+               return function (structure) {
+                        let tags = that.posModelData;
+                        let ps=that.positionSettings;
+                        let result = true;
+                  if (structure.iTurnover<ps.open[0]|| structure.iTurnover>ps.open[1])result=false;
+                  if (structure.iProbability< (ps.conformity[0]/100)|| structure.iProbability>(ps.conformity[1]/100))result=false;
+                  if (ps.grade[structure.iGrade])result=false;
+                  if (ps.onlyLiked==true && !structure.liked)result=false;
+
+                        return result;
+                    }
+
             }
 
             function getModelData() {
                 return (positionSettings.show == "model") ? getPosition.positionData : getPosition.userPositionData;
             }
 
-            function likeCurrentPosition(e, index, position) {
-                let data = that.posModelData.data;
-                (data[index].liked) ? delete data[index].liked : data[index].liked = true;
-                positionSettings.countLiked = getPosition.getLiked().length;
+            function likeCurrentPosition(e, index, position){
+                let data= that.posModelData.data;
+                (data[index].liked)?delete data[index].liked: data[index].liked=true;
+                positionSettings.countLiked=getPosition.getLiked().length;
+                menuSettings[0].selectedPositions=positionSettings.countLiked;
+
             }
 
             //***********************************************************************************************************

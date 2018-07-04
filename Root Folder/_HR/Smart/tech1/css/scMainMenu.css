@@ -13,6 +13,11 @@
     color: #007aff;
 }
 
+.disableClick  {
+    pointer-events: none;
+    background: red;
+}
+
 
 .colorBlue{
     color: #007aff!important;

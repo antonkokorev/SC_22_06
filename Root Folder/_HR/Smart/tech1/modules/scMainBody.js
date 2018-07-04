@@ -18,7 +18,7 @@ function classMainBody() {
 
     //this.currentUser="Basic Z2VvcmdpZXYtZWk6cXdlcnR5MTIz",
     this.currentUser = "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
-        this.srvLink = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs",
+        this.srvLink = "http://sbt-oopp-009.sigma.sbrf.ru:8091/hr/smartcareer/services/data.xsjs",
         that_ = this;
     that_.user = "Krylova-YV";
 
