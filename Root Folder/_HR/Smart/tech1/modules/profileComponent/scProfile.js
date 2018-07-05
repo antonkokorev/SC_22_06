@@ -130,7 +130,7 @@ function dirProfile() {
                         if ((that.additionalAchievements.length + that.data.user.aSelfAchievments.length) > 1) {
                             that.showAchievementLine = true;
 
-                            customElements.renderTimelineLine(".profile-achievements");
+                            customElements.updateSwiper(0);
 
                         }
                     }

@@ -6,9 +6,12 @@ function Services() {
     /*******************************************************************************************************************/
     /*customElements отвечает за все элементы которые  не зашиты в angular*/
     /*******************************************************************************************************************/
-        .factory("customElements", function ($timeout) {
+        .factory("customElements", function ($timeout,$state) {
 
             function updateSwiper() {
+                if ($state.current.name === "profile") {
+                    renderTimelineLine([".profile-education", ".profile-results", ".profile-achievements"]);
+                }
                 that_.profile_swiper.update();
             }
 
@@ -46,7 +49,7 @@ function Services() {
                     if(ii<10){
                         ii++;
                         console.log(ii);
-                        $timeout(renderTimelineLine(array_parent,ii),1000);
+                        //$timeout(renderTimelineLine(array_parent,ii),1000);
                     }
 
                 }
@@ -54,19 +57,42 @@ function Services() {
 
             return {
                 "updateSwiper": (time) => {
-                    $timeout(updateSwiper, time || 0)
+                    let time1=time || 0;
+                    $timeout(updateSwiper, time1)
                 },
                 "resetSwiper": (time) => {
-                    $timeout(resetSwiper, time || 0)
-                },
-                "renderTimelineLine": (array_parent, time) => {
-                    $timeout(renderTimelineLine(array_parent), time || 0)
+                    let time1=time || 0;
+                    $timeout(resetSwiper, time1)
                 }
             }
         })
         /*******************************************************************************************************************/
         /*для работы с xsjs
         /*******************************************************************************************************************/
+        .service("timelineService", function () {
+                this.renderTimelineLine = function (parent) {
+                    try {
+                        // Перерисовка линии таймлайна
+                        var first_circle = $(parent + " .timeline-circle").first();
+                        var last_circle = $(parent + " .timeline-circle").last();
+                        var line_y_offset = ($(parent + " .timeline-center").first().height() - first_circle.height()) / 2;
+                        var line_x_offset = first_circle.position().left + first_circle.width() / 2;
+                        var line_y1 = first_circle.offset().top;
+                        var line_y2 = last_circle.offset().top + last_circle.height();
+                        var line_height = line_y2 - line_y1;
+                        $(parent + " .timeline-line").css({
+                            "height": line_height,
+                            "top": 0,
+                            "left": line_x_offset
+                        })
+                    } catch (e) {
+                        console.log(e.message)
+                    }
+                }
+            }
+        )
+
+
         .factory("dataServises", function ($http, $state, customElements) {
             console.warn("SERVICES");
             this.cachedData = {};
@@ -91,9 +117,7 @@ function Services() {
 
             function check(name) {
                 if ($state.current.name === name) {
-                    if (name === "profile"){
-                        customElements.renderTimelineLine([".profile-education", ".profile-results", ".profile-achievements"],100)
-                    }
+
                     customElements.updateSwiper(200);
                 }
             }

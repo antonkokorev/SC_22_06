@@ -53,14 +53,14 @@ function classMainBody() {
         //============================================================
         //создание прелоадера
         //============================================================
-        $(component).append(`
+      /*  $(component).append(`
             <div id="preId" class="preClass"'>
                 <div class='cssload-loader'>
                     <div class='cssload-inner cssload-one'></div>
                     <div class='cssload-inner cssload-two'></div>
                     <div class='cssload-inner cssload-three'></div>
                 </div>
-            </div>`);
+            </div>`);*/
         $(component).append(html);
         //============================================================
         //основной свайпер
@@ -106,6 +106,9 @@ function classMainBody() {
                 url: '/profile',
                 template: '<dir-profile id="sc-profile" class="profile-slide sc-v-slide"></dir-profile>',
                 controller: allController
+
+
+
             });
             $stateProvider.state({
                 name: 'choice',
@@ -163,16 +166,10 @@ function classMainBody() {
             }]);
 
         //общий контроллер для состояний с обновлением основного свайпера
-        function allController($state, $scope, customElements, preloader) {
-            preloader.on();
-            var state = $state.current.name;
-
+        function allController( $scope, customElements ) {
             $scope.$on('$viewContentLoaded', function (event) {
-                if (state === "profile") {
-                    customElements.renderTimelineLine([".profile-education", ".profile-results", ".profile-achievements"],400);
-                }
-                customElements.resetSwiper(400);
-                preloader.off();
+                customElements.resetSwiper(500);
+
             });
 
 
