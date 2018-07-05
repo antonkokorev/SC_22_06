@@ -25,9 +25,9 @@
 
         <div class="ipr-sections">
 
-            <div class="ipr-section">
+            <div class="ipr-section" >
                 <!--<h3 class="sc-slide-middle-heading"> Практические советы </h3>-->
-                <div class="tools-col"
+                <div  ng-show="ipr.currentMenu===0" class="tools-col"
                      ng-repeat="advise in ipr.iprData.advises">
                     <h4 class="tools-small-heading"> {{advise.sName}} </h4>
                     <p class="tools-text"> {{advise.sDescription}} </p>
@@ -38,7 +38,7 @@
             <div class="ipr-section">
                 <!--<h3 class="sc-slide-middle-heading"> Книги </h3>-->
 
-                <div class="book" ng-repeat="book in ipr.iprData.books">
+                <div class="book"  ng-show="ipr.currentMenu===1" ng-repeat="book in ipr.iprData.books">
                     <h4 class="tools-heading"> {{book.sName}} </h4>
                     <div class="slide-row book-info">
                         <div class="book-img"></div>
@@ -57,7 +57,7 @@
             <div class="ipr-section">
                 <!--<h3 class="sc-slide-middle-heading"> Обучающие видео </h3>-->
 
-                <div class="video"
+                <div  ng-show="ipr.currentMenu===2" class="video"
                      ng-repeat="video in ipr.iprData.videos">
                     <h4 class="tools-heading"> {{video.sName}} </h4>
                     <p class="tools-text"><a href="{{video.sUrl}}"> Ссылка на просмотр</a></p>
@@ -68,7 +68,7 @@
             <div class="ipr-section">
                 <!--<h3 class="sc-slide-middle-heading"> Очные курсы </h3>-->
 
-                <div class="planned-courses"
+                <div  ng-show="ipr.currentMenu===3" class="planned-courses"
                      ng-repeat="course in ipr.iprData.courses">
                     <h4 class="tools-heading"> {{course.sName}} </h4>
                     <div class="tools-col">

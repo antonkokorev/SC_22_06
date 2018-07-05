@@ -19,7 +19,7 @@ function classMainBody() {
     this.currentUser = "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi";
     this.srvLink = "http://sbt-oopp-009.sigma.sbrf.ru:8091/hr/smartcareer/services/data.xsjs";
     that_ = this;
-    that_.user = (that_.globalSettings.Settings.user == "UNKNOWN")?"Krylova-YV":that_.globalSettings.Settings.user;
+    that_.user = (that_.globalSettings.Settings.user === "UNKNOWN") ? "Krylova-YV" : that_.globalSettings.Settings.user;
 
 
     this.initMainBody = function () {
@@ -28,17 +28,16 @@ function classMainBody() {
         path[path.length - 1] = "";
         this.path = path.join("/");
         this.refresh();
-        var globalSettings = this.globalSettings;
         //============================================================
         //создание html страницы
         //============================================================
-        var component = '#' + globalSettings.teg + '_COMPONENT ';
+        var component = '#' + this.globalSettings.teg + '_COMPONENT ';
         var html =
             '<div id="sc-app" ng-controller="scAppController as appController">' +
             '   <dir-header class="sc-header"></dir-header>' +
             '   <dir-main-menu page="appController.choiceCurentPage" id="id_menu" class="sc-menu"></dir-main-menu>' +
             '   <main id="id_main" class="sc-main enter-active">' +
-            '   <dir-sw-header style="background:red;width: 100%;height: 90px;"></dir-sw-header>' +
+            '   <dir-sw-header></dir-sw-header>' +
             '   <div id="swiper-container" class="swiper-auto-container">' +
             '       <div class="swiper-wrapper">' +
             '           <div class="swiper-slide">' +
@@ -124,10 +123,10 @@ function classMainBody() {
                 url: '/position',
                 template: "<dir-position  modelposition='appController.modelPosition'></dir-position>",
                 controller: allController,
-                onExit: function (getPosition,positionSettings) {
+                onExit: function (getPosition, positionSettings) {
                     //alert("test")
-                    var test = getPosition.getLiked();
-                    positionSettings.showMenu=false;
+                    // var test = getPosition.getLiked();
+                    positionSettings.showMenu = false;
 
                 }
             });
@@ -163,23 +162,16 @@ function classMainBody() {
             }]);
 
         //общий контроллер для состояний с обновлением основного свайпера
-        function allController($state, $scope, $timeout, updateSwiper, timelineService, preloader, resetSwiper) {
+        function allController($state, $scope, customElements, preloader) {
             preloader.on();
             var state = $state.current.name;
 
             $scope.$on('$viewContentLoaded', function (event) {
-                $timeout(function () {
-                    if (state == "profile") {
-                        timelineService.renderTimelineLine(".profile-education");
-                        timelineService.renderTimelineLine(".profile-results");
-                        timelineService.renderTimelineLine(".profile-achievements");
-                    }
-                    resetSwiper();
-                    updateSwiper();
-                    preloader.off();
-                }, 400);
-
-
+                if (state === "profile") {
+                    customElements.renderTimelineLine([".profile-education", ".profile-results", ".profile-achievements"], 400);
+                }
+                customElements.resetSwiper(400);
+                preloader.off();
             });
         }
 

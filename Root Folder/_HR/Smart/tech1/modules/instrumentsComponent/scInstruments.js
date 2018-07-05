@@ -1,7 +1,7 @@
 function dirInstruments() {
 
     (function () {
-        console.warn("dirHeader");
+        console.warn("dirInstruments");
         angular.module('scApp.instruments', [])
 
             .directive('dirInstruments', function ($location) {
@@ -14,11 +14,12 @@ function dirInstruments() {
                 };
             });
 
-        function instrumentsController($timeout, requestService, updateSwiper, formGoalsService, instrumentsService, iprService) {
-
+        function instrumentsController($timeout, requestService, formGoalsService, instrumentsService, iprService,customElements) {
+            let that=this;
             this.preloader = instrumentsService.preloader;
             this.currentGoal = instrumentsService.currentGoal;
             this.instrumentsData = instrumentsService.instrumentsData;
+            this.currentMenu=0;
 
             // var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument&competentionId="+ this.currentGoal.sCompetentionId +"&user=";
             // requestService(url).then((data) => {
@@ -33,8 +34,10 @@ function dirInstruments() {
             var underline = document.querySelector(".tools-underline");
 
             this.switchTool = (index) => {
+                that.currentMenu=index;
                 sections.style.transform = "translateX(-" + 25 * index + "%)";
                 underline.style.left = 25 * index + "%";
+                customElements.resetSwiper(100);
             };
 
             this.addToIpr = (item) => {
