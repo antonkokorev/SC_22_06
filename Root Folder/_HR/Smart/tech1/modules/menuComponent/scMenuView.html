@@ -56,9 +56,9 @@
                     <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
                     <div class="sc-grade-filter">
                         <div class="scMenuGradeFilter"
-                             ng-class="{scGradeGray:menu.positionSettings.grade[menu.profileData.user.iGrade -2+$index]}"
+                             ng-class="{scGradeGray:menu.positionSettings.grade[menu.pData.profileData.iGrade -2+$index]}"
                              ng-click="menu.gradeFltClick($index,$value)"
-                             ng-repeat="gr in menu.range(5) track by $index">{{menu.profileData.user.iGrade -2+$index}}
+                             ng-repeat="gr in menu.range(5) track by $index">{{menu.pData.profileData.iGrade -2+$index}}
                         </div>
                     </div>
                 </div>

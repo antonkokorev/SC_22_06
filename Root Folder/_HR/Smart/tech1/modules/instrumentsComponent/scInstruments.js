@@ -14,7 +14,7 @@ function dirInstruments() {
                 };
             });
 
-        function instrumentsController($timeout, requestService, formGoalsService, instrumentsService, iprService,customElements) {
+        function instrumentsController( requestService, formGoalsService, instrumentsService, iprService,customElements) {
             let that=this;
             this.preloader = instrumentsService.preloader;
             this.currentGoal = instrumentsService.currentGoal;

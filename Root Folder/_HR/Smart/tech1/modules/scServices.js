@@ -1,56 +1,138 @@
 function Services() {
     angular.module('scApp')
-//====================================================================================================================
-//новые переделанные сервисы
-//====================================================================================================================
+    //====================================================================================================================
+    //новые переделанные сервисы
+    //====================================================================================================================
+    /*******************************************************************************************************************/
     /*customElements отвечает за все элементы которые  не зашиты в angular*/
-    .factory("customElements", function ($timeout) {
+    /*******************************************************************************************************************/
+        .factory("customElements", function ($timeout) {
 
-        function updateSwiper() {
-            that_.profile_swiper.update();
-        }
+            function updateSwiper() {
+                that_.profile_swiper.update();
+            }
 
-        function resetSwiper() {
-            that_.profile_swiper.update();
-            that_.profile_swiper.slideTo(0, 0, false)
-        }
+            $(window).resize(function () {
+                renderTimelineLine([".profile-education", ".profile-results", ".profile-achievements"]);
+            });
 
-        function renderTimelineLine(array_parent) {
-            try {
-                for (let i = 0; i < array_parent.length; i++) {
-                    // Перерисовка линии таймлайна
-                    let parent = array_parent[i];
-                    let first_circle = $(parent + " .timeline-circle").first();
-                    let last_circle = $(parent + " .timeline-circle").last();
-                    let line_y_offset = ($(parent + " .timeline-center").first().height() - first_circle.height()) / 2;
-                    let line_x_offset = first_circle.position().left + first_circle.width() / 2;
-                    let line_y1 = first_circle.offset().top;
-                    let line_y2 = last_circle.offset().top + last_circle.height();
-                    let line_height = line_y2 - line_y1;
-                    $(parent + " .timeline-line").css({
-                        "height": line_height,
-                        "top": 0,
-                        "left": line_x_offset
-                    })
+            function resetSwiper() {
+                that_.profile_swiper.update();
+                that_.profile_swiper.slideTo(0, 0, false)
+            }
+
+            function renderTimelineLine(array_parent,ii) {
+
+                try {
+                    for (let i = 0; i < array_parent.length; i++) {
+                        // Перерисовка линии таймлайна
+                        let parent = array_parent[i];
+                        let first_circle = $(parent + " .timeline-circle").first();
+                        let last_circle = $(parent + " .timeline-circle").last();
+                        let line_y_offset = ($(parent + " .timeline-center").first().height() - first_circle.height()) / 2;
+                        let line_x_offset = first_circle.position().left + first_circle.width() / 2;
+                        let line_y1 = first_circle.offset().top;
+                        let line_y2 = last_circle.offset().top + last_circle.height();
+                        let line_height = line_y2 - line_y1;
+                        $(parent + " .timeline-line").css({
+                            "height": line_height,
+                            "top": 0,
+                            "left": line_x_offset
+                        })
+                    }
+                    ii=undefined;
+                } catch (e) {
+                    ii=(!ii)?0:ii;
+                    if(ii<10){
+                        ii++;
+                        console.log(ii);
+                        $timeout(renderTimelineLine(array_parent,ii),1000);
+                    }
+
                 }
-            } catch (e) {
-                console.log(e.message)
             }
-        }
 
-        return {
-            "updateSwiper": (time) => {
-                $timeout(updateSwiper, time||0)
-            },
-            "resetSwiper": (time) => {
-                $timeout(resetSwiper, time||0)
-            },
-            "renderTimelineLine": (array_parent,time) => {
-                $timeout(renderTimelineLine(array_parent),  time||0)
+            return {
+                "updateSwiper": (time) => {
+                    $timeout(updateSwiper, time || 0)
+                },
+                "resetSwiper": (time) => {
+                    $timeout(resetSwiper, time || 0)
+                },
+                "renderTimelineLine": (array_parent, time) => {
+                    $timeout(renderTimelineLine(array_parent), time || 0)
+                }
             }
-        }
-    })
-    //====================================================================================================
+        })
+        /*******************************************************************************************************************/
+        /*для работы с xsjs
+        /*******************************************************************************************************************/
+        .factory("dataServises", function ($http, $state, customElements) {
+            console.warn("SERVICES");
+            this.cachedData = {};
+            let that = this;
+
+            function getPostService(url, type, body) {
+                return $http({
+                    method: type,
+                    url: url + that_.user,
+                    data: body,
+                    headers: {
+                        'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
+                        'Accept': 'application/json; charset=utf-8',
+                        'Content-Type': 'application/json; charset=utf-8'
+                    }
+                }).then(function (response) {
+                    return response.data
+                }).catch(function (error) {
+                    console.error(error);
+                });
+            }
+
+            function check(name) {
+                if ($state.current.name === name) {
+                    if (name === "profile"){
+                        customElements.renderTimelineLine([".profile-education", ".profile-results", ".profile-achievements"],100)
+                    }
+                    customElements.updateSwiper(200);
+                }
+            }
+
+
+            function getProfile() {
+                that.cachedData.profileData = {};
+                const url = that_.srvLink + "?entity=empProfileNoCallback&user=";
+                getPostService(url, "GET").then((data) => {
+                    that.cachedData.profileData = data;
+                    check("profile");
+                });
+            }
+
+           function setProfile(body) {
+               getPostService(that_.srvLink+"?user=", "POST", body).then((data) => {
+                   getProfile();
+               })
+           }
+
+
+
+            return {
+                "data": this.cachedData,
+                "getProfile": getProfile,
+                "setProfile":setProfile
+            }
+        })
+
+
+        /*******************************************************************************************************************/
+        /*******************************************************************************************************************/
+        /*******************************************************************************************************************/
+        /*******************************************************************************************************************/
+        /*******************************************************************************************************************/
+        /*******************************************************************************************************************/
+        /*******************************************************************************************************************/
+
+        //====================================================================================================
         .factory("requestService", function ($http) {
             return function (url) {
                 return $http({
@@ -203,14 +285,14 @@ function Services() {
             };
         })
         //====================================================================================================
-        .service("getProfile", function (requestService, postService, $state, updateSwiper, timelineService, $timeout) {
+       /* .service("getProfile", function (requestService, postService, $state, updateSwiper, timelineService, $timeout) {
             this.profileData = {user: []};
             console.warn("SERVICES");
             this.getProfileData = () => {
                 var url = that_.srvLink + "?entity=empProfileNoCallback&user=";
                 requestService(url).then((data) => {
                     this.profileData.user = data;
-                    if ($state.current.name == "profile")
+                    if ($state.current.name === "profile")
                         $timeout(function () {
                             timelineService.renderTimelineLine(".profile-education");
                             timelineService.renderTimelineLine(".profile-results");
@@ -218,14 +300,14 @@ function Services() {
                             updateSwiper()
                         }, 0);
                 });
-            }
+            };
 
             this.postRequest = (body) => {
-                var url = that_.srvLink;
+                let url = that_.srvLink;
                 postService(url, body);
                 this.getProfileData()
             }
-        })
+        })*/
 
 
 
@@ -286,28 +368,28 @@ function Services() {
                     getDict:prGetDict}
             })*/
         //====================================================================================================
-        .service("timelineService", function () {
-                this.renderTimelineLine = function (parent) {
-                    try {
-                        // Перерисовка линии таймлайна
-                        var first_circle = $(parent + " .timeline-circle").first();
-                        var last_circle = $(parent + " .timeline-circle").last();
-                        var line_y_offset = ($(parent + " .timeline-center").first().height() - first_circle.height()) / 2;
-                        var line_x_offset = first_circle.position().left + first_circle.width() / 2;
-                        var line_y1 = first_circle.offset().top;
-                        var line_y2 = last_circle.offset().top + last_circle.height();
-                        var line_height = line_y2 - line_y1;
-                        $(parent + " .timeline-line").css({
-                            "height": line_height,
-                            "top": 0,
-                            "left": line_x_offset
-                        })
-                    } catch (e) {
-                        console.log(e.message)
-                    }
+    /*    .service("timelineService", function () {
+              this.renderTimelineLine = function (parent) {
+                try {
+                      // Перерисовка линии таймлайна
+                      var first_circle = $(parent + " .timeline-circle").first();
+                      var last_circle = $(parent + " .timeline-circle").last();
+                      var line_y_offset = ($(parent + " .timeline-center").first().height() - first_circle.height()) / 2;
+                      var line_x_offset = first_circle.position().left + first_circle.width() / 2;
+                      var line_y1 = first_circle.offset().top;
+                      var line_y2 = last_circle.offset().top + last_circle.height();
+                      var line_height = line_y2 - line_y1;
+                      $(parent + " .timeline-line").css({
+                          "height": line_height,
+                          "top": 0,
+                          "left": line_x_offset
+                      })
+                  } catch (e) {
+                      console.log(e.message)
+                  }
                 }
             }
-        )
+        )*/
         //====================================================================================================
         .service("preloader", function () {
             this.on = function () {

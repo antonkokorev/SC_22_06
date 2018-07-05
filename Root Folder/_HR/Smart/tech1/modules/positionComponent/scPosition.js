@@ -13,14 +13,14 @@ function dirPosition() {
                 };
             });
 
-        function positionController($scope, requestService, positionsService, getPosition, getProfile, positionSettings, $timeout, getCustomData, menuSettings,customElements) {
+        function positionController($scope, requestService, positionsService, getPosition,  positionSettings, $timeout, getCustomData, menuSettings,customElements,dataServises) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
             //атрибуты
             //============================================
             let that = this;
-            this.iGrade = getProfile.profileData.user.iGrade;
+            this.iGrade = dataServises.data.profileData.iGrade;
             this.posModelData = getModelData();
             this.positionSettings = positionSettings;//данные фильтрации
             this.competences_h_slider = document.querySelector(".sc-main-slide_pos");

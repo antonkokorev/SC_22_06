@@ -14,7 +14,7 @@ function dirProfile() {
                 };
             });
 
-        function profileController($scope, $state, $timeout, requestService, updateSwiper, timelineService, getProfile) {
+        function profileController($scope, $state, $timeout, requestService, /**/customElements,dataServises) {
 
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
@@ -22,7 +22,7 @@ function dirProfile() {
             //атрибуты
             //============================================
             let that = this;
-            this.data = getProfile.profileData;
+            this.data =dataServises.data;/*getProfile.profileData;*/
             this.competencesTypes = ["Corp", "Role", "Func"];
             this.showAdditionalSkill = false;
             this.showAdditionalAchievement = false;
@@ -32,7 +32,6 @@ function dirProfile() {
             this.additionalAchievement = {};
             this.showAchievementLine = true;
             this.aboutField = "";
-            this.updateSw = updateSwiper;
             this.showAboutForm = false;
             let addSkillLabels = document.querySelectorAll(".add-skill-label");
 
@@ -47,11 +46,7 @@ function dirProfile() {
             //***********************************************************************************************************
 //_______________________________________
 
-            $(window).resize(function () {
-                timelineService.renderTimelineLine(".profile-education");
-                timelineService.renderTimelineLine(".profile-results");
-                timelineService.renderTimelineLine(".profile-achievements");
-            });
+
 
 //_______________________________________
             function addNewSkill(e) {
@@ -64,7 +59,8 @@ function dirProfile() {
                         data.name = that.additionalSkill.name;
                         data.entity = "skill";
                         data.user = that_.user;
-                        getProfile.postRequest(data);
+                       // getProfile.postRequest(data);
+                        dataServises.setProfile(data);
                         that.additionalSkill = {};
                     }
                     e.currentTarget.classList.remove("clicked");
@@ -75,8 +71,6 @@ function dirProfile() {
                     e.currentTarget.classList.add("clicked");
                 }
                 that.showAdditionalSkill = !that.showAdditionalSkill;
-
-                $timeout(updateSwiper, 0);
             }
 
 //_______________________________________
@@ -100,8 +94,8 @@ function dirProfile() {
                         data.year = that.aboutField;
                         data.entity = "description";
                         data.user = that_.user;
-
-                        getProfile.postRequest(data);
+                        dataServises.setProfile(data);
+                      // getProfile.postRequest(data);
                     }
                     e.currentTarget.classList.remove("clicked");
                 } else {
@@ -109,7 +103,7 @@ function dirProfile() {
                 }
 
                 that.showAboutForm = !that.showAboutForm;
-                $timeout(updateSwiper, 0);
+
             }
 
 //_______________________________________
@@ -128,15 +122,16 @@ function dirProfile() {
                         data.entity = "selfachievement";
                         data.user = that_.user;
 
-                        getProfile.postRequest(data);
+
+                        dataServises.setProfile(data);
 
                         that.additionalAchievement = {};
 
                         if ((that.additionalAchievements.length + that.data.user.aSelfAchievments.length) > 1) {
                             that.showAchievementLine = true;
-                            $timeout(function () {
-                                timelineService.renderTimelineLine(".profile-achievements");
-                            }, 0)
+
+                            customElements.renderTimelineLine(".profile-achievements");
+
                         }
                     }
                     e.currentTarget.classList.remove("clicked");
@@ -144,7 +139,7 @@ function dirProfile() {
                     e.currentTarget.classList.add("clicked");
                 }
                 that.showAdditionalAchievement = !that.showAdditionalAchievement;
-                $timeout(updateSwiper, 0);
+
             }
 
 

@@ -11,7 +11,7 @@ function dirCompetences() {
                 };
             });
 
-        function competencesController(requestService, updateSwiper, $timeout, positionsService, formGoalsService, getPosition) {
+        function competencesController(requestService, $timeout, positionsService, formGoalsService, getPosition, customElements) {
             this.data = {};
             //console.log(positionsService.getLikedPositions());
             var liked = getPosition.getLiked().join(",")
@@ -47,7 +47,7 @@ function dirCompetences() {
                 this.positionCurrent = position;
                 this.currentIndex = index;
                 this.currentPositionCompetences = this.data.aPositions[index].aCompetentions;
-                $timeout(updateSwiper, 0);
+                customElements.updateSwiper();
             };
 
             this.competenceCurrent = null;
@@ -100,7 +100,7 @@ function dirCompetences() {
                 competences_h_slider.style.transform = "translateX(-66.6666%)";
                 this.competenceCurrent = competence;
                 this.currentCompetencesIndicators = this.data.aPositions[this.currentIndex].aCompetentions[index].aIndicators;
-                $timeout(updateSwiper, 0);
+                customElements.updateSwiper();
             };
 
 

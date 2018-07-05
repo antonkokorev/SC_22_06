@@ -16,14 +16,14 @@ function dirMenu() {
 
             }]);
         //-------------------------------------------------------------
-        function menuController($scope, $location, menuDataService, updateSwiper, resetSwiper, $state, positionSettings, getProfile, getDict, formGoalsService, instrumentsService, requestService, $timeout, menuSettings) {
+        function menuController($scope, $location, menuDataService, $state, positionSettings,  getDict, formGoalsService, instrumentsService, requestService, $timeout, menuSettings ,customElements,dataServises) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
             //атрибуты
             //============================================
             let that = this;
-            this.profileData = getProfile.profileData;
+            this.pData = dataServises.data;//getProfile.profileData;
             this.state = $state.current.name;// текущий роутер
             this.data = menuDataService.data;//данные меню
             this.userChoice = getDict;
@@ -49,31 +49,27 @@ function dirMenu() {
             };// генерация массива нужной размерности
             this.gradeFltClick = gradeFltClick;//клик по фильтру грейда
             this.switchGoal = switchGoal; // переключаем цель
-            this.sw = () => {
-                $timeout(() => {
-                    updateSwiper();
-                    resetSwiper()
-                }, 0)
-            };//update swiper
+
 
             //***********************************************************************************************************
 //_______________________________________
             function gradeFltClick(index, value) {
-                let num = that.profileData.user.iGrade - 2 + index;
+                let num = that.pData.profileData.iGrade - 2 + index;
                 (that.positionSettings.grade[num]) ? delete that.positionSettings.grade[num] : that.positionSettings.grade[num] = true;
-                that.sw();
+
+                customElements.resetSwiper();
             }
 
  //_______________________________________
             function openSliderOnChange(a, b, c) {
                 that.positionSettings.open = [b, c];
-                that.sw();
+                customElements.resetSwiper();
             }
 
 //_______________________________________
             function conformitySliderOnChange(a, b, c) {
                 that.positionSettings.conformity = [b, c];
-                that.sw();
+                customElements.resetSwiper();
             }
 
 //_______________________________________

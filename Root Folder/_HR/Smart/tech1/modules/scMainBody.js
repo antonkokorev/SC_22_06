@@ -89,12 +89,13 @@ function classMainBody() {
             "scApp.instruments",
             "scApp.ipr"
         ])
-            .controller('scAppController', function (getProfile, getPosition, getDict) {
+            .controller('scAppController', function ( getPosition, getDict,dataServises,$timeout) {
                 this.choiceCurentPage = 1;
 
                 getDict.getDictData();
-                getProfile.getProfileData();
+               /* getProfile.getProfileData();*/
                 getPosition.getPositionData();
+                dataServises.getProfile();
             });
         //============================================================
         //роутер
@@ -168,11 +169,15 @@ function classMainBody() {
 
             $scope.$on('$viewContentLoaded', function (event) {
                 if (state === "profile") {
-                    customElements.renderTimelineLine([".profile-education", ".profile-results", ".profile-achievements"], 400);
+                    customElements.renderTimelineLine([".profile-education", ".profile-results", ".profile-achievements"],400);
                 }
                 customElements.resetSwiper(400);
                 preloader.off();
             });
+
+
+
+
         }
 
         //============================================================
