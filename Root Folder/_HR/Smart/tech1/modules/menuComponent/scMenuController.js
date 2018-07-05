@@ -50,6 +50,8 @@ function dirMenu() {
             this.gradeFltClick = gradeFltClick;//клик по фильтру грейда
             this.switchGoal = switchGoal; // переключаем цель
 
+            this.vacantFltClick = vacantFltClick; // переключаем vacant
+            that.vacantBtnText = 'Отобразить только вакантные'
 
             //***********************************************************************************************************
 //_______________________________________
@@ -60,6 +62,11 @@ function dirMenu() {
                 customElements.resetSwiper();
             }
 
+            function vacantFltClick() {
+                that.positionSettings.onlyVacant= (!that.positionSettings.onlyVacant);
+                that.positionSettings.onlyVacant ? that.vacantBtnText = 'Отобразить вакантные и занятые' : that.vacantBtnText = 'Отобразить только вакантные';
+                customElements.resetSwiper();
+            }
  //_______________________________________
             function openSliderOnChange(a, b, c) {
                 that.positionSettings.open = [b, c];

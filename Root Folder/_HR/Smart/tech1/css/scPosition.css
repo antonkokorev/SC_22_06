@@ -263,3 +263,33 @@
     width: 100%;
     height: 180px;
 }
+
+
+
+
+.notVacant{
+    color: #16181c8a;
+}
+
+.sc-grade-vacant-filter{
+    color: black;
+}
+
+.icon-with-item{
+    display:  flex;
+}
+
+
+.sc-position__icon-block-sb {
+    width: 30px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.sc-position__icon-block-sb > .fa-lock-open {
+    color: #16181c8a;
+}
+
+.sc-position__icon-block-sb > .fa-lock {
+    color: #16181c;
+}

@@ -29,6 +29,7 @@ function dirSwHeader() {
             this.showMenu = positionSettings.showMenu;
             this.settings = positionSettings.positionStaticMenu;
             this.menuSettings=menuSettings;
+            this.vacant = positionSettings.iIsVacant;
             this.selected = positionSettings.selectedMenu;
             this.menu = ["Функции", "Компетенции", "Опыт работы", "Образование","Навыки", "Языки", "Сетификаты"];
             //============================================
@@ -60,8 +61,10 @@ function dirSwHeader() {
                 if (that.showMenu) {
                     that.settings = positionSettings.positionStaticMenu;
                     that.sText = that.settings.sJobProfileName;
+                    that.vacant = that.settings.iIsVacant;
                 } else {
                     that.sText = "Для вас";
+                    that.vacant = 1;
                 }
 
             });

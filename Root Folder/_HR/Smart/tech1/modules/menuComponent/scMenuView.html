@@ -51,7 +51,13 @@
                 <div class="sc-menu-desc">
                     <p class="sc-menu-desc-p">{{menu.data[2].discrFlt}}</p>
                 </div>
-
+                <div class="sc-menu-desc icon-with-item">
+                    <div class="sc-position__icon-block-sb">
+                        <i class="fas"
+                           ng-class="{'fa-lock-open':!menu.positionSettings.onlyVacant,'fa-lock':menu.positionSettings.onlyVacant}" ></i>
+                    </div>
+                    <h3 class="sc-menu-desc-heading" ng-click="menu.vacantFltClick()">{{menu.vacantBtnText}}</h3>
+                </div>
                 <div class="sc-menu-desc" ng-repeat="item in menu.data[2].childFlt" ng-if="item.type !== 'slider'">
                     <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
                     <div class="sc-grade-filter">

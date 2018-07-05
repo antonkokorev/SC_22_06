@@ -8,7 +8,7 @@
                                 <i class="fa-heart" ng-class="{far: !positions.liked, fas: positions.liked}" ></i>
                             </div>
                             <div ng-click="positionCtrl.getPositionCompetences($index,positions)" class="sc-position__content">
-                                <div class="sc-position__title">{{positions.sJobProfileName}}</div>
+                                <div class="sc-position__title" ng-class="{notVacant: !positions.iIsVacant}">{{positions.sJobProfileName}}</div>
                                 <div class="sc-position__elements">
                                     <div class="sc-position__element">
                                         <span class="sc-position__label">Грейд</span>
