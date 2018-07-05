@@ -55,7 +55,7 @@
                 <div class="sc-menu-desc" ng-repeat="item in menu.data[2].childFlt" ng-if="item.type !== 'slider'">
                     <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
                     <div class="sc-grade-filter">
-                        <div class="sc-grade"
+                        <div class="scMenuGradeFilter"
                              ng-class="{scGradeGray:menu.positionSettings.grade[menu.profileData.user.iGrade -2+$index]}"
                              ng-click="menu.gradeFltClick($index,$value)"
                              ng-repeat="gr in menu.range(5) track by $index">{{menu.profileData.user.iGrade -2+$index}}
@@ -72,9 +72,6 @@
                     </div>
                 </div>
 
-                <div class="sc-menu-desc">
-                    <h3 class="sc-menu-desc-heading color-red"> Отфильтровать </h3>
-                </div>
             </div>
         </div>
     </a>

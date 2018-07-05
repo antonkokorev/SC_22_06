@@ -138,7 +138,7 @@ function dirMenu() {
                             options: {
                                 floor: 0,
                                 ceil: 100,
-                                step: 1,
+                                step: 5,
                                 noSwitching: true
                             }
                         },
@@ -148,7 +148,7 @@ function dirMenu() {
                             options: {
                                 floor: 0,
                                 ceil: 100,
-                                step: 1,
+                                step: 5,
                                 noSwitching: true
                             }
                         }
@@ -157,7 +157,6 @@ function dirMenu() {
                     this.data = [{
                         num: "01",
                         item: "Мой профиль",
-                        type: "menuBasic",
                         page: "profile",
                         discr: "Это твоя визитка для развития и карьреного продвижения, внеси все самое важное о себе"
                     }, {
@@ -179,7 +178,6 @@ function dirMenu() {
                         num: "03",
                         item: "Позиции",
                         page: "position",
-                        type: "menuPosition",
                         discr: "Расскажите мне о себе то, чего я не знаю",
                         child: [
                             {
@@ -212,7 +210,6 @@ function dirMenu() {
                     }, {
                         num: "04",
                         item: "Компетенции выбранных позиций",
-                        type: "menuChoice",
                         page: "competences",
                         discr: "Выберите индикаторы компетенций для развития",
                         child: [
@@ -228,14 +225,12 @@ function dirMenu() {
                     }, {
                         num: "05",
                         item: "Мои приоритеты в развитии",
-                        type: "menuBasic",
                         page: "goals",
                         discr: "Опишите цели по изучению индикаторов"
                     }, {
                         num: "06",
                         item: "Инструменты",
                         page: "instruments",
-                        type: "menuList",
                         discr: "Укажите инструменты, которыми вы будете добиваться целей",
                         child: [
                             {
@@ -252,7 +247,6 @@ function dirMenu() {
                         num: "07",
                         item: "ИПР",
                         page: "ipr",
-                        type: "menuList",
                         child: []
                     }
                     ]

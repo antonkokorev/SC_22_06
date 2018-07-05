@@ -89,7 +89,7 @@
 
 .rzslider .rz-selection {
     z-index: 2;
-    background: #007aff;
+    background: #015a9a;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px
@@ -101,7 +101,7 @@
     width: 16px;
     height: 16px;
     cursor: pointer;
-    background-color: #007aff;
+    background-color: #015a9a;
     -webkit-border-radius: 16px;
     -moz-border-radius: 16px;
     border-radius: 16px
@@ -179,7 +179,7 @@
 }
 
 .rzslider .rz-tick.rz-selected {
-    background: #007aff
+    background: #015a9a
 }
 
 .rzslider .rz-tick-value {
