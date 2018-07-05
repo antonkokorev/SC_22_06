@@ -20,7 +20,7 @@ function Services() {
             });
 
             function resetSwiper() {
-                that_.profile_swiper.update();
+                updateSwiper();
                 that_.profile_swiper.slideTo(0, 0, false)
             }
 
@@ -69,28 +69,6 @@ function Services() {
         /*******************************************************************************************************************/
         /*для работы с xsjs
         /*******************************************************************************************************************/
-        .service("timelineService", function () {
-                this.renderTimelineLine = function (parent) {
-                    try {
-                        // Перерисовка линии таймлайна
-                        var first_circle = $(parent + " .timeline-circle").first();
-                        var last_circle = $(parent + " .timeline-circle").last();
-                        var line_y_offset = ($(parent + " .timeline-center").first().height() - first_circle.height()) / 2;
-                        var line_x_offset = first_circle.position().left + first_circle.width() / 2;
-                        var line_y1 = first_circle.offset().top;
-                        var line_y2 = last_circle.offset().top + last_circle.height();
-                        var line_height = line_y2 - line_y1;
-                        $(parent + " .timeline-line").css({
-                            "height": line_height,
-                            "top": 0,
-                            "left": line_x_offset
-                        })
-                    } catch (e) {
-                        console.log(e.message)
-                    }
-                }
-            }
-        )
 
 
         .factory("dataServises", function ($http, $state, customElements) {
@@ -147,6 +125,20 @@ function Services() {
             }
         })
 
+        /*******************************************************************************************************************/
+        /*для передачи данных в меню и обратно
+        /*******************************************************************************************************************/
+        .factory("menuSettings", function () {
+
+            return this.menuSettings = [{
+                page: 1,
+                selectedVerbs: 0,
+                selectedPositions: 0,
+                offset:999
+            }];
+
+
+        })
 
         /*******************************************************************************************************************/
         /*******************************************************************************************************************/
@@ -214,17 +206,7 @@ function Services() {
             };
             return this.positionSettings;
         })
-        .factory("menuSettings", function () {
 
-            return this.menuSettings = [{
-                page: 1,
-                selectedVerbs: 0,
-                selectedPositions: 0,
-
-            }];
-
-
-        })
 
         .service("getDict", function (requestService, $state, updateSwiper, $timeout) {
 

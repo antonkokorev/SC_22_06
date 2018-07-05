@@ -14,7 +14,7 @@ function dirProfile() {
                 };
             });
 
-        function profileController($scope, $state, $timeout, requestService, /**/customElements,dataServises) {
+        function profileController($scope, $state, $timeout, requestService, /**/customElements, dataServises) {
 
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
@@ -22,7 +22,8 @@ function dirProfile() {
             //атрибуты
             //============================================
             let that = this;
-            this.data =dataServises.data;/*getProfile.profileData;*/
+            this.data = dataServises.data;
+            /*getProfile.profileData;*/
             this.competencesTypes = ["Corp", "Role", "Func"];
             this.showAdditionalSkill = false;
             this.showAdditionalAchievement = false;
@@ -38,7 +39,9 @@ function dirProfile() {
             //============================================
             //функции
             //============================================
-            this.range = (n) => { return new Array(n)};
+            this.range = (n) => {
+                return new Array(n)
+            };
             this.addNewSkill = addNewSkill;
             this.rateNewSkill = rateNewSkill;
             this.addAboutMe = addAboutMe;
@@ -47,19 +50,18 @@ function dirProfile() {
 //_______________________________________
 
 
-
 //_______________________________________
             function addNewSkill(e) {
                 if (that.showAdditionalSkill && e.target.classList.contains("clicked")) {
                     // Отправить запрос
                     if (that.additionalSkill.name && that.additionalSkill.rate) {
-                       // that.additionalSkills.push(that.additionalSkill);
+                        // that.additionalSkills.push(that.additionalSkill);
                         const data = {};
                         data.rating = that.additionalSkill.rate;
                         data.name = that.additionalSkill.name;
                         data.entity = "skill";
                         data.user = that_.user;
-                       // getProfile.postRequest(data);
+                        // getProfile.postRequest(data);
                         dataServises.setProfile(data);
                         that.additionalSkill = {};
                     }
@@ -87,6 +89,7 @@ function dirProfile() {
 
 //_______________________________________
             function addAboutMe(e) {
+                customElements.updateSwiper(0);
                 if (that.aboutField && e.currentTarget.classList.contains("clicked")) {
                     // Отправить запрос
                     if (that.aboutField.length > 0) {
@@ -95,7 +98,7 @@ function dirProfile() {
                         data.entity = "description";
                         data.user = that_.user;
                         dataServises.setProfile(data);
-                      // getProfile.postRequest(data);
+                        // getProfile.postRequest(data);
                     }
                     e.currentTarget.classList.remove("clicked");
                 } else {
@@ -113,7 +116,6 @@ function dirProfile() {
 
                     // Отправить запрос
                     if (that.additionalAchievement.what && that.additionalAchievement.when && that.additionalAchievement.where) {
-                        that.additionalAchievements.push(that.additionalAchievement);
 
                         const data = {};
                         data.year = that.additionalAchievement.when;
@@ -127,7 +129,7 @@ function dirProfile() {
 
                         that.additionalAchievement = {};
 
-                        if ((that.additionalAchievements.length + that.data.user.aSelfAchievments.length) > 1) {
+                        if ((that.additionalAchievements.length + that.data.profileData.aSelfAchievments.length) > 1) {
                             that.showAchievementLine = true;
 
                             customElements.updateSwiper(0);
