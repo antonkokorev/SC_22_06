@@ -53,23 +53,25 @@
 				<bi:property name="inc" index="2" value="modules\headerComponent\scHeader.js"/>
 				<bi:property name="inc" index="3" value="modules\menuComponent\scMenuController.js"/>
 				<bi:property name="inc" index="4" value="modules\swiperHeaderComponent\scSwHeader.js"/>
-				<bi:property name="inc" index="5" value="modules\profileComponent\scProfile.js"/>
-				<bi:property name="inc" index="6" value="modules\choiceComponent\scChoice.js"/>
-				<bi:property name="inc" index="7" value="modules\choiceComponent\scChoice.css"/>
-				<bi:property name="inc" index="8" value="modules\positionComponent\scPosition.js"/>
-				<bi:property name="inc" index="9" value="modules\competencesComponent\scCompetences.js"/>
-				<bi:property name="inc" index="10" value="modules\goalsComponent\scGoals.js"/>
-				<bi:property name="inc" index="11" value="modules\instrumentsComponent\scInstruments.js"/>
-				<bi:property name="inc" index="12" value="modules\iprComponent\scIpr.js"/>
-				<bi:property name="inc" index="13" value="modules\startComponent\scStart.js"/>
-				<bi:property name="inc" index="14" value="css\scHeader.css"/>
-				<bi:property name="inc" index="15" value="css\rzSlider.css"/>
-				<bi:property name="inc" index="16" value="css\fontawesome-all.css"/>
-				<bi:property name="inc" index="17" value="css\scMainMenu.css"/>
-				<bi:property name="inc" index="18" value="css\scMainBody.css"/>
-				<bi:property name="inc" index="19" value="css\scPosition.css"/>
-				<bi:property name="inc" index="20" value="css\scStart.css"/>
-				<bi:property name="inc" index="21" value="css\media.css"/>
+				<bi:property name="inc" index="5" value="modules\swiperHeaderComponent\scSwHeader.css"/>
+				<bi:property name="inc" index="6" value="modules\profileComponent\scProfile.js"/>
+				<bi:property name="inc" index="7" value="modules\choiceComponent\scChoice.js"/>
+				<bi:property name="inc" index="8" value="modules\choiceComponent\scChoice.css"/>
+				<bi:property name="inc" index="9" value="modules\positionComponent\scPosition.js"/>
+				<bi:property name="inc" index="10" value="modules\competencesComponent\scCompetences.js"/>
+				<bi:property name="inc" index="11" value="modules\goalsComponent\scGoals.js"/>
+				<bi:property name="inc" index="12" value="modules\instrumentsComponent\scInstruments.js"/>
+				<bi:property name="inc" index="13" value="modules\instrumentsComponent\scInstruments.css"/>
+				<bi:property name="inc" index="14" value="modules\iprComponent\scIpr.js"/>
+				<bi:property name="inc" index="15" value="modules\startComponent\scStart.js"/>
+				<bi:property name="inc" index="16" value="css\scHeader.css"/>
+				<bi:property name="inc" index="17" value="css\rzSlider.css"/>
+				<bi:property name="inc" index="18" value="css\fontawesome-all.css"/>
+				<bi:property name="inc" index="19" value="modules\menuComponent\scMainMenu.css"/>
+				<bi:property name="inc" index="20" value="css\scMainBody.css"/>
+				<bi:property name="inc" index="21" value="css\scPosition.css"/>
+				<bi:property name="inc" index="22" value="css\scStart.css"/>
+				<bi:property name="inc" index="23" value="css\media.css"/>
 			</bi:property>
 			<bi:property name="start">
 				<bi:value><![CDATA[Z_CONTROLLER._Action("init");]]></bi:value>
