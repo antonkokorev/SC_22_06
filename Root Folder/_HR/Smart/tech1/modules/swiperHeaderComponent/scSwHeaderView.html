@@ -1,7 +1,7 @@
 <div ng-show='swHeader.state=="position"' ng-class='{smallMenu:!swHeader.showMenu,bigMenu: swHeader.showMenu}'>
 
 
-    <h2 class="sc-slide-heading" ng-click="swHeader.yankiGoHome()"><i style="padding-right: 30px"
+    <h2 class="sc-slide-heading" ng-class="{notVacant: !swHeader.vacant, ' ':swHeader.vacant}" ng-click="swHeader.yankiGoHome()"><i style="padding-right: 30px"
                                                                       class="fas fa-long-arrow-alt-left"
                                                                       ng-show="swHeader.showMenu"></i>{{swHeader.sText}}
     </h2>

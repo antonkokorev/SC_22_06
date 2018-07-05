@@ -195,6 +195,7 @@ function Services() {
                 open: [0, 100],
                 onlyLiked: false,
                 countLiked: 0,
+                onlyVacant: false,
                 showMenu: false,
                 selectedMenu: 0,
                 positionStaticMenu: {}
