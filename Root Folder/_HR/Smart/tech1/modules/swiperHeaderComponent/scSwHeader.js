@@ -30,7 +30,7 @@ function dirSwHeader() {
             this.settings = positionSettings.positionStaticMenu;
             this.menuSettings=menuSettings;
             this.selected = positionSettings.selectedMenu;
-            this.menu = ["Функции", "Компетенции", "Образование", "Навыки", "Языки", "Сетификаты"];
+            this.menu = ["Функции", "Компетенции", "Опыт работы", "Образование","Навыки", "Языки", "Сетификаты"];
             //============================================
             //функции
             //============================================

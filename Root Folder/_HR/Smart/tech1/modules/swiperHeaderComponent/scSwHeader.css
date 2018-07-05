@@ -1,0 +1,11 @@
+.colorHeartGray{
+   color: #555555;
+}
+.colorHeartRed{
+    color: #ff3d46;
+}
+.heart{
+    font-size: 28px;
+    margin-left: 5px;
+    margin-top: -5px;
+}

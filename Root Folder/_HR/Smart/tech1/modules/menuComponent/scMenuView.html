@@ -101,7 +101,7 @@
 </div>
 <!--Пункт меню 05 Цели-->
 
-<div ng-class="menu.activeClass('targets')" class="sc-menu-li">
+<div ng-class="menu.activeClass('goals')" class="sc-menu-li">
     <a ui-sref="{{menu.data[4].page}}">
         <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[4].num}}</span>
             <span class="sc-menu-heading-text">{{menu.data[4].item}} ({{menu.getGoalsQuantity()}})</span>
@@ -116,7 +116,6 @@
 
 <!--Пункт меню 06 Инструменты-->
 <div ng-class="menu.activeClass('instruments')" class="sc-menu-li">
-
     <a ui-sref="{{menu.data[5].page}}">
         <h2 class="sc-menu-heading" ng-click="menu.switchGoal(menu.goalsData.goals[0], 0)"><span
                 class="sc-menu-heading-number">{{menu.data[5].num}}</span>

@@ -78,7 +78,7 @@ function dirMenu() {
                 let result =(page === currentRoute) ? true : false;
 
                 return {"active":result,"disableClick":(that.menuSettings[0].selectedPositions==0 &&  ["competences"].indexOf(page)!=-1)||(
-                        that.getGoalsQuantity()==0&&["targets","instruments","ipr"].indexOf(page)!=-1
+                        that.getGoalsQuantity()==0&&["goals","instruments","ipr"].indexOf(page)!=-1
                     ) };
 
 

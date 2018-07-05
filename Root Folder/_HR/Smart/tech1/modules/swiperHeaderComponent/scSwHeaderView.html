@@ -10,9 +10,9 @@
         <div class="your-item__element">
 
             <i ng-click="swHeader.likePos()" class="fa-heart"
-               ng-class="{far: !swHeader.settings.liked, fas: swHeader.settings.liked}"
-               style="color:#ff3d46;  font-size: 28px;   margin-left: 5px;margin-top: -5px;"
-               ng-class="{far: !positions.liked, fas: positions.liked}"></i>
+               ng-class="{'far colorHeartGray': !swHeader.settings.liked, 'fas colorHeartRed': swHeader.settings.liked}"
+
+               ></i>
 
         </div>
         <div class="your-item__element">

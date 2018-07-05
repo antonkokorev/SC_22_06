@@ -3,12 +3,10 @@ function dirPosition() {
     (function () {
         console.warn("dirPosition");
         angular.module('scApp.position', [])
-
             .directive('dirPosition', function ($location) {
                 return {
                     restrict: 'AE',
                     scope: {},
-                    // bindToController: true,
                     templateUrl: that_.path + "modules/positionComponent/scPositionView.html",
                     controller: positionController,
                     controllerAs: "positionCtrl"
@@ -54,12 +52,15 @@ function dirPosition() {
                             that.positionDiscrPart = that.positionDiscr.aExperience;
                             break;
                         case 3:
-                            that.positionDiscrPart = that.positionDiscr.aSkills;
+                            that.positionDiscrPart = that.positionDiscr.aEducation;
                             break;
                         case 4:
-                            that.positionDiscrPart = that.positionDiscr.aLanguages;
+                            that.positionDiscrPart = that.positionDiscr.aSkills;
                             break;
                         case 5:
+                            that.positionDiscrPart = that.positionDiscr.aLanguages;
+                            break;
+                        case 6:
                             that.positionDiscrPart = that.positionDiscr.aCertification;
                             break;
                     }
@@ -89,7 +90,7 @@ function dirPosition() {
                 $timeout(updateSwiper, 0);
                 getCustomData.jobProfile(position.sJobProfileId).then(function (data) {
                     that.positionDiscr = data;
-                    that.positionDiscrPart = that.positionDiscr.aCompetentions;
+                    that.positionDiscrPart = that.positionDiscr.aFunctions;
                     console.log(data)
                 })
 

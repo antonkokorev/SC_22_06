@@ -163,7 +163,7 @@ function Services() {
         //====================================================================================================
         .service("getProfile", function (requestService, postService, $state, updateSwiper, timelineService, $timeout) {
             this.profileData = {user: []};
-            console.error("s    top")
+            console.warn("SERVICES");
             this.getProfileData = () => {
                 var url = that_.srvLink + "?entity=empProfileNoCallback&user=";
                 requestService(url).then((data) => {
