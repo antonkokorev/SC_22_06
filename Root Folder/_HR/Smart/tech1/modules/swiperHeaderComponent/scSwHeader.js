@@ -13,7 +13,7 @@ function dirSwHeader() {
                 };
             });
 
-        function swHeaderController($scope, $state, positionSettings, getPosition,menuSettings) {
+        function swHeaderController($scope, $state, positionSettings, getPosition,menuSettings,customElements) {
 
 
 
@@ -81,6 +81,7 @@ function dirSwHeader() {
             function menuClick(index) {
                 that.selected = index;
                 positionSettings.selectedMenu = index;
+                customElements.updateSwiper();
             }
 
             function yankiGoHome() {
@@ -88,6 +89,8 @@ function dirSwHeader() {
 
                 var teg = document.querySelector(".sc-main-slide_pos");
                 teg.style.transform = "translateX(0%)";
+                customElements.updateSwiper();
+
             }
 
             function likeClick() {

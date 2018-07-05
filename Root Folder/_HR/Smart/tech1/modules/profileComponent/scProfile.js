@@ -15,28 +15,37 @@ function dirProfile() {
             });
 
         function profileController($scope, $state, $timeout, requestService, updateSwiper, timelineService, getProfile) {
-            var that = this;
+
+
+            //ИНТЕРФЕЙСНАЯ ЧАСТЬ
+            //============================================
+            //атрибуты
+            //============================================
+            let that = this;
             this.data = getProfile.profileData;
-
-
-            console.warn('profileController');
             this.competencesTypes = ["Corp", "Role", "Func"];
-            //this.data =$scope.data ;
             this.showAdditionalSkill = false;
             this.showAdditionalAchievement = false;
             this.additionalSkills = [];
             this.additionalSkill = {};
-
             this.additionalAchievements = [];
             this.additionalAchievement = {};
             this.showAchievementLine = true;
-
             this.aboutField = "";
+            this.updateSw = updateSwiper;
             this.showAboutForm = false;
+            let addSkillLabels = document.querySelectorAll(".add-skill-label");
 
-            this.range = function (n) {
-                return new Array(n);
-            };
+            //============================================
+            //функции
+            //============================================
+            this.range = (n) => { return new Array(n)};
+            this.addNewSkill = addNewSkill;
+            this.rateNewSkill = rateNewSkill;
+            this.addAboutMe = addAboutMe;
+            this.addNewAchievement = addNewAchievement;
+            //***********************************************************************************************************
+//_______________________________________
 
             $(window).resize(function () {
                 timelineService.renderTimelineLine(".profile-education");
@@ -44,46 +53,37 @@ function dirProfile() {
                 timelineService.renderTimelineLine(".profile-achievements");
             });
 
-
-            var addSkillLabels = document.querySelectorAll(".add-skill-label");
-
-            this.addNewSkill = (e) => {
-                if (this.showAdditionalSkill && e.target.classList.contains("clicked")) {
-
+//_______________________________________
+            function addNewSkill(e) {
+                if (that.showAdditionalSkill && e.target.classList.contains("clicked")) {
                     // Отправить запрос
-                    if (this.additionalSkill.name && this.additionalSkill.rate) {
-                        this.additionalSkills.push(this.additionalSkill);
-
+                    if (that.additionalSkill.name && that.additionalSkill.rate) {
+                       // that.additionalSkills.push(that.additionalSkill);
                         const data = {};
-                        data.rating = this.additionalSkill.rate;
-                        data.name = this.additionalSkill.name;
+                        data.rating = that.additionalSkill.rate;
+                        data.name = that.additionalSkill.name;
                         data.entity = "skill";
                         data.user = that_.user;
-
                         getProfile.postRequest(data);
-
-                        this.additionalSkill = {};
+                        that.additionalSkill = {};
                     }
-
                     e.currentTarget.classList.remove("clicked");
-
                     addSkillLabels.forEach((label) => {
                         label.classList.remove("checked");
                     });
                 } else {
                     e.currentTarget.classList.add("clicked");
                 }
-                this.showAdditionalSkill = !this.showAdditionalSkill;
+                that.showAdditionalSkill = !that.showAdditionalSkill;
 
                 $timeout(updateSwiper, 0);
-            };
+            }
 
-            this.rateNewSkill = (e, n) => {
-
+//_______________________________________
+            function rateNewSkill(e, n) {
                 addSkillLabels.forEach((label) => {
                     label.classList.remove("checked");
                 });
-
                 addSkillLabels.forEach((label, index) => {
                     if (index + 1 <= n) {
                         label.classList.add("checked");
@@ -91,47 +91,13 @@ function dirProfile() {
                 });
             }
 
-            this.addNewAchievement = (e) => {
-                if (this.additionalAchievement && e.currentTarget.classList.contains("clicked")) {
-                    console.log(this.additionalAchievement);
-
+//_______________________________________
+            function addAboutMe(e) {
+                if (that.aboutField && e.currentTarget.classList.contains("clicked")) {
                     // Отправить запрос
-                    if (this.additionalAchievement.what && this.additionalAchievement.when && this.additionalAchievement.where) {
-                        this.additionalAchievements.push(this.additionalAchievement);
-
+                    if (that.aboutField.length > 0) {
                         const data = {};
-                        data.year = this.additionalAchievement.when;
-                        data.place = this.additionalAchievement.where;
-                        data.name = this.additionalAchievement.what;
-                        data.entity = "selfachievement";
-                        data.user = that_.user;
-
-                        getProfile.postRequest(data);
-
-                        this.additionalAchievement = {};
-
-                        if ((this.additionalAchievements.length + this.data.user.aSelfAchievments.length) > 1) {
-                            this.showAchievementLine = true;
-                            $timeout(function() {
-                                timelineService.renderTimelineLine(".profile-achievements");
-                            }, 0)
-                        }
-                    }
-                    e.currentTarget.classList.remove("clicked");
-                } else {
-                    e.currentTarget.classList.add("clicked");
-                }
-
-                this.showAdditionalAchievement = !this.showAdditionalAchievement;
-                $timeout(updateSwiper, 0);
-            };
-
-            this.addAboutMe = (e) => {
-                if (this.aboutField && e.currentTarget.classList.contains("clicked")) {
-                     // Отправить запрос
-                    if (this.aboutField.length > 0 ) {
-                        const data = {};
-                        data.year = this.aboutField;
+                        data.year = that.aboutField;
                         data.entity = "description";
                         data.user = that_.user;
 
@@ -142,11 +108,46 @@ function dirProfile() {
                     e.currentTarget.classList.add("clicked");
                 }
 
-                this.showAboutForm = !this.showAboutForm;
+                that.showAboutForm = !that.showAboutForm;
                 $timeout(updateSwiper, 0);
-            };
+            }
 
-            this.updateSw = updateSwiper;
+//_______________________________________
+            function addNewAchievement(e) {
+                if (that.additionalAchievement && e.currentTarget.classList.contains("clicked")) {
+                    console.log(that.additionalAchievement);
+
+                    // Отправить запрос
+                    if (that.additionalAchievement.what && that.additionalAchievement.when && that.additionalAchievement.where) {
+                        that.additionalAchievements.push(that.additionalAchievement);
+
+                        const data = {};
+                        data.year = that.additionalAchievement.when;
+                        data.place = that.additionalAchievement.where;
+                        data.name = that.additionalAchievement.what;
+                        data.entity = "selfachievement";
+                        data.user = that_.user;
+
+                        getProfile.postRequest(data);
+
+                        that.additionalAchievement = {};
+
+                        if ((that.additionalAchievements.length + that.data.user.aSelfAchievments.length) > 1) {
+                            that.showAchievementLine = true;
+                            $timeout(function () {
+                                timelineService.renderTimelineLine(".profile-achievements");
+                            }, 0)
+                        }
+                    }
+                    e.currentTarget.classList.remove("clicked");
+                } else {
+                    e.currentTarget.classList.add("clicked");
+                }
+                that.showAdditionalAchievement = !that.showAdditionalAchievement;
+                $timeout(updateSwiper, 0);
+            }
+
+
         }
     }());
 }

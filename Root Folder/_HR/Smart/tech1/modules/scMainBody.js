@@ -172,6 +172,7 @@ function classMainBody() {
                     if (state == "profile") {
                         timelineService.renderTimelineLine(".profile-education");
                         timelineService.renderTimelineLine(".profile-results");
+                        timelineService.renderTimelineLine(".profile-achievements");
                     }
                     resetSwiper();
                     updateSwiper();

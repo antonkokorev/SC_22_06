@@ -1,7 +1,7 @@
 <div id="sc-position" class="sc-main-slide sc-main-slide_pos">
-    <div class="position-slide sc-v-slide"  >
+    <div class="position-slide sc-v-slide">
         <div class="slide-row">
-                    <div class="position-all">
+                    <div class="position-all" ng-show="!positionCtrl.positionSettings.showMenu">
 
                         <div class="sc-position__item"  ng-repeat="positions in positionCtrl.posModelData.data  |  filter:positionCtrl.setFilter()">
                             <div class="sc-position__icon-block" ng-click="positionCtrl.likeCurrentPosition($event, $index, positions)">
@@ -32,8 +32,6 @@
 
     <div class="green_box">
         <div class="main__wrapper">
-
-
             <div class="main-blocks">
                 <div class="main-blocks__column_left clearfix">
                     <div class="main-blocks__item" ng-repeat="item in positionCtrl.positionDiscrPart">
@@ -41,9 +39,6 @@
                           {{item}}
                         </span>
                     </div>
-
-
-
                 </div>
 
             </div>

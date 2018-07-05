@@ -1,48 +1,90 @@
 function Services() {
     angular.module('scApp')
+//====================================================================================================================
+//новые переделанные сервисы
+//====================================================================================================================
+    /*customElements отвечает за все элементы которые  не зашиты в angular*/
+    .factory("customElements", function ($timeout) {
+
+        function updateSwiper() {
+            that_.profile_swiper.update();
+        }
+
+        function resetSwiper() {
+            that_.profile_swiper.update();
+            that_.profile_swiper.slideTo(0, 0, false)
+        }
+
+        function renderTimelineLine(array_parent) {
+            try {
+                for (let i = 0; i < array_parent.length; i++) {
+                    // Перерисовка линии таймлайна
+                    let parent = array_parent[i];
+                    let first_circle = $(parent + " .timeline-circle").first();
+                    let last_circle = $(parent + " .timeline-circle").last();
+                    let line_y_offset = ($(parent + " .timeline-center").first().height() - first_circle.height()) / 2;
+                    let line_x_offset = first_circle.position().left + first_circle.width() / 2;
+                    let line_y1 = first_circle.offset().top;
+                    let line_y2 = last_circle.offset().top + last_circle.height();
+                    let line_height = line_y2 - line_y1;
+                    $(parent + " .timeline-line").css({
+                        "height": line_height,
+                        "top": 0,
+                        "left": line_x_offset
+                    })
+                }
+            } catch (e) {
+                console.log(e.message)
+            }
+        }
+
+        return {
+            "updateSwiper": (time) => {
+                $timeout(updateSwiper, time||0)
+            },
+            "resetSwiper": (time) => {
+                $timeout(resetSwiper, time||0)
+            },
+            "renderTimelineLine": (array_parent,time) => {
+                $timeout(renderTimelineLine(array_parent),  time||0)
+            }
+        }
+    })
     //====================================================================================================
         .factory("requestService", function ($http) {
             return function (url) {
-                var _url = url + that_.user;
-                var _headers = {
-                    'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
-                    'Accept': 'application/json; charset=utf-8',
-                    'Content-Type': 'application/json; charset=utf-8'
-                };
-
-                var promise = $http({
+                return $http({
                     method: 'GET',
-                    url: _url,
-                    headers: _headers
+                    url: url + that_.user,
+                    headers: {
+                        'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
+                        'Accept': 'application/json; charset=utf-8',
+                        'Content-Type': 'application/json; charset=utf-8'
+                    }
                 }).then(function (response) {
                     return response.data
                 }).catch(function (error) {
                     console.log(error);
                 });
-                return promise
+
             };
         })
         .factory("postService", function ($http) {
             return function (url, body) {
-
-                var _url = url;
-                var _headers = {
-                    'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
-                    'Accept': 'application/json; charset=utf-8',
-                    'Content-Type': 'application/json; charset=utf-8'
-                };
-
                 return $http({
                     method: 'POST',
-                    url: _url,
-                    headers: _headers,
+                    url: url,
+                    headers: {
+                        'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
+                        'Accept': 'application/json; charset=utf-8',
+                        'Content-Type': 'application/json; charset=utf-8'
+                    },
                     data: body
                 }).then(function (response) {
                     return response.data
                 }).catch(function (error) {
                     console.log(error);
                 });
-
             };
         })
         //====================================================================================================
@@ -68,10 +110,10 @@ function Services() {
         })
         .factory("menuSettings", function () {
 
-            return  this.menuSettings = [{
+            return this.menuSettings = [{
                 page: 1,
-                selectedVerbs:0,
-                selectedPositions:0,
+                selectedVerbs: 0,
+                selectedPositions: 0,
 
             }];
 
@@ -90,7 +132,7 @@ function Services() {
 
                     }
                     var change = true;
-                    if (JSON.stringify(pos) == JSON.stringify(this.sData)) {
+                    if (JSON.stringify(pos) === JSON.stringify(this.sData)) {
                         change = false;
                     }
                     this.sData = pos;
@@ -108,13 +150,13 @@ function Services() {
 
             };
 
-            this.sData = []
+            this.sData = [];
             this.dictData = {dict: []};
             this.getDictData = () => {
                 var url = that_.srvLink + "?entity=dictNoCallback&user=";
                 requestService(url).then((data) => {
                     this.dictData.dict = data;
-                    if ($state.current.name == "choice")
+                    if ($state.current.name === "choice")
                         $timeout(updateSwiper, 0);
                 });
             }
@@ -146,7 +188,7 @@ function Services() {
                 let url = that_.srvLink + "?entity=positionNoCallback&requestType=list&family=" + JSON.stringify(family) + "&row=1_30&user=";
                 requestService(url).then((data) => {
                     this.userPositionData.data = data;
-                    if ($state.current.name == "position")
+                    if ($state.current.name === "position")
                         $timeout(updateSwiper, 0);
                 });
             };
@@ -181,6 +223,7 @@ function Services() {
             this.postRequest = (body) => {
                 var url = that_.srvLink;
                 postService(url, body);
+                this.getProfileData()
             }
         })
 
@@ -284,9 +327,11 @@ function Services() {
         //====================================================================================================
         .factory("resetSwiper", function () {
             return () => {
-                that_.profile_swiper.slideTo(0, 0, false)
+
             }
         })
+
+
         //====================================================================================================
         .service("positionsService", function () {
             var positions = [];
