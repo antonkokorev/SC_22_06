@@ -3,7 +3,9 @@
 	background:white;
 }
 
-
+.clippy, .clippy-balloon {
+  position:absolute;
+}
 
 /* latin */
 @font-face {

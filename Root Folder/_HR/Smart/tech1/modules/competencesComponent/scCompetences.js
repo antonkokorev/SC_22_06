@@ -122,7 +122,7 @@ function dirCompetences() {
                 }
                 formGoalsService.setIndicators(this.chosenIndicators);
                 formGoalsService.getGoals();
-            }
+            };
 
             this.getBack = function (n) {
                 competences_h_slider.style.transform = "translateX(-" + 33.3333 * n + "%)";
