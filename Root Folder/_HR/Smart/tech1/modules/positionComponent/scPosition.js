@@ -102,7 +102,7 @@ function dirPosition() {
                     if (structure.iProbability < (ps.conformity[0] / 100) || structure.iProbability > (ps.conformity[1] / 100)) result = false;
                     if (ps.grade[structure.iGrade]) result = false;
                     if (ps.onlyLiked === true && !structure.liked) result = false;
-                    if (ps.onlyVacant==true && structure.iIsVacant == 0)result=false;
+                    if (ps.onlyVacant===true && structure.iIsVacant === 0)result=false;
                     return result;
                 }
             }
