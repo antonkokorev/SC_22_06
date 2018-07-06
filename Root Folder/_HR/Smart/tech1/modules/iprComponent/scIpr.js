@@ -14,9 +14,9 @@ function dirIpr() {
                 };
             });
 
-        function iprController(formGoalsService,iprService,customElements) {
+        function iprController(formGoalsService, customElements, dataServise) {
             this.toolsHeadings = ["Практические советы", "Книги", "Обучающие видео", "Очные курсы"];
-           let that=this;
+            let that=this;
             this.goalsData = formGoalsService.goalsData;
             this.ipr = {};
             this.currentMenu=0;
@@ -52,7 +52,7 @@ function dirIpr() {
             this.showIpr = (goal) => {
                 var hslider = document.querySelector(".ipr-h-slider");
                 hslider.style.transform = "translateX(-50%)";
-                this.iprData = iprService.getIpr(goal);
+                this.iprData = dataServises.getIpr(goal, this.goalsData);
 
                 console.log(this.iprData);
             };
@@ -75,7 +75,7 @@ function dirIpr() {
                 customElements.resetSwiper(100);
             }
         }
-
+    console.warn("dirIpr done");
     }());
 }
 

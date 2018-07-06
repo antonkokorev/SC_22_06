@@ -16,8 +16,9 @@ function dirMenu() {
 
             }]);
         //-------------------------------------------------------------
-        function menuController($scope, $location, menuDataService, $state, positionSettings,  getDict, formGoalsService, instrumentsService, requestService, $timeout, menuSettings ,customElements,dataServises) {
-
+        function menuController($scope, $location, menuDataService, $state, positionSettings, formGoalsService, $timeout, menuSettings ,customElements,dataServises) {
+            // function getDict(){
+            console.warn("menuController");
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
             //атрибуты
@@ -26,7 +27,7 @@ function dirMenu() {
             this.pData = dataServises.data;//getProfile.profileData;
             this.state = $state.current.name;// текущий роутер
             this.data = menuDataService.data;//данные меню
-            this.userChoice = getDict;
+            this.userChoice = dataServises.data.dictData.sData;
             this.btnText = menuDataService.choiceData[1];// текст кнопки меню выбора
             this.positionSettings = positionSettings;// данные для передачи в страницу позиции
             this.sliders = menuDataService.sliderOptions;// данные настройки слайдеров
@@ -111,7 +112,7 @@ function dirMenu() {
 
 //_______________________________________
             function changeModel(item) {
-                if (that.userChoice.sData.length !== 0) {
+                if (that.userChoice.length !== 0) {
                     that.positionSettings.show = (item) ? "user" : "model";
                     $state.reload();
                 }
@@ -119,8 +120,8 @@ function dirMenu() {
 
 //_______________________________________
             function switchGoal(goal, index) {
-                instrumentsService.getInstrumentsData(goal);
-                instrumentsService.setCurrentGoal(goal, index + 1);
+                dataServises.getInstrumentsData(goal);
+                dataServises.setCurrentGoal(goal, index + 1);
             }
 
 //_______________________________________

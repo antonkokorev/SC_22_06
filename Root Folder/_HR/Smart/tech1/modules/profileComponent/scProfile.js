@@ -14,7 +14,7 @@ function dirProfile() {
                 };
             });
 
-        function profileController($scope, $state, $timeout, requestService, /**/customElements, dataServises) {
+        function profileController($scope, $state, $timeout, /**/customElements, dataServises) {
 
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ

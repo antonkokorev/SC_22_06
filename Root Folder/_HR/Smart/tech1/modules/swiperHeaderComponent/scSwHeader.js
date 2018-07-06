@@ -13,7 +13,7 @@ function dirSwHeader() {
                 };
             });
 
-        function swHeaderController($scope, $state, positionSettings, getPosition,menuSettings,customElements) {
+        function swHeaderController($scope, $state, positionSettings, menuSettings,customElements) {
 
 
 

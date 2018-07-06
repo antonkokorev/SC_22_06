@@ -11,13 +11,13 @@ function dirCompetences() {
                 };
             });
 
-        function competencesController(requestService, $timeout, positionsService, formGoalsService, getPosition, customElements) {
+        function competencesController($timeout, positionsService, formGoalsService, customElements, /**/ dataServises) {
             this.data = {};
             //console.log(positionsService.getLikedPositions());
-            var liked = getPosition.getLiked().join(",")
+            var liked = dataServises.getLiked().join(",")
 
             var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=positionCompetentionsNoCallback&position=["+liked+"]&user=";
-            requestService(url)
+            dataServises.requestService(url)
                 .then(data => {
                     this.data = data;
                     //console.log(data);
