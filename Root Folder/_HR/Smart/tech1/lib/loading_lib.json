@@ -12,7 +12,10 @@
     "TweenLite": "$$path$$lib/TweenLite",
     "uiRoute": "$$path$$lib/angular-ui-router",
     "anim": "$$path$$lib/angular-animate",
-    "rzslider": "$$path$$lib/rzslider"
+    "rzslider": "$$path$$lib/rzslider",
+    "clippy":"$$path$$lib/clippy",
+    "stateHelper":"$$path$$lib/stateHelper"
+
   },
   "shim": {
     "SplitText": {
@@ -21,6 +24,11 @@
       ]
     },
     "route": {
+      "deps": [
+        "angular"
+      ]
+    },
+    "stateHelper": {
       "deps": [
         "angular"
       ]
