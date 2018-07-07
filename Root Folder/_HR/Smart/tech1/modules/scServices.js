@@ -353,28 +353,31 @@ function Services() {
 
 
         /*******************************************************************************************************************/
-        /*для передачи данных в меню и обратно
+        /*для передачи данных
         /*******************************************************************************************************************/
-        .factory("menuSettings", function () {
 
-            return this.menuSettings = [{
-                page: 1,
-                selectedVerbs: 0,
-                selectedPositions: 0,
-                offset: 999
-            }];
-
-
-        })
         .factory("appSettings", function () {
+            let that=this;
+
+
 
            this.Settings = {
                positionShowFrom: "model",
                countLikedPosition:0,
 
+
+               sizeSwiperStyle:"",//класс для свайпера
                //--------------------
+               fltOpenPosition: [0, 100],
+               fltConformityPosition: [0, 100],
+               fltOnlyVacantPosition:false,
+               fltGradePosition:{},
+               fltOnlyLikedPosition: false,
+               //--------------------
+               currentPositionInfo:{},//данные просматриваемой позиции
+               selectedMenuInPositionDetail: 0,
+
                selectedVerbs: 0,
-               selectedPositions: 0,
                offset: 999
                 };
 
@@ -392,13 +395,13 @@ function Services() {
         /*******************************************************************************************************************/
         /*******************************************************************************************************************/
 
-        .factory("positionSettings", function () {
+        .factory("positionSettings1", function () {
 
             this.positionSettings = {
                 show: "model",
                 conformity: [0, 100],
                 grade: {},
-                open: [0, 100],
+
                 onlyLiked: false,
                 countLiked: 0,
                 onlyVacant: false,

@@ -40,7 +40,7 @@
         <div class="sc-menu-details">
             <div class="sc-menu-desc" ng-repeat="item in menu.data[2].child">
                 <p class="sc-menu-desc-p" ng-click="menu.changeModel($index)"
-                   ng-class="{colorBlue:(menu.positionSettings.show=='model'&& $index==0)||(menu.positionSettings.show=='user'&& $index==1),colorInviz:menu.userChoice.sData.length==0&& $index==1}">
+                   ng-class="{colorBlue:(menu.appSettings.positionShowFrom=='model'&& $index==0)||(menu.appSettings.positionShowFrom=='user'&& $index==1),colorInviz:menu.userChoice.sData.length==0&& $index==1}">
                     {{item.discr}}</p>
             </div>
 
@@ -55,7 +55,7 @@
                 <div class="sc-menu-desc icon-with-item">
                     <div class="sc-position__icon-block-sb">
                         <i class="fas"
-                           ng-class="{'fa-lock-open':!menu.positionSettings.onlyVacant,'fa-lock':menu.positionSettings.onlyVacant}" ></i>
+                           ng-class="{'fa-lock-open':!menu.appSettings.fltOnlyVacantPosition,'fa-lock':menu.appSettingsfltOnlyVacantPosition}" ></i>
                     </div>
                     <h3 class="sc-menu-desc-heading" ng-click="menu.vacantFltClick()">{{menu.vacantBtnText}}</h3>
                 </div>
@@ -63,7 +63,7 @@
                     <h3 class="sc-menu-desc-heading">{{item.name}}</h3>
                     <div class="sc-grade-filter">
                         <div class="scMenuGradeFilter"
-                             ng-class="{scGradeGray:menu.positionSettings.grade[menu.pData.profileData.iGrade -2+$index]}"
+                             ng-class="{scGradeGray:menu.appSettings.fltGradePosition[menu.pData.profileData.iGrade -2+$index]}"
                              ng-click="menu.gradeFltClick($index,$value)"
                              ng-repeat="gr in menu.range(5) track by $index">{{menu.pData.profileData.iGrade -2+$index}}
                         </div>
@@ -89,7 +89,7 @@
 <div ng-class="menu.activeClass('competences')" class="sc-menu-li">
     <a ui-sref="{{menu.data[3].page}}">
         <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[3].num}}</span>
-            <span class="sc-menu-heading-text">{{menu.data[3].item}} ({{menu.menuSettings[0].selectedPositions}})</span>
+            <span class="sc-menu-heading-text">{{menu.data[3].item}} ({{menu.appSettings.countLikedPosition}})</span>
         </h2>
         <div class="sc-menu-details">
             <div class="sc-menu-desc">

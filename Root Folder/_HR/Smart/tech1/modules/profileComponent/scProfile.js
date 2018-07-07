@@ -14,7 +14,7 @@ function dirProfile() {
                 };
             });
 
-        function profileController($scope, $state, $timeout, /**/customElements, dataServises) {
+        function profileController($scope, $state, $timeout, /**/customElements, dataServises,appSettings) {
 
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
@@ -22,6 +22,7 @@ function dirProfile() {
             //атрибуты
             //============================================
             let that = this;
+            appSettings.sizeSwiperStyle="smallMenuSwiper";
             this.data = dataServises.data;
             /*getProfile.profileData;*/
             this.competencesTypes = ["Corp", "Role", "Func"];

@@ -16,7 +16,7 @@ function dirMenu() {
 
             }]);
         //-------------------------------------------------------------
-        function menuController($scope, $location, menuDataService, $state, positionSettings, formGoalsService, $timeout, menuSettings ,customElements,dataServises) {
+        function menuController($scope, $location, menuDataService, $state, formGoalsService, $timeout, appSettings ,customElements,dataServises) {
             // function getDict(){
             console.warn("menuController");
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
@@ -29,9 +29,8 @@ function dirMenu() {
             this.data = menuDataService.data;//данные меню
             this.userChoice = dataServises.data.dictData.sData;
             this.btnText = menuDataService.choiceData[1];// текст кнопки меню выбора
-            this.positionSettings = positionSettings;// данные для передачи в страницу позиции
             this.sliders = menuDataService.sliderOptions;// данные настройки слайдеров
-            this.menuSettings = menuSettings;
+            this.appSettings = appSettings;
             this.goalsData = formGoalsService.goalsData; // получаем выбранные цели
             this.getGoalsQuantity = getGoalsQuantity;
 
@@ -52,31 +51,30 @@ function dirMenu() {
             this.switchGoal = switchGoal; // переключаем цель
 
             this.vacantFltClick = vacantFltClick; // переключаем vacant
-            that.vacantBtnText = 'Отобразить только вакантные'
+            that.vacantBtnText = menuDataService.vacant[0];
 
             //***********************************************************************************************************
 //_______________________________________
             function gradeFltClick(index, value) {
                 let num = that.pData.profileData.iGrade - 2 + index;
-                (that.positionSettings.grade[num]) ? delete that.positionSettings.grade[num] : that.positionSettings.grade[num] = true;
-
+                (that.appSettings.fltGradePosition[num]) ? delete that.appSettings.fltGradePosition[num] : that.appSettings.fltGradePosition[num] = true;
                 customElements.resetSwiper();
             }
 
             function vacantFltClick() {
-                that.positionSettings.onlyVacant= (!that.positionSettings.onlyVacant);
-                that.positionSettings.onlyVacant ? that.vacantBtnText = 'Отобразить вакантные и занятые' : that.vacantBtnText = 'Отобразить только вакантные';
+                that.appSettings.fltOnlyVacantPosition= (!that.appSettings.fltOnlyVacantPosition);
+                that.appSettings.fltOnlyVacantPosition ? that.vacantBtnText = menuDataService.vacant[1] : that.vacantBtnText = menuDataService.vacant[0];;
                 customElements.resetSwiper();
             }
  //_______________________________________
             function openSliderOnChange(a, b, c) {
-                that.positionSettings.open = [b, c];
+                that.appSettings.fltOpenPosition = [b, c];
                 customElements.resetSwiper();
             }
 
 //_______________________________________
             function conformitySliderOnChange(a, b, c) {
-                that.positionSettings.conformity = [b, c];
+                that.appSettings.fltConformityPosition = [b, c];
                 customElements.resetSwiper();
             }
 
@@ -84,7 +82,7 @@ function dirMenu() {
             function changePageChoice(item) {
                 that.page = (that.page === 1) ? 2 : 1;
                 that.btnText = menuDataService.choiceData[that.page];
-                menuSettings[0].page = that.page;
+
             }
 
 //_______________________________________
@@ -94,7 +92,7 @@ function dirMenu() {
                 let result = (currentRoute.indexOf(page)!==-1 );// ? true : false;
                 return {
                     "active": result,
-                    "disableClick": (that.menuSettings[0].selectedPositions === 0 && ["competences"].indexOf(page) !== -1) || (
+                    "disableClick": (appSettings.countLikedPosition === 0 && ["competences"].indexOf(page) !== -1) || (
                         that.getGoalsQuantity() === 0 && ["goals", "instruments", "ipr"].indexOf(page) !== -1
                     )
                 };
@@ -134,6 +132,7 @@ function dirMenu() {
 
         angular.module('scApp.menu')
             .service('menuDataService', function () {
+                this.vacant=["Отобразить только вакантные", "Отобразить вакантные и занятые"]
                 this.choiceData = ["", "Продолжить", "Вернуться"],
                     this.sliderOptions = {
                         openSlider: {

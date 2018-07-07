@@ -33,12 +33,11 @@ function classMainBody() {
         var component = '#' + this.globalSettings.teg + '_COMPONENT ';
         var html =
             '<div id="sc-app" ng-controller="scAppController as appController">' +
-
             '   <dir-header class="sc-header"></dir-header>' +
             '   <dir-main-menu page="appController.choiceCurentPage" id="id_menu" class="sc-menu"></dir-main-menu>' +
             '   <main id="id_main" class="sc-main enter-active">' +
             '   <dir-sw-header></dir-sw-header>' +
-            '   <div id="swiper-container"  class="swiper-auto-container">' +
+            '   <div id="swiper-container" ng-class="appController.appSettings.sizeSwiperStyle" class="swiper-auto-container">' +
             '       <div class="swiper-wrapper">' +
             '           <div class="swiper-slide">' +
             '              <ui-view class="main-view"></ui-view>' +
@@ -89,9 +88,9 @@ function classMainBody() {
                         "scApp.instruments",
                         "scApp.ipr"
                     ])
-            .controller('scAppController', function (dataServises,$timeout) {
+            .controller('scAppController', function (dataServises,$timeout,appSettings) {
                 this.choiceCurentPage = 1;
-
+                this.appSettings=appSettings;
                 dataServises.getDictData();
                 /* getProfile.getProfileData();*/
                 dataServises.getPositionData();

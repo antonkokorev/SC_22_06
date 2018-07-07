@@ -13,7 +13,7 @@ function dirSwHeader() {
                 };
             });
 
-        function swHeaderController($scope, $state, positionSettings,customElements,appSettings) {
+        function swHeaderController($scope, $state,customElements,appSettings,dataServises) {
 
 
 
@@ -23,20 +23,17 @@ function dirSwHeader() {
             //============================================
 
             var that = this;
-            this.state = "";// текущий роутер
+            this.state = $state.current.name;// текущий роутер
             this.sText = "Для вас";
             this.appSettings =appSettings;
+            this.data=dataServises.data;
+            this.showMenu = appSettings.headerType;//none
+            this.settings = appSettings.currentPositionInfo;
 
 
 
-
-
-
-            this.showMenu = positionSettings.showMenu;
-            this.settings = positionSettings.positionStaticMenu;
-
-            this.vacant = positionSettings.iIsVacant;
-            this.selected = positionSettings.selectedMenu;
+        //    this.vacant = positionSettings.iIsVacant;
+           this.selected = appSettings.selectedMenuInPositionDetail;
             this.menu = ["Функции", "Компетенции", "Опыт работы", "Образование","Навыки", "Языки", "Сетификаты"];
             //============================================
             //функции
@@ -48,19 +45,19 @@ function dirSwHeader() {
             //============================================
             //вотчеры
             //============================================
-            $scope.$watch(function () {
+          /*  $scope.$watch(function () {
                 return $state.$current.name
             }, function (newVal, oldVal) {
                 that.state = newVal;
             });
-
-            $scope.$watch(function () {
+*/
+            /*$scope.$watch(function () {
                 return positionSettings.countLiked
             }, function (newVal, oldVal) {
                 that.likeCount = newVal;
-            });
+            });*/
 
-            $scope.$watch(function () {
+          /*  $scope.$watch(function () {
                 return positionSettings.showMenu
             }, function (newVal, oldVal) {
                 that.showMenu = newVal;
@@ -73,15 +70,15 @@ function dirSwHeader() {
                     that.vacant = 1;
                 }
 
-            });
+            });*/
 
             //***********************************************************************************************************
             function likePos() {
-               if (positionSettings.positionStaticMenu.liked) {
-                   delete positionSettings.positionStaticMenu.liked;
+               if (appSettings.currentPositionInfo.liked) {
+                   delete appSettings.currentPositionInfo.liked;
                    appSettings.countLikedPosition--;
                }else{
-                   positionSettings.positionStaticMenu.liked = true;
+                   appSettings.currentPositionInfo.liked = true;
                    appSettings.countLikedPosition++;
                }
 
@@ -89,12 +86,12 @@ function dirSwHeader() {
 
             function menuClick(index) {
                 that.selected = index;
-                positionSettings.selectedMenu = index;
+                appSettings.selectedMenuInPositionDetail = index;
                 customElements.updateSwiper();
             }
 
             function yankiGoHome() {
-                positionSettings.showMenu = false;
+              //  positionSettings.showMenu = false;
 
                 var teg = document.querySelector(".sc-main-slide_pos");
                 teg.style.transform = "translateX(0%)";
@@ -103,7 +100,7 @@ function dirSwHeader() {
             }
 
             function likeClick() {
-                positionSettings.onlyLiked = !positionSettings.onlyLiked
+                appSettings.fltOnlyLikedPosition = ! appSettings.fltOnlyLikedPosition
 
             }
 
