@@ -1,5 +1,4 @@
-
-<div ng-show='swHeader.state=="profile"' class='smallMenu'>
+<div ng-show='swHeader.state.current.name=="profile"' ng-class='swHeader.appSettings.sizeSwiperStyle'>
     <h2 class="sc-slide-heading profile-name">{{swHeader.data.profileData.sFullName}}</h2>
 </div>
 
@@ -8,12 +7,13 @@
 
 
 
-<div ng-show='swHeader.state=="position"' ng-class='{smallMenu:!swHeader.showMenu,bigMenu: swHeader.showMenu}'>
 
 
-    <h2 class="sc-slide-heading" ng-class="{notVacant: !swHeader.vacant, ' ':swHeader.vacant}" ng-click="swHeader.yankiGoHome()"><i style="padding-right: 30px"
-                                                                      class="fas fa-long-arrow-alt-left"
-                                                                      ng-show="swHeader.showMenu"></i>{{swHeader.sText}}
+<div ng-show='swHeader.state.current.name=="position"' ng-class='swHeader.appSettings.sizeSwiperStyle'>
+    <h2 class="sc-slide-heading" ng-class="{notVacant: !swHeader.vacant, ' ':swHeader.vacant}"
+        ng-click="swHeader.yankiGoHome()"><i style="padding-right: 30px"
+                                             class="fas fa-long-arrow-alt-left"
+                                             ng-show="swHeader.showMenu"></i>{{swHeader.sText}}
     </h2>
 
     <div class="your-item__elements" ng-show="swHeader.showMenu">
@@ -22,7 +22,7 @@
             <i ng-click="swHeader.likePos()" class="fa-heart"
                ng-class="{'far colorHeartGray': !swHeader.settings.liked, 'fas colorHeartRed': swHeader.settings.liked}"
 
-               ></i>
+            ></i>
 
         </div>
         <div class="your-item__element">

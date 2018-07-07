@@ -13,36 +13,40 @@ function dirPosition() {
                 };
             });
 
-        function positionController($scope, positionsService, positionSettings, $timeout, menuSettings, customElements, dataServises, appSettings) {
+        function positionController($scope, positionsService, customElements, dataServises, appSettings) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
             //атрибуты
             //============================================
             let that = this;
+            appSettings.sizeSwiperStyle="smallMenu";
             this.posModelData = dataServises.data;//данные
             this.mode = (appSettings.positionShowFrom === "model") ? "positionData" : "userPositionData";//выбранная модель
             this.appSettings = appSettings;
 
 
-            this.positionSettings = positionSettings;//данные фильтрации
-            this.competenceCurrent = null;//текущая выбранная позиция
+
+
+
+
+          /*  this.competenceCurrent = null;//текущая выбранная позиция
             this.currentIndex = null;//индекс выбранной позиции
-            this.menuSettings = menuSettings;
+
             this.currentPositionCompetences = null;
-            this.positionDiscr = {};
-            this.positionDiscrPart = {};
-            this.selectedMenu = positionSettings.selectedMenu;
+
+            this.positionDiscrPart = {};*/
+            this.selectedMenu = appSettings.selectedMenuInPositionDetail;
 
 
             //============================================
             //вотчеры
             //============================================
             $scope.$watch(function () {
-                return positionSettings.selectedMenu
+                return appSettings.selectedMenuInPositionDetail
             }, function (newVal, oldVal) {
                 try {
-                    that.selectedMenu = positionSettings.selectedMenu;
+                    that.selectedMenu = appSettings.selectedMenuInPositionDetail;
                     switch (that.selectedMenu) {
                         case 0:
                             that.positionDiscrPart = that.positionDiscr.aFunctions;
@@ -83,32 +87,30 @@ function dirPosition() {
 
 
             function getPositionCompetences(index, position) {
-                positionSettings.showMenu = true;
+
                 let slider = document.querySelector(".sc-main-slide_pos");
                 slider.style.transform = "translateX(-50%)";
-                positionSettings.positionStaticMenu = position;
-                that.currentIndex = index;
-                customElements.updateSwiper(500);
-                dataServises.jobProfile(position.sJobProfileId).then(function (data) {
-                    that.positionDiscr = data;
-                    that.positionDiscrPart = that.positionDiscr.aFunctions;
-                    console.log(data)
-                })
+                appSettings.currentPositionInfo = position;
+                appSettings.sizeSwiperStyle="bigMenu";
+                dataServises.getJobProfile(position.sJobProfileId);
             }
 
             function setFilter(obj) {
                 return function (structure) {
                     let tags = that.posModelData;
-                    let ps = that.positionSettings;
+                    let ps = that.appSettings;
                     let result = true;
-                    if (structure.iTurnover < ps.open[0] || structure.iTurnover > ps.open[1]) result = false;
-                    if (structure.iProbability < (ps.conformity[0] / 100) || structure.iProbability > (ps.conformity[1] / 100)) result = false;
-                    if (ps.grade[structure.iGrade]) result = false;
-                    if (ps.onlyLiked === true && !structure.liked) result = false;
-                    if (ps.onlyVacant === true && structure.iIsVacant === 0) result = false;
+                    if (structure.iTurnover < ps.fltOpenPosition[0] || structure.iTurnover > ps.fltOpenPosition[1]) result = false;
+                    if (structure.iProbability < (ps.fltConformityPosition[0] / 100) || structure.iProbability > (ps.fltConformityPosition[1] / 100)) result = false;
+                    if (ps.fltGradePosition[structure.iGrade]) result = false;
+                    if (ps.fltOnlyLikedPosition === true && !structure.liked) result = false;
+                    if (ps.fltOnlyVacantPosition === true && structure.iIsVacant === 0) result = false;
                     return result;
                 }
             }
+
+
+
 
 
             function likeCurrentPosition(e, index, position) {

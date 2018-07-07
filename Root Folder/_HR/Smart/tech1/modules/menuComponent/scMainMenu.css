@@ -38,10 +38,17 @@
 
 }
 
-.disableClick .sc-menu-heading,
-.disableClick .sc-menu-heading-text {
-    color: #f0eaf2 !important;
+
+.disableClick *
+{
+    color: rgba(0,0,0,0) !important;
+    text-decoration: unset
+
 }
+
+
+
+
 
 .colorBlue{
     color: #007aff!important;

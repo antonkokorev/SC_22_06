@@ -23,11 +23,11 @@ function dirSwHeader() {
             //============================================
 
             var that = this;
-            this.state = $state.current.name;// текущий роутер
+            this.state =appSettings.$state;// текущий роутер
             this.sText = "Для вас";
             this.appSettings =appSettings;
             this.data=dataServises.data;
-            this.showMenu = appSettings.headerType;//none
+           // this.showMenu = appSettings.headerType;//none
             this.settings = appSettings.currentPositionInfo;
 
 
@@ -45,7 +45,7 @@ function dirSwHeader() {
             //============================================
             //вотчеры
             //============================================
-          /*  $scope.$watch(function () {
+           /* $scope.$watch(function () {
                 return $state.$current.name
             }, function (newVal, oldVal) {
                 that.state = newVal;

@@ -18,7 +18,7 @@
         <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[1].num}}</span>
             <span class="sc-menu-heading-text">{{menu.data[1].item}}</span>
         </h2>
-        <div class="sc-menu-details" ng-repeat="item in menu.data[1].child">
+        <div class="sc-menu-details" ng-repeat="item in menu.data[1].child" ng-show="!( menu.appSettings.selectedVerbsInChoice==0 && $index==1 )"}>
              <!--ng-show=" !(menu.menuSettings[0].selectedVerbs==0 && $index==1)">-->
             <a ui-sref="{{item.page}}">
             <div class="sc-menu-desc">

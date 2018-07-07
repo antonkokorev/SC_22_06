@@ -4,8 +4,34 @@ function Services() {
     //новые переделанные сервисы
     //====================================================================================================================
     /*******************************************************************************************************************/
-    /*customElements отвечает за все элементы которые  не зашиты в angular*/
+    /*для передачи данных
     /*******************************************************************************************************************/
+
+        .factory("appSettings", function () {
+            this.Settings = {
+                positionShowFrom: "model",
+                countLikedPosition: 0,
+                sizeSwiperStyle: "",//класс для свайпера обработка смещения от меню
+                //--------------------
+                fltOpenPosition: [0, 100],
+                fltConformityPosition: [0, 100],
+                fltOnlyVacantPosition: false,
+                fltGradePosition: {},
+                fltOnlyLikedPosition: false,
+                //--------------------
+                currentPositionInfo: {},//данные просматриваемой позиции
+                selectedMenuInPositionDetail: 0,
+
+                selectedVerbsInChoice: 0,
+            };
+
+            return this.Settings;
+
+        })
+
+        /*******************************************************************************************************************/
+        /*customElements отвечает за все элементы которые  не зашиты в angular
+        /*******************************************************************************************************************/
         .factory("customElements", function ($timeout, $state) {
             let result = {
                 "updateSwiper": (time) => {
@@ -74,11 +100,19 @@ function Services() {
             let that = this;
             let result = {
                 "data": this.cachedData,
-                "getProfile": ()=>{getHelper("profile")},
-                "getDictData": ()=>{getHelper("dict")},
-                "getPositionData": ()=>{getHelper("position")},
-
-
+                "getProfile": () => {
+                    getHelper("profile")
+                },
+                "getDictData": () => {
+                    getHelper("dict")
+                },
+                "getPositionData": () => {
+                    getHelper("position")
+                },
+                "getJobProfile": (jId)=>
+                {
+                    getHelper("jobProfile","&jobProfileId="+jId)
+                },
 
                 "setProfile": setProfile,
                 "requestService": requestService,
@@ -86,7 +120,7 @@ function Services() {
                 "getSelected": getSelected,
                 "getLiked": getLiked,
                 "getUserPositionData": getUserPositionData,
-                "jobProfile": jobProfile,
+
                 "getInstrumentsData": getInstrumentsData,
                 "setCurrentGoal": setCurrentGoal,
                 "setInstrument": setInstrument,
@@ -94,38 +128,47 @@ function Services() {
             };
 
 
+            /* that.instrumentsData = {instruments: []};//?
+             that.currentGoal = {goal: {}, label: ""};//?
+             that.preloader = {show: false};//?
+             that.cachedData.positionData = {data: []};//?
+             that.cachedData.userPositionData = {data: []};//?
+             that.cachedData.dictData = {dict: []};//?
+             that.cachedData.dictData.sData = [];//?*/
 
 
-                                       /* that.instrumentsData = {instruments: []};//?
-                                        that.currentGoal = {goal: {}, label: ""};//?
-                                        that.preloader = {show: false};//?
-                                        that.cachedData.positionData = {data: []};//?
-                                        that.cachedData.userPositionData = {data: []};//?
-                                        that.cachedData.dictData = {dict: []};//?
-                                        that.cachedData.dictData.sData = [];//?*/
-
-
-
-
-            let settingsObject={
-                profile:{
-                    link:"?entity=empProfile&user="
+            let settingsObject = {
+                profile: {
+                    link: "?entity=empProfile"
                 },
-                dict:{
-                    link:"?entity=dict&user="
+                dict: {
+                    link: "?entity=dict"
                 },
-                position:{
-                   link: "?entity=position&requestType=model&family=[]&row=1_30&user="
+                position: {
+                    link: "?entity=position&requestType=model&family=[]&row=1_30"
+                },
+                jobProfile:{
+                    link: "?entity=jobProfile"
                 }
             };
             /***************************/
+
             /* FUNCTIONS
             /***************************/
+
+        /*    function jobProfile(jId) {
+                let url = that_.srvLink + "?entity=jobProfile&jobProfileId=" + jId + "&user=";
+                return requestService(url).then((response) => {
+                    return response
+                })
+            }*/
+
+
 
             function getPostService(url, type, body) {
                 return $http({
                     method: type,
-                    url: url + that_.user,
+                    url: url +"&user="+that_.user,
                     data: body,
                     headers: {
                         'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
@@ -142,18 +185,21 @@ function Services() {
             //_______________________________________________________________________________
 
             function check(name) {
-                name=(name=="dictData")?"choice":name;
+                name = (name == "dictData") ? "choice" : name;
+                name=(name=="jobProfile")?"position":name;
+
                 if ($state.current.name === name) {
                     customElements.updateSwiper(200);
                 }
             }
 
             //_______________________________________________________________________________
-            function getHelper(name){
-                that.cachedData[name+"Data"] = [];
-                const url = that_.srvLink + settingsObject[name].link;
+            function getHelper(name,urlAdd) {
+                urlAdd=urlAdd||"";
+                that.cachedData[name + "Data"] = [];
+                const url = that_.srvLink + settingsObject[name].link+urlAdd;
                 getPostService(url, "GET").then((data) => {
-                    that.cachedData[name+"Data"] = data;
+                    that.cachedData[name + "Data"] = data;
                     check(name);
                 });
             }
@@ -164,16 +210,8 @@ function Services() {
                     result.getProfile();
                 })
             }
+
             //_______________________________________________________________________________
-
-
-
-
-
-
-
-
-
 
 
             function requestService(url) { // вообще есть getPostService, не?
@@ -268,12 +306,6 @@ function Services() {
 
 
 
-            function jobProfile(jId) {
-                let url = that_.srvLink + "?entity=jobProfile&jobProfileId=" + jId + "&user=";
-                return requestService(url).then((response) => {
-                    return response
-                })
-            }
 
             // function instrumentsService() {
 
@@ -352,38 +384,6 @@ function Services() {
 
 
 
-        /*******************************************************************************************************************/
-        /*для передачи данных
-        /*******************************************************************************************************************/
-
-        .factory("appSettings", function () {
-            let that=this;
-
-
-
-           this.Settings = {
-               positionShowFrom: "model",
-               countLikedPosition:0,
-
-
-               sizeSwiperStyle:"",//класс для свайпера
-               //--------------------
-               fltOpenPosition: [0, 100],
-               fltConformityPosition: [0, 100],
-               fltOnlyVacantPosition:false,
-               fltGradePosition:{},
-               fltOnlyLikedPosition: false,
-               //--------------------
-               currentPositionInfo:{},//данные просматриваемой позиции
-               selectedMenuInPositionDetail: 0,
-
-               selectedVerbs: 0,
-               offset: 999
-                };
-
-            return this.Settings;
-
-        })
 
 
 

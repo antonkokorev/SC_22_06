@@ -12,19 +12,20 @@ function dirChoice() {
                 };
             });
 
-        function choiceController(menuSettings, dataServises) {
+        function choiceController( appSettings,dataServises) {
             console.warn('choiceController');
             //**********************************************
             let that = this;
+            appSettings.sizeSwiperStyle="";
             this.data = dataServises.data.dictData;
 
-            for(let i=0;i<this.data.aDo.length;i++){
+           for(let i=0;i<this.data.aDo.length;i++){
                 this.data.aDo[i].index=i;
             }
             for(let i=0;i<this.data.aDoTags.length;i++){
                 this.data.aDoTags[i].index=i;
             }
-            this.menuSettings=menuSettings;
+            this.appSettings=appSettings;
             this.chooseADoTags = chooseADoTags;     // выбор глаголов
             this.isVandN = isVandN;
             this.deleteThisItem=deleteThisItem;     //удалить выбор
@@ -33,7 +34,7 @@ function dirChoice() {
             //**********************************************
             function deleteThisItem(index){
               delete this.data.aDo[index].selected;
-                that.menuSettings[0].selectedVerbs--;
+                appSettings.selectedVerbsInChoice--;
             }
             function isVandN(obj) {
                 return function (structure) {
@@ -61,10 +62,10 @@ function dirChoice() {
             function chooseADoTags(index) {
                 if (that.data.aDo[index].selected) {
                     delete that.data.aDo[index].selected;
-                    that.menuSettings[0].selectedVerbs--;
+                    appSettings.selectedVerbsInChoice--;
                 } else {
                     that.data.aDo[index].selected = true;
-                    that.menuSettings[0].selectedVerbs++;
+                    appSettings.selectedVerbsInChoice++;
                 }
             }
         }
