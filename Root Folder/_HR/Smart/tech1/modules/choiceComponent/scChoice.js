@@ -18,6 +18,7 @@ function dirChoice() {
 
 
             //**********************************************
+            this.test="ANTOHA";
             let that = this;
             this.data = getDict.dictData;
             for(let i=0;i<this.data.dict.aDo.length;i++){

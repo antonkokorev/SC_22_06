@@ -114,7 +114,8 @@ function classMainBody() {
             $stateProvider.state({
                 name: 'choice',
                 url: '/choice',
-                template: "<dir-choice page='appController.choiceCurentPage'></dir-choice>",
+                abstract: true,
+                template: "<dir-choice></dir-choice>",
                 controller: allController,
                 onExit: function (getDict, getPosition) {
                     var result = getDict.getSelected();
@@ -122,7 +123,41 @@ function classMainBody() {
                         getPosition.getUserPositionData(result.selected)
                     }
                 }
+            })
+
+            $stateProvider.state('choice.verb', {
+                views: {
+                    '@choice': {
+                        templateUrl:  that_.path + "modules/choiceComponent/scChoiceViewVerb.html"
+                    }
+                }
             });
+
+            $stateProvider.state('choice.noun', {
+                views: {
+                    '@choice': {
+                        templateUrl:  that_.path + "modules/choiceComponent/scChoiceViewNoun.html"
+                    }
+                }
+            });
+
+                      /*  $stateProvider.state({
+                            name: 'choice.verb',
+                            url: '/verb',
+                            templateUrl: that_.path + "modules/choiceComponent/scChoiceViewVerb.html"
+
+                        });
+                        $stateProvider.state({
+                            name: 'choice.noun',
+                            url: '/noun',
+                            templateUrl: that_.path + "modules/choiceComponent/scChoiceViewNoun.html"
+                        });*/
+
+
+
+
+
+
             $stateProvider.state({
                 name: 'position',
                 url: '/position',
@@ -135,6 +170,11 @@ function classMainBody() {
 
                 }
             });
+
+
+
+
+
             $stateProvider.state({
                 name: 'competences',
                 url: '/competences',
@@ -159,7 +199,9 @@ function classMainBody() {
                 template: "<dir-ipr></dir-ipr>",
                 controller: allController
             });
+
             $urlRouterProvider.when('/', 'profile');
+            $urlRouterProvider.when('/choice', '/choice/verb');
         })
 
             .run(['$state', function ($state) {
@@ -169,7 +211,6 @@ function classMainBody() {
         //общий контроллер для состояний с обновлением основного свайпера
         function allController( $scope, customElements ) {
             $scope.$on('$viewContentLoaded', function (event) {
-
                 customElements.resetSwiper(500);
 
 

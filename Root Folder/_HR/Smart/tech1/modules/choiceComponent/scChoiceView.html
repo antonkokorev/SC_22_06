@@ -3,25 +3,27 @@
 
         <div class="sc-choice-v-slide">
             <div class="sc-choice-structures">
-                <div class="sc-choice-structure-col">
-                    <div class="sc-choice-structure" ng-repeat="structure in choice.data.dict.aDo" ng-show="choice.menuSettings[0].page==1">
-                        <h3 class="sc-structure-heading" ng-click="choice.chooseADoTags($index)" ng-class="{selectTeg: structure.selected==true }">
-                            {{structure.sDo}}</h3>
-                    </div>
-                </div>
-                <div class="sc-choice-structure-col">
-                    <div ng-click="choice.deleteThisItem(structure.index)" class="upperSelectedRow" ng-repeat="structure in choice.data.dict.aDo | filter:true " ng-show="choice.menuSettings[0].page==2">
-                            <i  class="far fa-times-circle uperSelectedIcon"></i>
-                            <h3 class="uperSelectedTegs">
-                                {{structure.sDo}}</h3>
-                    </div>
-                </div>
-                <div class="sc-choice-structure-col">
-                    <div class="sc-choice-structure"  ng-click="choice.selectObject(structure.index)" ng-repeat="structure in choice.data.dict.aDoTags| filter:choice.isVandN() " ng-show="choice.menuSettings[0].page==2">
-                        <h3 class="sc-structure-heading" ng-class="{selectTeg: structure.selected==true }"  >
-                            {{structure.sObject}}</h3>
-                    </div>
-                </div>
+                <!--<div class="sc-choice-structure-col">-->
+                    <!--<div class="sc-choice-structure" ng-repeat="structure in choice.data.dict.aDo" ng-show="choice.menuSettings[0].page==1">-->
+                        <!--<h3 class="sc-structure-heading" ng-click="choice.chooseADoTags($index)" ng-class="{selectTeg: structure.selected==true }">-->
+                            <!--{{structure.sDo}}</h3>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="sc-choice-structure-col">-->
+                    <!--<div ng-click="choice.deleteThisItem(structure.index)" class="upperSelectedRow" ng-repeat="structure in choice.data.dict.aDo | filter:true " ng-show="choice.menuSettings[0].page==2">-->
+                            <!--<i  class="far fa-times-circle uperSelectedIcon"></i>-->
+                            <!--<h3 class="uperSelectedTegs">-->
+                                <!--{{structure.sDo}}</h3>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="sc-choice-structure-col">-->
+                    <!--<div class="sc-choice-structure"  ng-click="choice.selectObject(structure.index)" ng-repeat="structure in choice.data.dict.aDoTags| filter:choice.isVandN() " ng-show="choice.menuSettings[0].page==2">-->
+                        <!--<h3 class="sc-structure-heading" ng-class="{selectTeg: structure.selected==true }"  >-->
+                            <!--{{structure.sObject}}</h3>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+             <ui-view></ui-view>
             </div>
         </div>
     </div>

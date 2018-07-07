@@ -90,7 +90,7 @@ function dirMenu() {
             function activeClass(page) {
                 that.state = $state.current.name;
                 let currentRoute = $location.path().substring(1) || 'profile';
-                let result = (page === currentRoute);// ? true : false;
+                let result = (currentRoute.indexOf(page)!==-1 );// ? true : false;
                 return {
                     "active": result,
                     "disableClick": (that.menuSettings[0].selectedPositions === 0 && ["competences"].indexOf(page) !== -1) || (
@@ -165,16 +165,17 @@ function dirMenu() {
                     }, {
                         num: "02",
                         item: "Выбор моей карьерной цели",
-                        type: "menuChoice",
-                        page: "choice",
+                        page: "choice.verb",
                         child: [
                             {
                                 name: "Мои предпочтения в работе",
-                                discr: "Укажите чем хотите заниматься"
+                                discr: "Укажите чем хотите заниматься",
+                                page: "choice.verb"
                             },
                             {
                                 name: "Профессиональные направления",
-                                discr: "Укажите где вы хотите этим заниматься"
+                                discr: "Укажите где вы хотите этим заниматься",
+                                page: "choice.noun"
                             }
                         ]
                     }, {
