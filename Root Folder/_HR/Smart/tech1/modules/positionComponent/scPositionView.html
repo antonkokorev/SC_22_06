@@ -3,7 +3,7 @@
         <div class="slide-row">
                     <div class="position-all" ng-show="!positionCtrl.positionSettings.showMenu">
 
-                        <div class="sc-position__item"  ng-repeat="positions in positionCtrl.posModelData.data  |  filter:positionCtrl.setFilter()">
+                        <div class="sc-position__item"  ng-repeat="positions in positionCtrl.posModelData[positionCtrl.mode] |  filter:positionCtrl.setFilter()">
                             <div class="sc-position__icon-block" ng-click="positionCtrl.likeCurrentPosition($event, $index, positions)">
                                 <i class="fa-heart" ng-class="{far: !positions.liked, fas: positions.liked}" ></i>
                             </div>

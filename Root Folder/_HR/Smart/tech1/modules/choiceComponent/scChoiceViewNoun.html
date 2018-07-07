@@ -1,9 +1,7 @@
 
-<div>{{choice.test}}!!!!!!</div>
-
 <div class="sc-choice-structure-col">
     <div ng-click="choice.deleteThisItem(structure.index)" class="upperSelectedRow"
-         ng-repeat="structure in choice.data.dict.aDo | filter:true " >
+         ng-repeat="structure in choice.data.aDo | filter:true " >
         <i class="far fa-times-circle uperSelectedIcon"></i>
         <h3 class="uperSelectedTegs">
             {{structure.sDo}}</h3>
@@ -11,7 +9,7 @@
 </div>
 <div class="sc-choice-structure-col">
     <div class="sc-choice-structure" ng-click="choice.selectObject(structure.index)"
-         ng-repeat="structure in choice.data.dict.aDoTags| filter:choice.isVandN() "
+         ng-repeat="structure in choice.data.aDoTags| filter:choice.isVandN() "
         >
         <h3 class="sc-structure-heading" ng-class="{selectTeg: structure.selected==true }">
             {{structure.sObject}}</h3>

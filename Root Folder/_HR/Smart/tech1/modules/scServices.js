@@ -6,7 +6,20 @@ function Services() {
     /*******************************************************************************************************************/
     /*customElements отвечает за все элементы которые  не зашиты в angular*/
     /*******************************************************************************************************************/
-        .factory("customElements", function ($timeout,$state) {
+        .factory("customElements", function ($timeout, $state) {
+            let result = {
+                "updateSwiper": (time) => {
+                    let time1 = time || 0;
+                    $timeout(updateSwiper, time1)
+                },
+                "resetSwiper": (time) => {
+                    let time1 = time || 0;
+                    $timeout(resetSwiper, time1)
+                }
+            };
+
+            //-------------------------------------------------------------------------------
+
 
             function updateSwiper() {
                 if ($state.current.name === "profile") {
@@ -24,8 +37,7 @@ function Services() {
                 that_.profile_swiper.slideTo(0, 0, false)
             }
 
-            function renderTimelineLine(array_parent,ii) {
-
+            function renderTimelineLine(array_parent) {
                 try {
                     for (let i = 0; i < array_parent.length; i++) {
                         // Перерисовка линии таймлайна
@@ -43,28 +55,12 @@ function Services() {
                             "left": line_x_offset
                         })
                     }
-                    ii=undefined;
                 } catch (e) {
-                    ii=(!ii)?0:ii;
-                    if(ii<10){
-                        ii++;
-                        console.log(ii);
-                        //$timeout(renderTimelineLine(array_parent,ii),1000);
-                    }
-
+                    console.log("error renderTimelineLine");
                 }
             }
 
-            return {
-                "updateSwiper": (time) => {
-                    let time1=time || 0;
-                    $timeout(updateSwiper, time1)
-                },
-                "resetSwiper": (time) => {
-                    let time1=time || 0;
-                    $timeout(resetSwiper, time1)
-                }
-            }
+            return result;
         })
         /*******************************************************************************************************************/
         /*для работы с xsjs
@@ -73,27 +69,57 @@ function Services() {
 
         .factory("dataServises", function ($http, $state, customElements) {
             console.warn("SERVICES");
+
             this.cachedData = {};
             let that = this;
+            let result = {
+                "data": this.cachedData,
+                "getProfile": ()=>{getHelper("profile")},
+                "getDictData": ()=>{getHelper("dict")},
+                "getPositionData": ()=>{getHelper("position")},
 
 
-            that.instrumentsData = {instruments: []};
-            that.currentGoal = {goal: {}, label: ""};
-            that.preloader = {show: false};
 
-            that.cachedData.positionData = {data: []};
+                "setProfile": setProfile,
+                "requestService": requestService,
+                "postService": postService,
+                "getSelected": getSelected,
+                "getLiked": getLiked,
+                "getUserPositionData": getUserPositionData,
+                "jobProfile": jobProfile,
+                "getInstrumentsData": getInstrumentsData,
+                "setCurrentGoal": setCurrentGoal,
+                "setInstrument": setInstrument,
+                "getIpr": getIpr,
+            };
 
-            that.cachedData.userPositionData = {data: []};
 
 
-             /*************************************************/
-            /*************************************************/
 
-            that.cachedData.dictData = {dict: []};
-            that.cachedData.dictData.sData = [];
+                                       /* that.instrumentsData = {instruments: []};//?
+                                        that.currentGoal = {goal: {}, label: ""};//?
+                                        that.preloader = {show: false};//?
+                                        that.cachedData.positionData = {data: []};//?
+                                        that.cachedData.userPositionData = {data: []};//?
+                                        that.cachedData.dictData = {dict: []};//?
+                                        that.cachedData.dictData.sData = [];//?*/
 
-              /***************************/
-             /* FUNCTIONS               */
+
+
+
+            let settingsObject={
+                profile:{
+                    link:"?entity=empProfile&user="
+                },
+                dict:{
+                    link:"?entity=dict&user="
+                },
+                position:{
+                   link: "?entity=position&requestType=model&family=[]&row=1_30&user="
+                }
+            };
+            /***************************/
+            /* FUNCTIONS
             /***************************/
 
             function getPostService(url, type, body) {
@@ -113,28 +139,44 @@ function Services() {
                 });
             }
 
+            //_______________________________________________________________________________
+
             function check(name) {
+                name=(name=="dictData")?"choice":name;
                 if ($state.current.name === name) {
                     customElements.updateSwiper(200);
                 }
             }
 
-            function getProfile() {
-                that.cachedData.profileData = {};
-                const url = that_.srvLink + "?entity=empProfileNoCallback&user=";
+            //_______________________________________________________________________________
+            function getHelper(name){
+                that.cachedData[name+"Data"] = [];
+                const url = that_.srvLink + settingsObject[name].link;
                 getPostService(url, "GET").then((data) => {
-                    that.cachedData.profileData = data;
-                    check("profile");
+                    that.cachedData[name+"Data"] = data;
+                    check(name);
                 });
             }
 
+            //_______________________________________________________________________________
             function setProfile(body) {
-                getPostService(that_.srvLink+"?user=", "POST", body).then((data) => {
-                    getProfile();
+                getPostService(that_.srvLink + "?user=", "POST", body).then((data) => {
+                    result.getProfile();
                 })
             }
+            //_______________________________________________________________________________
 
-            function requestService(url){ // вообще есть getPostService, не?
+
+
+
+
+
+
+
+
+
+
+            function requestService(url) { // вообще есть getPostService, не?
                 return $http({
                     method: 'GET',
                     url: url + that_.user,
@@ -169,7 +211,7 @@ function Services() {
 
 
             /* choice */
-            function getSelected(){
+            function getSelected() {
                 let pos = [];
                 let change = false;
                 try {
@@ -184,7 +226,8 @@ function Services() {
                     that.cachedData.dictData.sData = pos;
                 }
                 catch (e) {
-                    pos = []; /*wtf?*/
+                    pos = [];
+                    /*wtf?*/
                     change = false;
                 }
                 return {
@@ -194,18 +237,11 @@ function Services() {
             };
 
             /* choice */
-            function getDictData (){
-                let url = that_.srvLink + "?entity=dictNoCallback&user=";
-                requestService(url).then((data) => {
-                    that.cachedData.dictData.dict = data;
-                    if ($state.current.name === "choice") {
-                        customElements.updateSwiper(200);
-                    }
-                });
-            }
+
+
             // }
 
-            function getLiked(){
+            function getLiked() {
                 let pos = [];
                 for (let i = 0; i < that.cachedData.positionData.data.length; i++) {
                     if (that.cachedData.positionData.data[i].liked) {
@@ -220,8 +256,8 @@ function Services() {
                 return pos;
             };
 
-            function getUserPositionData(family){
-                let url = that_.srvLink + "?entity=positionNoCallback&requestType=list&family=" + JSON.stringify(family) + "&row=1_30&user=";
+            function getUserPositionData(family) {
+                let url = that_.srvLink + "?entity=position&requestType=list&family=" + JSON.stringify(family) + "&row=1_30&user=";
                 requestService(url).then((data) => {
                     that.cachedData.userPositionData.data = data;
                     if ($state.current.name === "position") {
@@ -230,15 +266,7 @@ function Services() {
                 });
             };
 
-            function getPositionData(){
-                let url = that_.srvLink + "?entity=positionNoCallback&requestType=model&family=[]&row=1_30&user=";
-                requestService(url).then((data) => {
-                    that.cachedData.positionData.data = data;
-                    if ($state.current.name === "position") {
-                        customElements.updateSwiper(200);
-                    }
-                });
-            };
+
 
             function jobProfile(jId) {
                 let url = that_.srvLink + "?entity=jobProfile&jobProfileId=" + jId + "&user=";
@@ -246,9 +274,10 @@ function Services() {
                     return response
                 })
             }
+
             // function instrumentsService() {
 
-            function getInstrumentsData(goal){
+            function getInstrumentsData(goal) {
                 that.preloader.show = !that.preloader.show;
                 let url = that_.srvLink + "?entity=competentionInstrument&competentionId=" + goal.sCompetentionId + "&user=";
                 requestService(url).then((data) => {
@@ -258,12 +287,13 @@ function Services() {
                 });
             }
 
-            function setCurrentGoal(goal, i){
+            function setCurrentGoal(goal, i) {
                 that.currentGoal.goal = goal;
                 that.currentGoal.label = "Цель №" + i;
             }
+
             // }
-            function setInstrument(goal, item, allGoalsData){
+            function setInstrument(goal, item, allGoalsData) {
                 console.log(goal);
                 console.log(item);
                 let indexOfCurrentGoal;
@@ -297,7 +327,7 @@ function Services() {
                 }
             };
 
-            function getIpr(goal, allGoalsData){
+            function getIpr(goal, allGoalsData) {
 
                 let indexOfCurrentGoal;
                 if (goal.hasOwnProperty("iIndicatorId")) {
@@ -313,53 +343,54 @@ function Services() {
             }
 
             /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-            // function getDict(){
-            console.warn("SERVICES222");
-            return {
-                "data": this.cachedData,
-                "getProfile": getProfile,
-                "setProfile":setProfile,
-                "requestService": requestService,
-                "postService": postService,
-                "getSelected": getSelected,
-                "getDictData": getDictData,
-                "getLiked": getLiked,
-                "getUserPositionData": getUserPositionData,
-                "getPositionData": getPositionData,
-                "jobProfile": jobProfile,
-                "getInstrumentsData": getInstrumentsData,
-                "setCurrentGoal": setCurrentGoal,
-                "setInstrument": setInstrument,
-                "getIpr": getIpr,
-            }
+
+
+            return result;
         })
 
 
 
 
 
-    /*******************************************************************************************************************/
-    /*для передачи данных в меню и обратно
-    /*******************************************************************************************************************/
-.factory("menuSettings", function () {
+        /*******************************************************************************************************************/
+        /*для передачи данных в меню и обратно
+        /*******************************************************************************************************************/
+        .factory("menuSettings", function () {
 
-        return this.menuSettings = [{
-            page: 1,
-            selectedVerbs: 0,
-            selectedPositions: 0,
-            offset:999
-        }];
+            return this.menuSettings = [{
+                page: 1,
+                selectedVerbs: 0,
+                selectedPositions: 0,
+                offset: 999
+            }];
 
 
-    })
+        })
+        .factory("appSettings", function () {
 
-    /*******************************************************************************************************************/
-    /*******************************************************************************************************************/
-    /*******************************************************************************************************************/
-    /*******************************************************************************************************************/
-    /*******************************************************************************************************************/
-    /*******************************************************************************************************************/
-    /*******************************************************************************************************************/
+           this.Settings = {
+               positionShowFrom: "model",
+               countLikedPosition:0,
+
+               //--------------------
+               selectedVerbs: 0,
+               selectedPositions: 0,
+               offset: 999
+                };
+
+            return this.Settings;
+
+        })
+
+
+
+        /*******************************************************************************************************************/
+        /*******************************************************************************************************************/
+        /*******************************************************************************************************************/
+        /*******************************************************************************************************************/
+        /*******************************************************************************************************************/
+        /*******************************************************************************************************************/
+        /*******************************************************************************************************************/
 
         .factory("positionSettings", function () {
 

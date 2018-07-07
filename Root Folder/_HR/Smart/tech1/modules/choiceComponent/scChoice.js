@@ -15,14 +15,14 @@ function dirChoice() {
         function choiceController(menuSettings, dataServises) {
             console.warn('choiceController');
             //**********************************************
-            this.test="ANTOHA";
             let that = this;
             this.data = dataServises.data.dictData;
-            for(let i=0;i<this.data.dict.aDo.length;i++){
-                this.data.dict.aDo[i].index=i;
+
+            for(let i=0;i<this.data.aDo.length;i++){
+                this.data.aDo[i].index=i;
             }
-            for(let i=0;i<this.data.dict.aDoTags.length;i++){
-                this.data.dict.aDoTags[i].index=i;
+            for(let i=0;i<this.data.aDoTags.length;i++){
+                this.data.aDoTags[i].index=i;
             }
             this.menuSettings=menuSettings;
             this.chooseADoTags = chooseADoTags;     // выбор глаголов
@@ -32,12 +32,12 @@ function dirChoice() {
 
             //**********************************************
             function deleteThisItem(index){
-              delete this.data.dict.aDo[index].selected;
+              delete this.data.aDo[index].selected;
                 that.menuSettings[0].selectedVerbs--;
             }
             function isVandN(obj) {
                 return function (structure) {
-                    let tags = that.data.dict.aDo;
+                    let tags = that.data.aDo;
                     let result = false;
                     let member = structure.sDo;
                     for (let i = 0; i < tags.length; i++) {
@@ -46,26 +46,24 @@ function dirChoice() {
                             break;
                         }
                     }
-
-
                     return result;
                 }
             }
             function selectObject(index) {
 
-                if (that.data.dict.aDoTags[index].selected) {
-                    delete that.data.dict.aDoTags[index].selected;
+                if (that.data.aDoTags[index].selected) {
+                    delete that.data.aDoTags[index].selected;
                 } else {
-                    that.data.dict.aDoTags[index].selected = true;
+                    that.data.aDoTags[index].selected = true;
                 }
             }
 
             function chooseADoTags(index) {
-                if (that.data.dict.aDo[index].selected) {
-                    delete that.data.dict.aDo[index].selected;
+                if (that.data.aDo[index].selected) {
+                    delete that.data.aDo[index].selected;
                     that.menuSettings[0].selectedVerbs--;
                 } else {
-                    that.data.dict.aDo[index].selected = true;
+                    that.data.aDo[index].selected = true;
                     that.menuSettings[0].selectedVerbs++;
                 }
             }

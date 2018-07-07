@@ -42,10 +42,10 @@ function dirProfile() {
             this.range = (n) => {
                 return new Array(n)
             };
-            this.addNewSkill = addNewSkill;
-            this.rateNewSkill = rateNewSkill;
-            this.addAboutMe = addAboutMe;
-            this.addNewAchievement = addNewAchievement;
+            this.addNewSkill = addNewSkill;//добавляет скилл(звездочки)
+            this.rateNewSkill = rateNewSkill;//управляет звездами при добавлении
+            this.addAboutMe = addAboutMe;//добавление AboutMe
+            this.addNewAchievement = addNewAchievement;// добавление ачивки
             //***********************************************************************************************************
 //_______________________________________
 

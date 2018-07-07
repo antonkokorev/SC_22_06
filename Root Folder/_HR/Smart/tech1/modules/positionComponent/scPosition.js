@@ -13,17 +13,19 @@ function dirPosition() {
                 };
             });
 
-        function positionController($scope, positionsService, positionSettings, $timeout, menuSettings,customElements,dataServises) {
+        function positionController($scope, positionsService, positionSettings, $timeout, menuSettings, customElements, dataServises, appSettings) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
             //атрибуты
             //============================================
             let that = this;
-            this.iGrade = dataServises.data.profileData.iGrade;
-            this.posModelData = getModelData();
+            this.posModelData = dataServises.data;//данные
+            this.mode = (appSettings.positionShowFrom === "model") ? "positionData" : "userPositionData";//выбранная модель
+            this.appSettings = appSettings;
+
+
             this.positionSettings = positionSettings;//данные фильтрации
-            this.competences_h_slider = document.querySelector(".sc-main-slide_pos");
             this.competenceCurrent = null;//текущая выбранная позиция
             this.currentIndex = null;//индекс выбранной позиции
             this.menuSettings = menuSettings;
@@ -82,7 +84,8 @@ function dirPosition() {
 
             function getPositionCompetences(index, position) {
                 positionSettings.showMenu = true;
-                that.competences_h_slider.style.transform = "translateX(-50%)";
+                let slider = document.querySelector(".sc-main-slide_pos");
+                slider.style.transform = "translateX(-50%)";
                 positionSettings.positionStaticMenu = position;
                 that.currentIndex = index;
                 customElements.updateSwiper(500);
@@ -102,21 +105,21 @@ function dirPosition() {
                     if (structure.iProbability < (ps.conformity[0] / 100) || structure.iProbability > (ps.conformity[1] / 100)) result = false;
                     if (ps.grade[structure.iGrade]) result = false;
                     if (ps.onlyLiked === true && !structure.liked) result = false;
-                    if (ps.onlyVacant===true && structure.iIsVacant === 0)result=false;
+                    if (ps.onlyVacant === true && structure.iIsVacant === 0) result = false;
                     return result;
                 }
             }
 
-            function getModelData() {
-                return (positionSettings.show === "model") ? dataServises.data.positionData : dataServises.data.userPositionData;
-            }
 
             function likeCurrentPosition(e, index, position) {
-                let data = that.posModelData.data;
-                (data[index].liked) ? delete data[index].liked : data[index].liked = true;
-                positionSettings.countLiked = dataServises.getLiked().length;
-                menuSettings[0].selectedPositions = positionSettings.countLiked;
-
+                let data = that.posModelData.positionData;
+                if (data[index].liked) {
+                    delete data[index].liked;
+                    appSettings.countLikedPosition--;
+                } else {
+                    data[index].liked = true;
+                    appSettings.countLikedPosition++;
+                }
             }
 
 
