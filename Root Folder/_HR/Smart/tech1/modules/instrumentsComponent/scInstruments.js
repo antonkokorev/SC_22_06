@@ -14,15 +14,16 @@ function dirInstruments() {
                 };
             });
 
-        function instrumentsController( requestService, formGoalsService, instrumentsService, iprService,customElements) {
+        function instrumentsController(formGoalsService, customElements, dataServises) {
             let that=this;
-            this.preloader = instrumentsService.preloader;
-            this.currentGoal = instrumentsService.currentGoal;
-            this.instrumentsData = instrumentsService.instrumentsData;
+            this.preloader = dataServises.preloader;
+            this.currentGoal = dataServises.currentGoal;
+            this.instrumentsData = dataServises.instrumentsData;
             this.currentMenu=0;
+            this.allGoals = formGoalsService.data;
 
             // var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=competentionInstrument&competentionId="+ this.currentGoal.sCompetentionId +"&user=";
-            // requestService(url).then((data) => {
+            // dataServises.requestService(url).then((data) => {
             //     this.tools = data;
             //     console.log(data);
             // });
@@ -41,7 +42,7 @@ function dirInstruments() {
             };
 
             this.addToIpr = (item) => {
-                iprService.setInstrument(this.currentGoal.goal, item);
+                dataServises.setInstrument(this.currentGoal.goal, this.allGoals);
             }
 
         }

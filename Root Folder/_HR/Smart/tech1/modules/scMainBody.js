@@ -14,7 +14,6 @@ function classMainBody() {
     dirInstruments.call(this);
     dirIpr.call(this);
     //======================================
-
     //this.currentUser="Basic Z2VvcmdpZXYtZWk6cXdlcnR5MTIz",
     this.currentUser = "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi";
     this.srvLink = "http://sbt-oopp-009.sigma.sbrf.ru:8091/hr/smartcareer/services/data.xsjs";
@@ -76,26 +75,26 @@ function classMainBody() {
         //создание основного модуля
         //============================================================
         angular.module('scApp', [
-            "ngAnimate",
-            "rzModule",
-            "ui.router",
-            "scApp.header",
-            "scApp.menu",
-            "scApp.choice",
-            "scApp.profile",
-            "scApp.position",
-            "scApp.swHeader",
-            "scApp.competences",
-            "scApp.goals",
-            "scApp.instruments",
-            "scApp.ipr"
-        ])
-            .controller('scAppController', function ( getPosition, getDict,dataServises,$timeout) {
+                        "ngAnimate",
+                        "rzModule",
+                        "ui.router",
+                        "scApp.header",
+                        "scApp.menu",
+                        "scApp.choice",
+                        "scApp.profile",
+                        "scApp.position",
+                        "scApp.swHeader",
+                        "scApp.competences",
+                        "scApp.goals",
+                        "scApp.instruments",
+                        "scApp.ipr"
+                    ])
+            .controller('scAppController', function (dataServises,$timeout) {
                 this.choiceCurentPage = 1;
 
-                getDict.getDictData();
-               /* getProfile.getProfileData();*/
-                getPosition.getPositionData();
+                dataServises.getDictData();
+                /* getProfile.getProfileData();*/
+                dataServises.getPositionData();
                 dataServises.getProfile();
             });
         //============================================================
@@ -117,10 +116,10 @@ function classMainBody() {
                 abstract: true,
                 template: "<dir-choice></dir-choice>",
                 controller: allController,
-                onExit: function (getDict, getPosition) {
-                    var result = getDict.getSelected();
+                onExit: function (dataServises) {
+                    var result = dataServises.getSelected();
                     if (result.isChange) {
-                        getPosition.getUserPositionData(result.selected)
+                        dataServises.getUserPositionData(result.selected)
                     }
                 }
             })
@@ -163,9 +162,9 @@ function classMainBody() {
                 url: '/position',
                 template: "<dir-position  modelposition='appController.modelPosition'></dir-position>",
                 controller: allController,
-                onExit: function (getPosition, positionSettings) {
+                onExit: function (positionSettings) {
                     //alert("test")
-                    // var test = getPosition.getLiked();
+                    // var test = dataServises.getPosition.getLiked();
                     positionSettings.showMenu = false;
 
                 }

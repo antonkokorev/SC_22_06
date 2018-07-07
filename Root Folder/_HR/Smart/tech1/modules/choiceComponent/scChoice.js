@@ -12,15 +12,12 @@ function dirChoice() {
                 };
             });
 
-        function choiceController(getDict,menuSettings) {
+        function choiceController(menuSettings, dataServises) {
             console.warn('choiceController');
-
-
-
             //**********************************************
             this.test="ANTOHA";
             let that = this;
-            this.data = getDict.dictData;
+            this.data = dataServises.data.dictData;
             for(let i=0;i<this.data.dict.aDo.length;i++){
                 this.data.dict.aDo[i].index=i;
             }

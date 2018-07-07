@@ -13,7 +13,7 @@ function dirPosition() {
                 };
             });
 
-        function positionController($scope, requestService, positionsService, getPosition,  positionSettings, $timeout, getCustomData, menuSettings,customElements,dataServises) {
+        function positionController($scope, positionsService, positionSettings, $timeout, menuSettings,customElements,dataServises) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
@@ -86,7 +86,7 @@ function dirPosition() {
                 positionSettings.positionStaticMenu = position;
                 that.currentIndex = index;
                 customElements.updateSwiper(500);
-                getCustomData.jobProfile(position.sJobProfileId).then(function (data) {
+                dataServises.jobProfile(position.sJobProfileId).then(function (data) {
                     that.positionDiscr = data;
                     that.positionDiscrPart = that.positionDiscr.aFunctions;
                     console.log(data)
@@ -108,13 +108,13 @@ function dirPosition() {
             }
 
             function getModelData() {
-                return (positionSettings.show === "model") ? getPosition.positionData : getPosition.userPositionData;
+                return (positionSettings.show === "model") ? dataServises.data.positionData : dataServises.data.userPositionData;
             }
 
             function likeCurrentPosition(e, index, position) {
                 let data = that.posModelData.data;
                 (data[index].liked) ? delete data[index].liked : data[index].liked = true;
-                positionSettings.countLiked = getPosition.getLiked().length;
+                positionSettings.countLiked = dataServises.getLiked().length;
                 menuSettings[0].selectedPositions = positionSettings.countLiked;
 
             }
