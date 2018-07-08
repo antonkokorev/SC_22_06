@@ -52,7 +52,7 @@ function dirIpr() {
             this.showIpr = (goal) => {
                 var hslider = document.querySelector(".ipr-h-slider");
                 hslider.style.transform = "translateX(-50%)";
-                this.iprData = dataServises.getIpr(goal, this.goalsData);
+                this.iprData = dataServices.getIpr(goal, this.goalsData);
 
                 console.log(this.iprData);
             };

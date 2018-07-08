@@ -12,12 +12,12 @@ function dirChoice() {
                 };
             });
 
-        function choiceController( appSettings,dataServises) {
+        function choiceController( appSettings,dataServices) {
             console.warn('choiceController');
             //**********************************************
             let that = this;
             appSettings.sizeSwiperStyle="";
-            this.data = dataServises.data.dictData;
+            this.data = dataServices.data.dictData;
 
            for(let i=0;i<this.data.aDo.length;i++){
                 this.data.aDo[i].index=i;

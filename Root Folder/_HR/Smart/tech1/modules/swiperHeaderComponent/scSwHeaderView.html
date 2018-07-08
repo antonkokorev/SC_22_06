@@ -1,59 +1,71 @@
+<!--Профиль-->
 <div ng-show='swHeader.state.current.name=="profile"' ng-class='swHeader.appSettings.sizeSwiperStyle'>
     <h2 class="sc-slide-heading profile-name">{{swHeader.data.profileData.sFullName}}</h2>
 </div>
 
+<!--Позиции-->
+<div ng-show='swHeader.state.current.name=="position"' >
+<!--=====================================================================================================-->
+    <div ng-show="swHeader.appSettings.sizeSwiperStyle=='bigMenu'"  ng-class='swHeader.appSettings.sizeSwiperStyle'>
+        <h2 class="sc-slide-heading" ng-class="{notVacant: !swHeader.appSettings.currentPositionInfo.iIsVacant}"
+            ng-click="swHeader.yankiGoHome()">
+            <i style="padding-right: 30px"
+               class="fas fa-long-arrow-alt-left">
+            </i>
+            {{swHeader.appSettings.currentPositionInfo.sJobProfileName}}
+        </h2>
 
+        <div class="your-item__elements" >
+            <div class="your-item__element">
 
+                <i ng-click="swHeader.likePos()" class="fa-heart"
+                   ng-class="{'far colorHeartGray': !swHeader.appSettings.currentPositionInfo.liked, 'fas colorHeartRed':swHeader.appSettings.currentPositionInfo.liked}"
 
+                ></i>
 
-
-
-
-<div ng-show='swHeader.state.current.name=="position"' ng-class='swHeader.appSettings.sizeSwiperStyle'>
-    <h2 class="sc-slide-heading" ng-class="{notVacant: !swHeader.vacant, ' ':swHeader.vacant}"
-        ng-click="swHeader.yankiGoHome()"><i style="padding-right: 30px"
-                                             class="fas fa-long-arrow-alt-left"
-                                             ng-show="swHeader.showMenu"></i>{{swHeader.sText}}
-    </h2>
-
-    <div class="your-item__elements" ng-show="swHeader.showMenu">
-        <div class="your-item__element">
-
-            <i ng-click="swHeader.likePos()" class="fa-heart"
-               ng-class="{'far colorHeartGray': !swHeader.settings.liked, 'fas colorHeartRed': swHeader.settings.liked}"
-
-            ></i>
-
+            </div>
+            <div class="your-item__element">
+                <span>Грейд</span>
+                <span class="sc-position__grade current_grade">{{swHeader.appSettings.currentPositionInfo.iGrade}}</span>
+            </div>
+            <div class="your-item__element">
+                <span>Соответсвие:</span>
+                <b>{{swHeader.appSettings.currentPositionInfo.iProbability}}</b>
+            </div>
+            <div class="your-item__element">
+                <span>Открытость:</span>
+                <b>{{swHeader.appSettings.currentPositionInfo.iTurnover}}</b>
+            </div>
         </div>
-        <div class="your-item__element">
-            <span>Грейд</span>
-            <span class="sc-position__grade current_grade">{{swHeader.settings.iGrade}}</span>
-        </div>
-        <div class="your-item__element">
-            <span>Соответсвие:</span>
-            <b>{{swHeader.settings.iProbability}}</b>
-        </div>
-        <div class="your-item__element">
-            <span>Открытость:</span>
-            <b>{{swHeader.settings.iTurnover}}</b>
+        <div class="main__nav"  >
+            <ul>
+                <li ng-class="{active: swHeader.selected==$index}" ng-click="swHeader.menuClick($index)"
+                    ng-repeat="item in swHeader.menu"><span>{{item}}</span></li>
+            </ul>
         </div>
     </div>
-    <div class="main__nav" ng-show="swHeader.showMenu">
-        <ul>
-            <li ng-class="{active: swHeader.selected==$index}" ng-click="swHeader.menuClick($index)"
-                ng-repeat="item in swHeader.menu"><span>{{item}}</span></li>
-
-        </ul>
-    </div>
-
-
-    <div style="margin-left: 20%" ng-show="!swHeader.showMenu" class="slide-position-col "
-         ng-click="swHeader.likeClick()">
-        <div class="position-liked-wrapper">
-            <i class="fa-heart fas"></i>
-            <span class="positions-liked-number">{{swHeader.appSettings.countLikedPosition}}</span>
+    <!--=====================================================================================================-->
+    <div ng-class='swHeader.appSettings.sizeSwiperStyle' ng-show="swHeader.appSettings.sizeSwiperStyle=='smallMenu'">
+        <h2 class="sc-slide-heading" >
+            Для вас
+        </h2>
+        <div class="scSwHeader-likeContent"
+             ng-click="swHeader.likeClick()">
+            <div class="position-liked-wrapper">
+                <i class="fa-heart fas"></i>
+                <span class="positions-liked-number">{{swHeader.appSettings.countLikedPosition}}</span>
+            </div>
         </div>
     </div>
 
 </div>
-</div>
+
+
+<!--Компетенции-->
+<h2 ng-class='swHeader.appSettings.sizeSwiperStyle' class="sc-slide-heading" ng-show='swHeader.state.current.name=="competences" && swHeader.appSettings.sizeSwiperStyle!=""'
+    ng-click="swHeader.yankiGoHomeCompetences()">
+    <i style="padding-right: 30px"
+       class="fas fa-long-arrow-alt-left">
+    </i>
+    {{swHeader.getHeaderComp()}}
+</h2>

@@ -16,7 +16,7 @@ function dirMenu() {
 
             }]);
         //-------------------------------------------------------------
-        function menuController($scope, $location, menuDataService, $state, formGoalsService, $timeout, appSettings ,customElements,dataServises) {
+        function menuController($scope, $location, menuDataService, $state, formGoalsService, $timeout, appSettings ,customElements,dataServices) {
             // function getDict(){
             console.warn("menuController");
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
@@ -24,15 +24,15 @@ function dirMenu() {
             //атрибуты
             //============================================
             let that = this;
-            this.pData = dataServises.data;//getProfile.profileData;
+            this.pData = dataServices.data;//getProfile.profileData;
             this.state = $state.current.name;// текущий роутер
             this.data = menuDataService.data;//данные меню
-            this.userChoice = dataServises.data.dictData.sData;
+            this.userChoice = dataServices.data.dictData.sData;
             this.btnText = menuDataService.choiceData[1];// текст кнопки меню выбора
             this.sliders = menuDataService.sliderOptions;// данные настройки слайдеров
             this.appSettings = appSettings;
             this.goalsData = formGoalsService.goalsData; // получаем выбранные цели
-            this.getGoalsQuantity = getGoalsQuantity;
+           // this.getGoalsQuantity = getGoalsQuantity;
 
             //============================================
             //функции
@@ -63,7 +63,7 @@ function dirMenu() {
 
             function vacantFltClick() {
                 that.appSettings.fltOnlyVacantPosition= (!that.appSettings.fltOnlyVacantPosition);
-                that.appSettings.fltOnlyVacantPosition ? that.vacantBtnText = menuDataService.vacant[1] : that.vacantBtnText = menuDataService.vacant[0];;
+                that.appSettings.fltOnlyVacantPosition ? that.vacantBtnText = menuDataService.vacant[1] : that.vacantBtnText = menuDataService.vacant[0];
                 customElements.resetSwiper();
             }
  //_______________________________________
@@ -93,7 +93,7 @@ function dirMenu() {
                 return {
                     "active": result,
                     "disableClick": (appSettings.countLikedPosition === 0 && ["competences"].indexOf(page) !== -1) || (
-                        that.getGoalsQuantity() === 0 && ["goals", "instruments", "ipr"].indexOf(page) !== -1
+                        that.pData.goalsData.length === 0 && ["goals", "instruments", "ipr"].indexOf(page) !== -1
                     )
                 };
             }
@@ -118,22 +118,22 @@ function dirMenu() {
 
 //_______________________________________
             function switchGoal(goal, index) {
-                dataServises.getInstrumentsData(goal);
-                dataServises.setCurrentGoal(goal, index + 1);
+                dataServices.getInstrumentsData(goal);
+                dataServices.setCurrentGoal(goal, index + 1);
             }
 
 //_______________________________________
-            function getGoalsQuantity() {
+            /*function getGoalsQuantity() {
                 return that.goalsData.goals.length;
-            }
+            }*/
         }
 
 //_______________________________________
 
         angular.module('scApp.menu')
             .service('menuDataService', function () {
-                this.vacant=["Отобразить только вакантные", "Отобразить вакантные и занятые"]
-                this.choiceData = ["", "Продолжить", "Вернуться"],
+                this.vacant=["Отобразить только вакантные", "Отобразить вакантные и занятые"];
+                this.choiceData = ["", "Продолжить", "Вернуться"];
                     this.sliderOptions = {
                         openSlider: {
                             minValue: 0,
@@ -155,7 +155,7 @@ function dirMenu() {
                                 noSwitching: true
                             }
                         }
-                    },
+                    };
 
                     this.data = [{
                         num: "01",

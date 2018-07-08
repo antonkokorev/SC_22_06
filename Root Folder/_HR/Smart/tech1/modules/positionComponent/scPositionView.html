@@ -1,7 +1,7 @@
 <div id="sc-position" class="sc-main-slide sc-main-slide_pos">
     <div class="position-slide sc-v-slide">
         <div class="slide-row">
-                    <div class="position-all" ng-show="!positionCtrl.positionSettings.showMenu">
+                    <div class="position-all" ng-show="positionCtrl.appSettings.sizeSwiperStyle=='smallMenu'">
 
                         <div class="sc-position__item"  ng-repeat="positions in positionCtrl.posModelData[positionCtrl.mode] |  filter:positionCtrl.setFilter()">
                             <div class="sc-position__icon-block" ng-click="positionCtrl.likeCurrentPosition($event, $index, positions)">
@@ -27,14 +27,13 @@
                         </div>
                     </div>
         </div>
-
     </div>
 
     <div class="green_box">
         <div class="main__wrapper">
             <div class="main-blocks">
                 <div class="main-blocks__column_left clearfix">
-                    <div class="main-blocks__item" ng-repeat="item in positionCtrl.positionDiscrPart">
+                    <div class="main-blocks__item" ng-repeat="item in positionCtrl.getPositionDiscrPart()">
                         <span>
                           {{item}}
                         </span>
@@ -44,37 +43,7 @@
             </div>
         </div>
     </div>
-    <!--<div class="position-slide sc-v-slide">-->
-        <!--<div class="slide-row">-->
-            <!--<div class="position-all">-->
 
-                <!--<div class="sc-position__item"  ng-repeat="positions in positionCtrl.posModelData.data  |  filter:positionCtrl.setFilter()">-->
-                    <!--<div class="sc-position__icon-block" ng-click="positionCtrl.likeCurrentPosition($event, $index, positions)">-->
-                        <!--<i class="fa-heart" ng-class="{far: !positions.liked, fas: positions.liked}" ></i>-->
-                    <!--</div>-->
-                    <!--<div ng-click="positionCtrl.getPositionCompetences($index,positions)" class="sc-position__content">-->
-                        <!--<div class="sc-position__title">{{positions.sJobProfileName}}</div>-->
-                        <!--<div class="sc-position__elements">-->
-                            <!--<div class="sc-position__element">-->
-                                <!--<span class="sc-position__label">Грейд</span>-->
-                                <!--<span class="sc-position__grade current_grade"  >{{positions.iGrade}}</span>-->
-                            <!--</div>-->
-                            <!--<div class="sc-position__element">-->
-                                <!--<span class="sc-position__label"> Соответсвие:</span>-->
-                                <!--<span class="sc-position__conformity"> {{100*positions.iProbability| number:0}}% </span>-->
-                            <!--</div>-->
-                            <!--<div class="sc-position__element">-->
-                                <!--<span class="sc-position__label"> Открытость:</span>-->
-                                <!--<span class="sc-position__turnover"> {{positions.iTurnover}}</span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
-        <!--</div>-->
-
-    <!--</div>-->
 
 
 </div>

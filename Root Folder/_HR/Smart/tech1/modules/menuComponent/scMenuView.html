@@ -108,7 +108,7 @@
 <div ng-class="menu.activeClass('goals')" class="sc-menu-li">
     <a ui-sref="{{menu.data[4].page}}">
         <h2 class="sc-menu-heading"><span class="sc-menu-heading-number">{{menu.data[4].num}}</span>
-            <span class="sc-menu-heading-text">{{menu.data[4].item}} ({{menu.getGoalsQuantity()}})</span>
+            <span class="sc-menu-heading-text">{{menu.data[4].item}} ({{menu.pData.goalsData.length}})</span>
         </h2>
         <div class="sc-menu-details">
             <div class="sc-menu-desc">

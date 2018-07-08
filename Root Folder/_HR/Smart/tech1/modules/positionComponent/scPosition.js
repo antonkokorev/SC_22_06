@@ -13,7 +13,7 @@ function dirPosition() {
                 };
             });
 
-        function positionController($scope, positionsService, customElements, dataServises, appSettings) {
+        function positionController($scope, positionsService, customElements, dataServices, appSettings) {
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
             //============================================
@@ -21,70 +21,45 @@ function dirPosition() {
             //============================================
             let that = this;
             appSettings.sizeSwiperStyle="smallMenu";
-            this.posModelData = dataServises.data;//данные
+            this.posModelData = dataServices.data;//данные
             this.mode = (appSettings.positionShowFrom === "model") ? "positionData" : "userPositionData";//выбранная модель
             this.appSettings = appSettings;
-
-
-
-
-
-
-          /*  this.competenceCurrent = null;//текущая выбранная позиция
-            this.currentIndex = null;//индекс выбранной позиции
-
-            this.currentPositionCompetences = null;
-
-            this.positionDiscrPart = {};*/
-            this.selectedMenu = appSettings.selectedMenuInPositionDetail;
-
-
-            //============================================
-            //вотчеры
-            //============================================
-            $scope.$watch(function () {
-                return appSettings.selectedMenuInPositionDetail
-            }, function (newVal, oldVal) {
-                try {
-                    that.selectedMenu = appSettings.selectedMenuInPositionDetail;
-                    switch (that.selectedMenu) {
-                        case 0:
-                            that.positionDiscrPart = that.positionDiscr.aFunctions;
-                            break;
-                        case 1:
-                            that.positionDiscrPart = that.positionDiscr.aCompetentions;
-                            break;
-                        case 2:
-                            that.positionDiscrPart = that.positionDiscr.aExperience;
-                            break;
-                        case 3:
-                            that.positionDiscrPart = that.positionDiscr.aEducation;
-                            break;
-                        case 4:
-                            that.positionDiscrPart = that.positionDiscr.aSkills;
-                            break;
-                        case 5:
-                            that.positionDiscrPart = that.positionDiscr.aLanguages;
-                            break;
-                        case 6:
-                            that.positionDiscrPart = that.positionDiscr.aCertification;
-                            break;
-                    }
-                } catch (e) {
-                }
-
-
-            });
-
             //============================================
             //функции
             //============================================
             this.likeCurrentPosition = likeCurrentPosition;// добавление в избранное
             this.getPositionCompetences = getPositionCompetences;//переход на описание позиции
             this.setFilter = setFilter;
-
+            this.getPositionDiscrPart=getPositionDiscrPart;// роутинг на нужный массив при апереходе по деталям позиции
             //***********************************************************************************************************
-
+            function getPositionDiscrPart(){
+                let result=[];
+                let data=that.posModelData.jobProfileData;
+                switch (appSettings.selectedMenuInPositionDetail) {
+                    case 0:
+                        result = data.aFunctions;
+                        break;
+                    case 1:
+                        result = data.aCompetentions;
+                        break;
+                    case 2:
+                        result= data.aExperience;
+                        break;
+                    case 3:
+                        result = data.aEducation;
+                        break;
+                    case 4:
+                        result= data.aSkills;
+                        break;
+                    case 5:
+                        result = data.aLanguages;
+                        break;
+                    case 6:
+                        result = data.aCertification;
+                        break;
+                }
+                return result
+            }
 
             function getPositionCompetences(index, position) {
 
@@ -92,7 +67,8 @@ function dirPosition() {
                 slider.style.transform = "translateX(-50%)";
                 appSettings.currentPositionInfo = position;
                 appSettings.sizeSwiperStyle="bigMenu";
-                dataServises.getJobProfile(position.sJobProfileId);
+                dataServices.getJobProfile(position.sJobProfileId);
+                appSettings.selectedMenuInPositionDetail=0;
             }
 
             function setFilter(obj) {

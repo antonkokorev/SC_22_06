@@ -14,7 +14,7 @@ function dirProfile() {
                 };
             });
 
-        function profileController( customElements,dataServises,appSettings) {
+        function profileController( customElements,dataServices,appSettings) {
 
 
             //ИНТЕРФЕЙСНАЯ ЧАСТЬ
@@ -23,7 +23,7 @@ function dirProfile() {
             //============================================
             let that = this;
             appSettings.sizeSwiperStyle="smallMenu";
-            this.data = dataServises.data;
+            this.data = dataServices.data;
             /*getProfile.profileData;*/
             this.competencesTypes = ["Corp", "Role", "Func"];
             this.showAdditionalSkill = false;
@@ -63,7 +63,7 @@ function dirProfile() {
                         data.entity = "skill";
                         data.user = that_.user;
                         // getProfile.postRequest(data);
-                        dataServises.setProfile(data);
+                        dataServices.setProfile(data);
                         that.additionalSkill = {};
                     }
                     e.currentTarget.classList.remove("clicked");
@@ -98,7 +98,7 @@ function dirProfile() {
                         data.year = that.aboutField;
                         data.entity = "description";
                         data.user = that_.user;
-                        dataServises.setProfile(data);
+                        dataServices.setProfile(data);
                         // getProfile.postRequest(data);
                     }
                     e.currentTarget.classList.remove("clicked");
@@ -126,7 +126,7 @@ function dirProfile() {
                         data.user = that_.user;
 
 
-                        dataServises.setProfile(data);
+                        dataServices.setProfile(data);
 
                         that.additionalAchievement = {};
 

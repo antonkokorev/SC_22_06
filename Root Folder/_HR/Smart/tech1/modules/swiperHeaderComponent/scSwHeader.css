@@ -13,21 +13,25 @@
 .smallMenu{
     display: flex;
     width: 100%;
-    height: 90px;
+    height: 120px;
 }
 
 .bigMenu{
     padding-left: 10px;
     width: 100%;
-    height: 180px;
+    height: 250px;
 }
 
 
 .smallMenuSwiper{
-    height: calc(100% - 90px)!important;
+    height: calc(100% - 120px)!important;
 }
 .bigMenuSwiper{
-    height: calc(100% - 180px)!important;
+    height: calc(100% - 250px)!important;
 }
 
 
+.scSwHeader-likeContent{
+    margin-left: 20%!important;
+    margin-top: -6px!important;
+}

@@ -68,7 +68,8 @@ function classMainBody() {
             direction: 'vertical',
             slidesPerView: 'auto',
             mousewheel: true,
-            freeMode: true
+            freeMode: true,
+            keyboard:true
         });
         //============================================================
         //создание основного модуля
@@ -88,14 +89,14 @@ function classMainBody() {
                         "scApp.instruments",
                         "scApp.ipr"
                     ])
-            .controller('scAppController', function ($state,dataServises,$timeout,appSettings) {
+            .controller('scAppController', function ($state,dataServices,$timeout,appSettings) {
                 this.choiceCurentPage = 1;
                 this.appSettings=appSettings;
                 this.appSettings.$state=$state;
-                dataServises.getDictData();
+                dataServices.getDictData();
                 /* getProfile.getProfileData();*/
-                dataServises.getPositionData();
-                dataServises.getProfile();
+                dataServices.getPositionData();
+                dataServices.getProfile();
             });
         //============================================================
         //роутер
@@ -116,31 +117,15 @@ function classMainBody() {
                 abstract: true,
                 template: "<dir-choice></dir-choice>",
                 controller: allController,
-                onExit: function (dataServises) {
-                    var result = dataServises.getSelected();
+                onExit: function (dataServices) {
+                    var result = dataServices.getSelected();
                     if (result.isChange) {
-                        dataServises.getUserPositionData(result.selected)
-                    }
-                }
-            })
-
-            $stateProvider.state('choice.verb', {
-                views: {
-                    '@choice': {
-                        templateUrl:  that_.path + "modules/choiceComponent/scChoiceViewVerb.html"
+                        dataServices.getUserPositionData(result.selected)
                     }
                 }
             });
 
-            $stateProvider.state('choice.noun', {
-                views: {
-                    '@choice': {
-                        templateUrl:  that_.path + "modules/choiceComponent/scChoiceViewNoun.html"
-                    }
-                }
-            });
-
-                      /*  $stateProvider.state({
+                       $stateProvider.state({
                             name: 'choice.verb',
                             url: '/verb',
                             templateUrl: that_.path + "modules/choiceComponent/scChoiceViewVerb.html"
@@ -150,11 +135,7 @@ function classMainBody() {
                             name: 'choice.noun',
                             url: '/noun',
                             templateUrl: that_.path + "modules/choiceComponent/scChoiceViewNoun.html"
-                        });*/
-
-
-
-
+                        });
 
 
             $stateProvider.state({
@@ -162,23 +143,25 @@ function classMainBody() {
                 url: '/position',
                 template: "<dir-position  modelposition='appController.modelPosition'></dir-position>",
                 controller: allController,
-                onExit: function () {
+                onExit: function (dataServices) {
                     //alert("test")
-                    // var test = dataServises.getPosition.getLiked();
-                   // positionSettings.showMenu = false;
+                    let liked=dataServices.getLiked();
+                    if(liked.length!=0){
+                        dataServices.getPositionCompetentions(JSON.stringify(liked))
+                    }
+
+
+
 
                 }
             });
-
-
-
-
 
             $stateProvider.state({
                 name: 'competences',
                 url: '/competences',
                 template: "<dir-competences></dir-competences>",
-                controller: allController
+                controller: allController,
+
             });
             $stateProvider.state({
                 name: 'goals',
@@ -200,7 +183,7 @@ function classMainBody() {
             });
 
             $urlRouterProvider.when('/', 'profile');
-            $urlRouterProvider.when('/choice', '/choice/verb');
+
         })
 
             .run(['$state', function ($state) {
@@ -211,13 +194,7 @@ function classMainBody() {
         function allController( $scope, customElements ) {
             $scope.$on('$viewContentLoaded', function (event) {
                 customElements.resetSwiper(500);
-
-
             });
-
-
-
-
         }
 
         //============================================================

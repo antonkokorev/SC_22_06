@@ -20,9 +20,11 @@ function Services() {
                 fltOnlyLikedPosition: false,
                 //--------------------
                 currentPositionInfo: {},//данные просматриваемой позиции
-                selectedMenuInPositionDetail: 0,
-
+                selectedMenuInPositionDetail: -1,
                 selectedVerbsInChoice: 0,
+                competenceHeaderPosName:"",
+                competenceHeaderCompName:"",
+                competenceCurrentPage:0,
             };
 
             return this.Settings;
@@ -45,8 +47,6 @@ function Services() {
             };
 
             //-------------------------------------------------------------------------------
-
-
             function updateSwiper() {
                 if ($state.current.name === "profile") {
                     renderTimelineLine([".profile-education", ".profile-results", ".profile-achievements"]);
@@ -93,10 +93,10 @@ function Services() {
         /*******************************************************************************************************************/
 
 
-        .factory("dataServises", function ($http, $state, customElements) {
+        .factory("dataServices", function ($http, $state, customElements) {
             console.warn("SERVICES");
 
-            this.cachedData = {};
+            this.cachedData = {"jobProfileData": {},"goalsData" :[]};
             let that = this;
             let result = {
                 "data": this.cachedData,
@@ -109,33 +109,26 @@ function Services() {
                 "getPositionData": () => {
                     getHelper("position")
                 },
-                "getJobProfile": (jId)=>
-                {
-                    getHelper("jobProfile","&jobProfileId="+jId)
+                "getJobProfile": (jId) => {
+                    getHelper("jobProfile", "&jobProfileId=" + jId)
+                },
+                "getPositionCompetentions": (pId) => {
+                    getHelper("positionCompetentions", "&position=" + pId);
                 },
 
                 "setProfile": setProfile,
+                "getLiked": getLikedPosition,
+
+
                 "requestService": requestService,
                 "postService": postService,
                 "getSelected": getSelected,
-                "getLiked": getLiked,
                 "getUserPositionData": getUserPositionData,
-
                 "getInstrumentsData": getInstrumentsData,
                 "setCurrentGoal": setCurrentGoal,
                 "setInstrument": setInstrument,
                 "getIpr": getIpr,
             };
-
-
-            /* that.instrumentsData = {instruments: []};//?
-             that.currentGoal = {goal: {}, label: ""};//?
-             that.preloader = {show: false};//?
-             that.cachedData.positionData = {data: []};//?
-             that.cachedData.userPositionData = {data: []};//?
-             that.cachedData.dictData = {dict: []};//?
-             that.cachedData.dictData.sData = [];//?*/
-
 
             let settingsObject = {
                 profile: {
@@ -147,28 +140,21 @@ function Services() {
                 position: {
                     link: "?entity=position&requestType=model&family=[]&row=1_30"
                 },
-                jobProfile:{
+                jobProfile: {
                     link: "?entity=jobProfile"
+                },
+                positionCompetentions: {
+                    link: "?entity=positionCompetentions"
                 }
             };
             /***************************/
 
             /* FUNCTIONS
             /***************************/
-
-        /*    function jobProfile(jId) {
-                let url = that_.srvLink + "?entity=jobProfile&jobProfileId=" + jId + "&user=";
-                return requestService(url).then((response) => {
-                    return response
-                })
-            }*/
-
-
-
             function getPostService(url, type, body) {
                 return $http({
                     method: type,
-                    url: url +"&user="+that_.user,
+                    url: url + "&user=" + that_.user,
                     data: body,
                     headers: {
                         'Authorization': "Basic ZG9tb3poYWtvX212OjEyMzQ1VGdi",
@@ -185,8 +171,8 @@ function Services() {
             //_______________________________________________________________________________
 
             function check(name) {
-                name = (name == "dictData") ? "choice" : name;
-                name=(name=="jobProfile")?"position":name;
+                name = (name === "dictData") ? "choice" : name;
+                name = (name === "jobProfile") ? "position" : name;
 
                 if ($state.current.name === name) {
                     customElements.updateSwiper(200);
@@ -194,10 +180,10 @@ function Services() {
             }
 
             //_______________________________________________________________________________
-            function getHelper(name,urlAdd) {
-                urlAdd=urlAdd||"";
+            function getHelper(name, urlAdd) {
+                urlAdd = urlAdd || "";
                 that.cachedData[name + "Data"] = [];
-                const url = that_.srvLink + settingsObject[name].link+urlAdd;
+                const url = that_.srvLink + settingsObject[name].link + urlAdd;
                 getPostService(url, "GET").then((data) => {
                     that.cachedData[name + "Data"] = data;
                     check(name);
@@ -212,6 +198,49 @@ function Services() {
             }
 
             //_______________________________________________________________________________
+            function getLikedPosition() {
+                let pos = [];
+                try {
+                    for (let i = 0; i < that.cachedData.positionData.length; i++) {
+                        if (that.cachedData.positionData[i].liked) {
+                            pos.push(that.cachedData.positionData[i].sJobProfileId)
+                        }
+                    }
+                    for (let i = 0; i < that.cachedData.userPositionData.data.length; i++) {
+                        if (that.cachedData.userPositionData.data[i].liked) {
+                            pos.push(that.cachedData.userPositionData.data[i].sJobProfileId)
+                        }
+                    }
+                } catch (e) {
+
+                }
+                return pos;
+            }
+
+            //_______________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             function requestService(url) { // вообще есть getPostService, не?
@@ -279,20 +308,6 @@ function Services() {
 
             // }
 
-            function getLiked() {
-                let pos = [];
-                for (let i = 0; i < that.cachedData.positionData.data.length; i++) {
-                    if (that.cachedData.positionData.data[i].liked) {
-                        pos.push(that.cachedData.positionData.data[i].sJobProfileId)
-                    }
-                }
-                for (let i = 0; i < that.cachedData.userPositionData.data.length; i++) {
-                    if (that.cachedData.userPositionData.data[i].liked) {
-                        pos.push(that.cachedData.userPositionData.data[i].sJobProfileId)
-                    }
-                }
-                return pos;
-            };
 
             function getUserPositionData(family) {
                 let url = that_.srvLink + "?entity=position&requestType=list&family=" + JSON.stringify(family) + "&row=1_30&user=";
@@ -303,8 +318,6 @@ function Services() {
                     }
                 });
             };
-
-
 
 
             // function instrumentsService() {

@@ -11,124 +11,33 @@ function dirCompetences() {
                 };
             });
 
-        function competencesController($timeout, positionsService, formGoalsService, customElements, /**/ dataServises) {
-            this.data = {};
-            //console.log(positionsService.getLikedPositions());
-            var liked = dataServises.getLiked().join(",")
+        function competencesController(localStorCompetences, customElements,dataServices, appSettings) {
 
-            var url = "https://sbt-surp-216.sigma.sbrf.ru:8292/hr/smartcareer/services/data.xsjs?entity=positionCompetentionsNoCallback&position=["+liked+"]&user=";
-            dataServises.requestService(url)
-                .then(data => {
-                    this.data = data;
-                    //console.log(data);
-                });
-
-            this.positionCurrent = null;
-            this.currentIndex = null;
-            this.currentPositionCompetences = [];
-
-            this.chosenIndicators = [];
-            if (formGoalsService.getIndicators().length > 0) {
-                this.chosenIndicators = formGoalsService.getIndicators()
-            }
-
-            console.log(this.chosenIndicators);
-
-            this.chosenCompetences = formGoalsService.getCompetences() || [];
-            if (formGoalsService.getCompetences().length > 0) {
-                this.chosenCompetences = formGoalsService.getCompetences()
-            }
-
-
-            var competences_h_slider = document.querySelector(".competences-by-position");
-
-            this.getPositionCompetences = function (index, position) {
-                competences_h_slider.style.transform = "translateX(-33.3333%)";
-                this.positionCurrent = position;
-                this.currentIndex = index;
-                this.currentPositionCompetences = this.data.aPositions[index].aCompetentions;
-                customElements.updateSwiper();
-            };
-
-            this.competenceCurrent = null;
-            this.currentCompetencesIndicators = [];
-
-
-            // Установить класс для уже добавленных индикаторов
-            this.getChosenIndicators = function (indicator) {
-                let index = this.chosenIndicators.map(function (item) {
-                    return item.iIndicatorId;
-                }).indexOf(indicator.iIndicatorId);
-
-                if (index >= 0) {
-                    return "chosen";
-                }
-            };
-
-            this.getChosenCompetences = function (competence) {
-                let index = this.chosenCompetences.map(function (item) {
-                    return item.sCompetentionId;
-                }).indexOf(competence.sCompetentionId);
-
-                if (index >= 0) {
-                    return "chosen";
-                }
-            };
-
-
-            this.getCompetencesIndicators = function (event, index, competence) {
-                if (competence.sCompetentionType !== 'Corp') {
-
-                    if (event.currentTarget.classList.contains("chosen")) {
-                        event.currentTarget.classList.remove("chosen");
-
-                        let index = this.chosenCompetences.map(function (item) {
-                            return item.sCompetentionId;
-                        }).indexOf(competence.sCompetentionId);
-
-                        this.chosenCompetences.splice(index, 1);
-                    } else {
-                        event.currentTarget.classList.add("chosen");
-                        this.chosenCompetences.push(competence);
-                    }
-
-                    formGoalsService.setCompetences(this.chosenCompetences);
-                    formGoalsService.getGoals();
-                    return;
-                }
-
-                competences_h_slider.style.transform = "translateX(-66.6666%)";
-                this.competenceCurrent = competence;
-                this.currentCompetencesIndicators = this.data.aPositions[this.currentIndex].aCompetentions[index].aIndicators;
-                customElements.updateSwiper();
-            };
-
-
-            this.chooseIndicator = function (event, indicator, competence) {
-                if (event.currentTarget.classList.contains("chosen")) {
-                    event.currentTarget.classList.remove("chosen");
-
-                    var index = this.chosenIndicators.map(function (item) {
-                        return item.iIndicatorId;
-                    }).indexOf(indicator.iIndicatorId);
-
-                    this.chosenIndicators.splice(index, 1);
-
-                } else {
-                    event.currentTarget.classList.add("chosen");
-                    indicator.sCompetentionName = competence.sCompetentionName;
-                    indicator.sCompetentionId = competence.sCompetentionId;
-                    this.chosenIndicators.push(indicator);
-                }
-                formGoalsService.setIndicators(this.chosenIndicators);
-                formGoalsService.getGoals();
-            };
-
-            this.getBack = function (n) {
-                competences_h_slider.style.transform = "translateX(-" + 33.3333 * n + "%)";
-            };
-
-            this.getColor = (i) => {
+            //ИНТЕРФЕЙСНАЯ ЧАСТЬ
+            //============================================
+            //атрибуты
+            //============================================
+            let that = this;
+            appSettings.sizeSwiperStyle = "";// класс меню хедера
+            appSettings.competenceCurrentPage = 0;//номер активного экрана
+            let ls=localStorCompetences;//для того чтобы если переходить на другой пункт меню не сбрасовались
+            this.currentIndex = null;//индекс выбранной позиции на 1 экране
+            this.appSettings = appSettings;
+            this.data = dataServices.data;//positionCompetentionsData
+            let competences_h_slider = document.querySelector(".competences-by-position");
+            this.competenceCurrent = null;//выбранная компетенция на 2 экране
+            //============================================
+            //функции
+            //============================================
+            this.getColor = getColor;//цвет для индикаторов на 3 странице
+            this.getPositionCompetences = getPositionCompetences;//выбор позиций на 1 экране
+            this.getCompetencesIndicators = getCompetencesIndicators;//переход на 3 страницу
+            this.getChosenIndicators = getChosenIndicators;//Установить класс для уже добавленных индикаторов
+            this.getChosenCompetences = getChosenCompetences;//Установить класс для уже добавленных компетенций
+            this.chooseIndicator = chooseIndicator;//выбор на 3 странице
+            //***********************************************************************************************************
+//_______________________________________
+            function getColor(i) {
                 if (i > 3) {
                     return "color-green";
                 } else if (i < 3) {
@@ -138,7 +47,88 @@ function dirCompetences() {
                 }
             }
 
+//_______________________________________
+            function getPositionCompetences(index, position) {
+                that.currentIndex = index;
+                that.currentPositionCompetences = that.data.positionCompetentionsData.aPositions[index].aCompetentions;
+                appSettings.competenceCurrentPage = 1;
+                appSettings.competenceHeaderPosName = position.sJobProfileName;
+                appSettings.sizeSwiperStyle = "smallMenu";
+                customElements.resetSwiper(200);
+            }
+
+//_______________________________________
+
+            function getChosenIndicators(indicator) {
+                let index = ls.chosenIndicators.map(function (item) {
+                    return item.iIndicatorId;
+                }).indexOf(indicator.iIndicatorId);
+
+                if (index >= 0) {
+                    return "chosen";
+                }
+            }
+
+//_______________________________________
+            function getChosenCompetences(competence) {
+                let index = ls.chosenCompetences.map(function (item) {
+                    return item.sCompetentionId;
+                }).indexOf(competence.sCompetentionId);
+
+                if (index >= 0) {
+                    return "chosen";
+                }
+            }
+
+//_______________________________________
+            function getCompetencesIndicators(event, index, competence) {
+                if (competence.sCompetentionType !== 'Corp') {
+                    if (event.currentTarget.classList.contains("chosen")) {
+                        event.currentTarget.classList.remove("chosen");
+                        let index = ls.chosenCompetences.map(function (item) {
+                            return item.sCompetentionId;
+                        }).indexOf(competence.sCompetentionId);
+                        ls.chosenCompetences.splice(index, 1);
+                    } else {
+                        event.currentTarget.classList.add("chosen");
+                        ls.chosenCompetences.push(competence);
+                    }
+                    dataServices.data.goalsData=ls.chosenCompetences.concat(ls.chosenIndicators)
+                } else {
+                    that.competenceCurrent = competence;
+                    appSettings.competenceHeaderCompName = competence.sCompetentionName;
+                    that.currentCompetencesIndicators = that.data.positionCompetentionsData.aPositions[that.currentIndex].aCompetentions[index].aIndicators;
+                    appSettings.competenceCurrentPage = 2;
+                    customElements.resetSwiper(200);
+                }
+
+            }
+
+//_______________________________________
+
+            function chooseIndicator(event, indicator, competence) {
+                if (event.currentTarget.classList.contains("chosen")) {
+                    event.currentTarget.classList.remove("chosen");
+                    let index = ls.chosenIndicators.map(function (item) {
+                        return item.iIndicatorId;
+                    }).indexOf(indicator.iIndicatorId);
+                    ls.chosenIndicators.splice(index, 1);
+                } else {
+                    event.currentTarget.classList.add("chosen");
+                    indicator.sCompetentionName = competence.sCompetentionName;
+                    indicator.sCompetentionId = competence.sCompetentionId;
+                    ls.chosenIndicators.push(indicator);
+                }
+                dataServices.data.goalsData=ls.chosenCompetences.concat(ls.chosenIndicators)
+            }
         }
+
+
+        angular.module('scApp.competences')
+            .service('localStorCompetences', function () {
+                this.chosenCompetences = [];//массив выбранных компетенций
+                this.chosenIndicators = [];//массив выбранных индикаторов
+            })
     }());
 }
 

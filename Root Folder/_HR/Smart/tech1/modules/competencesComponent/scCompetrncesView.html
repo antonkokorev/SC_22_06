@@ -1,20 +1,21 @@
 <div id="sc-competences" class="sc-main-slide">
     <div class="competences-slide sc-v-slide">
         <div class="competences-by-position">
-            <div class="competences-h-slide competences-by-position-list">
+            <div class="competences-h-slide competences-by-position-list" ng-show="competences.appSettings.competenceCurrentPage==0">
 
-                <div class="competence-position" ng-repeat="position in competences.data.aPositions"
+                <div class="competence-position" ng-repeat="position in competences.data.positionCompetentionsData.aPositions"
                      ng-click="competences.getPositionCompetences($index, position)">
                     <h3 class="competence-position-heading"> {{position.sJobProfileName}} </h3>
                     <p class="competence-position-conformity"> Соответствие <span
                             class="conformity-bold"> 87 </span></p>
                     <p class="competence-position-competences"> Компетенции </p>
                 </div>
+
             </div>
 
-            <div class="competences-h-slide competences-by-position-current">
-                <h2 class="sc-slide-heading"> {{competences.positionCurrent.sJobProfileName}} </h2>
-                <div class="back-button-competence back1" ng-click="competences.getBack(0)"> Назад</div>
+            <div class="competences-h-slide competences-by-position-current"  ng-show="competences.appSettings.competenceCurrentPage==1">
+                <!--<h2 class="sc-slide-heading"> {{competences.positionCurrent.sJobProfileName}} </h2>-->
+                <!--<div class="back-button-competence back1" ng-click="competences.getBack(0)"> Назад</div>-->
 
                 <div class="competence-position-current {{competences.getChosenCompetences(competence)}}"
                      ng-repeat="competence in competences.currentPositionCompetences"
@@ -25,9 +26,12 @@
                     <p class="competence-position-competences" ng-if="competence.sCompetentionType === 'Corp'"> Индикаторы </p>
                 </div>
             </div>
-            <div class="competences-h-slide competences-by-position-competence">
-                <h2 class="sc-slide-heading competence-name"> {{competences.competenceCurrent.sCompetentionName}} </h2>
-                <div class="back-button-competence back2" ng-click="competences.getBack(1)"> Назад</div>
+
+
+
+            <div class="competences-h-slide competences-by-position-competence"  ng-show="competences.appSettings.competenceCurrentPage===2">
+                <!--<h2 class="sc-slide-heading competence-name"> {{competences.competenceCurrent.sCompetentionName}} </h2>-->
+                <!--<div class="back-button-competence back2" ng-click="competences.getBack(1)"> Назад</div>-->
 
                 <div ng-repeat="indicator in competences.currentCompetencesIndicators">
                     <p class="competence-about {{competences.getChosenIndicators(indicator)}}" ng-click="competences.chooseIndicator($event, indicator, competences.competenceCurrent)">
@@ -36,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <div class="competence-by-intersections">
+        <div class="competence-by-intersections"  ng-show="competences.appSettings.competenceCurrentPage===3 ">
 
             <div class="competence-position-current"
                  ng-repeat="competence in model.aCompetetionIntersection">
@@ -47,7 +51,6 @@
                 </p>
                 <p class="competence-position-competences"> Индикаторы </p>
             </div>
-
         </div>
     </div>
 </div>
